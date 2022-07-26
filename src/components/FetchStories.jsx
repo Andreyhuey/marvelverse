@@ -56,13 +56,13 @@ const FetchStories = () => {
                       ID : {s.id}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Series : {s.series["available"]}
+                      Series : {s.series["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Comics : {s.comics["available"]}
+                      Comics : {s.comics["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Creators : {s.creators["available"]}
+                      Creators : {s.creators["available"]}
                     </li>
                   </ul>
                 </div>

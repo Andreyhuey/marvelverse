@@ -1,4 +1,11 @@
-export { default as Hulk } from "./Hulk.jsx";
-export { default as Spider } from "./Spider.jsx";
-export { default as Thor } from "./Thor.jsx";
-export { default as Homepage } from "./Homepage.jsx";
+export { default as Hulk } from "./Hulk";
+export { default as Spider } from "./Spider";
+export { default as Thor } from "./Thor";
+export { default as Homepage } from "./Homepage";
+export { default as Venom } from "./Venom";
+export { default as Deadpool } from "./Deadpool";
+export { default as Wolverine } from "./Wolverine";
+export { default as Thanos } from "./Thanos";
+export { default as Nova } from "./Nova";
+export { default as Captains } from "./Captains";
+export { default as Moonknight } from "./MoonKnight";

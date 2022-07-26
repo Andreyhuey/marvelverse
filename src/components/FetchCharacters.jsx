@@ -11,7 +11,7 @@ const FetchCharacters = () => {
 
   useEffect(() => {
     fetch(
-      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=loki&orderBy=-modified&limit=6&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      "https://gateway.marvel.com/v1/public/characters?orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -30,10 +30,10 @@ const FetchCharacters = () => {
   if (isLoading)
     return (
       <h1
-        className="display-1 text-white d-flex align-items-center justify-content-center"
+        className="display-1 text-warning d-flex align-items-center justify-content-center"
         style={{ height: "80vh" }}
       >
-        ...Loading
+        ...Loading Updated Characters
       </h1>
     );
 
@@ -48,7 +48,7 @@ const FetchCharacters = () => {
   return (
     <div className="container-fluid bg-dark text-white">
       <div className="container-fluid h1 py-3 mt-4 bg-black border text-center text-uppercase">
-        Character Collection
+        Latest Character Collection
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
@@ -63,9 +63,9 @@ const FetchCharacters = () => {
       <div className=" row">
         {characters.map((c) => {
           return (
-            <div className="col-lg-4 col-md-6 col-xs-6">
+            <div key={c.id} className="col-lg-4 col-md-6 col-xs-6">
               <div className="border border-warning card my-3 bg-dark">
-                <div key={c.id} className="p-2 my-3">
+                <div className="p-2 my-3">
                   <h4 className="card-header text-center text-warning py-3">
                     {c.name}
                   </h4>
@@ -75,7 +75,7 @@ const FetchCharacters = () => {
                     alt="...img"
                   />
                   <div className="card-body my-2">
-                    <span class="border-bottom border-white">
+                    <span className="border-bottom border-white">
                       <h4 className="card-title text-muted">Description </h4>
                       <p className="card-text ">{c.description}</p>
                     </span>
@@ -85,36 +85,43 @@ const FetchCharacters = () => {
                     <li className="list-group-item bg-dark text-muted">
                       ID : {c.id}
                     </li>
-
                     <li className="list-group-item bg-dark text-white">
                       Modified : {c.modified}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Stories : {c.stories["available"]}
+                      Stories : {c.stories["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Series : {c.series["available"]}
+                      Series : {c.series["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Comics : {c.comics["available"]}
+                      Comics : {c.comics["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Events : {c.events["available"]}
+                      Events : {c.events["available"]}
+                    </li>
+                    <li className="list-group-item bg-dark text-warning text-capitalize d-flex justify-content-between pt-4">
+                      <a
+                        href={c.urls[1].url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-outline-warning text-capitalize"
+                      >
+                        {c.urls[1].type}
+                      </a>
+
+                      <a
+                        href={c.urls[0].url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-outline-warning"
+                      >
+                        {c.urls[0].type}
+                      </a>
                     </li>
                   </ul>
-
-                  <div className="card-body text-end">
-                    <a
-                      href={c.urls[0].url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn btn-outline-warning"
-                    >
-                      Learn More
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>

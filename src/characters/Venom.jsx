@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Hulk = () => {
+const Venom = () => {
   const [characters, setCharacters] = useState([]);
   //   const [global, setGlobal] = useState(" ");
   const [count, setCount] = useState("");
@@ -9,7 +9,7 @@ const Hulk = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=hulk&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=venom&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -28,10 +28,10 @@ const Hulk = () => {
   if (isLoading)
     return (
       <h1
-        className="display-1 text-success d-flex align-items-center justify-content-center"
+        className="display-1 text-white d-flex align-items-center justify-content-center"
         style={{ height: "80vh" }}
       >
-        ...Hulk SMASH!!!
+        ...Venom Loading
       </h1>
     );
 
@@ -46,15 +46,15 @@ const Hulk = () => {
   return (
     <div className="container-fluid bg-dark text-white my-3 py-3">
       <div className="container-fluid h1 py-3 mt-4 bg-black border text-center text-uppercase">
-        Hulk Collection
+        Venom Collection
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
         {/* <h3 className="text-muted ">
-          Total Characters <p className="mx-2 text-success">{global}</p>
+          Total Characters <p className="mx-2 text-white">{global}</p>
         </h3> */}
         <h4 className="text-muted">
-          Total Displayed <p className="mx-2 text-success">{count}</p>
+          Total Displayed <p className="mx-2 text-white">{count}</p>
         </h4>
       </div>
 
@@ -62,9 +62,9 @@ const Hulk = () => {
         {characters.map((c) => {
           return (
             <div className="col-lg-4 col-md-6 col-xs-6">
-              <div className="border border-success card my-3 bg-dark">
+              <div className="border border-white card my-3 bg-dark">
                 <div key={c.id} className="p-2 my-3">
-                  <h4 className="card-header text-center text-success py-3">
+                  <h4 className="card-header text-center text-white py-3">
                     {c.name}
                   </h4>
                   <img
@@ -102,12 +102,12 @@ const Hulk = () => {
                       Available Events : {c.events["available"]}
                     </li>
 
-                    <li className="list-group-item bg-dark text-success text-capitalize d-flex justify-content-between pt-4">
+                    <li className="list-group-item bg-dark text-white text-capitalize d-flex justify-content-between pt-4">
                       <a
                         href={c.urls[1].url}
                         target="_blank"
                         rel="noreferrer"
-                        className="btn btn-outline-success text-capitalize"
+                        className="btn btn-outline-light text-capitalize"
                       >
                         {c.urls[1].type}
                       </a>
@@ -116,7 +116,7 @@ const Hulk = () => {
                         href={c.urls[0].url}
                         target="_blank"
                         rel="noreferrer"
-                        className="btn btn-outline-success"
+                        className="btn btn-outline-light"
                       >
                         {c.urls[0].type}
                       </a>
@@ -132,4 +132,4 @@ const Hulk = () => {
   );
 };
 
-export default Hulk;
+export default Venom;

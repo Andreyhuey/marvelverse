@@ -18,7 +18,7 @@ const Thor = () => {
         setCharacters(data.data.results);
         // setGlobal(data.data.total);
         setCount(data.data.count);
-        setLoading(false);
+        setLoading(true);
       })
       .catch((err) => {
         console.log(err.message);
@@ -28,10 +28,10 @@ const Thor = () => {
   if (isLoading)
     return (
       <h1
-        className="display-1 text-white d-flex align-items-center justify-content-center"
-        style={{ height: "80vh" }}
+        className="display-1 text-warning d-flex align-items-center justify-content-center"
+        style={{ height: "85vh" }}
       >
-        ...Loading
+        ...Tales Of Asgard
       </h1>
     );
 
@@ -89,30 +89,38 @@ const Thor = () => {
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Stories : {c.stories["available"]}
+                      Stories : {c.stories["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Series : {c.series["available"]}
+                      Series : {c.series["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Comics : {c.comics["available"]}
+                      Comics : {c.comics["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Events : {c.events["available"]}
+                      Events : {c.events["available"]}
+                    </li>
+                    <li className="list-group-item bg-dark text-warning text-capitalize d-flex justify-content-between pt-4">
+                      <a
+                        href={c.urls[1].url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-outline-warning text-capitalize"
+                      >
+                        {c.urls[1].type}
+                      </a>
+
+                      <a
+                        href={c.urls[0].url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-outline-warning"
+                      >
+                        {c.urls[0].type}
+                      </a>
                     </li>
                   </ul>
-
-                  <div className="card-body text-end">
-                    <a
-                      href={c.urls[0].url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn btn-outline-warning"
-                    >
-                      Learn More
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>

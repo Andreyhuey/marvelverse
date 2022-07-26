@@ -18,7 +18,7 @@ const Spider = () => {
         setCharacters(data.data.results);
         // setGlobal(data.data.total);
         setCount(data.data.count);
-        setLoading(false);
+        setLoading(true);
       })
       .catch((err) => {
         console.log(err.message);
@@ -28,10 +28,10 @@ const Spider = () => {
   if (isLoading)
     return (
       <h1
-        className="display-1 text-white d-flex align-items-center justify-content-center"
+        className="display-1 text-danger d-flex align-items-center justify-content-center"
         style={{ height: "80vh" }}
       >
-        ...Loading
+        ...Into The SpiderVerse
       </h1>
     );
 
@@ -51,7 +51,7 @@ const Spider = () => {
 
       <div className="container mt-2 py-3 bg-dark ">
         {/* <h3 className="text-muted ">
-          Total Characters <p className="mx-2 text-warning">{global}</p>
+          Total Characters <p className="mx-2 text-danger">{global}</p>
         </h3> */}
         <h4 className="text-muted">
           Total Displayed <p className="mx-2 text-danger">{count}</p>
@@ -89,30 +89,39 @@ const Spider = () => {
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Stories : {c.stories["available"]}
+                      Stories : {c.stories["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Series : {c.series["available"]}
+                      Series : {c.series["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Comics : {c.comics["available"]}
+                      Comics : {c.comics["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Events : {c.events["available"]}
+                      Events : {c.events["available"]}
+                    </li>
+
+                    <li className="list-group-item bg-dark text-danger text-capitalize d-flex justify-content-between pt-4">
+                      <a
+                        href={c.urls[1].url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-outline-danger text-capitalize"
+                      >
+                        {c.urls[1].type}
+                      </a>
+
+                      <a
+                        href={c.urls[0].url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-outline-danger"
+                      >
+                        {c.urls[0].type}
+                      </a>
                     </li>
                   </ul>
-
-                  <div className="card-body text-end">
-                    <a
-                      href={c.urls[0].url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn btn-outline-danger"
-                    >
-                      Learn More
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>

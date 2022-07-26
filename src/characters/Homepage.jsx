@@ -1,12 +1,30 @@
 import React from "react";
-import { Hulk, Spider, Thor } from ".";
+import {
+  Moonknight,
+  Hulk,
+  Spider,
+  Thor,
+  Venom,
+  Deadpool,
+  Wolverine,
+  Thanos,
+  Captains,
+  Nova,
+} from ".";
 
 const Homepage = () => {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid bg-dark">
       <Thor />
+      <Moonknight />
       <Hulk />
+      <Deadpool />
       <Spider />
+      <Wolverine />
+      <Nova />
+      <Venom />
+      <Captains />
+      <Thanos />
     </div>
   );
 };

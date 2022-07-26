@@ -63,7 +63,7 @@ const FetchComics = () => {
                       ID : {c.id}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Stories : {c.stories["available"]}
+                      Stories : {c.stories["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
@@ -71,7 +71,7 @@ const FetchComics = () => {
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Events : {c.events["available"]}
+                      Events : {c.events["available"]}
                     </li>
                   </ul>
 

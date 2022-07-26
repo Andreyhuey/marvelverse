@@ -1,3 +1,4 @@
+export { default as Navbar } from "./Navbar";
 export { default as FetchCharacters } from "./FetchCharacters";
 export { default as FetchCharacterName } from "./FetchCharacterName";
 export { default as FetchComics } from "./FetchComics.jsx";
@@ -8,3 +9,4 @@ export { default as FetchStories } from "./FetchStories.jsx";
 export { default as Search } from "./Search";
 export { default as Loader } from "./Loader.jsx";
 export { default as Footer } from "./Footer.jsx";
+export { default as Example } from "./Example";

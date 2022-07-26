@@ -69,17 +69,17 @@ const FetchCreators = () => {
                       ID : {c.id}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Stories : {c.stories["available"]}
+                      Stories : {c.stories["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Series : {c.series["available"]}
+                      Series : {c.series["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Comics : {c.comics["available"]}
+                      Comics : {c.comics["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Events : {c.events["available"]}
+                      Events : {c.events["available"]}
                     </li>
                   </ul>
 

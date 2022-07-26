@@ -1,8 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { Homepage } from "./characters";
-import { Footer } from "./components";
+import { Footer, FetchCharacters, Example } from "./components";
 
-// FetchCharacters,
 // FetchCharacterName,
 // FetchStories,
 // FetchSeries,
@@ -18,8 +17,9 @@ function App() {
           <h1 className="text-warning text-uppercase mx-3">MARVEL</h1>
         </div>
       </header>
+      <Example />
       <Homepage />
-
+      {/* <FetchCharacters /> */}
       <Footer />
     </div>
   );
@@ -27,7 +27,6 @@ function App() {
 
 // DisplayHeader
 /* <section className="container py-3">
-  <FetchCharacters />
 </section>
 
 

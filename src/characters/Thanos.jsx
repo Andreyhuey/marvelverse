@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
+// import { Search } from "./";
+// import axios from "axios";
 
-const Hulk = () => {
+const Thanos = () => {
   const [characters, setCharacters] = useState([]);
-  //   const [global, setGlobal] = useState(" ");
+  //   const [global, setGlobal] = useState("");
   const [count, setCount] = useState("");
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  // const [query, setQuery] = useState(" ");
 
   useEffect(() => {
-    setLoading(true);
     fetch(
-      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=hulk&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=thanos&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -28,10 +30,10 @@ const Hulk = () => {
   if (isLoading)
     return (
       <h1
-        className="display-1 text-success d-flex align-items-center justify-content-center"
+        className="display-1 text-warning d-flex align-items-center justify-content-center"
         style={{ height: "80vh" }}
       >
-        ...Hulk SMASH!!!
+        ...Thanos Loading
       </h1>
     );
 
@@ -44,27 +46,27 @@ const Hulk = () => {
   // offset
 
   return (
-    <div className="container-fluid bg-dark text-white my-3 py-3">
+    <div className="container-fluid bg-dark text-white">
       <div className="container-fluid h1 py-3 mt-4 bg-black border text-center text-uppercase">
-        Hulk Collection
+        Thanos Collection
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
         {/* <h3 className="text-muted ">
-          Total Characters <p className="mx-2 text-success">{global}</p>
+          Total Characters <p className="mx-2 text-warning">{global}</p>
         </h3> */}
         <h4 className="text-muted">
-          Total Displayed <p className="mx-2 text-success">{count}</p>
+          Total Displayed <p className="mx-2 text-warning">{count}</p>
         </h4>
       </div>
 
       <div className=" row">
         {characters.map((c) => {
           return (
-            <div className="col-lg-4 col-md-6 col-xs-6">
-              <div className="border border-success card my-3 bg-dark">
-                <div key={c.id} className="p-2 my-3">
-                  <h4 className="card-header text-center text-success py-3">
+            <div key={c.id} className="col-lg-4 col-md-6 col-xs-6">
+              <div className="border border-warning card my-3 bg-dark">
+                <div className="p-2 my-3">
+                  <h4 className="card-header text-center text-warning py-3">
                     {c.name}
                   </h4>
                   <img
@@ -73,7 +75,7 @@ const Hulk = () => {
                     alt="...img"
                   />
                   <div className="card-body my-2">
-                    <span class="border-bottom border-white">
+                    <span className="border-bottom border-white">
                       <h4 className="card-title text-muted">Description </h4>
                       <p className="card-text ">{c.description}</p>
                     </span>
@@ -85,29 +87,28 @@ const Hulk = () => {
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Date Modified : {c.modified}
+                      Modified : {c.modified}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Stories : {c.stories["available"]}
+                      Stories : {c.stories["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Series : {c.series["available"]}
+                      Series : {c.series["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Comics : {c.comics["available"]}
+                      Comics : {c.comics["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Events : {c.events["available"]}
+                      Events : {c.events["available"]}
                     </li>
-
-                    <li className="list-group-item bg-dark text-success text-capitalize d-flex justify-content-between pt-4">
+                    <li className="list-group-item bg-dark text-warning text-capitalize d-flex justify-content-between pt-4">
                       <a
                         href={c.urls[1].url}
                         target="_blank"
                         rel="noreferrer"
-                        className="btn btn-outline-success text-capitalize"
+                        className="btn btn-outline-warning text-capitalize"
                       >
                         {c.urls[1].type}
                       </a>
@@ -116,7 +117,7 @@ const Hulk = () => {
                         href={c.urls[0].url}
                         target="_blank"
                         rel="noreferrer"
-                        className="btn btn-outline-success"
+                        className="btn btn-outline-warning"
                       >
                         {c.urls[0].type}
                       </a>
@@ -132,4 +133,6 @@ const Hulk = () => {
   );
 };
 
-export default Hulk;
+export default Thanos;
+
+// data.data.results[0];
