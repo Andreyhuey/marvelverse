@@ -1,12 +1,12 @@
 import React from "react";
-import { Hulk, Spider } from ".";
+import { Hulk, Spider, Thor } from ".";
 
 const Homepage = () => {
   return (
     <div className="container-fluid">
+      <Thor />
       <Hulk />
       <Spider />
-      {/* <Thor /> */}
     </div>
   );
 };

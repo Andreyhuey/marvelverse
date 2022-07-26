@@ -9,7 +9,7 @@ const Thor = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      "https://gateway.marvel.com/v1/public/characters?nameStartswith=thor&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=thor&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -28,7 +28,7 @@ const Thor = () => {
   if (isLoading)
     return (
       <h1
-        className="display-1 text-white d-flex align-items-center"
+        className="display-1 text-white d-flex align-items-center justify-content-center"
         style={{ height: "80vh" }}
       >
         ...Loading
@@ -46,7 +46,7 @@ const Thor = () => {
   return (
     <div className="container-fluid bg-dark text-white py-3">
       <div className="container-fluid h1 py-3 mt-4 bg-black border text-center text-uppercase">
-        spider Collection
+        Thor Collection
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
@@ -73,7 +73,7 @@ const Thor = () => {
                     alt="...img"
                   />
                   <div className="card-body my-2">
-                    <span class="border-bottom border-white">
+                    <span className="border-bottom border-white">
                       <h4 className="card-title text-muted">Description </h4>
                       <p className="card-text ">{c.description}</p>
                     </span>

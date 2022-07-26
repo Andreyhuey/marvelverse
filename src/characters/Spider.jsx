@@ -46,7 +46,7 @@ const Spider = () => {
   return (
     <div className="container-fluid bg-dark text-white py-3">
       <div className="container-fluid h1 py-3 mt-4 bg-black border text-center text-uppercase">
-        spider Collection
+        Spider Collection
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
@@ -73,7 +73,7 @@ const Spider = () => {
                     alt="...img"
                   />
                   <div className="card-body my-2">
-                    <span class="border-bottom border-white">
+                    <span className="border-bottom border-white">
                       <h4 className="card-title text-muted">Description </h4>
                       <p className="card-text ">{c.description}</p>
                     </span>
