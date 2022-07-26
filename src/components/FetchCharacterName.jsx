@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const FetchComics = () => {
+const FetchCharacterName = () => {
+  const [character, setCharacter] = useState([]);
   const [global, setGlobal] = useState("");
-  const [comics, setComics] = useState([]);
-  const [count, setCount] = useState([]);
+  const [count, setCount] = useState("");
 
   useEffect(() => {
-    fetch(
-      "https://gateway.marvel.com/v1/public/comics?titleStartsWith=hulk&limit=6&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data.results);
-        console.log(data.data.total);
-        setComics(data.data.results);
-        setGlobal(data.data.total);
-        setCount(data.data.count);
+    axios
+      .get(
+        `https://gateway.marvel.com/v1/public/characters?limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+      )
+      .then((res) => {
+        setCharacter(res.data.data.results);
+        setGlobal(res.data.data.total);
+        setCount(res.data.data.count);
+        console.log(res.data.data.results);
       })
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
       });
   }, []);
 
   return (
-    <div className="container-fluid bg-dark text-white">
-      <div className="container-fluid border h1 py-3 mt-5 text-center text-uppercase bg-black">
-        Comics Collection
+    <div className="text-white">
+      <div className="container-fluid h1 p-3 mt-4 text-center text-uppercase">
+        Character Collection
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
@@ -37,14 +37,14 @@ const FetchComics = () => {
         </h4>
       </div>
 
-      <div className="row">
-        {comics.map((c) => {
+      <div className=" row">
+        {character.map((c) => {
           return (
             <div className="col-lg-4 col-md-6 col-xs-6">
-              <div className="border border-info card my-3 bg-dark">
+              <div className="border border-warning card my-3 bg-dark">
                 <div key={c.id} className="p-2 my-3">
-                  <h4 className="card-header text-center text-info py-3">
-                    {c.title}
+                  <h4 className="card-header text-center text-warning py-3">
+                    {c.name}
                   </h4>
                   <img
                     src={c.thumbnail.path + "/standard_fantastic.jpg"}
@@ -56,6 +56,11 @@ const FetchComics = () => {
                       <h4 className="card-title text-muted">Description </h4>
                       <p className="card-text ">{c.description}</p>
                     </span>
+                    {/* 
+                    <p>URL type : {c.urls[0].type}</p>
+                    <p>Modified : {c.modified}</p> 
+                    <p>thumbnail.path {c.thumbnail.path}</p>
+                    */}
                   </div>
 
                   <ul className="list-group list-group-flush ">
@@ -65,9 +70,11 @@ const FetchComics = () => {
                     <li className="list-group-item bg-dark text-white">
                       Available Stories : {c.stories["available"]}
                     </li>
-
                     <li className="list-group-item bg-dark text-white">
-                      issueNumber : {c.issueNumber}
+                      Available Series : {c.series["available"]}
+                    </li>
+                    <li className="list-group-item bg-dark text-white">
+                      Available Comics : {c.comics["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
@@ -80,7 +87,7 @@ const FetchComics = () => {
                       href={c.urls[0].url}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn btn-outline-info"
+                      className="btn btn-outline-warning"
                     >
                       Learn More
                     </a>
@@ -95,4 +102,4 @@ const FetchComics = () => {
   );
 };
 
-export default FetchComics;
+export default FetchCharacterName;

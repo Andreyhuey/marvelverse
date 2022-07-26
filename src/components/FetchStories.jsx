@@ -7,7 +7,7 @@ const FetchStories = () => {
 
   useEffect(() => {
     fetch(
-      "https://gateway.marvel.com/v1/public/stories?limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      "https://gateway.marvel.com/v1/public/stories?orderBy=-modified&limit=6&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -24,48 +24,36 @@ const FetchStories = () => {
 
   return (
     <div className="container-fluid bg-dark text-white">
-      <div className="container-fluid border h2 p-3 text-center text-uppercase">
+      <div className="container-fluid h1 py-3 mt-4 border bg-black text-center text-uppercase">
         Stories Collection
       </div>
-      <div className="container mt-2 py-3 bg-dark text-end">
-        <h2 className="text-success ">
-          Total Characters : <b>{global}</b>
-        </h2>
-        <h3 className="text-warning m-2">
-          Total Displayed : <b>{count}</b>
+      <div className="container mt-2 py-3 bg-dark">
+        <h3 className="text-muted ">
+          Total Stories <p className="mx-2 text-primary">{global}</p>
         </h3>
+        <h4 className="text-muted">
+          Total Displayed <p className="mx-2 text-primary">{count}</p>
+        </h4>
       </div>
 
       <div className=" row">
         {stories.map((s) => {
           return (
             <div className="col-lg-4 col-md-6 col-xs-6">
-              <div className="card my-3 bg-dark">
+              <div className="border border-primary card my-3 bg-dark">
                 <div key={s.id} className="p-2 my-3">
-                  <h4 className="card-header text-center text-warning py-3">
+                  <h4 className="card-header text-center text-primary py-3">
                     {s.originalIssue.name}
                   </h4>
-                  {/* <img
-                    src={s.thumbnail.path + "/standard_fantastis.jpg"}
-                    className="card-img-top"
-                    alt="...img"
-                  /> */}
+
                   <div className="card-body my-2">
-                    <h4 className="card-title text-info">Description </h4>
+                    <h4 className="card-title text-muted">Description </h4>
                     <p className="card-text">{s.title}</p>
-                    {/* 
-                    <p>URL type : {s.urls[0].type}</p>
-                    <p>Modified : {s.modified}</p> 
-                    <p>thumbnail.path {s.thumbnail.path}</p>
-                    */}
                   </div>
 
                   <ul className="list-group list-group-flush ">
-                    <li className="list-group-item bg-dark text-white">
-                      <h4 className="text-muted">Details</h4>
-                    </li>
-                    <li className="list-group-item bg-dark text-white ">
-                      <p className="text-capitalize text-muted">ID : {s.id}</p>
+                    <li className="list-group-item bg-dark text-muted ">
+                      ID : {s.id}
                     </li>
                     <li className="list-group-item bg-dark text-white">
                       Available Series : {s.series["available"]}
@@ -77,17 +65,6 @@ const FetchStories = () => {
                       Available Creators : {s.creators["available"]}
                     </li>
                   </ul>
-
-                  <div className="card-body text-end">
-                    <a
-                      href={s.resourceURI}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn btn-primary text-white"
-                    >
-                      Learn More
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>

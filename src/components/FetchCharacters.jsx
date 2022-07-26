@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import { Search } from "./";
 // import axios from "axios";
-import { Loader } from ".";
 
 const FetchCharacters = () => {
   const [characters, setCharacters] = useState([]);
@@ -12,7 +11,7 @@ const FetchCharacters = () => {
 
   useEffect(() => {
     fetch(
-      "https://gateway.marvel.com/v1/public/characters?&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=loki&orderBy=-modified&limit=6&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -21,14 +20,22 @@ const FetchCharacters = () => {
         setCharacters(data.data.results);
         setGlobal(data.data.total);
         setCount(data.data.count);
-        setLoading(false);
+        setLoading(true);
       })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <h1
+        className="display-1 text-white d-flex align-items-center justify-content-center"
+        style={{ height: "80vh" }}
+      >
+        ...Loading
+      </h1>
+    );
 
   // # fetch parameters
   // name
@@ -40,16 +47,16 @@ const FetchCharacters = () => {
 
   return (
     <div className="container-fluid bg-dark text-white">
-      <div className="container-fluid h1 p-3 mt-4 text-center text-uppercase">
+      <div className="container-fluid h1 py-3 mt-4 bg-black border text-center text-uppercase">
         Character Collection
       </div>
-      {/* <Search search={(q) => setQuery(q)} /> */}
+
       <div className="container mt-2 py-3 bg-dark ">
         <h3 className="text-muted ">
-          Total Characters <p className="mx-2 text-info">{global}</p>
+          Total Characters <p className="mx-2 text-warning">{global}</p>
         </h3>
         <h4 className="text-muted">
-          Total Displayed <p className="mx-2 text-info">{count}</p>
+          Total Displayed <p className="mx-2 text-warning">{count}</p>
         </h4>
       </div>
 
@@ -72,17 +79,17 @@ const FetchCharacters = () => {
                       <h4 className="card-title text-muted">Description </h4>
                       <p className="card-text ">{c.description}</p>
                     </span>
-                    {/* 
-                    <p>URL type : {c.urls[0].type}</p>
-                    <p>Modified : {c.modified}</p> 
-                    <p>thumbnail.path {c.thumbnail.path}</p>
-                    */}
                   </div>
 
                   <ul className="list-group list-group-flush ">
                     <li className="list-group-item bg-dark text-muted">
                       ID : {c.id}
                     </li>
+
+                    <li className="list-group-item bg-dark text-white">
+                      Modified : {c.modified}
+                    </li>
+
                     <li className="list-group-item bg-dark text-white">
                       Available Stories : {c.stories["available"]}
                     </li>
