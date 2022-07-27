@@ -1,15 +1,32 @@
+import { render } from "@testing-library/react";
 import React, { useState } from "react";
 
-const Example = () => {
-  // Declare a new state variable, which we'll call "count"
-  const [count, setCount] = useState(0);
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
 
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className="text-white">
+        <p>You clicked {this.state.count} times</p>
+        <button
+          className="btn btn-danger
+          "
+          onClick={() =>
+            this.setState({
+              count: this.state.count + 1,
+            })
+          }
+        >
+          click me
+        </button>
+      </div>
+    );
+  }
+}
 
 export default Example;

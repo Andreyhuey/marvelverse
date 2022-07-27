@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
-import { Homepage } from "./characters";
+// import { Homepage } from "./characters";
+import { Homepage } from "./pages";
 import { Footer, FetchCharacters, Example } from "./components";
 
 // FetchCharacterName,
