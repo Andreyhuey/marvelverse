@@ -75,7 +75,9 @@ const Spider = () => {
                   <div className="card-body my-2">
                     <span className="border-bottom border-white">
                       <h4 className="card-title text-muted">Description </h4>
-                      <p className="card-text ">{c.description}</p>
+                      <p className="card-text ">
+                        {HTMLReactParser(c.description)}
+                      </p>
                     </span>
                   </div>
 
@@ -85,7 +87,7 @@ const Spider = () => {
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Date Modified : {c.modified}
+                      Last Modified : {c.modified}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">

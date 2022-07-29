@@ -14,7 +14,7 @@ import {
 
 const Homepage = () => {
   return (
-    <div className="container-fluid bg-dark">
+    <div className="container-fluid bg-dark mt-5 pt-3">
       <Thor />
       <Moonknight />
       <Hulk />

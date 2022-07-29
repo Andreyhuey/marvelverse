@@ -1,54 +1,34 @@
 import "bootstrap/dist/css/bootstrap.css";
-// import { Homepage } from "./characters";
-import { Homepage } from "./pages";
-import { Footer, FetchCharacters, Example } from "./components";
+import { Switch, Route } from "react-router-dom";
+import { Homepage } from "./characters";
+import { NameSearch } from "./pages";
+import { Navbar, Footer } from "./components";
 
-// FetchCharacterName,
-// FetchStories,
-// FetchSeries,
-// FetchComics,
-// FetchCreators,
-// FetchEvents,
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+import { faEnvelopeOpen, faSearch } from "@fortawesome/free-solid-svg-icons";
+
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+
+library.add(faGithub, faLinkedin, faEnvelopeOpen, faSearch);
 
 function App() {
   return (
     <div className="bg-dark">
-      <header className="p-1 bg-black">
-        <div className="pt-1">
-          <h1 className="text-warning text-uppercase mx-3">MARVEL</h1>
-        </div>
-      </header>
-      <Example />
-      <Homepage />
-      {/* <FetchCharacters /> */}
+      <Navbar />
+      <div>
+        <Switch>
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route exact path="/search">
+            <NameSearch />
+          </Route>
+        </Switch>
+      </div>
       <Footer />
     </div>
   );
 }
-
-// DisplayHeader
-/* <section className="container py-3">
-</section>
-
-
-<section className="container py-3">
-  <FetchComics />
-</section>
-
-<section className="container py-3">
-  <FetchStories />
-</section>
-
-<section className="container py-3">
-  <FetchSeries />
-</section>
-
-<section className="container py-3">
-  <FetchEvents />
-</section>
-
-<section className="container py-3">
-  <FetchCreators />
-</section> */
 
 export default App;

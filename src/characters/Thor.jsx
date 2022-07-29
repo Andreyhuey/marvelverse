@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import HTMLReactParser from "html-react-parser";
 
 const Thor = () => {
   const [characters, setCharacters] = useState([]);
@@ -18,7 +19,7 @@ const Thor = () => {
         setCharacters(data.data.results);
         // setGlobal(data.data.total);
         setCount(data.data.count);
-        setLoading(true);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
@@ -35,26 +36,15 @@ const Thor = () => {
       </h1>
     );
 
-  // # fetch parameters
-  // name
-  // nameStartsWith
-  // orderBy
-  // modifiedSince
-  // limit
-  // offset
-
   return (
-    <div className="container-fluid bg-dark text-white py-3">
+    <div className="container bg-dark text-white py-3">
       <div className="container-fluid h1 py-3 mt-4 bg-black border text-center text-uppercase">
         Thor Collection
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
-        {/* <h3 className="text-muted ">
-          Total Characters <p className="mx-2 text-warning">{global}</p>
-        </h3> */}
         <h4 className="text-muted">
-          Total Displayed <p className="mx-2 text-warning">{count}</p>
+          Total Displayed <b className="mx-2 text-warning">{count}</b>
         </h4>
       </div>
 
@@ -74,18 +64,15 @@ const Thor = () => {
                   />
                   <div className="card-body my-2">
                     <span className="border-bottom border-white">
-                      <h4 className="card-title text-muted">Description </h4>
-                      <p className="card-text ">{c.description}</p>
+                      <p className="card-text ">
+                        {HTMLReactParser(c.description)}
+                      </p>
                     </span>
                   </div>
 
                   <ul className="list-group list-group-flush ">
                     <li className="list-group-item bg-dark text-muted">
                       ID : {c.id}
-                    </li>
-
-                    <li className="list-group-item bg-dark text-white">
-                      Date Modified : {c.modified}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
@@ -119,6 +106,9 @@ const Thor = () => {
                       >
                         {c.urls[0].type}
                       </a>
+                    </li>
+                    <li className="list-group-item bg-dark text-muted">
+                      Last Modified : {c.modified}
                     </li>
                   </ul>
                 </div>

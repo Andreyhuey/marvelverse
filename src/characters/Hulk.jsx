@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import HTMLReactParser from "html-react-parser";
 
 const Hulk = () => {
   const [characters, setCharacters] = useState([]);
@@ -18,7 +19,7 @@ const Hulk = () => {
         setCharacters(data.data.results);
         // setGlobal(data.data.total);
         setCount(data.data.count);
-        setLoading(true);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
@@ -35,16 +36,8 @@ const Hulk = () => {
       </h1>
     );
 
-  // # fetch parameters
-  // name
-  // nameStartsWith
-  // orderBy
-  // modifiedSince
-  // limit
-  // offset
-
   return (
-    <div className="container-fluid bg-dark text-white my-3 py-3">
+    <div className="container bg-dark text-white my-3 py-3">
       <div className="container-fluid h1 py-3 mt-4 bg-black border text-center text-uppercase">
         Hulk Collection
       </div>
@@ -74,8 +67,9 @@ const Hulk = () => {
                   />
                   <div className="card-body my-2">
                     <span class="border-bottom border-white">
-                      <h4 className="card-title text-muted">Description </h4>
-                      <p className="card-text ">{c.description}</p>
+                      <p className="card-text ">
+                        {HTMLReactParser(c.description)}
+                      </p>
                     </span>
                   </div>
 
@@ -85,21 +79,17 @@ const Hulk = () => {
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Date Modified : {c.modified}
+                      Stories : {c.stories["available"]}
+                    </li>
+                    <li className="list-group-item bg-dark text-white">
+                      Series : {c.series["available"]}
+                    </li>
+                    <li className="list-group-item bg-dark text-white">
+                      Comics : {c.comics["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Stories : {c.stories["available"]}
-                    </li>
-                    <li className="list-group-item bg-dark text-white">
-                      Available Series : {c.series["available"]}
-                    </li>
-                    <li className="list-group-item bg-dark text-white">
-                      Available Comics : {c.comics["available"]}
-                    </li>
-
-                    <li className="list-group-item bg-dark text-white">
-                      Available Events : {c.events["available"]}
+                      Events : {c.events["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-success text-capitalize d-flex justify-content-between pt-4">
@@ -120,6 +110,9 @@ const Hulk = () => {
                       >
                         {c.urls[0].type}
                       </a>
+                    </li>
+                    <li className="list-group-item bg-dark text-muted">
+                      Last Modified : {c.modified}
                     </li>
                   </ul>
                 </div>

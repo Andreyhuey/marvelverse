@@ -9,4 +9,3 @@ export { default as FetchStories } from "./FetchStories.jsx";
 export { default as Search } from "./Search";
 export { default as Loader } from "./Loader.jsx";
 export { default as Footer } from "./Footer.jsx";
-export { default as Example } from "./Example";

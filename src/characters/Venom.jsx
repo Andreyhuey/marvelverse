@@ -75,7 +75,9 @@ const Venom = () => {
                   <div className="card-body my-2">
                     <span class="border-bottom border-white">
                       <h4 className="card-title text-muted">Description </h4>
-                      <p className="card-text ">{c.description}</p>
+                      <p className="card-text ">
+                        {HTMLReactParser(c.description)}
+                      </p>
                     </span>
                   </div>
 
@@ -85,21 +87,21 @@ const Venom = () => {
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Date Modified : {c.modified}
+                      Last Modified : {c.modified}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Stories : {c.stories["available"]}
+                      Stories : {c.stories["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Series : {c.series["available"]}
+                      Series : {c.series["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
-                      Available Comics : {c.comics["available"]}
+                      Comics : {c.comics["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Available Events : {c.events["available"]}
+                      Events : {c.events["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white text-capitalize d-flex justify-content-between pt-4">

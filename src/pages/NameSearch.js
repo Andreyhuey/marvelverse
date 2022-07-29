@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col, Input } from "antd";
-
+import HTMLReactParser from "html-react-parser";
+import Moment from "react-moment";
+import "moment-timezone";
+import moment from "moment";
 // import { useGetCharactersQuery } from "../services/CharacterApi";
 
 const NameSearch = () => {
@@ -46,8 +48,8 @@ const NameSearch = () => {
     );
 
   return (
-    <div className="container text-white" style={{ height: "auto" }}>
-      <div className="d-flex justify-content-center text-white my-2 py-2">
+    <div className="container text-white mt-5 pt-3" style={{ height: "auto" }}>
+      <div className="d-flex justify-content-center text-white my-3 py-2">
         <input
           placeholder="Find A Character"
           type="text"
@@ -74,10 +76,12 @@ const NameSearch = () => {
                     className="card-img-top"
                     alt="...img"
                   />
-                  <div className="card-body my-2">
+                  <p className="text-muted text-center"></p>
+                  <div className="card-body">
                     <span className="border-bottom border-white">
-                      <h4 className="card-title text-muted">Description </h4>
-                      <p className="card-text text-white">{c.description}</p>
+                      <p className="card-text text-white">
+                        {HTMLReactParser(c.description)}
+                      </p>
                     </span>
                   </div>
 
@@ -85,23 +89,22 @@ const NameSearch = () => {
                     <li className="list-group-item bg-dark text-muted">
                       ID : {c.id}
                     </li>
+
                     <li className="list-group-item bg-dark text-white">
-                      Modified : {c.modified}
+                      Comics : {c.comics["available"]}
+                    </li>
+                    <li className="list-group-item bg-dark text-white">
+                      Events : {c.events["available"]}
+                    </li>
+
+                    <li className="list-group-item bg-dark text-white">
+                      Series : {c.series["available"]}
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
                       Stories : {c.stories["available"]}
                     </li>
-                    <li className="list-group-item bg-dark text-white">
-                      Series : {c.series["available"]}
-                    </li>
-                    <li className="list-group-item bg-dark text-white">
-                      Comics : {c.comics["available"]}
-                    </li>
 
-                    <li className="list-group-item bg-dark text-white">
-                      Events : {c.events["available"]}
-                    </li>
                     <li className="list-group-item bg-dark text-warning text-capitalize d-flex justify-content-between pt-4">
                       <a
                         href={c.urls[1].url}
@@ -120,6 +123,9 @@ const NameSearch = () => {
                       >
                         {c.urls[0].type}
                       </a>
+                    </li>
+                    <li className="list-group-item bg-dark text-muted">
+                      Last modified : {c.modified}
                     </li>
                   </ul>
                 </div>
