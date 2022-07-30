@@ -4,7 +4,7 @@ import "moment-timezone";
 
 const NameSearch = () => {
   const [characters, setCharacters] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("thor");
+  const [searchTerm, setSearchTerm] = useState("spider-man");
   const [count, setCount] = useState("");
   const [isLoading, setLoading] = useState(true);
 
@@ -45,6 +45,9 @@ const NameSearch = () => {
 
   return (
     <div className="container text-white mt-5 pt-3" style={{ height: "auto" }}>
+      <div className="text-warning text-left h2 pt-3">
+        Total Marvel Characters : 1562
+      </div>
       <div className="d-flex justify-content-center text-white my-3 py-2">
         <input
           placeholder="Find A Character"
@@ -53,7 +56,7 @@ const NameSearch = () => {
         />
       </div>
       <div className="text-muted text-center h5">Find {searchTerm}</div>
-      <div className="text-muted text-center h3">
+      <div className="text-muted text-center h6">
         Total Characters Found : {count}
       </div>
       <div className="row">
