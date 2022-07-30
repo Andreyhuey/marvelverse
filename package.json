@@ -1,6 +1,6 @@
 {
-  "name": "marvel-app",
-  "version": "0.1.0",
+  "name": "marvel-x-app",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
