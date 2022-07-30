@@ -107,7 +107,7 @@ const Thor = () => {
                         {c.urls[0].type}
                       </a>
                     </li>
-                    <li className="list-group-item bg-dark text-muted">
+                    <li className="list-group-item bg-dark text-white">
                       Last Modified : {c.modified}
                     </li>
                   </ul>

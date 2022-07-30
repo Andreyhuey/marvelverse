@@ -45,7 +45,7 @@
 //                   </h4>
 
 //                   <div className="card-body my-2">
-//                     <h4 className="card-title text-muted">Description </h4>
+//
 //                     <p className="card-text">{s.title}</p>
 //                   </div>
 

@@ -75,7 +75,7 @@
 //                   />
 //                   <div className="card-body my-2">
 //                     <span className="border-bottom border-white">
-//                       <h4 className="card-title text-muted">Description </h4>
+//
 //                       <p className="card-text text-white">{HTMLReactParser(c.description)}</p>
 //                     </span>
 //                   </div>

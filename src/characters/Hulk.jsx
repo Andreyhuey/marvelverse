@@ -43,11 +43,8 @@ const Hulk = () => {
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
-        {/* <h3 className="text-muted ">
-          Total Characters <p className="mx-2 text-success">{global}</p>
-        </h3> */}
         <h4 className="text-muted">
-          Total Displayed <p className="mx-2 text-success">{count}</p>
+          Total Displayed <b className="mx-2 text-success">{count}</b>
         </h4>
       </div>
 
@@ -111,7 +108,7 @@ const Hulk = () => {
                         {c.urls[0].type}
                       </a>
                     </li>
-                    <li className="list-group-item bg-dark text-muted">
+                    <li className="list-group-item bg-dark text-white">
                       Last Modified : {c.modified}
                     </li>
                   </ul>
