@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
+import HTMLReactParser from "html-react-parser";
 
 const Captains = () => {
   const [characters, setCharacters] = useState([]);
-  //   const [global, setGlobal] = useState(" ");
+
   const [count, setCount] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     fetch(
-      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=captain&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=captain&orderBy=-modified&limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
     )
       .then((response) => response.json())
       .then((data) => {
         console.log(data.data);
         console.log(data.data.total);
         setCharacters(data.data.results);
-        // setGlobal(data.data.total);
         setCount(data.data.count);
-        setLoading(true);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
@@ -35,26 +35,15 @@ const Captains = () => {
       </h1>
     );
 
-  // # fetch parameters
-  // name
-  // nameStartsWith
-  // orderBy
-  // modifiedSince
-  // limit
-  // offset
-
   return (
-    <div className="container-fluid bg-dark text-white my-3 py-3">
+    <div className="container bg-dark text-white my-3 py-3">
       <div className="container-fluid h1 py-3 mt-4 bg-black border text-center text-uppercase">
         Captains Collection
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
-        {/* <h3 className="text-muted ">
-          Total Characters <p className="mx-2 text-white">{global}</p>
-        </h3> */}
         <h4 className="text-muted">
-          Total Displayed <p className="mx-2 text-white">{count}</p>
+          Total Displayed <b className="mx-2 text-white">{count}</b>
         </h4>
       </div>
 
@@ -86,10 +75,6 @@ const Captains = () => {
                     </li>
 
                     <li className="list-group-item bg-dark text-white">
-                      Last Modified : {c.modified}
-                    </li>
-
-                    <li className="list-group-item bg-dark text-white">
                       Stories : {c.stories["available"]}
                     </li>
                     <li className="list-group-item bg-dark text-white">
@@ -103,6 +88,9 @@ const Captains = () => {
                       Events : {c.events["available"]}
                     </li>
 
+                    <li className="list-group-item bg-dark text-white">
+                      Last Modified : {c.modified}
+                    </li>
                     <li className="list-group-item bg-dark text-white text-capitalize d-flex justify-content-between pt-4">
                       <a
                         href={c.urls[1].url}

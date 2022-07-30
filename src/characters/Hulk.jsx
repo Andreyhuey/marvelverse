@@ -10,7 +10,7 @@ const Hulk = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=hulk&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=hulk&orderBy=-modified&limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -88,6 +88,9 @@ const Hulk = () => {
                     <li className="list-group-item bg-dark text-white">
                       Events : {c.events["available"]}
                     </li>
+                    <li className="list-group-item bg-dark text-white">
+                      Last Modified : {c.modified}
+                    </li>
 
                     <li className="list-group-item bg-dark text-success text-capitalize d-flex justify-content-between pt-4">
                       <a
@@ -107,9 +110,6 @@ const Hulk = () => {
                       >
                         {c.urls[0].type}
                       </a>
-                    </li>
-                    <li className="list-group-item bg-dark text-white">
-                      Last Modified : {c.modified}
                     </li>
                   </ul>
                 </div>

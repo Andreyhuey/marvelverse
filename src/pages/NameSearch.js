@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HTMLReactParser from "html-react-parser";
-import Moment from "react-moment";
 import "moment-timezone";
-import moment from "moment";
-// import { useGetCharactersQuery } from "../services/CharacterApi";
 
 const NameSearch = () => {
   const [characters, setCharacters] = useState([]);
@@ -13,7 +10,7 @@ const NameSearch = () => {
 
   useEffect(() => {
     fetch(
-      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchTerm}&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchTerm}&orderBy=-modified&limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -24,7 +21,6 @@ const NameSearch = () => {
 
         setCharacters(Results);
 
-        // setLoading(true);
         const filteredData = Results?.filter((character) =>
           character?.name?.toLowerCase()?.includes(searchTerm)
         );
@@ -54,8 +50,6 @@ const NameSearch = () => {
           placeholder="Find A Character"
           type="text"
           onChange={(e) => setSearchTerm(e.target.value?.toLowerCase())}
-
-          // onChange={}
         />
       </div>
       <div className="text-muted text-center h5">Find {searchTerm}</div>
@@ -105,6 +99,9 @@ const NameSearch = () => {
                       Stories : {c.stories["available"]}
                     </li>
 
+                    <li className="list-group-item bg-dark text-white">
+                      Last modified : {c.modified}
+                    </li>
                     <li className="list-group-item bg-dark text-warning text-capitalize d-flex justify-content-between pt-4">
                       <a
                         href={c.urls[1].url}
@@ -123,9 +120,6 @@ const NameSearch = () => {
                       >
                         {c.urls[0].type}
                       </a>
-                    </li>
-                    <li className="list-group-item bg-dark text-muted">
-                      Last modified : {c.modified}
                     </li>
                   </ul>
                 </div>

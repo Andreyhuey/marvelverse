@@ -11,19 +11,19 @@ export const CharacterApi = createApi({
     getCharacters: builder.query({
       query: () =>
         createRequest(
-          `/v1/public/characters?limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+          `/v1/public/characters?limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     // getCharacterId: builder.query({
     //   query: (characterId) =>
     //     createRequest(
-    //       `/v1/pubic/characters/${characterId}?limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+    //       `/v1/pubic/characters/${characterId}?limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
     //     ),
     // }),
     // getCharactersStories: builder.query({
     //   query: () =>
     //     createRequest(
-    //       `/v1/public/characters?limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+    //       `/v1/public/characters?limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
     //     ),
     // }),
   }),

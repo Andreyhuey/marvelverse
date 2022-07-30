@@ -11,7 +11,7 @@ const Deadpool = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=deadpool&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=deadpool&orderBy=-modified&limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
     )
       .then((response) => response.json())
       .then((data) => {

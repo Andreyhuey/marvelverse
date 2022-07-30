@@ -10,7 +10,7 @@ const Spider = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      "https://gateway.marvel.com/v1/public/characters?nameStartsWith=spider&orderBy=-modified&limit=100&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a"
+      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=spider&orderBy=-modified&limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -43,11 +43,8 @@ const Spider = () => {
       </div>
 
       <div className="container mt-2 py-3 bg-dark ">
-        {/* <h3 className="text-muted ">
-          Total Characters <p className="mx-2 text-danger">{global}</p>
-        </h3> */}
         <h4 className="text-muted">
-          Total Displayed <p className="mx-2 text-danger">{count}</p>
+          Total Displayed <b className="mx-2 text-danger">{count}</b>
         </h4>
       </div>
 
