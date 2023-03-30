@@ -15,9 +15,7 @@ const Thor = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.data);
-        console.log(data.data.total);
         setCharacters(data.data.results);
-        // setGlobal(data.data.total);
         setCount(data.data.count);
         setLoading(false);
       })

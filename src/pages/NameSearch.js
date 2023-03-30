@@ -16,6 +16,7 @@ const NameSearch = () => {
       .then((data) => {
         console.log(data.data.total);
         setCount(data.data.count);
+        console.log(count);
         const Results = data.data.results;
         console.log(Results);
 
