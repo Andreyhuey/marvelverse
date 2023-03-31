@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { characterApi } from "../services/characterApi";
 
-import { CharacterApi } from "../services/CharacterApi";
-
-export default configureStore({
+const store = configureStore({
   reducer: {
-    [CharacterApi.reducerPath]: CharacterApi.reducer,
+    [characterApi.reducerPath]: characterApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(characterApi.middleware),
 });
+
+export default store;

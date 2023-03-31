@@ -32,7 +32,7 @@ const NameSearch = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [searchTerm]);
+  }, [searchTerm, count]);
 
   if (isLoading)
     return (
