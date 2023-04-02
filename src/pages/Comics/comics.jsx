@@ -7,7 +7,7 @@ const Comics = () => {
   const [count, setCount] = useState("");
   const [total, setTotal] = useState(" ");
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setLoading] = useState();
+  const [isLoading, setLoading] = useState(true);
 
   // fetches Data from server and stores in setcomics(array) due to the handle search function
   const handleSearch = (event) => {
@@ -75,6 +75,7 @@ const Comics = () => {
 
   return (
     <section className="container-fluid bg-dark">
+      <div>{isLoading}</div>
       <div className="container vh-auto">
         <h3 className="text-bold fw-bold text-center py-3">Marvel comics</h3>
         <form
@@ -93,7 +94,6 @@ const Comics = () => {
             Search
           </button>
         </form>
-        {/* <div>{isLoading}</div> */}
         <div className="d-flex justify-content-between">
           <div className="text-center h6">Total comics Found : {total}</div>
           <div className="text-center h6">Total comics Rendered : {count}</div>

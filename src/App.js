@@ -4,6 +4,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelopeOpen, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import {
+  Homepage,
+  //
   Characters,
   CharactersId,
   CharacterComics,
@@ -23,6 +25,10 @@ function App() {
     <div className="bg-dark text-white">
       <div>
         <Switch>
+          {/* Homepage */}
+          <Route exact path="/">
+            <Homepage />
+          </Route>
           {/* Character Pages */}
           <Route exact path="/characters">
             <Characters />

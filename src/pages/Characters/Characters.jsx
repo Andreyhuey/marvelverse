@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 
@@ -7,7 +7,7 @@ const Characters = () => {
   const [count, setCount] = useState("");
   const [total, setTotal] = useState(" ");
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setLoading] = useState();
+  const [isLoading, setLoading] = useState(true);
 
   // fetches Data from server and stores in setCharacters(array) due to the handle search function
   const handleSearch = (event) => {
@@ -32,6 +32,30 @@ const Characters = () => {
         console.log(err.message);
       });
   };
+
+  useEffect(() => {
+    async function fetchCharcters() {
+      setLoading(true);
+      fetch(
+        `https://gateway.marvel.com/v1/public/characters?&limit=30&offset=203&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.data);
+          setCount(data.data.count);
+          setTotal(data.data.total);
+          const results = data.data.results;
+          setCharacters(results);
+          console.log(results);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+
+    fetchCharcters();
+  }, []);
 
   // loading state component
   if (isLoading)
