@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { BeatLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
-const CharacterComics = () => {
-  const { characterId } = useParams();
-  const [comics, setComics] = useState([]);
+const ComicCharacters = () => {
+  const { comicId } = useParams();
+  const [characters, setCharacters] = useState([]);
   const [count, setCount] = useState("");
-  const [total, setTotal] = useState("");
+  const [total, setTotal] = useState(" ");
   const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState();
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       fetch(
-        `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?&limit=25&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+        `https://gateway.marvel.com/v1/public/comics/${comicId}/characters?&limit=25&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -23,7 +23,7 @@ const CharacterComics = () => {
           setCount(data.data.count);
           setTotal(data.data.total);
           const results = data.data.results;
-          setComics(results);
+          setCharacters(results);
           console.log(results);
           setLoading(false);
         })
@@ -33,13 +33,16 @@ const CharacterComics = () => {
     }
 
     fetchData();
-  }, [characterId]);
+  }, [comicId]);
 
+  // fetches Data from server and stores in setCharacters(array) due to the handle search function
   const handleSearch = (event) => {
     event.preventDefault();
     setLoading(true);
     fetch(
-      `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?&titleStartsWith=${searchTerm}&limit=25&orderBy=issueNumber&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchTerm.toLowerCase()}&limit=40&orderBy=-modified&ts=1&apikey=${
+        process.env.REACT_APP_API_KEY
+      }&hash=${process.env.REACT_APP_HASH}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -47,7 +50,7 @@ const CharacterComics = () => {
         setCount(data.data.count);
         setTotal(data.data.total);
         const results = data.data.results;
-        setComics(results);
+        setCharacters(results);
         console.log(results);
         setLoading(false);
       })
@@ -56,7 +59,8 @@ const CharacterComics = () => {
       });
   };
 
-  if (loading)
+  // loading state component
+  if (isLoading)
     return (
       <div
         className="display-1 d-flex align-items-center justify-content-center"
@@ -72,8 +76,11 @@ const CharacterComics = () => {
     );
 
   return (
-    <div className="container-fluid py-5">
-      <div className="container py-5">
+    <section className="container-fluid bg-dark">
+      <div className="container vh-auto">
+        <h3 className="text-bold fw-bold text-center py-3">
+          Marvel Characters
+        </h3>
         <form
           className="d-flex justify-content-center py-3"
           onSubmit={handleSearch}
@@ -82,7 +89,7 @@ const CharacterComics = () => {
             className="form-control mr-sm-2"
             type="search"
             value={searchTerm}
-            placeholder="e.g search for comics"
+            placeholder="e.g spider-man, ant-man, iron man, hulk, hawkeye"
             onChange={(event) => setSearchTerm(event.target.value)}
             required
           />
@@ -90,47 +97,45 @@ const CharacterComics = () => {
             Search
           </button>
         </form>
+        <div>{isLoading}</div>
         <div className="d-flex justify-content-between">
           <div className="text-center h6">Total Characters Found : {total}</div>
           <div className="text-center h6">
             Total Characters Rendered : {count}
           </div>
         </div>
-        <div>
-          <div className="row">
-            {comics.map((c) => {
-              return (
-                <div key={c.id} className="col-lg-4 col-md-6">
-                  <div className="border border-warning card my-3 bg-dark">
-                    <div className="p-2 my-3">
-                      <h4 className="card-header text-center text-warning py-3">
-                        {c.title}
-                      </h4>
-                      <img
-                        src={c.thumbnail.path + ".jpg"}
-                        className="card-img-top"
-                        alt="...img"
-                      />
-                      <div>{loading}</div>
-                      <div className="d-flex justify-content-center py-2">
-                        <Link
-                          key={c.id}
-                          to={`/comics/${c.id}`}
-                          className="btn btn-warning"
-                        >
-                          <b className="text-light">Learn More</b>
-                        </Link>
-                      </div>
+        <div className="row">
+          {characters.map((c) => {
+            return (
+              <div key={c.id} className="col-lg-4 col-md-6">
+                <div className="border border-warning card my-3 bg-dark">
+                  <div className="p-2 my-3">
+                    <h4 className="card-header text-center text-warning py-3">
+                      {c.name}
+                    </h4>
+                    <img
+                      src={c.thumbnail.path + ".jpg"}
+                      className="card-img-top"
+                      alt="...img"
+                    />
+                    <div className="d-flex justify-content-center py-2">
+                      <Link
+                        key={c.id}
+                        to={`/characters/${c.id}`}
+                        className="btn btn-warning"
+                      >
+                        <b className="text-light">Learn More</b>
+                      </Link>
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default CharacterComics;
+export default ComicCharacters;
