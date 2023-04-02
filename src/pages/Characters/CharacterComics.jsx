@@ -8,13 +8,14 @@ const CharacterComics = () => {
   const [comics, setComics] = useState([]);
   const [count, setCount] = useState("");
   const [total, setTotal] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       fetch(
-        `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?&limit=4&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+        `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?&limit=25&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -34,6 +35,27 @@ const CharacterComics = () => {
     fetchData();
   }, [characterId]);
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    fetch(
+      `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?&titleStartsWith=${searchTerm}&limit=25&orderBy=issueNumber&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data);
+        setCount(data.data.count);
+        setTotal(data.data.total);
+        const results = data.data.results;
+        setComics(results);
+        console.log(results);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   if (loading)
     return (
       <div
@@ -50,8 +72,24 @@ const CharacterComics = () => {
     );
 
   return (
-    <div className="container-fluid my-5">
-      <div className="container py-3 my-5">
+    <div className="container-fluid py-5">
+      <div className="container py-5">
+        <form
+          className="d-flex justify-content-center py-3"
+          onSubmit={handleSearch}
+        >
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            value={searchTerm}
+            placeholder="e.g search for comics"
+            onChange={(event) => setSearchTerm(event.target.value)}
+            required
+          />
+          <button className="btn btn-primary" type="submit" value="submit">
+            Search
+          </button>
+        </form>
         <div className="d-flex justify-content-between">
           <div className="text-center h6">Total Characters Found : {total}</div>
           <div className="text-center h6">
@@ -74,7 +112,7 @@ const CharacterComics = () => {
                         alt="...img"
                       />
                       <div>{loading}</div>
-                      <div className="card-body">
+                      {/* <div className="card-body">
                         <span className="border-bottom border-white">
                           <p className="card-text text-white">
                             {c.description}
@@ -134,7 +172,7 @@ const CharacterComics = () => {
                             <a href={c.series.resourceURI}>{c.series.name}</a>
                           </b>
                         </span>
-                      </div>
+                      </div> */}
                       <ul className="list-group list-group-flush d-flex justify-content-between">
                         <li className="list-group-item bg-dark text-muted d-flex justify-content-between">
                           Comic ID : <b>{c.id}</b>

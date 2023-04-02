@@ -57,7 +57,7 @@ const CharactersId = () => {
                   <img
                     src={d.thumbnail.path + ".jpg"}
                     className="card-img-top"
-                    alt={"image of" + d.name}
+                    alt={"...image of " + d.name}
                   />
                 </div>
                 <div className="col-lg-6">

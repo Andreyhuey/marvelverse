@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import HTMLReactParser from "html-react-parser";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
-import moment from "moment";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
@@ -11,7 +9,7 @@ const Characters = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setLoading] = useState();
 
-  // fetches Data from server and stores in setCharacters(array)
+  // fetches Data from server and stores in setCharacters(array) due to the handle search function
   const handleSearch = (event) => {
     event.preventDefault();
     setLoading(true);
@@ -58,26 +56,22 @@ const Characters = () => {
           Marvel Characters
         </h3>
         <form
-          className="d-flex justify-content-center vw-10 py-3 px-5 mx-5"
+          className="d-flex justify-content-center py-3"
           onSubmit={handleSearch}
         >
           <input
             className="form-control mr-sm-2"
             type="search"
             value={searchTerm}
-            placeholder="e.g spider-man"
+            placeholder="e.g spider-man, ant-man, iron man, hulk, hawkeye"
             onChange={(event) => setSearchTerm(event.target.value)}
             required
           />
-          <button
-            className="btn btn-primary my-2 my-sm-0"
-            type="submit"
-            value="submit"
-          >
+          <button className="btn btn-primary" type="submit" value="submit">
             Search
           </button>
         </form>
-        <div>{isLoading}</div>
+        {/* <div>{isLoading}</div> */}
         <div className="d-flex justify-content-between">
           <div className="text-center h6">Total Characters Found : {total}</div>
           <div className="text-center h6">
