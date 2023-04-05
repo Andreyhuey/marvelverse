@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer = () => {
   return (
-    <div className="container-fluid bg-black">
+    <div className="container-fluid bg-dark-black">
       <footer className="container py-4  ">
         <div className="row py-2 mt-2 text-muted">
           <div className="">

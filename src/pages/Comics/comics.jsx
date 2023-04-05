@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import "../../components/styles.css";
 
 const Comics = () => {
   const [comics, setComics] = useState([]);
@@ -55,6 +56,11 @@ const Comics = () => {
     }
 
     fetchComics();
+
+    // Set custom title for page
+    document.title = "Marvel Comics";
+
+    // Update URL to reflect custom title
   }, []);
 
   // loading state component
@@ -102,27 +108,27 @@ const Comics = () => {
           {comics.map((c) => {
             return (
               <div key={c.id} className="col-lg-4 col-md-6">
-                <div className="border border-primary card my-3 bg-dark">
-                  <div className="p-2 my-3">
-                    <h4 className="card-header text-center text-primary py-3">
-                      {c.title}
-                    </h4>
-                    <img
-                      src={c.thumbnail.path + ".jpg"}
-                      className="card-img-top"
-                      alt="...img"
-                    />
-                    <p className="text-muted text-center"></p>
-                    <div className="d-flex justify-content-center">
-                      <Link
-                        key={c.id}
-                        to={`/comics/${c.id}`}
-                        className="btn btn-primary"
-                      >
-                        <b className="text-light">Read More</b>
-                      </Link>
+                <div className="border border-primary card my-3 bg-black">
+                  <Link
+                    key={c.id}
+                    to={`/comics/issue/${c.id}/${c.title
+                      .toLowerCase()
+                      .replace(/[^a-z0-9-_]/g, "_")
+                      .replace(/[-_]+/g, "_")}`}
+                    style={{ textDecoration: "none" }}
+                    className="text-primary hover-effect"
+                  >
+                    <div className="p-2 my-3">
+                      <h4 className="card-header text-center py-3">
+                        {c.title}
+                      </h4>
+                      <img
+                        src={c.thumbnail.path + ".jpg"}
+                        className="card-img-top"
+                        alt="...img"
+                      />
                     </div>
-                  </div>
+                  </Link>
                 </div>
               </div>
             );

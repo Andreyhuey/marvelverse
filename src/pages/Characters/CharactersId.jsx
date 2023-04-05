@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import HTMLReactParser from "html-react-parser";
 
 const CharactersId = () => {
   const { characterId } = useParams();
@@ -55,30 +56,32 @@ const CharactersId = () => {
               <div key={d.id} className="row">
                 <div className="col-lg-6">
                   <img
-                    src={d.thumbnail.path + ".jpg"}
+                    src={d.thumbnail.path ? d.thumbnail.path + ".jpg" : loading}
                     className="card-img-top"
                     alt={"...image of " + d.name}
                   />
                 </div>
-                <div className="col-lg-6">
+                <div className="col-lg-6 mt-3">
+                  <h3 className="text-center py-2">
+                    <span className="text-warning fw-bold">{d.name}</span>
+                  </h3>
                   <div className="py-3">
-                    <p>
-                      <b>ID</b>: {d.id}
+                    <p className="bg-secondary d-inline p-2 mb-5">
+                      <b>Modified</b> :{" "}
+                      {moment(d.modified).format("MMMM Do YYYY, h:mma")}
                     </p>
-                    <p>
-                      <b>Name</b> :{" "}
-                      <span className="text-warning fw-bold">{d.name}</span>
-                    </p>
-                    <p>
-                      <b>Description</b> : {d.description}
-                    </p>
-                    <p>
-                      <b>Date Modified</b> :{" "}
-                      {moment(d.modified).format("DD/MM/YYYY")}
+                    <p className="mt-4">
+                      {d.description ? (
+                        <p>{HTMLReactParser(d.description)}</p>
+                      ) : (
+                        <p className="fst-italic text-secondary text-center">
+                          Sorry, No backstory provided.
+                        </p>
+                      )}
                     </p>
                   </div>
                   <div className="border border-warning border-0">
-                    <ul className="list-group list-group-flush d-flex justify-content-between">
+                    <ul className="list-group list-group-flush d-flex justify-content-between bg-warning border border-warning">
                       <li className="list-group-item bg-warning text-white d-flex justify-content-between align-items-center">
                         <b>Comics : </b>
                         <Link

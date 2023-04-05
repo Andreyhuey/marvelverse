@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import "../../components/styles.css";
 
-const ComicCharacters = () => {
+const ComicCreators = () => {
   const { comicId } = useParams();
-  const [characters, setCharacters] = useState([]);
+  const [creators, setCreators] = useState([]);
   const [count, setCount] = useState("");
   const [total, setTotal] = useState(" ");
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,7 +16,7 @@ const ComicCharacters = () => {
     async function fetchData() {
       setLoading(true);
       fetch(
-        `https://gateway.marvel.com/v1/public/comics/${comicId}/characters?&limit=25&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+        `https://gateway.marvel.com/v1/public/comics/${comicId}/creators?&limit=25&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -23,7 +24,7 @@ const ComicCharacters = () => {
           setCount(data.data.count);
           setTotal(data.data.total);
           const results = data.data.results;
-          setCharacters(results);
+          setCreators(results);
           console.log(results);
           setLoading(false);
         })
@@ -40,7 +41,7 @@ const ComicCharacters = () => {
     event.preventDefault();
     setLoading(true);
     fetch(
-      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchTerm.toLowerCase()}&limit=40&orderBy=-modified&ts=1&apikey=${
+      `https://gateway.marvel.com/v1/public/creators?nameStartsWith=${searchTerm.toLowerCase()}&limit=40&orderBy=-modified&ts=1&apikey=${
         process.env.REACT_APP_API_KEY
       }&hash=${process.env.REACT_APP_HASH}`
     )
@@ -50,7 +51,7 @@ const ComicCharacters = () => {
         setCount(data.data.count);
         setTotal(data.data.total);
         const results = data.data.results;
-        setCharacters(results);
+        setCreators(results);
         console.log(results);
         setLoading(false);
       })
@@ -78,9 +79,7 @@ const ComicCharacters = () => {
   return (
     <section className="container-fluid bg-dark">
       <div className="container vh-auto">
-        <h3 className="text-bold fw-bold text-center py-3">
-          Marvel Characters
-        </h3>
+        <h3 className="text-bold fw-bold text-center py-3">Marvel Creators</h3>
         <form
           className="d-flex justify-content-center py-3"
           onSubmit={handleSearch}
@@ -105,18 +104,18 @@ const ComicCharacters = () => {
           </div>
         </div>
         <div className="row">
-          {characters.map((c) => {
+          {creators.map((c) => {
             return (
               <div key={c.id} className="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                <div className="border border-warning card my-3 bg-dark">
+                <div className="border border-info card my-3 bg-dark">
                   <Link
                     key={c.id}
-                    to={`/characters/${c.id}`}
+                    to={`/creators/${c.id}`}
                     style={{ textDecoration: "none" }}
                   >
                     <div className="p-2 my-3">
-                      <h4 className="card-header text-center text-warning py-3">
-                        {c.name}
+                      <h4 className="card-header text-center text-info py-3">
+                        {c.fullName}
                       </h4>
                       <img
                         src={c.thumbnail.path + ".jpg"}
@@ -135,4 +134,4 @@ const ComicCharacters = () => {
   );
 };
 
-export default ComicCharacters;
+export default ComicCreators;

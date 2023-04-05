@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import moment from "moment";
+import HTMLReactParser from "html-react-parser";
 import { Link } from "react-router-dom";
 
 const ComicsId = () => {
@@ -67,7 +68,14 @@ const ComicsId = () => {
                   <h5 className="text-center fw-bold pt-2">About</h5>
                   <div className="pb-3 pt-2">
                     <p>
-                      <b>Description</b> : {d.description}
+                      <b>Description</b> :{" "}
+                      {d.description ? (
+                        <p>{HTMLReactParser(d.description)}</p>
+                      ) : (
+                        <p className="fst-italic text-secondary text-center">
+                          Sorry, No description provided.
+                        </p>
+                      )}
                     </p>
                     <p>
                       <b>Format</b> : {d.format}
