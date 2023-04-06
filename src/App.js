@@ -12,6 +12,7 @@ import {
   CharactersId,
   CharacterComics,
   CharacterEvents,
+  CharacterSearch,
   CharacterSeries,
   CharacterStories,
   //
@@ -64,6 +65,9 @@ function App() {
           </Route>
           <Route exact path="/characters/:characterId/series">
             <CharacterSeries />
+          </Route>
+          <Route exact path="/search">
+            <CharacterSearch />
           </Route>
           <Route exact path="/characters/:characterId/stories">
             <CharacterStories />

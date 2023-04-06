@@ -9,14 +9,28 @@ const CharacterComics = () => {
   const [comics, setComics] = useState([]);
   const [count, setCount] = useState("");
   const [total, setTotal] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(sessionStorage.getItem("currentPage")) || 1
+  );
+  const [pageNo, setPageNo] = useState(currentPage);
+  const [perPage, setPerPage] = useState(12);
+
+  const handlePageClick = (number) => {
+    setCurrentPage(number);
+    setPageNo(number);
+    sessionStorage.setItem("currentPage", number);
+  };
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData(pageNumber) {
       setLoading(true);
       fetch(
-        `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?&limit=25&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+        `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?&limit=${perPage}&offset=${
+          (pageNumber - 1) * perPage
+        }&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${
+          process.env.REACT_APP_HASH
+        }`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -33,29 +47,17 @@ const CharacterComics = () => {
         });
     }
 
-    fetchData();
-  }, [characterId]);
+    fetchData(currentPage);
+    sessionStorage.setItem("currentPage", currentPage);
 
-  // const handleSearch = (event) => {
-  //   event.preventDefault();
-  //   setLoading(true);
-  //   fetch(
-  //     `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?&titleStartsWith=${searchTerm}&limit=25&orderBy=issueNumber&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data.data);
-  //       setCount(data.data.count);
-  //       setTotal(data.data.total);
-  //       const results = data.data.results;
-  //       setComics(results);
-  //       console.log(results);
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // };
+    document.title = "Marvel Comics";
+  }, [characterId, currentPage, perPage]);
+
+  function totalPages() {
+    let Pages = total / perPage;
+    Pages = Math.ceil(Pages);
+    return Pages;
+  }
 
   if (loading)
     return (
@@ -75,24 +77,11 @@ const CharacterComics = () => {
   return (
     <div className="container-fluid py-5">
       <div className="container py-5">
-        {/* <form
-          className="d-flex justify-content-center py-3"
-          onSubmit={handleSearch}
-        >
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            value={searchTerm}
-            placeholder="e.g search for comics"
-            onChange={(event) => setSearchTerm(event.target.value)}
-            required
-          />
-          <button className="btn btn-primary" type="submit" value="submit">
-            Search
-          </button>
-        </form> */}
         <div className="d-flex justify-content-between">
           <div className="text-center h6">Total Characters Found : {total}</div>
+          <div className="text-center h6 fw-bold bg-black p-3">
+            Page {pageNo} of {totalPages()}
+          </div>
           <div className="text-center h6">
             Total Characters Rendered : {count}
           </div>
@@ -128,6 +117,33 @@ const CharacterComics = () => {
                 </div>
               );
             })}
+            <div className="d-flex ">
+              <div className="justify-content-center overflow-auto pt-5">
+                <nav aria-label="Page navigation example ">
+                  <ul className="pagination ">
+                    {Array.from(
+                      { length: Math.ceil(total / perPage) },
+                      (_, i) => i + 1
+                    ).map((number) => (
+                      <li
+                        key={number}
+                        className={`page-item ${
+                          currentPage === number ? "active" : ""
+                        }`}
+                      >
+                        <button
+                          className="page-link"
+                          onClick={() => handlePageClick(number)}
+                        >
+                          {number}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            {/*  */}
           </div>
         </div>
       </div>

@@ -72,11 +72,11 @@ const CharactersId = () => {
                     </p>
                     <p className="mt-4">
                       {d.description ? (
-                        <p>{HTMLReactParser(d.description)}</p>
+                        <span>{HTMLReactParser(d.description)}</span>
                       ) : (
-                        <p className="fst-italic text-secondary text-center">
+                        <span className="fst-italic text-secondary text-center">
                           Sorry, No backstory provided.
-                        </p>
+                        </span>
                       )}
                     </p>
                   </div>

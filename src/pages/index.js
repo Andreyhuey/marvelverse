@@ -3,6 +3,7 @@ export { default as Homepage } from "./Homepage.jsx";
 
 // For Characters and their Details
 export { default as Characters } from "./Characters/Characters.jsx";
+export { default as CharacterSearch } from "./Characters/CharacterSearch.jsx";
 export { default as CharactersId } from "./Characters/CharactersId.jsx";
 export { default as CharacterComics } from "./Characters/CharacterComics.jsx";
 export { default as CharacterEvents } from "./Characters/CharacterEvents.jsx";
