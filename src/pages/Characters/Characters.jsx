@@ -7,24 +7,24 @@ const Characters = () => {
   const [count, setCount] = useState("");
   const [total, setTotal] = useState(" ");
   const [isLoading, setLoading] = useState(true);
+
+  // Pagination useState(s)
   const [currentPage, setCurrentPage] = useState(
     parseInt(sessionStorage.getItem("currentPage")) || 1
   );
-  const [pageNo, setPageNo] = useState(currentPage);
-  const [perPage, setPerPage] = useState(12);
+  const limit = 12;
 
   const handlePageClick = (number) => {
     setCurrentPage(number);
-    setPageNo(number);
-    sessionStorage.setItem("currentPage", number);
+    sessionStorage.setItem(currentPage, number);
   };
 
   useEffect(() => {
-    async function fetchCharacters(pageNumber) {
+    async function fetchCharacters(currentPage) {
       setLoading(true);
       fetch(
-        `https://gateway.marvel.com/v1/public/characters?&limit=${perPage}&offset=${
-          (pageNumber - 1) * perPage
+        `https://gateway.marvel.com/v1/public/characters?&limit=${limit}&offset=${
+          (currentPage - 1) * limit
         }&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${
           process.env.REACT_APP_HASH
         }`
@@ -48,10 +48,10 @@ const Characters = () => {
     sessionStorage.setItem("currentPage", currentPage);
 
     document.title = "Marvel Characters";
-  }, [currentPage, perPage]);
+  }, [currentPage, limit]);
 
   function totalPages() {
-    let Pages = total / perPage;
+    let Pages = total / limit;
     Pages = Math.ceil(Pages);
     return Pages;
   }
@@ -82,7 +82,7 @@ const Characters = () => {
         <div className="d-flex justify-content-between">
           <div className="">Total Characters Found : {total}</div>
           <div className="text-center h6 fw-bold bg-black p-3">
-            Page {pageNo} of {totalPages()}
+            Page {currentPage} of {totalPages()}
           </div>
           <div className="text-center h6">
             Total Characters Rendered : {count}
@@ -126,7 +126,7 @@ const Characters = () => {
             <nav aria-label="Page navigation example ">
               <ul className="pagination ">
                 {Array.from(
-                  { length: Math.ceil(total / perPage) },
+                  { length: Math.ceil(total / limit) },
                   (_, i) => i + 1
                 ).map((number) => (
                   <li

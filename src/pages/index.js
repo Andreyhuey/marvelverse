@@ -17,5 +17,18 @@ export { default as ComicCharacters } from "./Comics/ComicCharacters.jsx";
 export { default as ComicCreators } from "./Comics/ComicCreators.jsx";
 export { default as ComicStories } from "./Comics/ComicStories.jsx";
 
+// For Creators and their Details
+export { default as Creators } from "./Creators/Creators.jsx";
+
+// For Events and their Details
+export { default as Events } from "./Events/Events.jsx";
+
+// For Series and their Details
+export { default as Series } from "./Series/Series.jsx";
+
+// For Stories and their Details
+export { default as Stories } from "./Stories/Stories.jsx";
+
 // For Tests
+export { default as Test } from "./Test/Test.jsx";
 export { default as NameSearch } from "./NameSearch";

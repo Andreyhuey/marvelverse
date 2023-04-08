@@ -12,7 +12,6 @@ import {
   CharactersId,
   CharacterComics,
   CharacterEvents,
-  CharacterSearch,
   CharacterSeries,
   CharacterStories,
   //
@@ -21,27 +20,21 @@ import {
   ComicCharacters,
   ComicCreators,
   ComicStories,
+  //
+  Creators,
+  //
+  Events,
+  //
+  Series,
+  //
+  Stories,
+  //
+  Test,
 } from "./pages";
 
 library.add(faGithub, faLinkedin, faEnvelopeOpen, faSearch);
 
 function App() {
-  // const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  // //function to change toggle the Theme
-  // const toggleTheme = () => {
-  //   if (theme === "light") {
-  //     setTheme("dark");
-  //   } else {
-  //     setTheme("light");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   localStorage.setItem("theme", theme);
-  //   document.body.className = theme;
-  // }, [theme]);
-
   return (
     <div className={`bg-dark text-white`}>
       <>
@@ -66,9 +59,6 @@ function App() {
           <Route exact path="/characters/:characterId/series">
             <CharacterSeries />
           </Route>
-          <Route exact path="/search">
-            <CharacterSearch />
-          </Route>
           <Route exact path="/characters/:characterId/stories">
             <CharacterStories />
           </Route>
@@ -87,6 +77,26 @@ function App() {
           </Route>
           <Route exact path="/comics/:comicId/stories">
             <ComicStories />
+          </Route>
+          {/* Creator Pages */}
+          <Route exact path="/creators">
+            <Creators />
+          </Route>
+          {/* Events Pages */}
+          <Route exact path="/events">
+            <Events />
+          </Route>
+          {/* Creator Pages */}
+          <Route exact path="/series">
+            <Series />
+          </Route>
+          {/* Creator Pages */}
+          <Route exact path="/stories">
+            <Stories />
+          </Route>
+          {/* Test Pages */}
+          <Route exact path="/test">
+            <Test />
           </Route>
         </Switch>
       </>

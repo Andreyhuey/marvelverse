@@ -1,7 +1,6 @@
 {
   "name": "marvel-x-app",
   "version": "0.2.1",
-  "homepage": "https://Andreyhuey.github.io/marvel-x-app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",

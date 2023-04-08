@@ -10,16 +10,16 @@ const CharacterComics = () => {
   const [count, setCount] = useState("");
   const [total, setTotal] = useState("");
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(sessionStorage.getItem("currentPage")) || 1
+  const [currentComicPage, setCurrentComicPage] = useState(
+    parseInt(sessionStorage.getItem("currentComicPage")) || 1
   );
-  const [pageNo, setPageNo] = useState(currentPage);
+  const [pageNo, setPageNo] = useState(currentComicPage);
   const [perPage, setPerPage] = useState(12);
 
   const handlePageClick = (number) => {
-    setCurrentPage(number);
+    setCurrentComicPage(number);
     setPageNo(number);
-    sessionStorage.setItem("currentPage", number);
+    sessionStorage.setItem("currentComicPage", number);
   };
 
   useEffect(() => {
@@ -47,11 +47,11 @@ const CharacterComics = () => {
         });
     }
 
-    fetchData(currentPage);
-    sessionStorage.setItem("currentPage", currentPage);
+    fetchData(currentComicPage);
+    sessionStorage.setItem("currentComicPage", currentComicPage);
 
     document.title = "Marvel Comics";
-  }, [characterId, currentPage, perPage]);
+  }, [characterId, currentComicPage, perPage]);
 
   function totalPages() {
     let Pages = total / perPage;
@@ -128,7 +128,7 @@ const CharacterComics = () => {
                       <li
                         key={number}
                         className={`page-item ${
-                          currentPage === number ? "active" : ""
+                          currentComicPage === number ? "active" : ""
                         }`}
                       >
                         <button
