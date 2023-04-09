@@ -7,38 +7,24 @@ const Comics = () => {
   const [comics, setComics] = useState([]);
   const [count, setCount] = useState("");
   const [total, setTotal] = useState(" ");
-  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setLoading] = useState(true);
 
-  // fetches Data from server and stores in setcomics(array) due to the handle search function
-  const handleSearch = (event) => {
-    event.preventDefault();
-    setLoading(true);
-    fetch(
-      `https://gateway.marvel.com/v1/public/comics?titleStartsWith=${searchTerm.toLowerCase()}&limit=50&orderBy=-modified&ts=1&apikey=${
-        process.env.REACT_APP_API_KEY
-      }&hash=${process.env.REACT_APP_HASH}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data);
-        setCount(data.data.count);
-        setTotal(data.data.total);
-        const results = data.data.results;
-        setComics(results);
-        console.log(results);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  // Pagination useState(s)
+  const [currentComicPage, setCurrentComicPage] = useState(
+    parseInt(sessionStorage.getItem("currentComicPage")) || 1
+  );
+  const limit = 20;
+
+  const handlePageClick = (number) => {
+    setCurrentComicPage(number);
+    sessionStorage.setItem(currentComicPage, number);
   };
 
   useEffect(() => {
-    async function fetchComics() {
+    async function fetchComics(currentComicPage) {
       setLoading(true);
       fetch(
-        `https://gateway.marvel.com/v1/public/comics?&limit=25&dateRange=2022-01-01%2C2023-04-01&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+        `https://gateway.marvel.com/v1/public/comics?&limit=${limit}&offset=${(currentComicPage -1) * limit }&orderBy=-onsaleDate&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -55,13 +41,20 @@ const Comics = () => {
         });
     }
 
-    fetchComics();
+    fetchComics(currentComicPage);
+    sessionStorage.setItem("currentComicPage", currentComicPage)
 
     // Set custom title for page
     document.title = "Marvel Comics";
 
     // Update URL to reflect custom title
-  }, []);
+  }, [currentComicPage,limit]);
+
+  function totalPages() {
+    let Pages = total / limit;
+    Pages = Math.ceil(Pages);
+    return Pages;
+  }
 
   // loading state component
   if (isLoading)
@@ -84,24 +77,11 @@ const Comics = () => {
       <div>{isLoading}</div>
       <div className="container vh-auto">
         <h3 className="text-bold fw-bold text-center py-3">Marvel comics</h3>
-        <form
-          className="d-flex justify-content-center py-3"
-          onSubmit={handleSearch}
-        >
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            value={searchTerm}
-            placeholder="e.g spider-man, ant-man, iron man, hulk, hawkeye"
-            onChange={(event) => setSearchTerm(event.target.value)}
-            required
-          />
-          <button className="btn btn-primary" type="submit" value="submit">
-            Search
-          </button>
-        </form>
         <div className="d-flex justify-content-between">
           <div className="text-center h6">Total comics Found : {total}</div>
+          <div className="text-center h6 fw-bold bg-black p-3">
+            Page {currentComicPage} of {totalPages()}
+          </div>
           <div className="text-center h6">Total comics Rendered : {count}</div>
         </div>
         <div className="row">
@@ -111,10 +91,7 @@ const Comics = () => {
                 <div className="border border-primary card my-3 bg-black">
                   <Link
                     key={c.id}
-                    to={`/comics/issue/${c.id}/${c.title
-                      .toLowerCase()
-                      .replace(/[^a-z0-9-_]/g, "_")
-                      .replace(/[-_]+/g, "_")}`}
+                    to={`/comics/${c.id}`}
                     style={{ textDecoration: "none" }}
                     className="text-primary hover-effect"
                   >
@@ -133,6 +110,30 @@ const Comics = () => {
               </div>
             );
           })}
+          <div className="container d-flex overflow-auto pt-5">
+            <nav aria-label="Page navigation example ">
+              <ul className="pagination ">
+                {Array.from(
+                  { length: Math.ceil(total / limit) },
+                  (_, i) => i + 1
+                ).map((number) => (
+                  <li
+                    key={number}
+                    className={`page-item ${
+                      currentComicPage === number ? "active" : ""
+                    }`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() => handlePageClick(number)}
+                    >
+                      {number}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </section>
