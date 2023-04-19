@@ -22,6 +22,7 @@ import {
   Events,
   EventsId,
   EventCharacters,
+  EventComics,
   //
   Series,
   //
@@ -87,6 +88,9 @@ function App() {
           </Route>
           <Route exact path="/events/:eventId/characters">
             <EventCharacters />
+          </Route>
+          <Route exact path="/events/:eventId/comics">
+            <EventComics />
           </Route>
           {/* Creator Pages */}
           <Route exact path="/series">
