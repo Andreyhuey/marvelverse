@@ -94,19 +94,9 @@ export default function EventsId() {
                     <div className="border border-white border-0">
                       <ul className="list-group list-group-flush d-flex justify-content-between bg-white border border-white">
                         <li className="list-group-item bg-white text-black d-flex justify-content-between align-items-center">
-                          <b>Comics : </b>
-                          <Link
-                            className="btn btn-light"
-                            key={d.id}
-                            to={`/events/${d.id}/comics`}
-                          >
-                            {d.comics.available}
-                          </Link>
-                        </li>
-                        <li className="list-group-item bg-white text-black d-flex justify-content-between align-items-center">
                           <b>Characters : </b>
                           <Link
-                            className="btn btn-light"
+                            className="btn btn-dark"
                             key={d.id}
                             to={`/events/${d.id}/characters`}
                           >
@@ -114,9 +104,19 @@ export default function EventsId() {
                           </Link>
                         </li>
                         <li className="list-group-item bg-white text-black d-flex justify-content-between align-items-center">
+                          <b>Comics : </b>
+                          <Link
+                            className="btn btn-dark"
+                            key={d.id}
+                            to={`/events/${d.id}/comics`}
+                          >
+                            {d.comics.available}
+                          </Link>
+                        </li>
+                        <li className="list-group-item bg-white text-black d-flex justify-content-between align-items-center">
                           <b>Series : </b>
                           <Link
-                            className="btn btn-light"
+                            className="btn btn-dark"
                             key={d.id}
                             to={`/events/${d.id}/series`}
                           >
@@ -126,7 +126,7 @@ export default function EventsId() {
                         <li className="list-group-item bg-white text-black d-flex justify-content-between align-items-center">
                           <b>Stories : </b>
                           <Link
-                            className="btn btn-light"
+                            className="btn btn-dark"
                             key={d.id}
                             to={`/events/${d.id}/stories`}
                           >
