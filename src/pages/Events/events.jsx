@@ -20,7 +20,7 @@ const Events = () => {
       fetch(
         `https://gateway.marvel.com/v1/public/events?limit=${limit}&offset=${
           (currentEventPage - 1) * limit
-        }&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${
+        }&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${
           process.env.REACT_APP_HASH
         }`
       )
@@ -97,7 +97,11 @@ const Events = () => {
                     >
                       <div className="p-2 my-1">
                         <img
-                          src={c.thumbnail.path + ".jpg"}
+                          src={
+                            c.thumbnail.path.loading
+                              ? { isLoading }
+                              : c.thumbnail.path + ".jpg"
+                          }
                           className="card-img-top"
                           alt={"img of " + c.title}
                         />
