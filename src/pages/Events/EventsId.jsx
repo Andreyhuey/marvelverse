@@ -85,10 +85,11 @@ export default function EventsId() {
                     </div>
                     <div className="py-1">
                       <p>
-                        Start : {moment(d.start).format("MMMM Do YYYY, h:mma")}{" "}
+                        Start Date :{" "}
+                        {moment(d.start).format("h:mma, Do MMMM YYYY")}{" "}
                       </p>
                       <p>
-                        End : {moment(d.end).format("MMMM Do YYYY, h:mma")}{" "}
+                        End Date : {moment(d.end).format("h:mma, Do MMMM YYYY")}{" "}
                       </p>
                     </div>
                     <div className="border border-white border-0">
@@ -111,6 +112,16 @@ export default function EventsId() {
                             to={`/events/${d.id}/comics`}
                           >
                             {d.comics.available}
+                          </Link>
+                        </li>
+                        <li className="list-group-item bg-white text-black d-flex justify-content-between align-items-center">
+                          <b>Creators : </b>
+                          <Link
+                            className="btn btn-dark"
+                            key={d.id}
+                            to={`/events/${d.id}/creators`}
+                          >
+                            {d.creators.available}
                           </Link>
                         </li>
                         <li className="list-group-item bg-white text-black d-flex justify-content-between align-items-center">
