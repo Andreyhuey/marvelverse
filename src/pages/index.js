@@ -22,6 +22,7 @@ export { default as Creators } from "./Creators/Creators.jsx";
 
 // For Events and their Details
 export { default as Events } from "./Events/Events.jsx";
+export { default as EventsId } from "./Events/EventsId.jsx";
 
 // For Series and their Details
 export { default as Series } from "./Series/Series.jsx";

@@ -1,5 +1,4 @@
 import React from "react";
-import "./darkMode.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Switch, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -24,6 +23,7 @@ import {
   Creators,
   //
   Events,
+  EventsId,
   //
   Series,
   //
@@ -85,6 +85,9 @@ function App() {
           {/* Events Pages */}
           <Route exact path="/events">
             <Events />
+          </Route>
+          <Route exact path="/events/:eventId">
+            <EventsId />
           </Route>
           {/* Creator Pages */}
           <Route exact path="/series">
