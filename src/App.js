@@ -1,9 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Switch, Route } from "react-router-dom";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEnvelopeOpen, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import {
   Homepage,
   //
@@ -24,6 +21,7 @@ import {
   //
   Events,
   EventsId,
+  EventCharacters,
   //
   Series,
   //
@@ -31,8 +29,6 @@ import {
   //
   Test,
 } from "./pages";
-
-library.add(faGithub, faLinkedin, faEnvelopeOpen, faSearch);
 
 function App() {
   return (
@@ -88,6 +84,9 @@ function App() {
           </Route>
           <Route exact path="/events/:eventId">
             <EventsId />
+          </Route>
+          <Route exact path="/events/:eventId/characters">
+            <EventCharacters />
           </Route>
           {/* Creator Pages */}
           <Route exact path="/series">
