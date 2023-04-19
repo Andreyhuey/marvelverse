@@ -35,30 +35,6 @@ const ComicCharacters = () => {
     fetchData();
   }, [comicId]);
 
-  // fetches Data from server and stores in setCharacters(array) due to the handle search function
-  const handleSearch = (event) => {
-    event.preventDefault();
-    setLoading(true);
-    fetch(
-      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchTerm.toLowerCase()}&limit=40&orderBy=-modified&ts=1&apikey=${
-        process.env.REACT_APP_API_KEY
-      }&hash=${process.env.REACT_APP_HASH}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data);
-        setCount(data.data.count);
-        setTotal(data.data.total);
-        const results = data.data.results;
-        setCharacters(results);
-        console.log(results);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
-
   // loading state component
   if (isLoading)
     return (
@@ -81,22 +57,6 @@ const ComicCharacters = () => {
         <h3 className="text-bold fw-bold text-center py-3">
           Marvel Characters
         </h3>
-        <form
-          className="d-flex justify-content-center py-3"
-          onSubmit={handleSearch}
-        >
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            value={searchTerm}
-            placeholder="e.g spider-man, ant-man, iron man, hulk, hawkeye"
-            onChange={(event) => setSearchTerm(event.target.value)}
-            required
-          />
-          <button className="btn btn-primary" type="submit" value="submit">
-            Search
-          </button>
-        </form>
         <div>{isLoading}</div>
         <div className="d-flex justify-content-between">
           <div className="text-center h6">Total Characters Found : {total}</div>
@@ -121,7 +81,7 @@ const ComicCharacters = () => {
                       <img
                         src={c.thumbnail.path + ".jpg"}
                         className="card-img-top"
-                        alt="...img"
+                        alt={"...img of" + c.name}
                       />
                     </div>
                   </Link>
