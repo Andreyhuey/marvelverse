@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+getting the md5 hash [sample code](https://developer.apple.com/forums/thread/125394)
+
 ## Available Scripts
 
 In the project directory, you can run:
