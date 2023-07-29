@@ -6,33 +6,7 @@ const NameSearch = () => {
   const [characters, setCharacters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("spider-man");
   const [count, setCount] = useState("");
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(
-      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchTerm}&orderBy=-modified&limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data.total);
-        setCount(data.data.count);
-        console.log(count);
-        const Results = data.data.results;
-        console.log(Results);
-
-        setCharacters(Results);
-
-        const filteredData = Results?.filter((character) =>
-          character?.name?.toLowerCase()?.includes(searchTerm)
-        );
-        setCharacters(filteredData);
-        console.log(filteredData);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, [searchTerm]);
+  const [isLoading, setLoading] = useState(false);
 
   if (isLoading)
     return (
@@ -44,18 +18,80 @@ const NameSearch = () => {
       </h1>
     );
 
+  // useEffect(() => {
+  //   fetch(
+  //     `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchTerm}&orderBy=-modified&limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data.data.total);
+  //       setCount(data.data.count);
+  //       console.log(count);
+  //       const Results = data.data.results;
+  //       console.log(Results);
+
+  //       setCharacters(Results);
+
+  //       const filteredData = Results?.filter((character) =>
+  //         character?.name?.toLowerCase()?.includes(searchTerm)
+  //       );
+  //       setCharacters(filteredData);
+  //       console.log(filteredData);
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, [searchTerm]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    fetch(
+      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchTerm}&orderBy=-modified&limit=100&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data.total);
+        setCount(data.data.total);
+        console.log(data.data.total);
+        const Results = data.data.results;
+        console.log(Results);
+
+        const filteredData = Results.filter((character) =>
+          character.name.toLowerCase().includes(searchTerm)
+        );
+        setCharacters(filteredData);
+        console.log(filteredData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setLoading(false);
+      });
+  };
+
   return (
     <div className="container text-white mt-5 pt-3" style={{ height: "auto" }}>
       <div className="text-warning text-left h2 pt-3">
         Total Marvel Characters : 1562
       </div>
-      <div className="d-flex justify-content-center text-white my-3 py-2">
+      <form
+        onSubmit={handleSearch}
+        className="d-flex justify-content-center text-white my-3 py-2"
+      >
         <input
           placeholder="Find A Character"
+          className="form-control "
           type="text"
+          value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value?.toLowerCase())}
         />
-      </div>
+        <button type="submit" className="btn btn-warning">
+          Search
+        </button>
+      </form>
       <div className="text-muted text-center h5">Find {searchTerm}</div>
       <div className="text-muted text-center h6">
         Total Characters Found : {count}
