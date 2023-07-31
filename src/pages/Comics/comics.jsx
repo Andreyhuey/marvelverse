@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import "../../components/styles.css";
+import { Loader } from "../../components";
 
 const Comics = () => {
   const [comics, setComics] = useState([]);
@@ -24,7 +25,11 @@ const Comics = () => {
     async function fetchComics(currentComicPage) {
       setLoading(true);
       fetch(
-        `https://gateway.marvel.com/v1/public/comics?&limit=${limit}&offset=${(currentComicPage -1) * limit }&orderBy=-onsaleDate&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+        `https://gateway.marvel.com/v1/public/comics?&limit=${limit}&offset=${
+          (currentComicPage - 1) * limit
+        }&orderBy=-onsaleDate&ts=1&apikey=${
+          process.env.REACT_APP_API_KEY
+        }&hash=${process.env.REACT_APP_HASH}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -42,13 +47,13 @@ const Comics = () => {
     }
 
     fetchComics(currentComicPage);
-    sessionStorage.setItem("currentComicPage", currentComicPage)
+    sessionStorage.setItem("currentComicPage", currentComicPage);
 
     // Set custom title for page
     document.title = "Marvel Comics";
 
     // Update URL to reflect custom title
-  }, [currentComicPage,limit]);
+  }, [currentComicPage, limit]);
 
   function totalPages() {
     let Pages = total / limit;
@@ -57,20 +62,7 @@ const Comics = () => {
   }
 
   // loading state component
-  if (isLoading)
-    return (
-      <div
-        className="display-1 d-flex align-items-center justify-content-center"
-        style={{ height: "100vh", backgroundColor: "#000000" }}
-      >
-        <BeatLoader
-          color="#ffff"
-          size={13}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </div>
-    );
+  if (isLoading) return <Loader />;
 
   return (
     <section className="container-fluid bg-dark">

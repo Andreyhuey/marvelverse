@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Homepage = () => {
   return (
     <>
-      <section className="bg-dark vh-100 d-flex align-items-center justify-content-center">
-        <div className="">
+      <section className="bg-dark vh-100 d-flex align-items-center justify-content-center container">
+        {/* <div className="">
           <div className="p-3">
             <Link
               to={`/characters`}
@@ -69,7 +69,11 @@ const Homepage = () => {
               Test Page
             </Link>
           </div>
-        </div>
+        </div> */}
+        <h2 className="text-center">
+          Welcome to Marvel's Vast Universe, please explore characters, comics,
+          events, stories, creators e.t.c
+        </h2>
       </section>
     </>
   );

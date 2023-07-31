@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Switch, Route } from "react-router-dom";
 import {
   Homepage,
@@ -30,11 +31,13 @@ import {
   //
   Test,
 } from "./pages";
+import { Footer, Navbar } from "./components";
 
 function App() {
   return (
     <div className={`bg-dark text-white`}>
       <>
+        <Navbar />
         <Switch>
           {/* Homepage */}
           <Route exact path="/">
@@ -105,6 +108,7 @@ function App() {
             <Test />
           </Route>
         </Switch>
+        <Footer />
       </>
     </div>
   );

@@ -30,6 +30,7 @@ const ComicsId = () => {
     }
 
     fetchData();
+    window.scrollTo(0, 0);
   }, [comicId]);
 
   if (loading)

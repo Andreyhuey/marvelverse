@@ -30,6 +30,7 @@ const CharactersId = () => {
     }
 
     fetchData();
+    window.scrollTo(0, 0);
   }, [characterId]);
 
   if (loading)
@@ -50,7 +51,7 @@ const CharactersId = () => {
   return (
     <section className="container-fluid py-5">
       <div className="container py-5">
-        <div className="row">
+        <div className="">
           {details.map((d) => {
             return (
               <div key={d.id} className="row">

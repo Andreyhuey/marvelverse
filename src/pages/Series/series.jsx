@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { BeatLoader } from "react-spinners";
+import { Loader } from "../../components";
 
 const Series = () => {
   const [series, setSeries] = useState([]);
@@ -57,20 +57,7 @@ const Series = () => {
   };
 
   // loading state component
-  if (isLoading)
-    return (
-      <div
-        className="display-1 d-flex align-items-center justify-content-center"
-        style={{ height: "100vh", backgroundColor: "#000000" }}
-      >
-        <BeatLoader
-          color="#ffff"
-          size={13}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </div>
-    );
+  if (isLoading) return <Loader />;
 
   return (
     <>

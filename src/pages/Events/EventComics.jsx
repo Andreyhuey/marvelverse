@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import "../../components/styles.css";
+import { Loader } from "../../components";
 
 export default function EventComics() {
   const { eventId } = useParams();
@@ -62,20 +63,7 @@ export default function EventComics() {
   }
 
   // loading state component
-  if (isLoading)
-    return (
-      <div
-        className="display-1 d-flex align-items-center justify-content-center"
-        style={{ height: "100vh", backgroundColor: "#000000" }}
-      >
-        <BeatLoader
-          color="#ffff"
-          size={13}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </div>
-    );
+  if (isLoading) return <Loader />;
 
   return (
     <section className="container-fluid bg-dark">

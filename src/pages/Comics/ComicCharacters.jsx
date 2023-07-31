@@ -2,20 +2,30 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import { Loader } from "../../components";
 
 const ComicCharacters = () => {
   const { comicId } = useParams();
   const [characters, setCharacters] = useState([]);
   const [count, setCount] = useState("");
   const [total, setTotal] = useState(" ");
-  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setLoading] = useState();
 
+  // Pagination useState(s)
+  const [currentComicCharacterPage, setCurrentComicCharacterPage] = useState(
+    parseInt(sessionStorage.getItem("currentComicCharacterPage")) || 1
+  );
+  const limit = 20;
+
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData(currentComicCharacterPage) {
       setLoading(true);
       fetch(
-        `https://gateway.marvel.com/v1/public/comics/${comicId}/characters?&limit=25&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+        `https://gateway.marvel.com/v1/public/comics/${comicId}/characters?&limit=${limit}&offset=${
+          (currentComicCharacterPage - 1) * limit
+        }&orderBy=-modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${
+          process.env.REACT_APP_HASH
+        }`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -32,24 +42,26 @@ const ComicCharacters = () => {
         });
     }
 
-    fetchData();
-  }, [comicId]);
+    fetchData(currentComicCharacterPage);
+    sessionStorage.setItem(
+      "currentComicCharacterPage",
+      currentComicCharacterPage
+    );
+  }, [comicId, limit, currentComicCharacterPage]);
+
+  function totalPages() {
+    let Pages = total / limit;
+    Pages = Math.ceil(Pages);
+    return Pages;
+  }
+
+  const handlePageClick = (number) => {
+    setCurrentComicCharacterPage(number);
+    sessionStorage.setItem(currentComicCharacterPage, number);
+  };
 
   // loading state component
-  if (isLoading)
-    return (
-      <div
-        className="display-1 d-flex align-items-center justify-content-center"
-        style={{ height: "100vh", backgroundColor: "#000000" }}
-      >
-        <BeatLoader
-          color="#ffff"
-          size={13}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </div>
-    );
+  if (isLoading) return <Loader />;
 
   return (
     <section className="container-fluid bg-dark">
@@ -58,12 +70,17 @@ const ComicCharacters = () => {
           Marvel Characters
         </h3>
         <div>{isLoading}</div>
+
         <div className="d-flex justify-content-between">
           <div className="text-center h6">Total Characters Found : {total}</div>
+          <div className="text-center h6 fw-bold bg-black p-3">
+            Page {currentComicCharacterPage} of {totalPages()}
+          </div>
           <div className="text-center h6">
             Total Characters Rendered : {count}
           </div>
         </div>
+
         <div className="row">
           {characters.map((c) => {
             return (
@@ -89,6 +106,29 @@ const ComicCharacters = () => {
               </div>
             );
           })}
+          <div className="container d-flex overflow-auto pt-5">
+            <nav aria-label="Page navigation example ">
+              <ul className="pagination">
+                {Array.from({ length: totalPages() }, (_, i) => i + 1).map(
+                  (number) => (
+                    <li
+                      key={number}
+                      className={`page-item ${
+                        currentComicCharacterPage === number ? "active" : ""
+                      }`}
+                    >
+                      <button
+                        className="page-link"
+                        onClick={() => handlePageClick(number)}
+                      >
+                        {number}
+                      </button>
+                    </li>
+                  )
+                )}
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </section>

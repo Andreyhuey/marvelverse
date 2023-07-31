@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import { Loader } from "../../components";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
@@ -12,7 +13,7 @@ const Characters = () => {
   const [currentPage, setCurrentPage] = useState(
     parseInt(sessionStorage.getItem("currentPage")) || 1
   );
-  const limit = 12;
+  const limit = 20;
 
   const handlePageClick = (number) => {
     setCurrentPage(number);
@@ -48,6 +49,8 @@ const Characters = () => {
     sessionStorage.setItem("currentPage", currentPage);
 
     document.title = "Marvel Characters";
+    console.log(document.location.pathname);
+    window.scrollTo(0, 0);
   }, [currentPage, limit]);
 
   function totalPages() {
@@ -57,20 +60,7 @@ const Characters = () => {
   }
 
   // loading state component
-  if (isLoading)
-    return (
-      <div
-        className="display-1 d-flex align-items-center justify-content-center"
-        style={{ height: "100vh", backgroundColor: "#000000" }}
-      >
-        <BeatLoader
-          color="#ffff"
-          size={13}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </div>
-    );
+  if (isLoading) return <Loader />;
 
   return (
     <section className="container-fluid bg-dark">
@@ -97,7 +87,7 @@ const Characters = () => {
           ) : (
             characters.map((c) => {
               return (
-                <div key={c.id} className="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                <div key={c.id} className="col-lg-3 col-md-4 col-sm-6 col-6">
                   <div className="border border-warning card my-3 bg-dark">
                     <Link
                       key={c.id}
@@ -106,8 +96,10 @@ const Characters = () => {
                     >
                       <div className="p-2 my-1">
                         <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className="card-img-top"
+                          src={
+                            c.thumbnail ? c.thumbnail.path + ".jpg" : isLoading
+                          }
+                          className={`card-img-top `}
                           alt="...img"
                         />
                         <div className="d-flex justify-content-center">
