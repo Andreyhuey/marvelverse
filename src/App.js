@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { Homepage, Events, EventDetails } from "./pages";
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
             <Events />
           </Route>
           <Route exact path="/events/:eventId">
-            <EventsDetails />
+            <EventDetails />
           </Route>
         </Switch>
       </div>
