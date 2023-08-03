@@ -1,6 +1,12 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { Homepage, Events, EventDetails } from "./pages";
+import {
+  Homepage,
+  Events,
+  EventDetails,
+  EventsOrder,
+  EventsCharacters,
+} from "./pages";
 
 const App = () => {
   return (
@@ -17,6 +23,12 @@ const App = () => {
           </Route>
           <Route exact path="/events/:eventId">
             <EventDetails />
+          </Route>
+          <Route exact path="/events?order=:order">
+            <EventsOrder />
+          </Route>
+          <Route exact path="/events/:eventId/characters">
+            <EventsCharacters />
           </Route>
         </Switch>
       </div>

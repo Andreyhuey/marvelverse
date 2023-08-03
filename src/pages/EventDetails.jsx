@@ -1,9 +1,10 @@
 import React from "react";
+import { DataDetails } from "../components";
 
 const EventDetails = () => {
   return (
     <div>
-      <h4>EventsDetails</h4>
+      <DataDetails />
     </div>
   );
 };

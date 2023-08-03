@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useGetEventsQuery } from "../services/eventsApi";
-import HTMLReactParser from "html-react-parser";
-import Loader from "./Loader";
 import moment from "moment";
-import {
-  Autocomplete,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import HTMLReactParser from "html-react-parser";
+import { Autocomplete, TextField } from "@mui/material";
+import Loader from "./Loader";
 
-const Data = () => {
+const DataOrder = () => {
   const history = useHistory();
-  const [orderBy, setOrderBy] = useState("name");
-  const [label, setLabel] = useState("Ascending Order (A-Z)");
+  const { order } = useParams();
+  const [orderBy, setOrderBy] = useState(order);
+  const [label, setLabel] = useState(order);
   const limit = "100";
   const { data: eventsList, isFetching } = useGetEventsQuery({
     orderBy,
@@ -23,12 +18,30 @@ const Data = () => {
   });
   const [events, setEvents] = useState([]);
 
-  const handleChange = (event, newValue) => {
-    // setOrderBy(newValue);
+  const [hoveredId, setHoveredId] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
 
-    setOrderBy(newValue?.value);
+  const handleMouseEnter = (id) => {
+    setHoveredId(id);
+    setIsHovered(true);
+  };
+
+  const Blur = () => {
+    if (isHovered === true) return "backdrop-blur-xl blur-3xl rounded-xl";
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredId(null);
+    setIsHovered(false);
+  };
+
+  const handleChange = (event, newValue) => {
+    const newOrderBy = newValue?.value;
+    setOrderBy(newOrderBy);
     setLabel(newValue?.label);
-    history.push(`/events?order=${newValue?.value}`);
+
+    // Update the URL with the new order value
+    history.push(`/events?order=${newOrderBy}`);
   };
 
   const options = [
@@ -39,11 +52,16 @@ const Data = () => {
     { label: "Last Modified", value: "modified" },
   ];
 
+  // Fetch data when the "orderBy" value changes in the URL
+
   useEffect(() => {
-    const fetchResults = eventsList?.data?.results;
-    setEvents(fetchResults || []);
-    console.log(fetchResults);
-  }, [eventsList, orderBy]);
+    // Extract the data from eventsList only when it is available and not fetching
+    if (eventsList && !isFetching) {
+      const fetchResults = eventsList.data.results;
+      setEvents(fetchResults);
+      console.log(fetchResults);
+    }
+  }, [eventsList, isFetching]);
 
   if (isFetching) return <Loader />;
 
@@ -85,29 +103,32 @@ const Data = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
           {events?.map((c) => (
-            <div key={c.id}>
+            <div
+              key={c.id}
+              onMouseEnter={() => handleMouseEnter(c.id)}
+              onMouseLeave={handleMouseLeave}
+            >
               <Link key={c.id} to={`/events/${c.id}`} className="py-4">
-                <div className="py-2">
-                  <img
-                    src={c.thumbnail.path + ".jpg"}
-                    className="rounded-xl"
-                    alt={"img of " + c.title}
-                    // title={
-                    //   c.description
-                    //     ? HTMLReactParser(c.description)
-                    //     : "Sorry 😢, No description provided."
-                    // }
-                  />
-                  {c.description ? (
-                    <div className="tooltip bg-black text-white px-2 py-1 text-md rounded opacity-0 group-hover:opacity-100 absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none transition-opacity duration-300 w-full">
-                      {HTMLReactParser(c.description)}
-                    </div>
+                <div>
+                  {c.id === hoveredId ? (
+                    <>
+                      <img
+                        src={c.thumbnail.path + ".jpg"}
+                        className={`${Blur}`}
+                        alt={"img of " + c.title}
+                      />
+                    </>
                   ) : (
-                    <div className="tooltip bg-black text-white px-2 py-1 text-md rounded opacity-0 group-hover:opacity-100 absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none transition-opacity duration-300 w-full text-center">
-                      "Sorry 😢, No description provided."
-                    </div>
+                    <>
+                      <img
+                        src={c.thumbnail.path + ".jpg"}
+                        className={`${"rounded-xl"}`}
+                        alt={"img of " + c.title}
+                      />
+                    </>
                   )}
                 </div>
+
                 <div className="uppercase font-bold h-[48px]">{c.title}</div>
                 <div className="font-mono font-bold text-[#a7a4a4]">
                   {c.start ? moment(c.start).format("YYYY") : "Nill"}
@@ -121,4 +142,4 @@ const Data = () => {
   );
 };
 
-export default Data;
+export default DataOrder;
