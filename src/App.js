@@ -6,6 +6,7 @@ import {
   EventDetails,
   EventsOrder,
   EventsCharacters,
+  EventComics,
 } from "./pages";
 
 const App = () => {
@@ -29,6 +30,9 @@ const App = () => {
           </Route>
           <Route exact path="/events/:eventId/characters">
             <EventsCharacters />
+          </Route>
+          <Route exact path="/events/:eventId/comics">
+            <EventComics />
           </Route>
         </Switch>
       </div>

@@ -26,6 +26,12 @@ export const eventsApi = createApi({
           `/events/${eventId}/characters?orderBy=${orderBy}&limit=${limit}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
         ),
     }),
+    getEventComics: builder.query({
+      query: ({ eventId, orderBy, limit }) =>
+        createRequest(
+          `/events/${eventId}/comics?orderBy=${orderBy}&limit=${limit}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+        ),
+    }),
   }),
 });
 
@@ -33,4 +39,5 @@ export const {
   useGetEventsQuery,
   useGetEventDetailsQuery,
   useGetEventCharactersQuery,
+  useGetEventComicsQuery,
 } = eventsApi;

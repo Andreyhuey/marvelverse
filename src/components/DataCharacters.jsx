@@ -19,6 +19,7 @@ const DataCharacters = () => {
   });
 
   const [characters, setCharacters] = useState([]);
+  const [total, setTotal] = useState(0);
 
   const [hoveredId, setHoveredId] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -45,6 +46,7 @@ const DataCharacters = () => {
   useEffect(() => {
     const fetchResults = charactersList?.data?.results;
     setCharacters(fetchResults || []);
+    setTotal(charactersList?.data?.total);
     console.log(fetchResults);
   }, [charactersList, orderBy]);
 
@@ -95,7 +97,7 @@ const DataCharacters = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
           {characters?.map((c) => (
-            <div key={c.id} className="">
+            <div key={c.id}>
               <div className="hover:p-1  font-mono relative group cursor-pointer">
                 {/* <Link key={c.id} to={`/events/${c.id}`} className="py-4"> */}
                 <div
@@ -112,7 +114,7 @@ const DataCharacters = () => {
                       <img
                         src={c.thumbnail.path + ".jpg"}
                         className={`${Blur}`}
-                        alt={"img of " + c.title}
+                        alt={"img of " + c.name}
                       />
                     </>
                   ) : (
@@ -120,7 +122,7 @@ const DataCharacters = () => {
                       <img
                         src={c.thumbnail.path + ".jpg"}
                         className={`${"rounded-xl"}`}
-                        alt={"img of " + c.title}
+                        alt={"img of " + c.name}
                       />
                     </>
                   )}

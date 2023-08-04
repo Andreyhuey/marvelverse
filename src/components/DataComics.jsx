@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useGetEventsQuery } from "../services/eventsApi";
+import { useParams } from "react-router-dom";
 import HTMLReactParser from "html-react-parser";
+import { useGetEventComicsQuery } from "../services/eventsApi";
 import Loader from "./Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
+import { Link } from "react-router-dom";
 
-const Data = () => {
-  const history = useHistory();
-  const [orderBy, setOrderBy] = useState("name");
+const DataComics = () => {
+  const { eventId } = useParams();
+  const [orderBy, setOrderBy] = useState("title");
   const [label, setLabel] = useState("Ascending Order (A-Z)");
   const limit = "100";
-  const { data: eventsList, isFetching } = useGetEventsQuery({
+  const { data: comicsList, isFetching } = useGetEventComicsQuery({
+    eventId,
     orderBy,
     limit,
   });
-  const [events, setEvents] = useState([]);
+
+  const [comics, setComics] = useState([]);
   const [total, setTotal] = useState(0);
 
   const [hoveredId, setHoveredId] = useState(null);
@@ -36,35 +39,42 @@ const Data = () => {
   };
 
   const handleChange = (event, newValue) => {
-    // setOrderBy(newValue);
-
     setOrderBy(newValue?.value);
     setLabel(newValue?.label);
-    history.push(`/events?order=${newValue?.value}`);
   };
 
-  const options = [
-    { label: "Newest", value: "-startDate" },
-    { label: "Oldest", value: "startDate" },
-    { label: "Ascending Order (A-Z)", value: "name" },
-    { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Last Modified", value: "modified" },
-  ];
-
   useEffect(() => {
-    const fetchResults = eventsList?.data?.results;
-    setEvents(fetchResults || []);
+    const fetchResults = comicsList?.data?.results;
+    setTotal(comicsList?.data?.total);
+    setComics(fetchResults || []);
     console.log(fetchResults);
-  }, [eventsList, orderBy]);
+  }, [comicsList, orderBy]);
+
+  const options = [
+    { label: "Ascending Order (A-Z)", value: "title" },
+    { label: "Descending Order (Z-A)", value: "-title" },
+    { label: "Oldest Issue", value: "issueNumber" },
+    { label: "Latest Issue", value: "-issueNumber" },
+    { label: "Oldest Modified", value: "modified" },
+    { label: "Recently Modified", value: "-modified" },
+    { label: "Final Order Cutoff (FOC)", value: "focDate" },
+    { label: "Latest Final Order Cutoff (FOC)", value: "-focDate" },
+    { label: "Oldest On Sale", value: "onsaleDate" },
+    { label: "Latest On Sale", value: "-onsaleDate" },
+  ];
 
   if (isFetching) return <Loader />;
 
   return (
     <div>
       <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
-        <h4 className="text-center">Marvel Events</h4>
+        <h4 className="text-center">Event Comics</h4>
 
-        <div className="flex items-end justify-end text-black mb-7">
+        <div className="flex flex-col md:flex-row  items-center justify-between text-black mb-7 gap-4">
+          <div className="flex items-center justify-center gap-2 text-white font-bold text-center">
+            <h4>Available Comics :</h4>
+            <div>{total}</div>
+          </div>
           <fieldset className="fieldset flex items-center justify-center gap-2">
             <label
               htmlFor="loe"
@@ -96,19 +106,19 @@ const Data = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
-          {events?.map((c) => (
-            <div
-              key={c.id}
-              onMouseEnter={() => handleMouseEnter(c.id)}
-              onMouseLeave={handleMouseLeave}
-              className={` ${
-                c.id === hoveredId
-                  ? "py-2 font-mono rounded-xl bg-gray-900 "
-                  : "py-2 font-mono"
-              } hover:p-1  font-mono relative group cursor-pointer`}
-            >
-              <Link key={c.id} to={`/events/${c.id}`}>
-                <div className={`  `}>
+          {comics?.map((c) => (
+            <div key={c.id} className="">
+              <div className="hover:p-1  font-mono relative group cursor-pointer">
+                {/* <Link key={c.id} to={`/events/${c.id}`} className="py-4"> */}
+                <div
+                  className={` ${
+                    c.id === hoveredId
+                      ? "py-2 font-mono rounded-xl bg-gray-900 "
+                      : "py-2 font-mono"
+                  } `}
+                  onMouseEnter={() => handleMouseEnter(c.id)}
+                  onMouseLeave={handleMouseLeave}
+                >
                   {c.id === hoveredId ? (
                     <>
                       <img
@@ -126,27 +136,37 @@ const Data = () => {
                       />
                     </>
                   )}
+
                   {c.description ? (
                     <div className="tooltip  text-white px-3 pb-3 pt-7 text-md opacity-0 group-hover:opacity-100 absolute bottom-0 top-0 left-1/2 mb-2 transform -translate-x-1/2 pointer-events-none transition-opacity rounded-xl flex flex-col items-start justify-start w-full h-full">
-                      <p className="line-clamp-[9] font-mono">
+                      <p className="line-clamp-[15] font-serif">
                         {HTMLReactParser(c.description)}
                       </p>
                     </div>
                   ) : (
-                    <div className="tooltip bg-black text-white px-2 py-1 text-md rounded opacity-0 group-hover:opacity-100 absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none transition-opacity duration-300 w-full text-center">
-                      "Sorry 😢, No description provided."
+                    <div className="tooltip p-2 text-md rounded opacity-0 group-hover:opacity-100 absolute  top-0  left-1/2 transform -translate-x-1/2 pointer-events-none transition-opacity  w-full h-full  flex flex-col items-center justify-center gap-5">
+                      <p className="font-extrabold text-xl text-center">
+                        No description provided.
+                      </p>
                     </div>
                   )}
-                </div>
-                <div className="px-2 pb-2">
-                  <div className="uppercase font-bold h-[48px] py-2">
-                    {c.title}
+                  <div className="px-2 pb-2">
+                    <div className={`uppercase  font-bold py-2  "`}>
+                      {c.title}
+                    </div>
+                    <div
+                      className={`uppercase  font-bold py-2 font-mono text-[#a7a4a4] "`}
+                    >
+                      {c.format}
+                    </div>
+                    {/* <div className={`font-mono font-bold text-[#a7a4a4]`}>
+                      {c.modified ? moment(c.modified).format("YYYY") : "Nill"}
+                    </div> */}
                   </div>
-                  <div className="font-mono font-bold text-[#a7a4a4]">
-                    {c.start ? moment(c.start).format("YYYY") : "Nill"}
-                  </div>
                 </div>
-              </Link>
+
+                {/* </Link> */}
+              </div>
             </div>
           ))}
         </div>
@@ -155,4 +175,4 @@ const Data = () => {
   );
 };
 
-export default Data;
+export default DataComics;
