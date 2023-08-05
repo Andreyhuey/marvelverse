@@ -87,7 +87,6 @@ const DataComics = () => {
                 disablePortal
                 id="grading-system"
                 options={options}
-                // getOptionValue={(option) => option.value}
                 getOptionLabel={(option) => option.label}
                 className="uppercase rounded-lg focus:outline-none bg-slate-400"
                 onChange={handleChange}
