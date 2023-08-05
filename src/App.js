@@ -9,6 +9,7 @@ import {
   EventComics,
   EventCreators,
 } from "./pages";
+import EventSeries from "./pages/EventSeries";
 
 const App = () => {
   return (
@@ -37,6 +38,9 @@ const App = () => {
           </Route>
           <Route exact path="/events/:eventId/creators">
             <EventCreators />
+          </Route>
+          <Route exact path="/events/:eventId/series">
+            <EventSeries />
           </Route>
         </Switch>
       </div>
