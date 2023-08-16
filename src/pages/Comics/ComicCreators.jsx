@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { BeatLoader } from "react-spinners";
+import { Loader } from "../.././components";
 import "../../components/styles.css";
 
 const ComicCreators = () => {

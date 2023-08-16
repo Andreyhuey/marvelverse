@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import HTMLReactParser from "html-react-parser";
-import "moment-timezone";
 
 const NameSearch = () => {
   const [characters, setCharacters] = useState([]);

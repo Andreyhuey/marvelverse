@@ -1,5 +1,4 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer = () => {
   return (
@@ -20,36 +19,21 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
                 style={{ textDecoration: "none" }}
-              >
-                <FontAwesomeIcon
-                  icon="fa-brands fa-github"
-                  className="px-5 text-warning"
-                />
-              </a>
+              ></a>
 
               <a
                 href="https://www.linkedin.com/in/oluwadara-ola-obaado-64b5511b4"
                 target="_blank"
                 rel="noreferrer"
                 style={{ textDecoration: "none" }}
-              >
-                <FontAwesomeIcon
-                  icon="fa-brands fa-linkedin"
-                  className="px-5 text-warning"
-                />
-              </a>
+              ></a>
 
               <a
                 href="mailto:andreyhuey777@gmail.com"
                 target="_blank"
                 rel="noreferrer"
                 style={{ textDecoration: "none" }}
-              >
-                <FontAwesomeIcon
-                  icon="fa-solid fa-envelope-open"
-                  className="px-5 text-warning"
-                />
-              </a>
+              ></a>
             </div>
           </div>
         </div>
