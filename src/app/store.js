@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { CharacterApi } from "../services/characterApi";
 
-const store = configureStore({
+import { eventsApi } from "../services/eventsApi";
+
+export default configureStore({
   reducer: {
-    [CharacterApi.reducerPath]: CharacterApi.reducer,
+    [eventsApi.reducerPath]: eventsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(CharacterApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(eventsApi.middleware),
 });
-
-export default store;

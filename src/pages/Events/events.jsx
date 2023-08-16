@@ -1,51 +1,64 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { BeatLoader } from "react-spinners";
+import { Link, useHistory } from "react-router-dom";
+import HTMLReactParser from "html-react-parser";
+import moment from "moment";
+import { Autocomplete, TextField } from "@mui/material";
 import { Loader } from "../../components";
+import { useGetEventsQuery } from "../../services/eventsApi";
 
 const Events = () => {
+  const history = useHistory();
   const [events, setEvents] = useState([]);
   const [count, setCount] = useState("");
+  const [orderBy, setOrderBy] = useState("name");
+  const [offset, setOffset] = useState(0);
+  const limit = 20;
   const [total, setTotal] = useState(" ");
-  const [isLoading, setLoading] = useState(true);
+  const [label, setLabel] = useState("Ascending Order (A-Z)");
+  const { data: eventsList, isFetching } = useGetEventsQuery({
+    orderBy,
+    limit,
+    offset,
+  });
+  const [isHovered, setIsHovered] = useState(false);
 
   //   Pagination useState(s)
   const [currentEventPage, setCurrentEventPage] = useState(
     parseInt(sessionStorage.getItem("currentEventPage")) || 1
   );
-  const limit = 20;
 
+  // handleChange for the Order
+  const handleChange = (event, newValue) => {
+    setOrderBy(newValue?.value);
+    setLabel(newValue?.label);
+    setCurrentEventPage(1);
+  };
+
+  // Options for the Order
+  const options = [
+    { label: "Newest", value: "-startDate" },
+    { label: "Oldest", value: "startDate" },
+    { label: "Ascending Order (A-Z)", value: "name" },
+    { label: "Descending Order (Z-A)", value: "-name" },
+    { label: "Last Modified", value: "modified" },
+  ];
+
+  // UseEffect used to fetch and set Total, count and offset
   useEffect(() => {
-    async function fetchCreators(currentEventPage) {
-      setLoading(true);
-      fetch(
-        `https://gateway.marvel.com/v1/public/events?limit=${limit}&offset=${
-          (currentEventPage - 1) * limit
-        }&orderBy=modified&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${
-          process.env.REACT_APP_HASH
-        }`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data.data);
-          setCount(data.data.count);
-          setTotal(data.data.total);
-          const results = data.data.results;
-          setEvents(results);
-          console.log(results);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-
-    fetchCreators(currentEventPage);
+    const fetchResults = eventsList?.data?.results;
+    setEvents(fetchResults || []);
+    setTotal(eventsList?.data?.total);
+    setCount(eventsList?.data?.count);
+    setOffset((currentEventPage - 1) * limit);
+    console.log(fetchResults);
     sessionStorage.setItem("currentEventPage", currentEventPage);
-
     document.title = "Marvel Events";
-  }, [currentEventPage, limit]);
+  }, [eventsList, orderBy, limit, currentEventPage]);
 
+  // Loading state for fetch
+  if (isFetching) return <Loader />;
+
+  // Total Pages of Data Available
   function totalPages() {
     let Pages = total / limit;
     Pages = Math.ceil(Pages);
@@ -57,54 +70,80 @@ const Events = () => {
     sessionStorage.setItem(currentEventPage, number);
   };
 
-  // loading state component
-  if (isLoading) return <Loader />;
-
   return (
     <>
-      <section className="container-fluid bg-dark">
-        <div className="container vh-auto">
+      <section
+        className="container-fluid"
+        style={{ backgroundColor: "#00002e" }}
+      >
+        <div className="container vh-auto my-5 py-5">
           <h3 className="text-bold fw-bold text-center py-3">Marvel Events</h3>
           <div className="d-flex justify-content-between">
             <div className="">Total Events Found : {total}</div>
-            <div className="text-center h6 fw-bold bg-black p-3">
+            <div className="text-center h6 fw-bold bg-black p-3 rounded">
               Page {currentEventPage} of {totalPages()}
             </div>
             <div className="text-center h6">Total Rendered : {count}</div>
+          </div>
+
+          <div className="  text-black">
+            <fieldset className="fieldset gap-2">
+              <label
+                htmlFor="loe"
+                className="text-white uppercase font-semibold font-mono"
+              >
+                Order By
+              </label>
+              <div className=" w-100 h-auto mt-1 rounded-lg">
+                <Autocomplete
+                  disablePortal
+                  id="grading-system"
+                  options={options}
+                  // getOptionValue={(option) => option.value}
+                  getOptionLabel={(option) => option.label}
+                  className="uppercase rounded-lg focus:outline-none bg-slate-400"
+                  onChange={handleChange}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="Order By"
+                      placeholder={label}
+                      required
+                      className="  placeholder:text-slate-950 w-full"
+                    />
+                  )}
+                />
+              </div>
+            </fieldset>
           </div>
 
           <div className="row">
             {events.map((c) => {
               return (
                 <div key={c.id} className="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                  <div className="border border-light card my-3 bg-black">
+                  <div className="border card my-3 bg-black">
                     <Link
                       key={c.id}
                       to={`/events/${c.id}`}
                       style={{ textDecoration: "none" }}
                     >
-                      <div className="p-2 my-1">
+                      <div className="p-2 my-1 bg-image hover-overlay hover-zoom hover-shadow ripple">
                         <img
                           src={
                             c.thumbnail.path.loading
-                              ? { isLoading }
+                              ? { isFetching }
                               : c.thumbnail.path + ".jpg"
                           }
                           className="card-img-top"
                           alt={"img of " + c.title}
                         />
-                        <div className="d-flex justify-content-center">
-                          <h4 className="card-body text-center text-light py-3">
-                            {c.title}
-                          </h4>
-                        </div>
                       </div>
                     </Link>
                   </div>
                 </div>
               );
             })}
-            <div className="container d-flex overflow-auto pt-5">
+            <div className="container d-flex justify-content-center overflow-auto pt-5">
               <nav aria-label="Page navigation example ">
                 <ul className="pagination">
                   {Array.from({ length: totalPages() }, (_, i) => i + 1).map(

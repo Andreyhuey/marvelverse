@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { BeatLoader } from "react-spinners";
 import { Loader } from "../../components";
 
 const Characters = () => {

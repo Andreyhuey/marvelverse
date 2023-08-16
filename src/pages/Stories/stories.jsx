@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Loader } from "../.././components";
+import { Loader } from "../../components";
 import Story from "../../images/Story.jpg";
 import HTMLReactParser from "html-react-parser";
 
