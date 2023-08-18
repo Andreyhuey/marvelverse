@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import HTMLReactParser from "html-react-parser";
 import { useGetEventComicsQuery } from "../services/eventsApi";
 import Loader from "./Loader";
@@ -7,10 +7,26 @@ import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 
+const routeSpecificDataMap = {
+  "/events": { orderBy: "name" },
+  "/events/:eventId/:title/characters": { orderBy: "name" },
+  "/events/:eventId/:title/comics": { orderBy: "title" },
+  "/events/:eventId/:title/creators": { orderBy: "firstName" },
+  // Add more route-specific data here...
+  // Default route-specific data if no match is found
+  default: { orderBy: "default" },
+};
+
 const DataComics = () => {
+  const location = useLocation();
   const { eventId, title } = useParams();
+  // Determine the route-specific data to use
+  const routeSpecificData =
+    routeSpecificDataMap[location.pathname] || routeSpecificDataMap.default;
+
+  // Use the route-specific data for state initialization
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderBy") || "title"
+    sessionStorage.getItem("orderBy") || routeSpecificData.orderBy
   );
   const [label, setLabel] = useState(
     sessionStorage.getItem("label") || "Ascending Order (A-Z)"
@@ -55,7 +71,6 @@ const DataComics = () => {
   const handleChange = (event, newValue) => {
     setOrderBy(newValue?.value);
     setLabel(newValue?.label);
-
     setCurrentEventComicsPage(1);
   };
 
@@ -74,7 +89,7 @@ const DataComics = () => {
     sessionStorage.setItem("orderBy", orderBy); // Store orderBy
     sessionStorage.setItem("label", label);
 
-    document.title = "Marvel Comics";
+    document.title = `${title} Comics | Events | Marvel-Verse `;
   }, [comicsList, orderBy, label, limit, currentEventComicsPage]);
 
   const options = [

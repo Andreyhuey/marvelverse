@@ -1,17 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import HTMLReactParser from "html-react-parser";
 import { useGetEventCharactersQuery } from "../services/eventsApi";
 import Loader from "./Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 
+const routeSpecificDataMap = {
+  "/events": { orderBy: "name" },
+  "/events/:eventId/:title/characters": { orderBy: "name" },
+  "/events/:eventId/:title/comics": { orderBy: "title" },
+  "/events/:eventId/:title/creators": { orderBy: "firstName" },
+  // Add more route-specific data here...
+  // Default route-specific data if no match is found
+  default: { orderBy: "default" },
+};
+
 const DataCharacters = () => {
+  const location = useLocation();
   const { eventId, title } = useParams();
   const [offset, setOffset] = useState(0);
-  const limit = "24";
+  const limit = "20";
+
+  // Determine the route-specific data to use
+  const routeSpecificData =
+    routeSpecificDataMap[location.pathname] || routeSpecificDataMap.default;
+
+  // Use the route-specific data for state initialization
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderByEventCharacters") || "name"
+    sessionStorage.getItem("orderBy") || routeSpecificData.orderBy
   );
 
   // Data being fetched by redux toolkit
@@ -241,7 +258,7 @@ const DataCharacters = () => {
           </div>
 
           {/* Pagination example */}
-          {totalPages()}
+
           <div className="flex justify-center overflow-auto mt-4 py-12">
             <nav aria-label="Page navigation example ">
               <ul className="inline-flex -space-x-px text-md">

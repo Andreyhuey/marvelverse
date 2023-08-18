@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import HTMLReactParser from "html-react-parser";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useGetEventDetailsQuery } from "../services/eventsApi";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Loader from "./Loader";
 
 const DataDetails = () => {
+  const location = useLocation();
   const { eventId, title } = useParams();
   const { data, isFetching } = useGetEventDetailsQuery(eventId);
 
@@ -38,7 +39,7 @@ const DataDetails = () => {
 
                 <div className="flex-1">
                   <div className="flex flex-col justify-center items-start gap-4">
-                    <h5 className="font-extrabold text-[40px] uppercase">
+                    <h5 className="font-extrabold text-[40px] uppercase text-center">
                       {d.title}
                     </h5>
                     <p className="font-semibold text-slate-300 font-mono">
@@ -82,7 +83,7 @@ const DataDetails = () => {
 
                       <div>
                         {d.creators.available !== 0 ? (
-                          <Link to={`/events/${d.id}/creators`}>
+                          <Link to={`/events/${d.id}/${d.title}/creators`}>
                             <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.creators.available}
@@ -97,7 +98,7 @@ const DataDetails = () => {
 
                       <div>
                         {d.series.available !== 0 ? (
-                          <Link to={`/events/${d.id}/series`}>
+                          <Link to={`/events/${d.id}/${d.title}/series`}>
                             <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.series.available}
@@ -113,7 +114,7 @@ const DataDetails = () => {
                       <div>
                         {d.stories.available !== 0 ? (
                           <Link
-                            to={`/events/${d.id}/stories
+                            to={`/events/${d.id}/${d.title}/stories
 `}
                           >
                             <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">

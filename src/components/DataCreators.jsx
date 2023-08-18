@@ -8,10 +8,10 @@ import { Autocomplete, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const DataCreators = () => {
-  const { eventId } = useParams();
+  const { eventId, title } = useParams();
   const [orderBy, setOrderBy] = useState("firstName");
   const [label, setLabel] = useState("First Name Ascending Order (A-Z)");
-  const limit = "100";
+  const limit = "20";
   const { data: creatorsList, isFetching } = useGetEventCreatorsQuery({
     eventId,
     orderBy,
@@ -48,7 +48,9 @@ const DataCreators = () => {
     setTotal(creatorsList?.data?.total);
     setCreators(fetchResults || []);
     console.log(fetchResults);
-  }, [creatorsList, orderBy]);
+
+    document.title = `${title} Creators | Events | Marvel-Verse`;
+  }, [creatorsList, orderBy, title]);
 
   const options = [
     { label: "First Name Ascending Order (A-Z)", value: "firstName" },

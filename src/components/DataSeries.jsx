@@ -7,10 +7,10 @@ import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 
 const DataSeries = () => {
-  const { eventId } = useParams();
+  const { eventId, title } = useParams();
   const [orderBy, setOrderBy] = useState("title");
   const [label, setLabel] = useState("Ascending Order (A-Z)");
-  const limit = "100";
+  const limit = "20";
   const { data: seriesList, isFetching } = useGetEventSeriesQuery({
     eventId,
     orderBy,
@@ -46,6 +46,8 @@ const DataSeries = () => {
     setTotal(seriesList?.data?.total);
     setSeries(fetchResults || []);
     console.log(fetchResults);
+
+    document.title = `${title} Series | Events | Marvel-Verse`;
   }, [seriesList, orderBy]);
 
   const options = [

@@ -19,15 +19,12 @@ const App = () => {
           <Route exact path="/">
             <Homepage />
           </Route>
+
           {/* #Marvel Events Routes */}
           {/* Events */}
           <Route exact path="/events">
             <Events />
           </Route>
-          {/* Events Order*/}
-          {/* <Route exact path="/events?order=:order">
-            <Events />
-          </Route> */}
           {/* Event Details */}
           <Route exact path="/events/:eventId/:title">
             <EventDetails />
