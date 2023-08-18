@@ -7,7 +7,6 @@ import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 
 const DataCharacters = () => {
-  const history = useHistory();
   const { eventId, title } = useParams();
   const [offset, setOffset] = useState(0);
   const limit = "24";
@@ -60,16 +59,10 @@ const DataCharacters = () => {
   );
 
   // space links with hypens
-  function Hyphens(inputString) {
-    return inputString.replace(/ /g, "-").toLowerCase();
-  }
 
   const handleChange = (event, newValue) => {
     setOrderBy(newValue?.value);
     setLabel(newValue?.label);
-    history.push(
-      `/events/${eventId}/${Hyphens(title)}/characters?order=${orderBy}`
-    );
     setCurrentEventCharactersPage(1);
   };
 
@@ -98,10 +91,7 @@ const DataCharacters = () => {
     sessionStorage.setItem("label", label);
     sessionStorage.setItem("scrollPosition", scrollPosition);
 
-    document.title = `${title.toUpperCase()} Characters`;
-    history.push(
-      `/events/${eventId}/${Hyphens(title)}/characters?order=${orderBy}`
-    );
+    document.title = `${title} Characters | Events | Marvel-Verse`;
   }, [
     charactersList,
     currentEventCharactersPage,

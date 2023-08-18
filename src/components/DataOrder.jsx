@@ -7,7 +7,6 @@ import { Autocomplete, TextField } from "@mui/material";
 import Loader from "./Loader";
 
 const DataOrder = () => {
-  const history = useHistory();
   const { order } = useParams();
   const [orderBy, setOrderBy] = useState(order);
   const [label, setLabel] = useState(order);
@@ -41,7 +40,6 @@ const DataOrder = () => {
     setLabel(newValue?.label);
 
     // Update the URL with the new order value
-    history.push(`/events?order=${newOrderBy}`);
   };
 
   const options = [

@@ -8,8 +8,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const DataComics = () => {
-  const history = useHistory();
-  const { eventId } = useParams();
+  const { eventId, title } = useParams();
   const [orderBy, setOrderBy] = useState(
     sessionStorage.getItem("orderBy") || "title"
   );
@@ -56,7 +55,7 @@ const DataComics = () => {
   const handleChange = (event, newValue) => {
     setOrderBy(newValue?.value);
     setLabel(newValue?.label);
-    history.push(`/events/${eventId}/comics?order=${orderBy}`);
+
     setCurrentEventComicsPage(1);
   };
 
@@ -76,7 +75,6 @@ const DataComics = () => {
     sessionStorage.setItem("label", label);
 
     document.title = "Marvel Comics";
-    history.push(`/events/${eventId}/comics?order=${orderBy}`);
   }, [comicsList, orderBy, label, limit, currentEventComicsPage]);
 
   const options = [

@@ -1,16 +1,20 @@
-import EventDetails from "./EventDetails";
+// Homepage
+import Homepage from "./Homepage";
+
+// Events
 import Events from "./Events";
 import EventsOrder from "./EventsOrder";
-import Homepage from "./Homepage";
+import EventDetails from "./EventDetails";
 import EventsCharacters from "./EventsCharacters";
 import EventComics from "./EventComics";
 import EventCreators from "./EventCreators";
 
 export {
   Homepage,
+  //
   Events,
-  EventDetails,
   EventsOrder,
+  EventDetails,
   EventsCharacters,
   EventComics,
   EventCreators,

@@ -12,7 +12,7 @@ const DataDetails = () => {
 
   const eventDetails = data?.data?.results;
 
-  document.title = `${title} | Marvelverse`;
+  document.title = `${title} | Events | Marvel-Verse`;
 
   if (isFetching) return <Loader />;
 
@@ -67,7 +67,7 @@ const DataDetails = () => {
                       </div>
                       <div>
                         {d.comics.available !== 0 ? (
-                          <Link to={`/events/${d.id}/comics`}>
+                          <Link to={`/events/${d.id}/${d.title}/comics`}>
                             <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.comics.available}

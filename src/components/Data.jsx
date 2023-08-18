@@ -7,7 +7,6 @@ import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 
 const Data = () => {
-  const history = useHistory();
   const [events, setEvents] = useState([]);
   const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
@@ -58,7 +57,6 @@ const Data = () => {
   const handleChange = (event, newValue) => {
     setOrderBy(newValue?.value);
     setLabel(newValue?.label);
-    history.push(`/events?order=${orderBy}`);
     setCurrentEventPage(1);
   };
 
@@ -85,8 +83,8 @@ const Data = () => {
     sessionStorage.setItem("label", label);
     sessionStorage.setItem("scrollPosition", scrollPosition);
 
-    document.title = "Marvel Events";
-    history.push(`/events?order=${orderBy}`);
+    document.title =
+      "Events | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
   }, [eventsList, orderBy, limit, currentEventPage, scrollPosition]);
 
   // On component mount, retrieve stored data from sessionStorage
