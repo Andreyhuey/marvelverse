@@ -6,40 +6,15 @@ import Loader from "../components/Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 
-import {
-  saveScrollPosition,
-  restoreScrollPosition,
-} from "../components/savePositionUtilits";
-
-const routeSpecificDataMap = {
-  "/events": { orderBy: "name" },
-  "/events/:eventId/:title/characters": { orderBy: "name" },
-  "/events/:eventId/:title/comics": { orderBy: "title" },
-  "/events/:eventId/:title/creators": { orderBy: "firstName" },
-  // Add more route-specific data here...
-  // Default route-specific data if no match is found
-  default: { orderBy: "default" },
-};
-
 const Events = () => {
-  const location = useLocation();
   const [events, setEvents] = useState([]);
   const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
   const limit = "16";
   const [total, setTotal] = useState(0);
-  // Determine the route-specific data to use
-  const routeSpecificData =
-    routeSpecificDataMap[location.pathname] || routeSpecificDataMap.default;
-
-  // Use the route-specific data for state initialization
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderBy") || routeSpecificData.orderBy
+    sessionStorage.getItem("orderBy") || "name"
   );
-
-  // const [orderBy, setOrderBy] = useState(
-  //   sessionStorage.getItem("orderBy") || "name"
-  // );
   const [label, setLabel] = useState(
     sessionStorage.getItem("label") || "Ascending Order (A-Z)"
   );
@@ -56,23 +31,23 @@ const Events = () => {
   const [hoveredId, setHoveredId] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  // To set the hovered Id once the mouse touches it
-  const handleMouseEnter = (id) => {
-    setHoveredId(id);
-    setIsHovered(true);
-  };
+  // // To set the hovered Id once the mouse touches it
+  // const handleMouseEnter = (id) => {
+  //   setHoveredId(id);
+  //   setIsHovered(true);
+  // };
+
+  // // the mouse leaving the hover
+  // const handleMouseLeave = () => {
+  //   setHoveredId(null);
+  //   setIsHovered(false);
+  // };
 
   // The css function enacted on the ID
-  const Blur = () => {
-    if (isHovered === true)
-      return "backdrop-blur-3xl backdrop-brightness-0 blur-xl rounded-2xl";
-  };
-
-  // the mouse leaving the hover
-  const handleMouseLeave = () => {
-    setHoveredId(null);
-    setIsHovered(false);
-  };
+  // const Blur = () => {
+  //   if (isHovered === true)
+  //     return "backdrop-blur-3xl backdrop-brightness-0 blur-xl rounded-2xl";
+  // };
 
   //   Pagination useState(s)
   const [currentEventPage, setCurrentEventPage] = useState(
@@ -159,11 +134,8 @@ const Events = () => {
           Marvel Events
         </div> */}
 
-          <div className="flex items-start justify-between py-4">
-            <div className="flex flex-col gap-4 font-serif">
-              <p>Total Events Found: {total}</p>
-              <p>Total Rendered : {count}</p>
-            </div>
+          <div className="flex md:flex-row flex-col items-center justify-between py-4 gap-5">
+            <div className="flex flex-col gap-4 font-serif"></div>
             <div className="border rounded p-2 bg-black">
               <p>
                 Page {currentEventPage} of {totalPages()}
@@ -171,28 +143,23 @@ const Events = () => {
             </div>
             <div className="flex items-start justify-end text-black mb-7">
               <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
-                <label
-                  htmlFor="loe"
-                  className="text-white uppercase font-semibold font-mono"
-                >
-                  Order By
-                </label>
-                <div className=" w-[225px] h-auto mt-1 rounded-lg">
+                <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
                   <Autocomplete
                     disablePortal
-                    id="grading-system"
                     options={options}
-                    // getOptionValue={(option) => option.value}
                     getOptionLabel={(option) => option.label}
-                    className="uppercase rounded-lg focus:outline-none bg-slate-400"
+                    id="controllable-states-demo"
+                    className="uppercase  bg-transparent border-none"
                     onChange={handleChange}
                     renderInput={(params) => (
                       <TextField
                         {...params}
                         name="Order By"
-                        placeholder={label}
+                        label={label.toLowerCase()}
+                        variant="standard"
+                        id="standard-basic"
                         required
-                        className="flex items-center justify-center placeholder:text-slate-950"
+                        className="flex items-center justify-center placeholder:text-slate-950 bg-transparent border-none"
                       />
                     )}
                   />
@@ -205,44 +172,21 @@ const Events = () => {
             {events?.map((c) => (
               <div
                 key={c.id}
-                onMouseEnter={() => handleMouseEnter(c.id)}
-                onMouseLeave={handleMouseLeave}
-                className={` ${
-                  c.id === hoveredId
-                    ? "py-2 font-mono rounded-xl bg-gray-900 "
-                    : "py-2 font-mono"
-                } hover:p-1  font-mono relative group cursor-pointer`}
+                // onMouseEnter={() => handleMouseEnter(c.id)}
+                // onMouseLeave={handleMouseLeave}
+                className={` 
+                
+                transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2`}
               >
                 <Link key={c.id} to={`/events/${c.id}/${c.title}`}>
                   <div className={`  `}>
-                    {c.id === hoveredId ? (
-                      <>
-                        <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className={`${Blur}`}
-                          alt={"img of " + c.title}
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className={`${"rounded-xl "}  `}
-                          alt={"img of " + c.title}
-                        />
-                      </>
-                    )}
-                    {c.description ? (
-                      <div className="tooltip  text-white px-3 pb-3 pt-7 text-md opacity-0 bg-transparent group-hover:opacity-100 absolute bottom-0 top-0 left-1/2 mb-2 transform -translate-x-1/2 pointer-events-none transition-opacity rounded-xl flex flex-col items-start justify-start w-full h-full bright">
-                        <p className="line-clamp-[9] font-mono">
-                          {HTMLReactParser(c.description)}
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="tooltip bg-black text-white px-2 py-1 text-md rounded opacity-0 group-hover:opacity-100 absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none transition-opacity duration-300 w-full text-center">
-                        "Sorry 😢, No description provided."
-                      </div>
-                    )}
+                    <>
+                      <img
+                        src={c.thumbnail.path + ".jpg"}
+                        className={`${"rounded-xl "}  `}
+                        alt={"img of " + c.title}
+                      />
+                    </>
                   </div>
                   <div className="px-2 pb-2">
                     <div className="font-mono font-bold text-[#a7a4a4] py-2">
