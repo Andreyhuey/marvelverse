@@ -50,8 +50,8 @@ const DataDetails = () => {
                     </p>
                   </div>
 
-                  <div className="items-center justify-center flex lg:justify-start">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-6">
+                  <div className="items-center justify-center flex">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-6 items-center justify-center">
                       <div>
                         {d.characters.available !== 0 ? (
                           <Link to={`/events/${d.id}/${d.title}/characters`}>
@@ -81,7 +81,7 @@ const DataDetails = () => {
                         )}
                       </div>
 
-                      <div>
+                      {/* <div>
                         {d.creators.available !== 0 ? (
                           <Link to={`/events/${d.id}/${d.title}/creators`}>
                             <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
@@ -127,7 +127,7 @@ const DataDetails = () => {
                         ) : (
                           ""
                         )}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

@@ -7,14 +7,13 @@ import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 
 const DataCharacters = () => {
-  const location = useLocation();
   const { eventId, title } = useParams();
   const [offset, setOffset] = useState(0);
   const limit = "20";
 
   // Use the route-specific data for state initialization
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderByEventCharacters") || "name"
+    sessionStorage.getItem(`orderByEventCharacters${eventId}`) || "name"
   );
 
   // Data being fetched by redux toolkit
@@ -31,7 +30,8 @@ const DataCharacters = () => {
   const [count, setCount] = useState("");
 
   const [label, setLabel] = useState(
-    sessionStorage.getItem("label") || "Ascending Order (A-Z)"
+    sessionStorage.getItem(`labelByEventCharacters${eventId}`) ||
+      "Ascending Order (A-Z)"
   );
   const [scrollPosition, setScrollPosition] = useState(
     parseInt(sessionStorage.getItem("scrollPosition")) || 0
@@ -90,8 +90,8 @@ const DataCharacters = () => {
       currentEventCharactersPage
     );
     // Store relevant data in sessionStorage
-    sessionStorage.setItem("orderByEventCharacters", orderBy); // Store orderBy
-    sessionStorage.setItem("label", label);
+    sessionStorage.setItem(`orderByEventCharacters${eventId}`, orderBy); // Store orderBy
+    sessionStorage.setItem(`labelByEventCharacters${eventId}`, label);
     sessionStorage.setItem("scrollPosition", scrollPosition);
 
     document.title = `${title} Characters | Events | Marvel-Verse`;
@@ -106,8 +106,12 @@ const DataCharacters = () => {
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
-    const storedOrderBy = sessionStorage.getItem("orderByEventCharacters");
-    const storedLabel = sessionStorage.getItem("label");
+    const storedOrderBy = sessionStorage.getItem(
+      `orderByEventCharacters${eventId}`
+    );
+    const storedLabel = sessionStorage.getItem(
+      `labelByEventCharacters${eventId}`
+    );
 
     if (storedOrderBy) {
       setOrderBy(storedOrderBy);
