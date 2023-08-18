@@ -9,9 +9,9 @@ export const eventsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getEvents: builder.query({
-      query: ({ orderBy, limit }) =>
+      query: ({ orderBy, limit, offset }) =>
         createRequest(
-          `/events?orderBy=${orderBy}&limit=${limit}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+          `/events?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
         ),
     }),
     getEventDetails: builder.query({
@@ -21,27 +21,27 @@ export const eventsApi = createApi({
         ),
     }),
     getEventCharacters: builder.query({
-      query: ({ eventId, orderBy, limit }) =>
+      query: ({ eventId, orderBy, limit, offset }) =>
         createRequest(
-          `/events/${eventId}/characters?orderBy=${orderBy}&limit=${limit}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+          `/events/${eventId}/characters?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
         ),
     }),
     getEventComics: builder.query({
-      query: ({ eventId, orderBy, limit }) =>
+      query: ({ eventId, orderBy, limit, offset }) =>
         createRequest(
-          `/events/${eventId}/comics?orderBy=${orderBy}&limit=${limit}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+          `/events/${eventId}/comics?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
         ),
     }),
     getEventCreators: builder.query({
-      query: ({ eventId, orderBy, limit }) =>
+      query: ({ eventId, orderBy, limit, offset }) =>
         createRequest(
-          `/events/${eventId}/creators?orderBy=${orderBy}&limit=${limit}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+          `/events/${eventId}/creators?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
         ),
     }),
     getEventSeries: builder.query({
-      query: ({ eventId, orderBy, limit }) =>
+      query: ({ eventId, orderBy, limit, offset }) =>
         createRequest(
-          `/events/${eventId}/series?orderBy=${orderBy}&limit=${limit}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
+          `/events/${eventId}/series?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=47c728e2933b98677639c9ef3bcbed3c&hash=e926e192b0df9aaff901a57cb66e154a`
         ),
     }),
   }),

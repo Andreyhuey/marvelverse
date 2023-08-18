@@ -7,10 +7,12 @@ import moment from "moment";
 import Loader from "./Loader";
 
 const DataDetails = () => {
-  const { eventId } = useParams();
+  const { eventId, title } = useParams();
   const { data, isFetching } = useGetEventDetailsQuery(eventId);
 
   const eventDetails = data?.data?.results;
+
+  document.title = `${title} | Marvelverse`;
 
   if (isFetching) return <Loader />;
 
@@ -51,7 +53,7 @@ const DataDetails = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-6">
                       <div>
                         {d.characters.available !== 0 ? (
-                          <Link to={`/events/${d.id}/characters`}>
+                          <Link to={`/events/${d.id}/${d.title}/characters`}>
                             <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.characters.available}

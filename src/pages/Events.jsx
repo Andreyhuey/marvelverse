@@ -3,7 +3,7 @@ import { Data } from "../components";
 
 const Events = () => {
   return (
-    <div>
+    <div className="">
       <Data />
     </div>
   );

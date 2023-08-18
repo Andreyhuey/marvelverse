@@ -4,7 +4,7 @@ import {
   Homepage,
   Events,
   EventDetails,
-  EventsOrder,
+  // EventsOrder,
   EventsCharacters,
   EventComics,
   EventCreators,
@@ -20,26 +20,39 @@ const App = () => {
             <Homepage />
           </Route>
 
-          {/* Events Routes */}
+          {/* #Marvel Events Routes */}
+
+          {/* Events */}
           <Route exact path="/events">
             <Events />
           </Route>
-          <Route exact path="/events/:eventId">
+          {/* Events Order*/}
+          <Route exact path="/events?order=:order">
+            <Events />
+          </Route>
+
+          {/* Event Details */}
+          <Route exact path="/events/:eventId/:title">
             <EventDetails />
           </Route>
-          <Route exact path="/events?order=:order">
-            <EventsOrder />
-          </Route>
-          <Route exact path="/events/:eventId/characters">
+
+          {/* Event Character Details */}
+          <Route exact path="/events/:eventId/:title/characters">
             <EventsCharacters />
           </Route>
-          <Route exact path="/events/:eventId/comics">
+          <Route exact path="/events/:eventId/:title/characters?order=:order">
+            <EventsCharacters />
+          </Route>
+
+          {/* Event Comics Details */}
+          <Route exact path="/events/:eventId/:title/comics?order=:order">
             <EventComics />
           </Route>
-          <Route exact path="/events/:eventId/creators">
+          {/* Event Details */}
+          <Route exact path="/events/:eventId/:title/creators?order=:order">
             <EventCreators />
           </Route>
-          <Route exact path="/events/:eventId/series">
+          <Route exact path="/events/:eventId/:title/series?order=:order">
             <EventSeries />
           </Route>
         </Switch>
