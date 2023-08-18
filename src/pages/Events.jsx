@@ -54,13 +54,6 @@ const Events = () => {
     parseInt(sessionStorage.getItem("currentEventPage")) || 1
   );
 
-  // handleChange for the Order
-  const handleChange = (event, newValue) => {
-    setOrderBy(newValue?.value);
-    setLabel(newValue?.label);
-    setCurrentEventPage(1);
-  };
-
   // Options for the Order
   const options = [
     { label: "Newest", value: "-startDate" },
@@ -69,6 +62,13 @@ const Events = () => {
     { label: "Descending Order (Z-A)", value: "-name" },
     { label: "Modified", value: "modified" },
   ];
+
+  // handleChange for the Order
+  const handleChange = (event, newValue) => {
+    setOrderBy(newValue?.value);
+    setLabel(newValue?.label);
+    setCurrentEventPage(1);
+  };
 
   // UseEffect used to fetch and set Total, count and offset
   useEffect(() => {
@@ -130,17 +130,13 @@ const Events = () => {
         </>
       ) : (
         <div className="bg-gray-950 text-white py-20 px-4 md:px-8 lg:px-20">
-          {/* <div className="text-center uppercase font-mono py-6">
-          Marvel Events
-        </div> */}
+          <div className="flex items-center justify-center">
+            <p className="border rounded p-2 bg-black">
+              Page {currentEventPage} of {totalPages()}
+            </p>
+          </div>
 
-          <div className="flex md:flex-row flex-col items-center justify-between py-4 gap-5">
-            <div className="flex flex-col gap-4 font-serif"></div>
-            <div className="border rounded p-2 bg-black">
-              <p>
-                Page {currentEventPage} of {totalPages()}
-              </p>
-            </div>
+          <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
             <div className="flex items-start justify-end text-black mb-7">
               <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
                 <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
@@ -149,13 +145,13 @@ const Events = () => {
                     options={options}
                     getOptionLabel={(option) => option.label}
                     id="controllable-states-demo"
-                    className="uppercase  bg-transparent border-none"
+                    className="capitalize bg-transparent border-none"
                     onChange={handleChange}
                     renderInput={(params) => (
                       <TextField
                         {...params}
                         name="Order By"
-                        label={label.toLowerCase()}
+                        placeholder={label}
                         variant="standard"
                         id="standard-basic"
                         required

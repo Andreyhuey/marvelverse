@@ -7,29 +7,17 @@ import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const routeSpecificDataMap = {
-  "/events": { orderBy: "name" },
-  "/events/:eventId/:title/characters": { orderBy: "name" },
-  "/events/:eventId/:title/comics": { orderBy: "title" },
-  "/events/:eventId/:title/creators": { orderBy: "firstName" },
-  // Add more route-specific data here...
-  // Default route-specific data if no match is found
-  default: { orderBy: "default" },
-};
-
 const DataComics = () => {
   const location = useLocation();
   const { eventId, title } = useParams();
   // Determine the route-specific data to use
-  const routeSpecificData =
-    routeSpecificDataMap[location.pathname] || routeSpecificDataMap.default;
 
   // Use the route-specific data for state initialization
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderBy") || routeSpecificData.orderBy
+    sessionStorage.getItem("orderByEventComics") || "title"
   );
   const [label, setLabel] = useState(
-    sessionStorage.getItem("label") || "Ascending Order (A-Z)"
+    sessionStorage.getItem("labelByEventComics") || "Ascending Order (A-Z)"
   );
   const limit = "12";
   const [count, setCount] = useState("");
@@ -43,24 +31,25 @@ const DataComics = () => {
   });
   const [comics, setComics] = useState([]);
   const [total, setTotal] = useState(0);
-  const [hoveredId, setHoveredId] = useState(null);
-  const [isHovered, setIsHovered] = useState(false);
+
+  // const [hoveredId, setHoveredId] = useState(null);
+  // const [isHovered, setIsHovered] = useState(false);
 
   // handle the mouse movement
 
-  const handleMouseEnter = (id) => {
-    setHoveredId(id);
-    setIsHovered(true);
-  };
+  // const handleMouseEnter = (id) => {
+  //   setHoveredId(id);
+  //   setIsHovered(true);
+  // };
 
-  const Blur = () => {
-    if (isHovered === true) return "backdrop-blur-xl blur-3xl rounded-xl";
-  };
+  // const Blur = () => {
+  //   if (isHovered === true) return "backdrop-blur-xl blur-3xl rounded-xl";
+  // };
 
-  const handleMouseLeave = () => {
-    setHoveredId(null);
-    setIsHovered(false);
-  };
+  // const handleMouseLeave = () => {
+  //   setHoveredId(null);
+  //   setIsHovered(false);
+  // };
 
   //   Pagination useState(s)
   const [currentEventComicsPage, setCurrentEventComicsPage] = useState(
@@ -86,8 +75,8 @@ const DataComics = () => {
 
     // Store relevant data in sessionStorage
     sessionStorage.setItem("currentEventComicsPage", currentEventComicsPage);
-    sessionStorage.setItem("orderBy", orderBy); // Store orderBy
-    sessionStorage.setItem("label", label);
+    sessionStorage.setItem("orderByEventComics", orderBy); // Store orderBy
+    sessionStorage.setItem("labelByEventComics", label);
 
     document.title = `${title} Comics | Events | Marvel-Verse `;
   }, [comicsList, orderBy, label, limit, currentEventComicsPage]);
@@ -107,8 +96,8 @@ const DataComics = () => {
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
-    const storedOrderBy = sessionStorage.getItem("orderBy");
-    const storedLabel = sessionStorage.getItem("label");
+    const storedOrderBy = sessionStorage.getItem("orderByEventComics");
+    const storedLabel = sessionStorage.getItem("labelByEventComics");
 
     if (storedOrderBy) {
       setOrderBy(storedOrderBy);
@@ -135,95 +124,64 @@ const DataComics = () => {
   return (
     <div>
       <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
-        {/* <h4 className="text-center">Event Comics</h4> */}
+        <div className="flex items-center justify-center">
+          <p className="border rounded p-2 bg-black">
+            Page {currentEventComicsPage} of {totalPages()}
+          </p>
+        </div>
 
-        <div className="flex items-start justify-between py-4">
-          <div className="flex flex-col gap-4 font-serif">
-            <p>Total Comics Found: {total}</p>
-            <p>Total Rendered : {count}</p>
-          </div>
-          <div className="border rounded p-2 bg-[#1b135f69] font-semibold">
-            <p>
-              Page {currentEventComicsPage} of {totalPages()}
-            </p>
-          </div>
-          <div className="flex items-start justify-end text-black mb-7">
-            <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
-              <label
-                htmlFor="loe"
-                className="text-white uppercase font-semibold font-mono"
-              >
-                Order By
-              </label>
-              <div className=" w-[225px] h-auto mt-1 rounded-lg">
-                <Autocomplete
-                  disablePortal
-                  id="grading-system"
-                  options={options}
-                  // getOptionValue={(option) => option.value}
-                  getOptionLabel={(option) => option.label}
-                  className="uppercase rounded-lg focus:outline-none bg-slate-400"
-                  onChange={handleChange}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      name="Order By"
-                      placeholder={label}
-                      required
-                      className="flex items-center justify-center placeholder:text-slate-950"
-                    />
-                  )}
-                />
-              </div>
-            </fieldset>
+        <div className="flex md:flex-row flex-col items-center justify-end py-4 space-x-5 space-y-10">
+          <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
+            <div className="flex items-start justify-end text-black mb-7">
+              <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
+                <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
+                  <Autocomplete
+                    disablePortal
+                    options={options}
+                    getOptionLabel={(option) => option.label}
+                    id="controllable-states-demo"
+                    className="capitalize bg-transparent border-none"
+                    onChange={handleChange}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        name="Order By"
+                        placeholder={label}
+                        variant="standard"
+                        id="standard-basic"
+                        required
+                        className="flex items-center justify-center placeholder:text-slate-950 bg-transparent border-none"
+                      />
+                    )}
+                  />
+                </div>
+              </fieldset>
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
           {comics?.map((c) => (
             <div key={c.id} className="">
-              <div className="hover:p-1  font-mono relative group cursor-pointer">
-                <Link key={c.id} to={`/events/${c.id}`} className="py-4">
+              <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
+                <Link
+                  key={c.id}
+                  to={`/characters/${c.title}/${c.id}`}
+                  className="py-4"
+                >
                   <div
-                    className={` ${
-                      c.id === hoveredId
-                        ? "py-2 font-mono rounded-xl bg-gray-900 "
-                        : "py-2 font-mono"
-                    } `}
-                    onMouseEnter={() => handleMouseEnter(c.id)}
-                    onMouseLeave={handleMouseLeave}
+                    className={` `}
+                    // onMouseEnter={() => handleMouseEnter(c.id)}
+                    // onMouseLeave={handleMouseLeave}
                   >
-                    {c.id === hoveredId ? (
-                      <>
-                        <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className={`${Blur} w-full`}
-                          alt={"img of " + c.title}
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className={`${"rounded-xl w-full"}`}
-                          alt={"img of " + c.title}
-                        />
-                      </>
-                    )}
+                    <>
+                      <img
+                        src={c.thumbnail.path + ".jpg"}
+                        className={`${"rounded-xl w-full"}`}
+                        alt={"img of " + c.title}
+                      />
+                    </>
 
-                    {c.description ? (
-                      <div className="tooltip  text-white px-3 pb-3 pt-7 text-md opacity-0 group-hover:opacity-100 absolute bottom-0 top-0 left-1/2 mb-2 transform -translate-x-1/2 pointer-events-none transition-opacity rounded-xl flex flex-col items-start justify-start w-full h-full">
-                        <p className="line-clamp-[15] font-serif">
-                          {HTMLReactParser(c.description)}
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="tooltip p-2 text-md rounded opacity-0 group-hover:opacity-100 absolute  top-0  left-1/2 transform -translate-x-1/2 pointer-events-none transition-opacity  w-full h-full  flex flex-col items-center justify-center gap-5">
-                        <p className="font-extrabold text-xl text-center">
-                          No description provided.
-                        </p>
-                      </div>
-                    )}
                     <div className="px-2 pb-2 flex items-center justify-between">
                       <div
                         className={`uppercase  font-bold py-2 font-mono text-[#a7a4a4] "`}
@@ -231,7 +189,7 @@ const DataComics = () => {
                         {c.format}
                       </div>
                       <div className="uppercase  font-bold py-2 font-mono text-[#a7a4a4] ">
-                        ${c.prices[0].price <= 5 ? 9.99 : c.prices[0].price}
+                        ${c.prices[0].price <= 5 ? 8.35 : c.prices[0].price}
                       </div>
                     </div>
                   </div>
