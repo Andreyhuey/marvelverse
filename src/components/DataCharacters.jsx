@@ -33,9 +33,6 @@ const DataCharacters = () => {
     sessionStorage.getItem(`labelByEventCharacters${eventId}`) ||
       "Ascending Order (A-Z)"
   );
-  const [scrollPosition, setScrollPosition] = useState(
-    parseInt(sessionStorage.getItem("scrollPosition")) || 0
-  );
 
   // // To set the hovered Id once the mouse touches it
   // const [hoveredId, setHoveredId] = useState(null);
@@ -58,7 +55,8 @@ const DataCharacters = () => {
 
   //   Pagination useState(s)
   const [currentEventCharactersPage, setCurrentEventCharactersPage] = useState(
-    parseInt(sessionStorage.getItem("currentEventCharactersPage")) || 1
+    parseInt(sessionStorage.getItem(`currentEventCharactersPage${eventId}`)) ||
+      1
   );
 
   // space links with hypens
@@ -86,13 +84,12 @@ const DataCharacters = () => {
     setOffset((currentEventCharactersPage - 1) * limit);
     console.log(fetchResults);
     sessionStorage.setItem(
-      "currentEventCharactersPage",
+      `currentEventCharactersPage${eventId}`,
       currentEventCharactersPage
     );
     // Store relevant data in sessionStorage
     sessionStorage.setItem(`orderByEventCharacters${eventId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelByEventCharacters${eventId}`, label);
-    sessionStorage.setItem("scrollPosition", scrollPosition);
 
     document.title = `${title} Characters | Events | Marvel-Verse`;
   }, [
@@ -133,45 +130,46 @@ const DataCharacters = () => {
 
   const handlePageClick = (number) => {
     setCurrentEventCharactersPage(number);
-    sessionStorage.setItem(currentEventCharactersPage, number);
+    sessionStorage.setItem(`currentEventCharactersPage${eventId}`, number);
   };
 
   return (
     <div>
       <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
+        <div className="text-center text-[26px] py-6 font-[700]">
+          {title} Characters
+        </div>
+
         <div className="flex items-center justify-center">
           <p className="border rounded p-2 bg-black">
             Page {currentEventCharactersPage} of {totalPages()}
           </p>
         </div>
 
-        <div className="flex md:flex-row flex-col items-center justify-end py-4 space-x-5 space-y-10">
-          <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
-            <div className="flex items-start justify-end text-black mb-7">
-              <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
-                <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
-                  <Autocomplete
-                    disablePortal
-                    options={options}
-                    getOptionLabel={(option) => option.label}
-                    id="controllable-states-demo"
-                    className="capitalize bg-transparent border-none"
-                    onChange={handleChange}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        name="Order By"
-                        placeholder={label}
-                        variant="standard"
-                        id="standard-basic"
-                        required
-                        className="flex items-center justify-center placeholder:text-slate-950 bg-transparent border-none"
-                      />
-                    )}
-                  />
-                </div>
-              </fieldset>
-            </div>
+        <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
+          <div className="flex items-start justify-end text-black mb-7">
+            <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
+              <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
+                <Autocomplete
+                  disablePortal
+                  options={options}
+                  getOptionLabel={(option) => option.label}
+                  className="capitalize rounded-xl focus-within:none bg-transparent"
+                  onChange={handleChange}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="Order By"
+                      placeholder={label}
+                      variant="outlined"
+                      id="outlined-basic"
+                      required
+                      className="flex items-center justify-center bg-slate-600 text-white rounded-lg"
+                    />
+                  )}
+                />
+              </div>
+            </fieldset>
           </div>
         </div>
 

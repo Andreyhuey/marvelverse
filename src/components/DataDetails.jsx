@@ -5,6 +5,7 @@ import { useGetEventDetailsQuery } from "../services/eventsApi";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Loader from "./Loader";
+import ScrollManager from ".././components/ScrollManager";
 
 const DataDetails = () => {
   const location = useLocation();
@@ -29,6 +30,7 @@ const DataDetails = () => {
                 key={d.id}
                 className="flex items-center justify-center flex-col lg:flex-row gap-x-5 gap-y-8"
               >
+                <ScrollManager scrollKey={d.id} />
                 <div className="flex-1">
                   <img
                     src={d.thumbnail.path && d.thumbnail.path + ".jpg"}

@@ -6,76 +6,45 @@ import Loader from "./Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 
-import {
-  saveScrollPosition,
-  restoreScrollPosition,
-} from "./savePositionUtilits";
-
-const Data = ({ history }) => {
-  // Call restoreScrollPosition when the component mounts
-  useEffect(() => {
-    restoreScrollPosition({
-      router: { route: { location: { pathname: history.location.pathname } } },
-    });
-  }, [history.location.pathname]);
-
-  // Call saveScrollPosition when the scroll position changes
-  useEffect(() => {
-    const handleScroll = () => {
-      saveScrollPosition({
-        router: {
-          route: { location: { pathname: history.location.pathname } },
-        },
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [history.location.pathname]);
-
+const Data = () => {
   const [events, setEvents] = useState([]);
   const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
   const limit = "16";
   const [total, setTotal] = useState(0);
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderBy") || "name"
+    sessionStorage.getItem("orderByEvents") || "name"
   );
   const [label, setLabel] = useState(
-    sessionStorage.getItem("label") || "Ascending Order (A-Z)"
+    sessionStorage.getItem("labelEvents") || "Ascending Order (A-Z)"
   );
   const [loading, setLoading] = useState(true);
-  const [scrollPosition, setScrollPosition] = useState(
-    parseInt(sessionStorage.getItem("scrollPosition")) || 0
-  );
   const { data: eventsList, isFetching } = useGetEventsQuery({
     orderBy,
     offset,
     limit,
   });
 
-  const [hoveredId, setHoveredId] = useState(null);
-  const [isHovered, setIsHovered] = useState(false);
+  // const [hoveredId, setHoveredId] = useState(null);
+  // const [isHovered, setIsHovered] = useState(false);
 
-  // To set the hovered Id once the mouse touches it
-  const handleMouseEnter = (id) => {
-    setHoveredId(id);
-    setIsHovered(true);
-  };
+  // // To set the hovered Id once the mouse touches it
+  // const handleMouseEnter = (id) => {
+  //   setHoveredId(id);
+  //   setIsHovered(true);
+  // };
 
-  // The css function enacted on the ID
-  const Blur = () => {
-    if (isHovered === true)
-      return "backdrop-blur-3xl backdrop-brightness-0 blur-xl rounded-2xl";
-  };
+  // // The css function enacted on the ID
+  // const Blur = () => {
+  //   if (isHovered === true)
+  //     return "backdrop-blur-3xl backdrop-brightness-0 blur-xl rounded-2xl";
+  // };
 
-  // the mouse leaving the hover
-  const handleMouseLeave = () => {
-    setHoveredId(null);
-    setIsHovered(false);
-  };
+  // // the mouse leaving the hover
+  // const handleMouseLeave = () => {
+  //   setHoveredId(null);
+  //   setIsHovered(false);
+  // };
 
   //   Pagination useState(s)
   const [currentEventPage, setCurrentEventPage] = useState(
@@ -108,29 +77,24 @@ const Data = ({ history }) => {
     console.log(fetchResults);
     sessionStorage.setItem("currentEventPage", currentEventPage);
     // Store relevant data in sessionStorage
-    sessionStorage.setItem("orderBy", orderBy); // Store orderBy
-    sessionStorage.setItem("label", label);
-    sessionStorage.setItem("scrollPosition", scrollPosition);
+    sessionStorage.setItem("orderByEvents", orderBy); // Store orderBy
+    sessionStorage.setItem("labelEvents", label);
 
     document.title =
       "Events | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
     setLoading(false);
-  }, [eventsList, orderBy, limit, currentEventPage, scrollPosition]);
+  }, [eventsList, orderBy, limit, currentEventPage]);
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
-    const storedOrderBy = sessionStorage.getItem("orderBy");
-    const storedLabel = sessionStorage.getItem("label");
-    const storedSession = sessionStorage.getItem("scrollPosition");
+    const storedOrderBy = sessionStorage.getItem("orderByEvents");
+    const storedLabel = sessionStorage.getItem("labelEvents");
 
     if (storedOrderBy) {
       setOrderBy(storedOrderBy);
     }
     if (storedLabel) {
       setLabel(storedLabel);
-    }
-    if (storedSession) {
-      setScrollPosition(storedSession);
     }
   }, []);
 
@@ -163,10 +127,6 @@ const Data = ({ history }) => {
         </div> */}
 
           <div className="flex items-start justify-between py-4">
-            <div className="flex flex-col gap-4 font-serif">
-              <p>Total Events Found: {total}</p>
-              <p>Total Rendered : {count}</p>
-            </div>
             <div className="border rounded p-2 bg-black">
               <p>
                 Page {currentEventPage} of {totalPages()}
@@ -180,14 +140,14 @@ const Data = ({ history }) => {
                 >
                   Order By
                 </label>
-                <div className=" w-[225px] h-auto mt-1 rounded-lg">
+                <div className=" w-[225px] h-auto mt-1 rounded-lg bg-slate-600">
                   <Autocomplete
                     disablePortal
-                    id="grading-system"
+                    id=""
                     options={options}
                     // getOptionValue={(option) => option.value}
                     getOptionLabel={(option) => option.label}
-                    className="uppercase rounded-lg focus:outline-none bg-slate-400"
+                    className="rounded-lg focus:outline-none "
                     onChange={handleChange}
                     renderInput={(params) => (
                       <TextField
@@ -195,7 +155,7 @@ const Data = ({ history }) => {
                         name="Order By"
                         placeholder={label}
                         required
-                        className="flex items-center justify-center placeholder:text-slate-950"
+                        className="flex items-center justify-center  text-white"
                       />
                     )}
                   />
@@ -208,44 +168,20 @@ const Data = ({ history }) => {
             {events?.map((c) => (
               <div
                 key={c.id}
-                onMouseEnter={() => handleMouseEnter(c.id)}
-                onMouseLeave={handleMouseLeave}
-                className={` ${
-                  c.id === hoveredId
-                    ? "py-2 font-mono rounded-xl bg-gray-900 "
-                    : "py-2 font-mono"
-                } hover:p-1  font-mono relative group cursor-pointer`}
+                // onMouseEnter={() => handleMouseEnter(c.id)}
+                // onMouseLeave={handleMouseLeave}
+                className={` 
+                 transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2`}
               >
                 <Link key={c.id} to={`/events/${c.id}/${c.title}`}>
                   <div className={`  `}>
-                    {c.id === hoveredId ? (
-                      <>
-                        <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className={`${Blur}`}
-                          alt={"img of " + c.title}
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className={`${"rounded-xl "}  `}
-                          alt={"img of " + c.title}
-                        />
-                      </>
-                    )}
-                    {c.description ? (
-                      <div className="tooltip  text-white px-3 pb-3 pt-7 text-md opacity-0 bg-transparent group-hover:opacity-100 absolute bottom-0 top-0 left-1/2 mb-2 transform -translate-x-1/2 pointer-events-none transition-opacity rounded-xl flex flex-col items-start justify-start w-full h-full bright">
-                        <p className="line-clamp-[9] font-mono">
-                          {HTMLReactParser(c.description)}
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="tooltip bg-black text-white px-2 py-1 text-md rounded opacity-0 group-hover:opacity-100 absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none transition-opacity duration-300 w-full text-center">
-                        "Sorry 😢, No description provided."
-                      </div>
-                    )}
+                    <>
+                      <img
+                        src={c.thumbnail.path + ".jpg"}
+                        className={`${"rounded-xl "}  `}
+                        alt={"img of " + c.title}
+                      />
+                    </>
                   </div>
                   <div className="px-2 pb-2">
                     <div className="font-mono font-bold text-[#a7a4a4] py-2">

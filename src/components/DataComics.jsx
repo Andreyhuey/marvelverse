@@ -8,16 +8,16 @@ import { Autocomplete, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const DataComics = () => {
-  const location = useLocation();
   const { eventId, title } = useParams();
   // Determine the route-specific data to use
 
   // Use the route-specific data for state initialization
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderByEventComics") || "title"
+    sessionStorage.getItem(`orderByEventComics${eventId}`) || "title"
   );
   const [label, setLabel] = useState(
-    sessionStorage.getItem("labelByEventComics") || "Ascending Order (A-Z)"
+    sessionStorage.getItem(`labelByEventComics${eventId}`) ||
+      "Ascending Order (A-Z)"
   );
   const limit = "12";
   const [count, setCount] = useState("");
@@ -53,7 +53,7 @@ const DataComics = () => {
 
   //   Pagination useState(s)
   const [currentEventComicsPage, setCurrentEventComicsPage] = useState(
-    parseInt(sessionStorage.getItem("currentEventComicsPage")) || 1
+    parseInt(sessionStorage.getItem(`currentEventComicsPage${eventId}`)) || 1
   );
 
   // handleChange for the Order
@@ -74,9 +74,12 @@ const DataComics = () => {
     console.log(fetchResults);
 
     // Store relevant data in sessionStorage
-    sessionStorage.setItem("currentEventComicsPage", currentEventComicsPage);
-    sessionStorage.setItem("orderByEventComics", orderBy); // Store orderBy
-    sessionStorage.setItem("labelByEventComics", label);
+    sessionStorage.setItem(
+      `currentEventComicsPage${eventId}`,
+      currentEventComicsPage
+    );
+    sessionStorage.setItem(`orderByEventComics${eventId}`, orderBy); // Store orderBy
+    sessionStorage.setItem(`labelByEventComics${eventId}`, label);
 
     document.title = `${title} Comics | Events | Marvel-Verse `;
   }, [comicsList, orderBy, label, limit, currentEventComicsPage]);
@@ -96,8 +99,10 @@ const DataComics = () => {
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
-    const storedOrderBy = sessionStorage.getItem("orderByEventComics");
-    const storedLabel = sessionStorage.getItem("labelByEventComics");
+    const storedOrderBy = sessionStorage.getItem(
+      `orderByEventComics${eventId}`
+    );
+    const storedLabel = sessionStorage.getItem(`labelByEventComics${eventId}`);
 
     if (storedOrderBy) {
       setOrderBy(storedOrderBy);
@@ -118,59 +123,59 @@ const DataComics = () => {
 
   const handlePageClick = (number) => {
     setCurrentEventComicsPage(number);
-    sessionStorage.setItem(currentEventComicsPage, number);
+    sessionStorage.setItem(`currentEventComicsPage${eventId}`, number);
   };
 
   return (
     <div>
       <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
+        <div className="text-center text-[26px] py-6 font-[700]">
+          {title} Comics
+        </div>
+
         <div className="flex items-center justify-center">
           <p className="border rounded p-2 bg-black">
             Page {currentEventComicsPage} of {totalPages()}
           </p>
         </div>
 
-        <div className="flex md:flex-row flex-col items-center justify-end py-4 space-x-5 space-y-10">
-          <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
-            <div className="flex items-start justify-end text-black mb-7">
-              <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
-                <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
-                  <Autocomplete
-                    disablePortal
-                    options={options}
-                    getOptionLabel={(option) => option.label}
-                    id="controllable-states-demo"
-                    className="capitalize bg-transparent border-none"
-                    onChange={handleChange}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        name="Order By"
-                        placeholder={label}
-                        variant="standard"
-                        id="standard-basic"
-                        required
-                        className="flex items-center justify-center placeholder:text-slate-950 bg-transparent border-none"
-                      />
-                    )}
-                  />
-                </div>
-              </fieldset>
-            </div>
+        <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
+          <div className="flex items-start justify-end text-black mb-7">
+            <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
+              <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
+                <Autocomplete
+                  disablePortal
+                  options={options}
+                  getOptionLabel={(option) => option.label}
+                  className="capitalize rounded-xl focus-within:none bg-transparent"
+                  onChange={handleChange}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="Order By"
+                      placeholder={label}
+                      variant="outlined"
+                      id="outlined-basic"
+                      required
+                      className="flex items-center justify-center bg-slate-600 text-white rounded-lg"
+                    />
+                  )}
+                />
+              </div>
+            </fieldset>
           </div>
         </div>
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
           {comics?.map((c) => (
             <div key={c.id} className="">
               <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
                 <Link
                   key={c.id}
-                  to={`/characters/${c.title}/${c.id}`}
+                  // to={`/characters/${c.title}/${c.id}`}
                   className="py-4"
                 >
                   <div
-                    className={` `}
+                    className={` relative`}
                     // onMouseEnter={() => handleMouseEnter(c.id)}
                     // onMouseLeave={handleMouseLeave}
                   >
@@ -182,15 +187,15 @@ const DataComics = () => {
                       />
                     </>
 
-                    <div className="px-2 pb-2 flex items-center justify-between">
-                      <div
-                        className={`uppercase  font-bold py-2 font-mono text-[#a7a4a4] "`}
-                      >
-                        {c.format}
-                      </div>
-                      <div className="uppercase  font-bold py-2 font-mono text-[#a7a4a4] ">
-                        ${c.prices[0].price <= 5 ? 8.35 : c.prices[0].price}
-                      </div>
+                    <div className="uppercase  font-bold p-2 font-mono text-white absolute bottom-0 right-0 bg-red-500 rounded-br-xl rounded-tl-md">
+                      ${c.prices[0].price <= 5 ? 8.35 : c.prices[0].price}
+                    </div>
+                  </div>
+                  <div className="px-2 pb-2 flex items-center justify-center">
+                    <div
+                      className={`uppercase  font-bold py-2 font-mono text-[#a7a4a4] text-center"`}
+                    >
+                      {c.title}
                     </div>
                   </div>
                 </Link>
@@ -198,7 +203,6 @@ const DataComics = () => {
             </div>
           ))}
         </div>
-
         {/* Pagination example */}
         <div className="flex justify-center overflow-auto mt-4 py-12">
           <nav aria-label="Page navigation example ">
