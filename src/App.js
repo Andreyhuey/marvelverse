@@ -68,6 +68,11 @@ const App = () => {
           <Route exact path="/events/:eventId/:title/series">
             <EventSeries />
           </Route>
+
+          {/* Comics */}
+          <Route exact path="/comics/:comicId/:title">
+            <ComicDetails />
+          </Route>
         </Switch>
       </div>
     </div>

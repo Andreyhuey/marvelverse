@@ -5,7 +5,6 @@ import { useGetEventDetailsQuery } from "../services/eventsApi";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Loader from "./Loader";
-import ScrollManager from ".././components/ScrollManager";
 
 const DataDetails = () => {
   const { eventId, title } = useParams();

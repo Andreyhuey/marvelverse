@@ -15,6 +15,10 @@ import EventsCharacters from "./EventsCharacters";
 import EventComics from "./EventComics";
 import EventCreators from "./EventCreators";
 
+// Comics
+
+import ComicDetails from "./Comics/ComicDetails";
+
 export {
   Homepage,
   //
@@ -28,4 +32,6 @@ export {
   EventsCharacters,
   EventComics,
   EventCreators,
+  //
+  ComicDetails,
 };

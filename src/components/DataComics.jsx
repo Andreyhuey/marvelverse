@@ -243,14 +243,10 @@ const DataComics = () => {
               <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
                 <Link
                   key={c.id}
-                  // to={`/characters/${c.title}/${c.id}`}
+                  to={`/comics/${c.id}/${c.title}`}
                   className="py-4"
                 >
-                  <div
-                    className={` relative`}
-                    // onMouseEnter={() => handleMouseEnter(c.id)}
-                    // onMouseLeave={handleMouseLeave}
-                  >
+                  <div className={` relative`}>
                     <>
                       <img
                         src={c.thumbnail.path + ".jpg"}
