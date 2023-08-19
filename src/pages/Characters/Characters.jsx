@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGetCharactersQuery } from "../../services/charactersApi";
-import HTMLReactParser from "html-react-parser";
 import Loader from "../../components/Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";

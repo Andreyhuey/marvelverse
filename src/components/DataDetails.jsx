@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HTMLReactParser from "html-react-parser";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetEventDetailsQuery } from "../services/eventsApi";
 import { Link } from "react-router-dom";
 import moment from "moment";
