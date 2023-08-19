@@ -221,38 +221,34 @@ const Characters = () => {
 
         <div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
-            {characters ? (
-              characters?.map((c) => (
-                <div key={c.id}>
-                  <ScrollPositionManager scrollKey={c.id} />
-                  <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
-                    <Link
-                      key={c.id}
-                      to={`/characters/${c.id}/${c.name}`}
-                      className="py-4"
-                    >
-                      <div className={`  `}>
-                        <>
-                          <img
-                            src={c.thumbnail.path + ".jpg"}
-                            className={`${"rounded-xl"}`}
-                            alt={"img of " + c.name}
-                          />
-                        </>
+            {characters?.map((c) => (
+              <div key={c.id}>
+                <ScrollPositionManager scrollKey={c.id} />
+                <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
+                  <Link
+                    key={c.id}
+                    to={`/characters/${c.id}/${c.name}`}
+                    className="py-4"
+                  >
+                    <div className={`  `}>
+                      <>
+                        <img
+                          src={c.thumbnail.path + ".jpg"}
+                          className={`${"rounded-xl"}`}
+                          alt={"img of " + c.name}
+                        />
+                      </>
 
-                        <div className="px-2 pb-2">
-                          <div className={`uppercase  font-bold py-2  "`}>
-                            {c.name}
-                          </div>
+                      <div className="px-2 pb-2">
+                        <div className={`uppercase  font-bold py-2  "`}>
+                          {c.name}
                         </div>
                       </div>
-                    </Link>
-                  </div>
+                    </div>
+                  </Link>
                 </div>
-              ))
-            ) : (
-              <div className="h-[90vh]"></div>
-            )}
+              </div>
+            ))}
           </div>
 
           {/* Pagination example */}

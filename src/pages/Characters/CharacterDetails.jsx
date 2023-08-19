@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useGetCharacterDetailsQuery } from "../../services/charactersApi";
 import { Link } from "react-router-dom";
 import moment from "moment";
-
+import { Helmet } from "react-helmet";
 import Loader from "../../components/Loader";
 import ScrollPositionManager from "../../components/ScrollManager";
 
@@ -14,7 +14,7 @@ const CharacterDetails = () => {
 
   const characterDetails = data?.data?.results;
 
-  document.name = `${name} | Characters | Marvel-Verse`;
+  const NewTitle = `${name} | Characters | Marvel-Verse`;
 
   if (isFetching) return <Loader />;
 
@@ -23,6 +23,9 @@ const CharacterDetails = () => {
   return (
     <div>
       <>
+        <Helmet>
+          <title>{NewTitle}</title>
+        </Helmet>
         <div className="bg-gray-950 px-4 md:px-8 lg:px-20 py-10 text-white">
           <div>
             {characterDetails?.map((d) => {
