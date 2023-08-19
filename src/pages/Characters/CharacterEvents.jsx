@@ -247,7 +247,7 @@ const CharacterEvents = () => {
                 
                 transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2`}
             >
-              <ScrollPositionManager scrollKey={`${c.id + c.title}`} />
+              <ScrollPositionManager scrollKey={`${c.id + c.description}`} />
 
               <Link key={c.id} to={`/events/${c.id}/${c.title}`}>
                 <div className={`  `}>

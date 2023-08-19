@@ -13,7 +13,10 @@ const DataDetails = () => {
 
   const eventDetails = data?.data?.results;
 
-  document.title = `${title} | Events | Marvel-Verse`;
+  useEffect(() => {
+    document.body.scrollTop = 0;
+    document.title = `${title} | Events | Marvel-Verse`;
+  }, [document]);
 
   if (isFetching) return <Loader />;
 
@@ -29,7 +32,6 @@ const DataDetails = () => {
                 key={d.id}
                 className="flex items-center justify-center flex-col lg:flex-row gap-x-5 gap-y-8"
               >
-                <ScrollManager scrollKey={`${d.id + d.title}`} />
                 <div className="flex-1">
                   <img
                     src={d.thumbnail.path && d.thumbnail.path + ".jpg"}
