@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { eventsApi } from "../services/eventsApi";
 import { charactersApi } from "../services/charactersApi";
+import { comicsApi } from "../services/comicsApi";
 
 export default configureStore({
   reducer: {
@@ -11,5 +12,9 @@ export default configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(eventsApi.middleware, charactersApi.middleware),
+    }).concat(
+      eventsApi.middleware,
+      charactersApi.middleware,
+      comicsApi.middleware
+    ),
 });
