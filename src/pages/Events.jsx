@@ -26,8 +26,8 @@ const Events = () => {
     limit,
   });
 
-  const [hoveredId, setHoveredId] = useState(null);
-  const [isHovered, setIsHovered] = useState(false);
+  // const [hoveredId, setHoveredId] = useState(null);
+  // const [isHovered, setIsHovered] = useState(false);
 
   // // To set the hovered Id once the mouse touches it
   // const handleMouseEnter = (id) => {

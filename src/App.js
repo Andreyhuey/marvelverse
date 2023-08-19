@@ -31,15 +31,15 @@ const App = () => {
             <Characters />
           </Route>
           {/* CharacterDetails */}
-          <Route exact path="/characters/:characterId/:title">
+          <Route exact path="/characters/:characterId/:name">
             <CharacterDetails />
           </Route>
           {/* Character Comics */}
-          <Route exact path="/characters/:characterId/:title/comics">
+          <Route exact path="/characters/:characterId/:name/comics">
             <CharacterComics />
           </Route>
           {/* Character Comics */}
-          <Route exact path="/characters/:characterId/:title/events">
+          <Route exact path="/characters/:characterId/:name/events">
             <CharacterEvents />
           </Route>
 
