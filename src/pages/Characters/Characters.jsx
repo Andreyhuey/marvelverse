@@ -219,68 +219,64 @@ const Characters = () => {
           </div>
         </div>
 
-        <div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
-            {characters?.map((c) => (
-              <div key={c.id}>
-                <ScrollPositionManager scrollKey={c.id} />
-                <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
-                  <Link
-                    key={c.id}
-                    to={`/characters/${c.id}/${c.name}`}
-                    className="py-4"
-                  >
-                    <div className={`  `}>
-                      <>
-                        <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className={`${"rounded-xl"}`}
-                          alt={"img of " + c.name}
-                        />
-                      </>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
+          {characters?.map((c) => (
+            <div key={c.id}>
+              <ScrollPositionManager scrollKey={window.location.href} />
+              <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
+                <Link
+                  key={c.id}
+                  to={`/characters/${c.id}/${c.name}`}
+                  className="py-4"
+                >
+                  <div className={`  `}>
+                    <>
+                      <img
+                        src={c.thumbnail.path + ".jpg"}
+                        className={`${"rounded-xl"}`}
+                        alt={"img of " + c.name}
+                      />
+                    </>
 
-                      <div className="px-2 pb-2">
-                        <div className={`uppercase  font-bold py-2  "`}>
-                          {c.name}
-                        </div>
+                    <div className="px-2 pb-2">
+                      <div className={`uppercase  font-bold py-2  "`}>
+                        {c.name}
                       </div>
                     </div>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </div>
-            ))}
-          </div>
-
-          {/* Pagination example */}
-
-          <div className="flex justify-center  mt-4 py-12 max-w-full">
-            <nav aria-label="Page navigation example">
-              <ul className="inline-flex -space-x-px text-md">
-                <li>
-                  <button
-                    className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                    onClick={() => handlePageClick(currentCharacterPage - 1)}
-                    disabled={currentCharacterPage === 1}
-                  >
-                    Prev
-                  </button>
-                </li>
-                {renderSmartPagination()}
-                <li>
-                  <button
-                    className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                    onClick={() => handlePageClick(currentCharacterPage + 1)}
-                    disabled={currentCharacterPage === totalPages()}
-                  >
-                    Next
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </div>
+            </div>
+          ))}
         </div>
 
-        {/* If there is no data  */}
+        {/* Pagination example */}
+
+        <div className="flex justify-center  mt-4 py-12 max-w-full">
+          <nav aria-label="Page navigation example">
+            <ul className="inline-flex -space-x-px text-md">
+              <li>
+                <button
+                  className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => handlePageClick(currentCharacterPage - 1)}
+                  disabled={currentCharacterPage === 1}
+                >
+                  Prev
+                </button>
+              </li>
+              {renderSmartPagination()}
+              <li>
+                <button
+                  className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => handlePageClick(currentCharacterPage + 1)}
+                  disabled={currentCharacterPage === totalPages()}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   );

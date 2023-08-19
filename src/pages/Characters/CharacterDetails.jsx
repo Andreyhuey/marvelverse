@@ -25,6 +25,7 @@ const CharacterDetails = () => {
       <>
         <Helmet>
           <title>{NewTitle}</title>
+          <meta property="og:title" content={NewTitle} />
         </Helmet>
         <div className="bg-gray-950 px-4 md:px-8 lg:px-20 py-10 text-white">
           <div>
@@ -34,7 +35,7 @@ const CharacterDetails = () => {
                   key={d.id}
                   className="flex items-center justify-center flex-col lg:flex-row gap-x-5 gap-y-8"
                 >
-                  <ScrollPositionManager scrollKey={d.id} />
+                  <ScrollPositionManager scrollKey={window.location.href} />
                   <div className="flex-1">
                     <img
                       src={d.thumbnail.path && d.thumbnail.path + ".jpg"}
