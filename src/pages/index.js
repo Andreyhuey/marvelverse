@@ -9,7 +9,7 @@ import CharacterEvents from "./Characters/CharacterEvents";
 
 // Events
 import Events from "./Events";
-import EventsOrder from "./EventsOrder";
+
 import EventDetails from "./EventDetails";
 import EventsCharacters from "./EventsCharacters";
 import EventComics from "./EventComics";
@@ -24,7 +24,6 @@ export {
   CharacterEvents,
   //
   Events,
-  EventsOrder,
   EventDetails,
   EventsCharacters,
   EventComics,
