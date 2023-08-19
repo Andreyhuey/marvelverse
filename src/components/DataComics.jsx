@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory, useLocation } from "react-router-dom";
-import HTMLReactParser from "html-react-parser";
+import { useParams, Link } from "react-router-dom";
 import { useGetEventComicsQuery } from "../services/eventsApi";
 import Loader from "./Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
 
 const DataComics = () => {
   const { eventId, title } = useParams();
-  // Determine the route-specific data to use
-
-  // Use the route-specific data for state initialization
   const [orderBy, setOrderBy] = useState(
     sessionStorage.getItem(`orderByEventComics${eventId}`) || "title"
   );
@@ -31,25 +26,6 @@ const DataComics = () => {
   });
   const [comics, setComics] = useState([]);
   const [total, setTotal] = useState(0);
-
-  // const [hoveredId, setHoveredId] = useState(null);
-  // const [isHovered, setIsHovered] = useState(false);
-
-  // handle the mouse movement
-
-  // const handleMouseEnter = (id) => {
-  //   setHoveredId(id);
-  //   setIsHovered(true);
-  // };
-
-  // const Blur = () => {
-  //   if (isHovered === true) return "backdrop-blur-xl blur-3xl rounded-xl";
-  // };
-
-  // const handleMouseLeave = () => {
-  //   setHoveredId(null);
-  //   setIsHovered(false);
-  // };
 
   //   Pagination useState(s)
   const [currentEventComicsPage, setCurrentEventComicsPage] = useState(
@@ -82,7 +58,15 @@ const DataComics = () => {
     sessionStorage.setItem(`labelByEventComics${eventId}`, label);
 
     document.title = `${title} Comics | Events | Marvel-Verse `;
-  }, [comicsList, orderBy, label, limit, currentEventComicsPage]);
+  }, [
+    comicsList,
+    orderBy,
+    label,
+    limit,
+    currentEventComicsPage,
+    title,
+    eventId,
+  ]);
 
   const options = [
     { label: "Ascending Order (A-Z)", value: "title" },
@@ -203,6 +187,7 @@ const DataComics = () => {
             </div>
           ))}
         </div>
+
         {/* Pagination example */}
         <div className="flex justify-center overflow-auto mt-4 py-12">
           <nav aria-label="Page navigation example ">
