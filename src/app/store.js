@@ -8,6 +8,7 @@ export default configureStore({
   reducer: {
     [eventsApi.reducerPath]: eventsApi.reducer,
     [charactersApi.reducerPath]: charactersApi.reducer,
+    [comicsApi.reducerPath]: comicsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

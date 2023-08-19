@@ -4,6 +4,7 @@ import { useGetEventComicsQuery } from "../services/eventsApi";
 import Loader from "./Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
+import ScrollPositionManager from "./ScrollManager";
 
 const DataComics = () => {
   const { eventId, title } = useParams();
@@ -240,6 +241,7 @@ const DataComics = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
           {comics?.map((c) => (
             <div key={c.id} className="">
+              <ScrollPositionManager scrollKey={`${c.id + c.digitalId}`} />
               <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
                 <Link
                   key={c.id}

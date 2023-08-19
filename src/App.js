@@ -14,6 +14,8 @@ import {
   EventsCharacters,
   EventComics,
   EventCreators,
+  //
+  ComicDetails,
 } from "./pages";
 import EventSeries from "./pages/EventSeries";
 

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useGetComicDetailsQuery } from "../../services/comicsApi";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import Loader from "./Loader";
+import Loader from "../../components/Loader";
 
 const ComicDetails = () => {
   const { comicId, title } = useParams();
@@ -14,11 +14,13 @@ const ComicDetails = () => {
 
   console.log(comicDetails);
 
+  if (isFetching) return <Loader />;
+
   return (
     <>
       <div className="bg-gray-950 px-4 md:px-8 lg:px-20 py-10 text-white">
         <div>
-          {eventDetails?.map((d) => {
+          {comicDetails?.map((d) => {
             return (
               <div
                 key={d.id}
@@ -38,11 +40,17 @@ const ComicDetails = () => {
                       {d.title}
                     </h5>
                     <p className="font-semibold text-slate-300 font-mono">
-                      {moment(d.end).format("YYYY")}
+                      {moment(d.modified).format("YYYY")}
                     </p>
-                    <p className="font-serif">
-                      {HTMLReactParser(d.description)}
-                    </p>
+                    <div className="font-serif">
+                      {d.description ? (
+                        HTMLReactParser(d.description)
+                      ) : (
+                        <p className="text-center">
+                          Sorry no description provided
+                        </p>
+                      )}
+                    </div>
                   </div>
 
                   <div className="items-center justify-center flex">
