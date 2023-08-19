@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGetEventsQuery } from "../services/eventsApi";
-import HTMLReactParser from "html-react-parser";
 import Loader from "../components/Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
@@ -25,27 +24,6 @@ const Events = () => {
     offset,
     limit,
   });
-
-  // const [hoveredId, setHoveredId] = useState(null);
-  // const [isHovered, setIsHovered] = useState(false);
-
-  // // To set the hovered Id once the mouse touches it
-  // const handleMouseEnter = (id) => {
-  //   setHoveredId(id);
-  //   setIsHovered(true);
-  // };
-
-  // // the mouse leaving the hover
-  // const handleMouseLeave = () => {
-  //   setHoveredId(null);
-  //   setIsHovered(false);
-  // };
-
-  // The css function enacted on the ID
-  // const Blur = () => {
-  //   if (isHovered === true)
-  //     return "backdrop-blur-3xl backdrop-brightness-0 blur-xl rounded-2xl";
-  // };
 
   //   Pagination useState(s)
   const [currentEventPage, setCurrentEventPage] = useState(

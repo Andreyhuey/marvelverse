@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
-import HTMLReactParser from "html-react-parser";
+import { useParams, Link } from "react-router-dom";
 import { useGetEventCharactersQuery } from "../services/eventsApi";
 import Loader from "./Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
+import ScrollPositionManager from "../components/ScrollManager";
 
 const DataCharacters = () => {
   const { eventId, title } = useParams();
@@ -34,32 +34,11 @@ const DataCharacters = () => {
       "Ascending Order (A-Z)"
   );
 
-  // // To set the hovered Id once the mouse touches it
-  // const [hoveredId, setHoveredId] = useState(null);
-  // const [isHovered, setIsHovered] = useState(false);
-
-  // const handleMouseEnter = (id) => {
-  //   setHoveredId(id);
-  //   setIsHovered(true);
-  // };
-
-  // const Blur = () => {
-  //   if (isHovered === true) return "backdrop-blur-xl blur-3xl rounded-xl";
-  // };
-
-  // // the mouse leaving the hover
-  // const handleMouseLeave = () => {
-  //   setHoveredId(null);
-  //   setIsHovered(false);
-  // };
-
   //   Pagination useState(s)
   const [currentEventCharactersPage, setCurrentEventCharactersPage] = useState(
     parseInt(sessionStorage.getItem(`currentEventCharactersPage${eventId}`)) ||
       1
   );
-
-  // space links with hypens
 
   const handleChange = (event, newValue) => {
     setOrderBy(newValue?.value);
@@ -178,29 +157,33 @@ const DataCharacters = () => {
             {characters ? (
               characters?.map((c) => (
                 <div key={c.id}>
+                  <ScrollPositionManager scrollKey={c.id} />
                   <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
-                    {/* <Link key={c.id} to={`/events/${c.id}`} className="py-4"> */}
-                    <div
-                      className={`  `}
-                      // onMouseEnter={() => handleMouseEnter(c.id)}
-                      // onMouseLeave={handleMouseLeave}
+                    <Link
+                      key={c.id}
+                      to={`/characters/${c.id}/${c.name}`}
+                      className="py-4"
                     >
-                      <>
-                        <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className={`${"rounded-xl"}`}
-                          alt={"img of " + c.name}
-                        />
-                      </>
+                      <div
+                        className={`  `}
+                        // onMouseEnter={() => handleMouseEnter(c.id)}
+                        // onMouseLeave={handleMouseLeave}
+                      >
+                        <>
+                          <img
+                            src={c.thumbnail.path + ".jpg"}
+                            className={`${"rounded-xl"}`}
+                            alt={"img of " + c.name}
+                          />
+                        </>
 
-                      <div className="px-2 pb-2">
-                        <div className={`uppercase  font-bold py-2  "`}>
-                          {c.name}
+                        <div className="px-2 pb-2">
+                          <div className={`uppercase  font-bold py-2  "`}>
+                            {c.name}
+                          </div>
                         </div>
                       </div>
-                    </div>
-
-                    {/* </Link> */}
+                    </Link>
                   </div>
                 </div>
               ))

@@ -11,9 +11,5 @@ export default configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(eventsApi.middleware),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }).concat(charactersApi.middleware),
+    }).concat(eventsApi.middleware, charactersApi.middleware),
 });
