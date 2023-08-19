@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+<!-- Scroll Position handled thanks to the link below -->
+
+gist [scroll position gist](https://gist.github.com/jeffijoe/510f6823ef809e3711ed307823b48c0a)
+
 ### `npm start`
 
 Runs the app in the development mode.\

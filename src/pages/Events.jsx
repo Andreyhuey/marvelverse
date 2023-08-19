@@ -191,7 +191,7 @@ const Events = () => {
                   onClick={() => handlePageClick(currentEventPage - 1)}
                   disabled={currentEventPage === 1}
                 >
-                  Previous
+                  Prev
                 </button>
               </li>
               {Array.from({ length: totalPages() }, (_, i) => i + 1).map(

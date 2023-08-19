@@ -2,9 +2,15 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import {
   Homepage,
+
+  //
+  Characters,
+  CharacterDetails,
+  CharacterComics,
+  CharacterEvents,
+  //
   Events,
   EventDetails,
-  // EventsOrder,
   EventsCharacters,
   EventComics,
   EventCreators,
@@ -18,6 +24,23 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <Homepage />
+          </Route>
+
+          {/* Characters */}
+          <Route exact path="/characters">
+            <Characters />
+          </Route>
+          {/* CharacterDetails */}
+          <Route exact path="/characters/:characterId/:title">
+            <CharacterDetails />
+          </Route>
+          {/* Character Comics */}
+          <Route exact path="/characters/:characterId/:title/comics">
+            <CharacterComics />
+          </Route>
+          {/* Character Comics */}
+          <Route exact path="/characters/:characterId/:title/events">
+            <CharacterEvents />
           </Route>
 
           {/* #Marvel Events Routes */}

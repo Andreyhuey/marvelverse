@@ -8,7 +8,6 @@ import Loader from "./Loader";
 import ScrollManager from ".././components/ScrollManager";
 
 const DataDetails = () => {
-  const location = useLocation();
   const { eventId, title } = useParams();
   const { data, isFetching } = useGetEventDetailsQuery(eventId);
 

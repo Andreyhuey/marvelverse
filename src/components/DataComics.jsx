@@ -213,7 +213,7 @@ const DataComics = () => {
                   onClick={() => handlePageClick(currentEventComicsPage - 1)}
                   disabled={currentEventComicsPage === 1}
                 >
-                  Previous
+                  Prev
                 </button>
               </li>
               {Array.from({ length: totalPages() }, (_, i) => i + 1).map(
