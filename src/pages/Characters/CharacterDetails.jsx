@@ -35,7 +35,7 @@ const CharacterDetails = () => {
                   key={d.id}
                   className="flex items-center justify-center flex-col lg:flex-row gap-x-5 gap-y-8"
                 >
-                  <ScrollPositionManager scrollKey={window.location.href} />
+                  <ScrollPositionManager scrollKey={`${d.id + d.name}`} />
                   <div className="flex-1">
                     <img
                       src={d.thumbnail.path && d.thumbnail.path + ".jpg"}

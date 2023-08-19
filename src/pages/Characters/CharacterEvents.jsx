@@ -243,13 +243,11 @@ const CharacterEvents = () => {
           {events?.map((c) => (
             <div
               key={c.id}
-              // onMouseEnter={() => handleMouseEnter(c.id)}
-              // onMouseLeave={handleMouseLeave}
               className={` 
                 
                 transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2`}
             >
-              <ScrollPositionManager scrollKey={c.id} />
+              <ScrollPositionManager scrollKey={`${c.id + c.title}`} />
 
               <Link key={c.id} to={`/events/${c.id}/${c.title}`}>
                 <div className={`  `}>

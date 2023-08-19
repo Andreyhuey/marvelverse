@@ -243,7 +243,7 @@ const DataCharacters = () => {
           {characters ? (
             characters?.map((c) => (
               <div key={c.id}>
-                <ScrollPositionManager scrollKey={c.id} />
+                <ScrollPositionManager scrollKey={`${c.id + c.name}`} />
                 <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
                   <Link
                     key={c.id}
