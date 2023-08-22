@@ -187,9 +187,7 @@ const Comics = () => {
   return (
     <div>
       <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
-        <div className="text-center text-[26px] py-6 font-[700]">
-          Marvel Comics
-        </div>
+        <div className="text-center text-[26px] py-6 font-[700]">Comics</div>
 
         <div className="flex items-center justify-center">
           <p className="border rounded p-2 bg-black font-mono">

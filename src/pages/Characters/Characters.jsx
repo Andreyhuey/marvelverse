@@ -184,7 +184,7 @@ const Characters = () => {
     <div>
       <div className="bg-gray-950 text-white py-10 px-2 md:px-8 lg:px-20">
         <div className="text-center text-[26px] py-6 font-[700]">
-          Marvel Characters
+          Characters
         </div>
 
         <div className="flex items-center justify-center">

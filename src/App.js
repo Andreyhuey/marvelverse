@@ -25,7 +25,7 @@ const App = () => {
   return (
     <div className="">
       <Navbar />
-      <div className="pt-20">
+      <div className="md:pt-20 pt-12">
         <Switch>
           <Route exact path="/">
             <Homepage />
