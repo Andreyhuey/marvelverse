@@ -15,11 +15,10 @@ import {
   EventDetails,
   EventsCharacters,
   EventComics,
-  EventCreators,
 
   //
 } from "./pages";
-import EventSeries from "./pages/EventSeries";
+
 import { Footer, Navbar } from "./components";
 
 const App = () => {
@@ -68,12 +67,6 @@ const App = () => {
             <EventComics />
           </Route>
           {/* Event Details */}
-          <Route exact path="/events/:eventId/:title/creators">
-            <EventCreators />
-          </Route>
-          <Route exact path="/events/:eventId/:title/series">
-            <EventSeries />
-          </Route>
 
           {/* Comics */}
           <Route exact path="/comics">

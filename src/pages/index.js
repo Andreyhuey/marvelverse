@@ -8,12 +8,10 @@ import CharacterComics from "./Characters/CharacterComics";
 import CharacterEvents from "./Characters/CharacterEvents";
 
 // Events
-import Events from "./Events";
-
-import EventDetails from "./EventDetails";
-import EventsCharacters from "./EventsCharacters";
-import EventComics from "./EventComics";
-import EventCreators from "./EventCreators";
+import Events from "./Events/Events";
+import EventDetails from "./Events/EventDetails";
+import EventsCharacters from "./Events/EventsCharacters";
+import EventComics from "./Events/EventComics";
 
 // Comics
 import Comics from "./Comics/Comics";
@@ -31,7 +29,6 @@ export {
   EventDetails,
   EventsCharacters,
   EventComics,
-  EventCreators,
   //
   Comics,
   ComicDetails,

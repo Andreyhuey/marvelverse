@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useGetEventsQuery } from "../services/eventsApi";
-import Loader from "../components/Loader";
+import { useGetEventsQuery } from "../../services/eventsApi";
+import Loader from "../../components/Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
-import ScrollPositionManager from ".././components/ScrollManager";
+import ScrollPositionManager from "../../components/ScrollManager";
 
 const Events = () => {
   const [events, setEvents] = useState([]);

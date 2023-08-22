@@ -1,92 +1,92 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useGetEventCharactersQuery } from "../services/eventsApi";
-import Loader from "./Loader";
+import { useGetEventComicsQuery } from "../../services/eventsApi";
 import { Autocomplete, TextField } from "@mui/material";
-import ScrollPositionManager from "../components/ScrollManager";
+import ScrollPositionManager from "../../components/ScrollManager";
+import { Loader } from "../../components";
 
-const DataCharacters = () => {
+const EventComics = () => {
   const { eventId, title } = useParams();
-  const [offset, setOffset] = useState(0);
-  const limit = "20";
-
-  // Use the route-specific data for state initialization
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem(`orderByEventCharacters${eventId}`) || "name"
+    sessionStorage.getItem(`orderByEventComics${eventId}`) || "title"
   );
+  const [label, setLabel] = useState(
+    sessionStorage.getItem(`labelByEventComics${eventId}`) ||
+      "Ascending Order (A-Z)"
+  );
+  const limit = "12";
+  const [count, setCount] = useState("");
+  const [offset, setOffset] = useState(0);
 
-  // Data being fetched by redux toolkit
-  const { data: charactersList, isFetching } = useGetEventCharactersQuery({
+  const { data: comicsList, isFetching } = useGetEventComicsQuery({
     eventId,
     orderBy,
     limit,
     offset,
   });
-
-  // Characters Array
-  const [characters, setCharacters] = useState([]);
+  const [comics, setComics] = useState([]);
   const [total, setTotal] = useState(0);
-  const [count, setCount] = useState("");
-
-  const [label, setLabel] = useState(
-    sessionStorage.getItem(`labelByEventCharacters${eventId}`) ||
-      "Ascending Order (A-Z)"
-  );
 
   //   Pagination useState(s)
-  const [currentEventCharactersPage, setCurrentEventCharactersPage] = useState(
-    parseInt(sessionStorage.getItem(`currentEventCharactersPage${eventId}`)) ||
-      1
+  const [currentEventComicsPage, setCurrentEventComicsPage] = useState(
+    parseInt(sessionStorage.getItem(`currentEventComicsPage${eventId}`)) || 1
   );
 
+  // handleChange for the Order
   const handleChange = (event, newValue) => {
     setOrderBy(newValue?.value);
     setLabel(newValue?.label);
-    setCurrentEventCharactersPage(1);
+    setCurrentEventComicsPage(1);
   };
 
-  // Options for the Order
-  const options = [
-    { label: "Ascending Order (A-Z)", value: "name" },
-    { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Oldest", value: "modified" },
-    { label: "Recently Modified", value: "-modified" },
-  ];
-
-  // UseEffect used to fetch and set total, count and offset
+  // useEffect to fetch the comicsList and sort it
   useEffect(() => {
-    const fetchResults = charactersList?.data?.results;
-    setCharacters(fetchResults || []);
-    setTotal(charactersList?.data?.total);
-    setCount(charactersList?.data?.count);
-    setOffset((currentEventCharactersPage - 1) * limit);
+    const fetchResults = comicsList?.data?.results;
+    setTotal(comicsList?.data?.total);
+    setComics(fetchResults || []);
+    setTotal(comicsList?.data?.total);
+    setCount(comicsList?.data?.count);
+    setOffset((currentEventComicsPage - 1) * limit);
     console.log(fetchResults);
-    sessionStorage.setItem(
-      `currentEventCharactersPage${eventId}`,
-      currentEventCharactersPage
-    );
-    // Store relevant data in sessionStorage
-    sessionStorage.setItem(`orderByEventCharacters${eventId}`, orderBy); // Store orderBy
-    sessionStorage.setItem(`labelByEventCharacters${eventId}`, label);
 
-    document.title = `${title} Characters | Events | Marvel-Verse`;
+    // Store relevant data in sessionStorage
+    sessionStorage.setItem(
+      `currentEventComicsPage${eventId}`,
+      currentEventComicsPage
+    );
+    sessionStorage.setItem(`orderByEventComics${eventId}`, orderBy); // Store orderBy
+    sessionStorage.setItem(`labelByEventComics${eventId}`, label);
+
+    document.title = `${title} Comics | Events | Marvel-Verse `;
   }, [
-    charactersList,
-    currentEventCharactersPage,
+    comicsList,
     orderBy,
-    eventId,
-    title,
+    label,
     limit,
+    currentEventComicsPage,
+    title,
+    eventId,
   ]);
+
+  const options = [
+    { label: "Ascending Order (A-Z)", value: "title" },
+    { label: "Descending Order (Z-A)", value: "-title" },
+    { label: "Oldest Issue", value: "issueNumber" },
+    { label: "Latest Issue", value: "-issueNumber" },
+    { label: "Oldest Modified", value: "modified" },
+    { label: "Recently Modified", value: "-modified" },
+    { label: "Final Order Cutoff (FOC)", value: "focDate" },
+    { label: "Latest Final Order Cutoff (FOC)", value: "-focDate" },
+    { label: "Oldest On Sale", value: "onsaleDate" },
+    { label: "Latest On Sale", value: "-onsaleDate" },
+  ];
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
     const storedOrderBy = sessionStorage.getItem(
-      `orderByEventCharacters${eventId}`
+      `orderByEventComics${eventId}`
     );
-    const storedLabel = sessionStorage.getItem(
-      `labelByEventCharacters${eventId}`
-    );
+    const storedLabel = sessionStorage.getItem(`labelByEventComics${eventId}`);
 
     if (storedOrderBy) {
       setOrderBy(storedOrderBy);
@@ -102,18 +102,17 @@ const DataCharacters = () => {
   function totalPages() {
     let Pages = total / limit;
     Pages = Math.ceil(Pages);
-
     return Pages;
   }
 
   const handlePageClick = (number) => {
-    setCurrentEventCharactersPage(number);
-    sessionStorage.setItem(`currentEventCharactersPage${eventId}`, number);
+    setCurrentEventComicsPage(number);
+    sessionStorage.setItem(`currentEventComicsPage${eventId}`, number);
   };
 
   function renderSmartPagination() {
     const totalPageCount = totalPages(); // Replace with your total number of pages
-    const currentPage = currentEventCharactersPage; // Replace with your current page
+    const currentPage = currentEventComicsPage; // Replace with your current page
     const screenWidth = window.innerWidth; // Get the screen width
 
     let visiblePageCount = 3; // Default visible page count
@@ -203,12 +202,12 @@ const DataCharacters = () => {
     <div>
       <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
         <div className="text-center text-[26px] py-6 font-[700]">
-          {title} Characters
+          {title} Comics
         </div>
 
         <div className="flex items-center justify-center">
           <p className="border rounded p-2 bg-black">
-            Page {currentEventCharactersPage} of {totalPages()}
+            Page {currentEventComicsPage} of {totalPages()}
           </p>
         </div>
 
@@ -238,58 +237,51 @@ const DataCharacters = () => {
             </fieldset>
           </div>
         </div>
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
-          {characters ? (
-            characters?.map((c) => (
-              <div key={c.id}>
-                <ScrollPositionManager scrollKey={`${c.id + c.name}`} />
-                <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
-                  <Link
-                    key={c.id}
-                    to={`/characters/${c.id}/${c.name}`}
-                    className="py-4"
-                  >
-                    <div
-                      className={`  `}
-                      // onMouseEnter={() => handleMouseEnter(c.id)}
-                      // onMouseLeave={handleMouseLeave}
-                    >
-                      <>
-                        <img
-                          src={c.thumbnail.path + ".jpg"}
-                          className={`${"rounded-xl"}`}
-                          alt={"img of " + c.name}
-                        />
-                      </>
+          {comics?.map((c) => (
+            <div key={c.id} className="">
+              <ScrollPositionManager scrollKey={`${c.id + c.digitalId}`} />
+              <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
+                <Link
+                  key={c.id}
+                  to={`/comics/${c.id}/${c.title}`}
+                  className="py-4"
+                >
+                  <div className={` relative`}>
+                    <>
+                      <img
+                        src={c.thumbnail.path + ".jpg"}
+                        className={`${"rounded-xl w-full"}`}
+                        alt={"img of " + c.title}
+                      />
+                    </>
 
-                      <div className="px-2 pb-2">
-                        <div className={`uppercase  font-bold py-2  "`}>
-                          {c.name}
-                        </div>
-                      </div>
+                    <div className="uppercase  font-bold p-2 font-mono text-white absolute bottom-0 right-0 bg-red-500 rounded-br-xl rounded-tl-md">
+                      ${c.prices[0].price}
                     </div>
-                  </Link>
-                </div>
+                  </div>
+                  <div className="px-2 pb-2 flex items-center justify-center">
+                    <div
+                      className={`uppercase  font-bold py-2 font-mono text-[#a7a4a4] text-center"`}
+                    >
+                      {c.title}
+                    </div>
+                  </div>
+                </Link>
               </div>
-            ))
-          ) : (
-            <div className="h-[90vh]"></div>
-          )}
+            </div>
+          ))}
         </div>
 
         {/* Pagination example */}
-
         <div className="flex justify-center  mt-4 py-12 max-w-full">
           <nav aria-label="Page navigation example">
             <ul className="inline-flex -space-x-px text-md">
               <li>
                 <button
                   className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() =>
-                    handlePageClick(currentEventCharactersPage - 1)
-                  }
-                  disabled={currentEventCharactersPage === 1}
+                  onClick={() => handlePageClick(currentEventComicsPage - 1)}
+                  disabled={currentEventComicsPage === 1}
                 >
                   Prev
                 </button>
@@ -298,10 +290,8 @@ const DataCharacters = () => {
               <li>
                 <button
                   className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() =>
-                    handlePageClick(currentEventCharactersPage + 1)
-                  }
-                  disabled={currentEventCharactersPage === totalPages()}
+                  onClick={() => handlePageClick(currentEventComicsPage + 1)}
+                  disabled={currentEventComicsPage === totalPages()}
                 >
                   Next
                 </button>
@@ -309,11 +299,9 @@ const DataCharacters = () => {
             </ul>
           </nav>
         </div>
-
-        {/* If there is no data  */}
       </div>
     </div>
   );
 };
 
-export default DataCharacters;
+export default EventComics;

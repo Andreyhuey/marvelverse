@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
-import { useGetEventDetailsQuery } from "../services/eventsApi";
+import { useGetEventDetailsQuery } from "../../services/eventsApi";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import Loader from "./Loader";
+import { Loader } from "../../components";
 
-const DataDetails = () => {
+const EventDetails = () => {
   const { eventId, title } = useParams();
   const { data, isFetching } = useGetEventDetailsQuery(eventId);
 
@@ -142,4 +142,4 @@ const DataDetails = () => {
   );
 };
 
-export default DataDetails;
+export default EventDetails;
