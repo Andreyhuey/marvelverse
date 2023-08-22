@@ -10,11 +10,11 @@ import placeholderComics from "../../assets/placeholder-comics.jpg";
 
 const Comics = () => {
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem(`orderByComics`) || "title"
+    sessionStorage.getItem(`orderByComics`) || "-modified"
   );
 
   const [label, setLabel] = useState(
-    sessionStorage.getItem(`labelByComics`) || "Ascending Order (A-Z)"
+    sessionStorage.getItem(`labelByComics`) || "Recently Modified"
   );
 
   const limit = "12";
@@ -233,7 +233,7 @@ const Comics = () => {
                   to={`/comics/${c.id}/${c.title}`}
                   className="py-4"
                 >
-                  <div className={` relative h-[900]`}>
+                  <div className={` relative`}>
                     <>
                       {/* <LazyLoadImage
                       src={c.thumbnail.path + ".jpg"}
@@ -253,7 +253,7 @@ const Comics = () => {
                     </>
 
                     <div className="uppercase  font-bold p-2 font-mono text-white absolute bottom-2 right-0 bg-red-500 rounded-br-xl rounded-tl-md">
-                      ${c.prices[0].price <= 5 ? 8.35 : c.prices[0].price}
+                      ${c.prices[0].price}
                     </div>
                   </div>
                   <div className="px-2 pb-2 flex items-center justify-center">

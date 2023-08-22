@@ -2,28 +2,31 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import {
   Homepage,
-
   //
   Characters,
   CharacterDetails,
   CharacterComics,
   CharacterEvents,
   //
+  Comics,
+  ComicDetails,
+  //
   Events,
   EventDetails,
   EventsCharacters,
   EventComics,
   EventCreators,
+
   //
-  Comics,
-  ComicDetails,
 } from "./pages";
 import EventSeries from "./pages/EventSeries";
+import { Footer, Navbar } from "./components";
 
 const App = () => {
   return (
-    <div>
-      <div>
+    <div className="">
+      <Navbar />
+      <div className="pt-20">
         <Switch>
           <Route exact path="/">
             <Homepage />
@@ -81,6 +84,7 @@ const App = () => {
           </Route>
         </Switch>
       </div>
+      <Footer />
     </div>
   );
 };

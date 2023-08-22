@@ -10,7 +10,7 @@ const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
-  const limit = "24";
+  const limit = "16";
   const [total, setTotal] = useState(0);
   const [orderBy, setOrderBy] = useState(
     sessionStorage.getItem("orderByCharacters") || "name"
@@ -85,6 +85,7 @@ const Characters = () => {
   const handlePageClick = (number) => {
     setCurrentCharacterPage(number);
     sessionStorage.setItem("currentCharacterPage", number);
+    document.body.scrollTop = 0;
   };
 
   // smart navigation
