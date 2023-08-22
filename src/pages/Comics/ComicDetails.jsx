@@ -24,7 +24,7 @@ const ComicDetails = () => {
             return (
               <div
                 key={d.id}
-                className="flex items-center justify-center flex-col lg:flex-row gap-x-5 gap-y-8"
+                className="flex items-start justify-center flex-col lg:flex-row gap-x-5 gap-y-8"
               >
                 <div className="flex-1">
                   <img
@@ -36,7 +36,7 @@ const ComicDetails = () => {
 
                 <div className="flex-1">
                   <div className="flex flex-col justify-center items-start gap-4">
-                    <h5 className="font-extrabold text-[40px] uppercase text-center">
+                    <h5 className="font-extrabold text-[30px] capitalize text-center">
                       {d.title}
                     </h5>
                     <p className="font-semibold text-slate-300 font-mono">

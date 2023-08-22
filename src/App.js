@@ -15,6 +15,7 @@ import {
   EventComics,
   EventCreators,
   //
+  Comics,
   ComicDetails,
 } from "./pages";
 import EventSeries from "./pages/EventSeries";
@@ -72,6 +73,9 @@ const App = () => {
           </Route>
 
           {/* Comics */}
+          <Route exact path="/comics">
+            <Comics />
+          </Route>
           <Route exact path="/comics/:comicId/:title">
             <ComicDetails />
           </Route>
