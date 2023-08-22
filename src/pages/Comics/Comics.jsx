@@ -10,7 +10,7 @@ import placeholderComics from "../../assets/placeholder-comics.jpg";
 
 const Comics = () => {
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem(`orderByComics` || "title")
+    sessionStorage.getItem(`orderByComics`) || "title"
   );
 
   const [label, setLabel] = useState(
@@ -191,10 +191,8 @@ const Comics = () => {
           Marvel Comics
         </div>
 
-        <div>{total}</div>
-
         <div className="flex items-center justify-center">
-          <p className="border rounded p-2 bg-black">
+          <p className="border rounded p-2 bg-black font-mono">
             Page {currentComicsPage} of {totalPages()}
           </p>
         </div>
@@ -228,9 +226,7 @@ const Comics = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
           {comics?.map((c) => (
             <div key={c.id} className="">
-              <ScrollPositionManager
-                scrollKey={`${c.id + +c.thumbnail.path}`}
-              />
+              <ScrollPositionManager scrollKey={`${c.id + c.diamondCode}`} />
               <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
                 <Link
                   key={c.id}
@@ -239,19 +235,21 @@ const Comics = () => {
                 >
                   <div className={` relative h-[900]`}>
                     <>
-                      <LazyLoadImage
-                        src={c.thumbnail.path + ".jpg"}
-                        alt={"image of" + c.title}
-                        className="rounded-xl"
-                        effect="blur"
-                        placeholderSrc={placeholderComics}
-                      />
+                      {/* <LazyLoadImage
+                      src={c.thumbnail.path + ".jpg"}
+                      alt={"image of" + c.title}
+                      className="rounded-xl"
+                      effect="blur"
+                      placeholderSrc={placeholderComics} 
+                    />
+                      */}
 
-                      {/* <img
+                      <img
                         src={c.thumbnail.path + ".jpg"}
                         className={`${"rounded-xl w-full"}`}
                         alt={"img of " + c.title}
-                      /> */}
+                        loading={<Loader />}
+                      />
                     </>
 
                     <div className="uppercase  font-bold p-2 font-mono text-white absolute bottom-2 right-0 bg-red-500 rounded-br-xl rounded-tl-md">

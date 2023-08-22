@@ -12,6 +12,11 @@ const ComicDetails = () => {
 
   const comicDetails = data?.data?.results;
 
+  useEffect(() => {
+    document.body.scrollTop = 0;
+    document.title = `${title} | Comics | Marvel-Verse`;
+  }, [document]);
+
   console.log(comicDetails);
 
   if (isFetching) return <Loader />;
@@ -46,9 +51,9 @@ const ComicDetails = () => {
                       {d.description ? (
                         HTMLReactParser(d.description)
                       ) : (
-                        <p className="text-center">
+                        <div className="flex items-center justify-center">
                           Sorry no description provided
-                        </p>
+                        </div>
                       )}
                     </div>
                   </div>
