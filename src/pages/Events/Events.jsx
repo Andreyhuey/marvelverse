@@ -95,6 +95,8 @@ const Events = () => {
   return (
     <div>
       <div className="bg-gray-950 text-white py-20 px-4 md:px-8 lg:px-20">
+        <div className="text-center text-[26px] py-6 font-[700]">Events</div>
+
         <div className="flex items-center justify-center">
           <p className="border rounded p-2 bg-black">
             Page {currentEventPage} of {totalPages()}
