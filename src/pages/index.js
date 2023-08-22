@@ -1,5 +1,6 @@
 // Homepage
 import Homepage from "./Homepage";
+import Search from "./Search";
 
 // Characters
 import Characters from "./Characters/Characters";
@@ -16,9 +17,12 @@ import EventComics from "./Events/EventComics";
 // Comics
 import Comics from "./Comics/Comics";
 import ComicDetails from "./Comics/ComicDetails";
+//
+import Series from "./Series/Series";
 
 export {
   Homepage,
+  Search,
   //
   Characters,
   CharacterDetails,
@@ -32,4 +36,6 @@ export {
   //
   Comics,
   ComicDetails,
+  //
+  Series,
 };

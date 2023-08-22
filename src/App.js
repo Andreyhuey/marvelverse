@@ -15,6 +15,8 @@ import {
   EventDetails,
   EventsCharacters,
   EventComics,
+  Search,
+  Series,
 
   //
 } from "./pages";
@@ -29,6 +31,10 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <Homepage />
+          </Route>
+
+          <Route exact path={"/search"}>
+            <Search />
           </Route>
 
           {/* Characters */}
@@ -57,16 +63,14 @@ const App = () => {
           <Route exact path="/events/:eventId/:title">
             <EventDetails />
           </Route>
-          {/* Event Character Details */}
+          {/* Event Character */}
           <Route exact path="/events/:eventId/:title/characters">
             <EventsCharacters />
           </Route>
-
-          {/* Event Comics Details */}
+          {/* Event Comics */}
           <Route exact path="/events/:eventId/:title/comics">
             <EventComics />
           </Route>
-          {/* Event Details */}
 
           {/* Comics */}
           <Route exact path="/comics">
@@ -74,6 +78,11 @@ const App = () => {
           </Route>
           <Route exact path="/comics/:comicId/:title">
             <ComicDetails />
+          </Route>
+
+          {/*  */}
+          <Route exact path="/series">
+            <Series />
           </Route>
         </Switch>
       </div>
