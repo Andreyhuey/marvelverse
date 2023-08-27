@@ -25,7 +25,7 @@ import { Footer, Navbar } from "./components";
 
 const App = () => {
   return (
-    <div className="">
+    <div className="relative">
       <Navbar />
       <div className="md:pt-20 pt-12">
         <Switch>
@@ -77,6 +77,15 @@ const App = () => {
             <Comics />
           </Route>
           <Route exact path="/comics/:comicId/:title">
+            <ComicDetails />
+          </Route>
+          <Route exact path="/comics/:comicId/:title/characters">
+            <ComicDetails />
+          </Route>
+          <Route exact path="/comics/:comicId/:title/events">
+            <ComicDetails />
+          </Route>
+          <Route exact path="/comics/:comicId/:title/series">
             <ComicDetails />
           </Route>
 

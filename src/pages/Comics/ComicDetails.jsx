@@ -13,6 +13,7 @@ const ComicDetails = () => {
 
   useEffect(() => {
     const comicDetails = data?.data?.results;
+    console.log(comicDetails);
     setComic(comicDetails);
     document.title = `${title} | Comics | Marvel-Verse`;
     document.body.scrollTop = 0;
@@ -44,27 +45,55 @@ const ComicDetails = () => {
                       <h5 className="font-extrabold text-[30px] capitalize text-center">
                         {d.title}
                       </h5>
-                      <p className="font-semibold text-slate-300 font-mono">
-                        {moment(d.modified).format("YYYY")}
-                      </p>
+
                       <div className="font-serif">
+                        <p className="text-lg font-bold">Overview: </p>
+
                         {d.description ? (
-                          HTMLReactParser(d.description)
+                          <p className="text-slate-300">
+                            {HTMLReactParser(d.description)}
+                          </p>
                         ) : (
-                          <div className="">
+                          <div className="text-slate-300">
                             Sorry no description provided by
                             <span className="text-red-500 ml-1">MARVEL</span>
                           </div>
                         )}
                       </div>
+
+                      <p className="font-mono">
+                        Price :
+                        <span className="text-slate-300">
+                          ${d.prices[0].price}
+                        </span>
+                      </p>
+                      <p className="font-mono">
+                        Format:
+                        <span className="text-slate-300"> {d.format}</span>
+                      </p>
+                      <p className="font-mono">
+                        Page Count:
+                        <span className="text-slate-300"> {d.pageCount}</span>
+                      </p>
+                      <p className="font-mono">
+                        Issue Number:
+                        <span className="text-slate-300"> {d.issueNumber}</span>
+                      </p>
+
+                      <p className="font-semibold  font-mono">
+                        Date:{" "}
+                        <span className="text-slate-300">
+                          {moment(d.modified).format("MMM DD, YYYY")}
+                        </span>
+                      </p>
                     </div>
 
-                    <div className="items-center justify-center flex">
+                    <div className="items-start justify-start flex">
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-6 items-center justify-center">
                         <div>
                           {d.characters.available !== 0 ? (
                             <Link to={`/comics/${d.id}/${d.title}/characters`}>
-                              <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                              <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                                 <p className="font-mono text-[#c0bdbd]">
                                   {d.characters.available}
                                 </p>
@@ -78,7 +107,7 @@ const ComicDetails = () => {
                         <div>
                           {d.events.available !== 0 ? (
                             <Link to={`/comics/${d.id}/${d.title}/events`}>
-                              <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                              <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                                 <p className="font-mono text-[#c0bdbd]">
                                   {d.events.available}
                                 </p>
@@ -93,7 +122,7 @@ const ComicDetails = () => {
                         {/* <div>
                         {d.creators.available !== 0 ? (
                           <Link to={`/comics/${d.id}/${d.title}/creators`}>
-                            <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                            <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.creators.available}
                               </p>
@@ -108,7 +137,7 @@ const ComicDetails = () => {
                       <div>
                         {d.series.available !== 0 ? (
                           <Link to={`/comics/${d.id}/${d.title}/series`}>
-                            <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                            <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.series.available}
                               </p>
@@ -126,7 +155,7 @@ const ComicDetails = () => {
                             to={`/comics/${d.id}/${d.title}/stories
 `}
                           >
-                            <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                            <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.stories.available}
                               </p>
@@ -138,6 +167,23 @@ const ComicDetails = () => {
                         )}
                       </div> */}
                       </div>
+                    </div>
+
+                    <div className="font-semibold  font-mono">
+                      <p className="text-lg">Creators:</p>
+                      <span className="pb-1">
+                        {d.creators.items.map((c) => {
+                          return (
+                            <div
+                              key={c.role}
+                              className="flex items-center justify-start gap-2"
+                            >
+                              <p className="capitalize">{c.role}:</p>
+                              <p className="text-slate-300">{c.name}</p>
+                            </div>
+                          );
+                        })}
+                      </span>
                     </div>
                   </div>
                 </div>

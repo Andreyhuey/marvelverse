@@ -13,11 +13,15 @@ const Navbar = () => {
     <div className="bg-black fixed h-auto w-full left-0 top-0 z-30">
       {/* for tabs and pcs */}
       <div className="md:flex md:flex-col hidden ">
-        <div className="border border-gray-600 flex items-center justify-between px-20 text-white">
+        <div className="border border-gray-600 flex items-center justify-between px-20 text-white relative">
           <Link className="uppercase border hover:text-red-500 border-r-gray-600 border-l-gray-600 font-semibold border-t-0 border-b-0 p-3 flex items-center justify-center cursor-pointer">
             sign in | join
           </Link>
-          <Link to={`/`} className="cursor-pointer">
+          <Link
+            to={`/`}
+            className="cursor-pointer absolute top-1/2 left-1/2 
+          transform -translate-x-1/2 -translate-y-1/2"
+          >
             <img src={logo} alt="site logo" className="h-[50px] w-[128px]" />
           </Link>
           <Link

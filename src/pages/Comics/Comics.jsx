@@ -233,15 +233,6 @@ const Comics = () => {
                 >
                   <div className={` relative`}>
                     <>
-                      {/* <LazyLoadImage
-                      src={c.thumbnail.path + ".jpg"}
-                      alt={"image of" + c.title}
-                      className="rounded-xl"
-                      effect="blur"
-                      placeholderSrc={placeholderComics} 
-                    />
-                      */}
-
                       <img
                         src={c.thumbnail.path + ".jpg"}
                         className={`${"rounded-xl w-full"}`}
