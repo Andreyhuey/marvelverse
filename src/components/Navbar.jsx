@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlineMenu } from "react-icons/hi";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -40,6 +40,9 @@ const Navbar = () => {
           <li className="cursor-pointer hover:text-red-500">
             <Link to={`/series`}>Series</Link>
           </li>
+          <li className="cursor-pointer hover:text-red-500">
+            <Link to={`/series`}>Collection</Link>
+          </li>
         </ul>
       </div>
       {/* for phones */}
@@ -50,50 +53,120 @@ const Navbar = () => {
         >
           <HiOutlineMenu className="text-[26px]" />
         </div>
-        {nav ? (
-          <div className="absolute h-screen w-full p-4 cursor-pointer bg-black transform">
-            <div className="flex flex-col gap-6 text-white font-bold">
-              <IoCloseCircleOutline
-                className="text-[26px] right-0 cursor-pointer"
-                onClick={handleClick}
-              />
 
-              <ul className="flex flex-col gap-6 text-white font-bold">
-                <li className="cursor-pointer hover:text-red-500">
-                  <Link to={`/characters`} onClick={handleClick}>
-                    Characters
-                  </Link>
-                </li>
-                <li className="cursor-pointer hover:text-red-500">
-                  <Link to={`/comics`} onClick={handleClick}>
-                    Comics
-                  </Link>
-                </li>
-                <li className="cursor-pointer hover:text-red-500">
-                  <Link to={`/events`} onClick={handleClick}>
-                    Events
-                  </Link>
-                </li>
-                <li className="cursor-pointer hover:text-red-500">
-                  <Link to={`/series`} onClick={handleClick}>
-                    Series
-                  </Link>
-                </li>
-              </ul>
+        <>
+          <Link to={`/`} className="cursor-pointer">
+            <img src={logo} alt="site logo" className="h-[50px] w-[128px]" />
+          </Link>
+          <Link
+            className="text-[26px] hover:text-red-500 font-semibold p-3"
+            to={`/search`}
+          >
+            <BiSearchAlt />
+          </Link>
+        </>
+
+        {nav ? (
+          <div className="absolute h-screen w-full  backdrop-blur-lg  transform">
+            <div className="w-[80%] border-r-white/20 bg-white/5 py-4 border-r-[1px] h-screen ">
+              <div className="flex flex-col gap-6 text-white font-bold">
+                <div className="pl-3">
+                  <AiOutlineClose
+                    className="text-[26px] cursor-pointer inline text-white"
+                    onClick={handleClick}
+                  />
+                </div>
+
+                <ul className="flex flex-col gap-5 text-white font-bold pt-8 ">
+                  <li className="cursor-pointer hover:text-red-500 border-b-[1px] border-white/20 pb-4 pl-3">
+                    <Link to={`/`} onClick={handleClick}>
+                      Home
+                    </Link>
+                  </li>
+                  <li className="cursor-pointer hover:text-red-500 border-b-[1px] border-white/20 pb-4 pl-3">
+                    <Link to={`/characters`} onClick={handleClick}>
+                      Characters
+                    </Link>
+                  </li>
+                  <li className="cursor-pointer hover:text-red-500 border-b-[1px] border-white/20 pb-4 pl-3">
+                    <Link to={`/comics`} onClick={handleClick}>
+                      Comics
+                    </Link>
+                  </li>
+                  <li className="cursor-pointer hover:text-red-500 border-b-[1px] border-white/20 pb-4 pl-3">
+                    <Link to={`/events`} onClick={handleClick}>
+                      Events
+                    </Link>
+                  </li>
+                  <li className="cursor-pointer hover:text-red-500 border-b-[1px] border-white/20 pb-4 pl-3">
+                    <Link to={`/series`} onClick={handleClick}>
+                      Series
+                    </Link>
+                  </li>
+                  <li className="cursor-pointer pl-3 pb-3">
+                    <Link to={`/collection`} onClick={handleClick}>
+                      Collection
+                    </Link>
+                  </li>
+                  <li className="w-full pl-3">
+                    <div className="grid grid-cols-2 justify-between gap-5 text-sm">
+                      <Link
+                        to={`/avengers`}
+                        className="cursor-pointer text-red-700"
+                        onClick={handleClick}
+                      >
+                        Avengers
+                      </Link>
+                      <Link
+                        to={`/captain-america`}
+                        className="cursor-pointer text-blue-700"
+                        onClick={handleClick}
+                      >
+                        Captains
+                      </Link>
+                      <Link
+                        to={`/captain-america`}
+                        className="cursor-pointer text-white"
+                        onClick={handleClick}
+                      >
+                        Deadpool
+                      </Link>
+                      <Link
+                        to={`/avengers`}
+                        className="cursor-pointer text-green-900"
+                        onClick={handleClick}
+                      >
+                        Hulk
+                      </Link>
+                      <Link
+                        to={`/avengers`}
+                        className="cursor-pointer text-red-700"
+                        onClick={handleClick}
+                      >
+                        Spider
+                      </Link>
+                      <Link
+                        to={`/thor`}
+                        className="cursor-pointer text-yellow-700"
+                        onClick={handleClick}
+                      >
+                        Thanos
+                      </Link>
+                      <Link
+                        to={`/thor`}
+                        className="cursor-pointer text-yellow-700"
+                        onClick={handleClick}
+                      >
+                        Thor
+                      </Link>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         ) : (
-          <>
-            <Link to={`/`} className="cursor-pointer">
-              <img src={logo} alt="site logo" className="h-[50px] w-[128px]" />
-            </Link>
-            <Link
-              className="text-[26px] hover:text-red-500 font-semibold p-3"
-              to={`/search`}
-            >
-              <BiSearchAlt />
-            </Link>
-          </>
+          <></>
         )}
       </div>
 

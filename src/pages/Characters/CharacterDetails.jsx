@@ -16,6 +16,10 @@ const CharacterDetails = () => {
 
   const NewTitle = `${name} | Characters | Marvel-Verse`;
 
+  useEffect(() => {
+    document.body.scrollTop = 0;
+  }, [document]);
+
   if (isFetching) return <Loader />;
 
   console.log(characterDetails);

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BeatLoader } from "react-spinners";
 
 const Loader = () => {
+  useEffect(() => {
+    document.body.scrollTop = 0;
+  }, []);
+
   return (
-    <div className="h-screen flex items-center justify-center bg-black">
+    <div className="h-screen py-10 flex items-center justify-center bg-black">
       <BeatLoader
         color="#ffff"
         size={13}
