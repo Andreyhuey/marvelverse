@@ -52,6 +52,5 @@ export const {
   useGetCharacterDetailsQuery,
   useGetCharacterEventsQuery,
   useGetCharacterComicsQuery,
-  useGetEventCreatorsQuery,
   useGetEventSeriesQuery,
 } = charactersApi;
