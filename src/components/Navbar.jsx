@@ -115,13 +115,6 @@ const Navbar = () => {
                   <li className="w-full pl-3">
                     <div className="grid grid-cols-2 justify-between gap-5 text-sm">
                       <Link
-                        to={`/avengers`}
-                        className="cursor-pointer text-red-700"
-                        onClick={handleClick}
-                      >
-                        Avengers
-                      </Link>
-                      <Link
                         to={`/captain-america`}
                         className="cursor-pointer text-blue-700"
                         onClick={handleClick}
@@ -150,6 +143,21 @@ const Navbar = () => {
                         Spider
                       </Link>
                       <Link
+                        to={`/avengers`}
+                        className="cursor-pointer text-red-700"
+                        onClick={handleClick}
+                      >
+                        Moon Knight
+                      </Link>
+                      <Link
+                        to={`/thor`}
+                        className="cursor-pointer text-yellow-700"
+                        onClick={handleClick}
+                      >
+                        Nova
+                      </Link>
+
+                      <Link
                         to={`/thor`}
                         className="cursor-pointer text-yellow-700"
                         onClick={handleClick}
@@ -162,6 +170,20 @@ const Navbar = () => {
                         onClick={handleClick}
                       >
                         Thor
+                      </Link>
+                      <Link
+                        to={`/thor`}
+                        className="cursor-pointer text-yellow-700"
+                        onClick={handleClick}
+                      >
+                        Wolverine
+                      </Link>
+                      <Link
+                        to={`/thor`}
+                        className="cursor-pointer text-yellow-700"
+                        onClick={handleClick}
+                      >
+                        Venom
                       </Link>
                     </div>
                   </li>
