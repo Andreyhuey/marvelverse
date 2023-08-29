@@ -1,146 +1,285 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Loader } from "../../components";
+import { Link, useLocation } from "react-router-dom";
+import { useGetCharactersQuery } from "../../services/charactersApi";
+import Loader from "../../components/Loader";
+import moment from "moment";
+import { Autocomplete, TextField } from "@mui/material";
+import ScrollPositionManager from "../../components/ScrollManager";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [count, setCount] = useState("");
-  const [total, setTotal] = useState(" ");
-  const [isLoading, setLoading] = useState(true);
-
-  // Pagination useState(s)
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(sessionStorage.getItem("currentPage")) || 1
+  const [offset, setOffset] = useState(0);
+  const limit = "16";
+  const [total, setTotal] = useState(0);
+  const [orderBy, setOrderBy] = useState(
+    sessionStorage.getItem("orderByCharacters") || "name"
   );
-  const limit = 20;
+  const [label, setLabel] = useState(
+    sessionStorage.getItem("labelCharacters") || "Ascending Order (A-Z)"
+  );
 
-  const handlePageClick = (number) => {
-    setCurrentPage(number);
-    sessionStorage.setItem(currentPage, number);
+  const { data: charactersList, isFetching } = useGetCharactersQuery({
+    orderBy,
+    offset,
+    limit,
+  });
+
+  //   Pagination useState(s)
+  const [currentCharacterPage, setCurrentCharacterPage] = useState(
+    parseInt(sessionStorage.getItem("currentCharacterPage")) || 1
+  );
+
+  // Options for the Order
+  const options = [
+    { label: "Ascending Order (A-Z)", value: "name" },
+    { label: "Descending Order (Z-A)", value: "-name" },
+    { label: "Modified", value: "modified" },
+    { label: "Recently Modified", value: "-modified" },
+  ];
+
+  // handleChange for the Order
+  const handleChange = (event, newValue) => {
+    setOrderBy(newValue?.value);
+    setLabel(newValue?.label);
+    setCurrentCharacterPage(1);
   };
 
+  // UseEffect used to fetch and set Total, count and offset
   useEffect(() => {
-    async function fetchCharacters(currentPage) {
-      setLoading(true);
-      fetch(
-        `https://gateway.marvel.com/v1/public/characters?&limit=${limit}&offset=${
-          (currentPage - 1) * limit
-        }&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${
-          process.env.REACT_APP_HASH
-        }`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data.data);
-          setCount(data.data.count);
-          setTotal(data.data.total);
-          const results = data.data.results;
-          setCharacters(results);
-          console.log(results);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+    const fetchResults = charactersList?.data?.results;
+    setCharacters(fetchResults || []);
+    setTotal(charactersList?.data?.total);
+    setCount(charactersList?.data?.count);
+    setOffset((currentCharacterPage - 1) * limit);
+    console.log(fetchResults);
+    sessionStorage.setItem("currentCharacterPage", currentCharacterPage);
+    // Store relevant data in sessionStorage
+    sessionStorage.setItem("orderByCharacters", orderBy); // Store orderBy
+    sessionStorage.setItem("labelCharacters", label);
+
+    document.title =
+      "Characters | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
+  }, [charactersList, orderBy, limit, currentCharacterPage]);
+
+  // On component mount, retrieve stored data from sessionStorage
+  useEffect(() => {
+    const storedOrderBy = sessionStorage.getItem("orderByCharacters");
+    const storedLabel = sessionStorage.getItem("labelCharacters");
+
+    if (storedOrderBy) {
+      setOrderBy(storedOrderBy);
     }
+    if (storedLabel) {
+      setLabel(storedLabel);
+    }
+  }, []);
 
-    fetchCharacters(currentPage);
-    sessionStorage.setItem("currentPage", currentPage);
-
-    document.title = "Marvel Characters";
-    console.log(document.location.pathname);
-    window.scrollTo(0, 0);
-  }, [currentPage, limit]);
-
+  // Total Pages of Data Available
   function totalPages() {
     let Pages = total / limit;
     Pages = Math.ceil(Pages);
     return Pages;
   }
 
-  // loading state component
-  if (isLoading) return <Loader />;
+  const handlePageClick = (number) => {
+    setCurrentCharacterPage(number);
+    sessionStorage.setItem("currentCharacterPage", number);
+    document.body.scrollTop = 0;
+  };
+
+  // smart navigation
+  function renderSmartPagination() {
+    const totalPageCount = totalPages(); // Replace with your total number of pages
+    const currentPage = currentCharacterPage; // Replace with your current page
+    const screenWidth = window.innerWidth; // Get the screen width
+
+    let visiblePageCount = 3; // Default visible page count
+
+    if (screenWidth > 440) {
+      visiblePageCount = 10; // Show more links on larger screens
+    }
+
+    const pageElements = [];
+
+    const startPage = Math.max(
+      currentPage - Math.floor(visiblePageCount / 2),
+      1
+    );
+    const endPage = Math.min(startPage + visiblePageCount - 1, totalPageCount);
+
+    if (startPage > 1) {
+      pageElements.push(
+        <li key={`page-1`}>
+          <button
+            className={`flex items-center justify-center px-2 md:px-3 h-8 leading-tight ${
+              currentPage === 1
+                ? "text-black bg-white"
+                : "text-gray-500 bg-white border-gray-300 border-[1px] hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            }`}
+            onClick={() => handlePageClick(1)}
+          >
+            1
+          </button>
+        </li>
+      );
+
+      if (startPage > 2) {
+        pageElements.push(
+          <span key="ellipsis-start" className="text-gray-500">
+            ...
+          </span>
+        );
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageElements.push(
+        <li key={`page-${i}`}>
+          <button
+            className={`flex items-center justify-center px-2 md:px-3 h-8 leading-tight ${
+              currentPage === i
+                ? "text-black bg-white"
+                : "text-gray-500 bg-white border-gray-300 border-[1px] hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            }`}
+            onClick={() => handlePageClick(i)}
+          >
+            {i}
+          </button>
+        </li>
+      );
+    }
+
+    if (endPage < totalPageCount) {
+      if (endPage < totalPageCount - 1) {
+        pageElements.push(
+          <span key="ellipsis-end" className="text-gray-500">
+            ...
+          </span>
+        );
+      }
+      pageElements.push(
+        <li key={`page-${totalPageCount}`}>
+          <button
+            className={`flex items-center justify-center px-2 md:px-3 h-8 leading-tight ${
+              currentPage === totalPageCount
+                ? "text-black bg-white"
+                : "text-gray-500 bg-white border-gray-300 border-[1px] hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            }`}
+            onClick={() => handlePageClick(totalPageCount)}
+          >
+            {totalPageCount}
+          </button>
+        </li>
+      );
+    }
+
+    return pageElements;
+  }
+
+  // ...Loading Content ...
+  if (isFetching) return <Loader />;
 
   return (
-    <section className="container-fluid bg-dark">
-      <div className="container vh-auto">
-        <h3 className="text-bold fw-bold text-center py-3">
-          Marvel Characters
-        </h3>
-        <div>{isLoading}</div>
-        <div className="d-flex justify-content-between">
-          <div className="">Total Characters Found : {total}</div>
-          <div className="text-center h6 fw-bold bg-black p-3">
-            Page {currentPage} of {totalPages()}
-          </div>
-          <div className="text-center h6">
-            Total Characters Rendered : {count}
+    <div>
+      <div className="bg-gray-950 text-white py-10 px-2 md:px-8 lg:px-20">
+        <div className="text-center text-[26px] py-6 font-[700]">
+          Characters
+        </div>
+
+        <div className="flex items-center justify-center">
+          <p className="border rounded p-2 bg-black">
+            Page {currentCharacterPage} of {totalPages()}
+          </p>
+        </div>
+
+        <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
+          <div className="flex items-start justify-end text-black mb-7">
+            <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
+              <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
+                <Autocomplete
+                  disablePortal
+                  options={options}
+                  getOptionLabel={(option) => option.label}
+                  className="capitalize rounded-xl focus-within:none bg-transparent"
+                  onChange={handleChange}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="Order By"
+                      placeholder={label}
+                      variant="outlined"
+                      id="outlined-basic"
+                      required
+                      className="flex items-center justify-center bg-slate-600 text-white rounded-lg"
+                    />
+                  )}
+                />
+              </div>
+            </fieldset>
           </div>
         </div>
 
-        <div className="row">
-          {characters.length === 0 ? (
-            <div className="d-flex align-items-center justify-content-center vh-100">
-              <p className="h5 fw-bold ">No Results Found</p>
-            </div>
-          ) : (
-            characters.map((c) => {
-              return (
-                <div key={c.id} className="col-lg-3 col-md-4 col-sm-6 col-6">
-                  <div className="border border-warning card my-3 bg-dark">
-                    <Link
-                      key={c.id}
-                      to={`/characters/${c.id}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <div className="p-2 my-1">
-                        <img
-                          src={
-                            c.thumbnail ? c.thumbnail.path + ".jpg" : isLoading
-                          }
-                          className={`card-img-top `}
-                          alt="...img"
-                        />
-                        <div className="d-flex justify-content-center">
-                          <h4 className="card-body text-center text-warning py-3">
-                            {c.name}
-                          </h4>
-                        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
+          {characters?.map((c) => (
+            <div key={c.id}>
+              <ScrollPositionManager scrollKey={`${c.id + c.description}`} />
+              <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
+                <Link
+                  key={c.id}
+                  to={`/characters/${c.id}/${c.name}`}
+                  className="py-4"
+                >
+                  <div className={`  `}>
+                    <>
+                      <img
+                        src={c.thumbnail.path + ".jpg"}
+                        className={`${"rounded-xl"}`}
+                        alt={"img of " + c.name}
+                      />
+                    </>
+
+                    <div className="px-2 pb-2">
+                      <div className={`uppercase  font-bold py-2  "`}>
+                        {c.name}
                       </div>
-                    </Link>
+                    </div>
                   </div>
-                </div>
-              );
-            })
-          )}
-          <div className="container d-flex overflow-auto pt-5">
-            <nav aria-label="Page navigation example ">
-              <ul className="pagination ">
-                {Array.from(
-                  { length: Math.ceil(total / limit) },
-                  (_, i) => i + 1
-                ).map((number) => (
-                  <li
-                    key={number}
-                    className={`page-item ${
-                      currentPage === number ? "active" : ""
-                    }`}
-                  >
-                    <button
-                      className="page-link"
-                      onClick={() => handlePageClick(number)}
-                    >
-                      {number}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
-        {/*  */}
+
+        {/* Pagination example */}
+
+        <div className="flex justify-center  mt-4 py-12 max-w-full">
+          <nav aria-label="Page navigation example">
+            <ul className="inline-flex -space-x-px text-md">
+              <li>
+                <button
+                  className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => handlePageClick(currentCharacterPage - 1)}
+                  disabled={currentCharacterPage === 1}
+                >
+                  Prev
+                </button>
+              </li>
+              {renderSmartPagination()}
+              <li>
+                <button
+                  className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => handlePageClick(currentCharacterPage + 1)}
+                  disabled={currentCharacterPage === totalPages()}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 

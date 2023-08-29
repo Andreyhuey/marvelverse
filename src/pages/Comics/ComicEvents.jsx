@@ -1,6 +1,6 @@
 import React from "react";
 
-const ComicCharacters = () => {
+const ComicEvents = () => {
   return (
     <div>
       <></>
@@ -8,4 +8,4 @@ const ComicCharacters = () => {
   );
 };
 
-export default ComicCharacters;
+export default ComicEvents;

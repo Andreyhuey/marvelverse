@@ -1,67 +1,32 @@
 import React from "react";
+import logo from "../assets/logo.png";
+import { BiLogoGithub, BiLogoLinkedin, BiLogoTwitter } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="container-fluid bg-dark-black">
-      <footer className="container py-4  ">
-        <div className="row py-2 mt-2 text-muted">
-          <div className="">
-            <div className="h4 text-center text-warning">Marvel-X</div>
-            <div className="h5">
-              Allows users everywhere to access information about Marvel's vast
-              character library from who's coming up, to 70 years ago
-            </div>
-          </div>
-          <div className="h4 text-center pt-3">
-            <div className="icons py-2">
-              <a
-                href="https://github.com/andreyhuey"
-                target="_blank"
-                rel="noreferrer"
-                style={{ textDecoration: "none" }}
-              ></a>
-
-              <a
-                href="https://www.linkedin.com/in/oluwadara-ola-obaado-64b5511b4"
-                target="_blank"
-                rel="noreferrer"
-                style={{ textDecoration: "none" }}
-              ></a>
-
-              <a
-                href="mailto:andreyhuey777@gmail.com"
-                target="_blank"
-                rel="noreferrer"
-                style={{ textDecoration: "none" }}
-              ></a>
-            </div>
-          </div>
+    <div className="bg-gray-950 text-[#8794BA] pt-10 pb-4 px-4 md:px-8 lg:px-20">
+      <div className="border-t-[1px] border-t-[#2A407C] py-5 flex md:flex-row flex-col items-center justify-center md:items-center md:justify-between gap-6">
+        <Link to={"/"} className="cursor-pointer">
+          <img className="h-[50px] w-[128px]" src={logo} alt="marvel logo" />
+        </Link>
+        <div className="text-center">
+          Marvel's vast library of characters, comics, events & stories
         </div>
-      </footer>
-      <div className="text-center">
-        <a
-          className="link-secondary link-center"
-          href="https://marvel.com"
-          target="_blank"
-          rel="noreferrer"
-          style={{ textDecoration: "none" }}
-        >
-          Data Provided By Marvel @2022
-        </a>
+        <div className="flex items-center justify-center gap-5  text-[#8794BA] text-[24px] ">
+          <Link className="hover:text-red-500 cursor-pointer" to={`/`}>
+            <BiLogoTwitter />
+          </Link>
+          <Link className="hover:text-red-500 cursor-pointer" to={`/`}>
+            <BiLogoGithub />
+          </Link>
+          <Link className="hover:text-red-500 cursor-pointer" to={`/`}>
+            <BiLogoLinkedin />
+          </Link>
+        </div>
       </div>
-      <div className="text-center pb-1">
-        <b className="text-white ">
-          Copyright @ 2022 All Rights Reserved by{" "}
-          <a
-            className="link-secondary"
-            href="https://culturex.space"
-            target="_blank"
-            rel="noreferrer"
-            style={{ textDecoration: "none" }}
-          >
-            CultureX
-          </a>
-        </b>
+      <div className="text-center text-[10px]">
+        © 2022 Marvel-Verse. All rights reserved.
       </div>
     </div>
   );

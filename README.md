@@ -1,10 +1,14 @@
-# Getting Started with Marvel App
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+<!-- Scroll Position handled thanks to the link below -->
+
+gist [scroll position gist](https://gist.github.com/jeffijoe/510f6823ef809e3711ed307823b48c0a)
 
 ### `npm start`
 
@@ -68,7 +72,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-### Project Hints
-
-Add React Query for app to properly remember pagination details

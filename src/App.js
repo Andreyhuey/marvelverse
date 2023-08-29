@@ -1,117 +1,102 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Switch, Route } from "react-router-dom";
 import {
   Homepage,
   //
   Characters,
-  CharactersId,
+  CharacterDetails,
   CharacterComics,
   CharacterEvents,
-  CharacterSeries,
-  CharacterStories,
   //
   Comics,
-  ComicsId,
-  ComicCharacters,
-  ComicCreators,
-  ComicStories,
-  //
-  Creators,
+  ComicDetails,
   //
   Events,
-  EventsId,
-  EventCharacters,
+  EventDetails,
+  EventsCharacters,
   EventComics,
-  //
+  Search,
   Series,
+
   //
-  Stories,
-  //
-  Test,
 } from "./pages";
 import { Footer, Navbar } from "./components";
 
-function App() {
+const App = () => {
   return (
-    <div className={`bg-dark text-white`}>
-      <>
-        <Navbar />
+    <div className="relative">
+      <Navbar />
+      <div className="md:pt-20 pt-12">
         <Switch>
-          {/* Homepage */}
           <Route exact path="/">
             <Homepage />
           </Route>
-          {/* Character Pages */}
+
+          <Route exact path={"/search"}>
+            <Search />
+          </Route>
+
+          {/* Characters */}
           <Route exact path="/characters">
             <Characters />
           </Route>
-          <Route exact path="/characters/:characterId">
-            <CharactersId />
+          {/* CharacterDetails */}
+          <Route exact path="/characters/:characterId/:name">
+            <CharacterDetails />
           </Route>
-          <Route exact path="/characters/:characterId/comics">
+          {/* Character Comics */}
+          <Route exact path="/characters/:characterId/:name/comics">
             <CharacterComics />
           </Route>
-          <Route exact path="/characters/:characterId/events">
+          {/* Character Comics */}
+          <Route exact path="/characters/:characterId/:name/events">
             <CharacterEvents />
           </Route>
-          <Route exact path="/characters/:characterId/series">
-            <CharacterSeries />
-          </Route>
-          <Route exact path="/characters/:characterId/stories">
-            <CharacterStories />
-          </Route>
-          {/* Comic Pages */}
-          <Route exact path="/comics">
-            <Comics />
-          </Route>
-          <Route exact path="/comics/:comicId">
-            <ComicsId />
-          </Route>
-          <Route exact path="/comics/:comicId/characters">
-            <ComicCharacters />
-          </Route>
-          <Route exact path="/comics/:comicId/creators">
-            <ComicCreators />
-          </Route>
-          <Route exact path="/comics/:comicId/stories">
-            <ComicStories />
-          </Route>
-          {/* Creator Pages */}
-          <Route exact path="/creators">
-            <Creators />
-          </Route>
-          {/* Events Pages */}
+
+          {/* #Marvel Events Routes */}
+          {/* Events */}
           <Route exact path="/events">
             <Events />
           </Route>
-          <Route exact path="/events/:eventId">
-            <EventsId />
+          {/* Event Details */}
+          <Route exact path="/events/:eventId/:title">
+            <EventDetails />
           </Route>
-          <Route exact path="/events/:eventId/characters">
-            <EventCharacters />
+          {/* Event Character */}
+          <Route exact path="/events/:eventId/:title/characters">
+            <EventsCharacters />
           </Route>
-          <Route exact path="/events/:eventId/comics">
+          {/* Event Comics */}
+          <Route exact path="/events/:eventId/:title/comics">
             <EventComics />
           </Route>
-          {/* Creator Pages */}
+
+          {/* Comics */}
+          <Route exact path="/comics">
+            <Comics />
+          </Route>
+          <Route exact path="/comics/:comicId/:title">
+            <ComicDetails />
+          </Route>
+          <Route exact path="/comics/:comicId/:title/characters">
+            <ComicDetails />
+          </Route>
+          <Route exact path="/comics/:comicId/:title/events">
+            <ComicDetails />
+          </Route>
+          <Route exact path="/comics/:comicId/:title/series">
+            <ComicDetails />
+          </Route>
+
+          {/*  */}
           <Route exact path="/series">
             <Series />
           </Route>
-          {/* Creator Pages */}
-          <Route exact path="/stories">
-            <Stories />
-          </Route>
-          {/* Test Pages */}
-          <Route exact path="/test">
-            <Test />
-          </Route>
         </Switch>
-        <Footer />
-      </>
+      </div>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;

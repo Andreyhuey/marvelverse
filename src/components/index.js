@@ -1,3 +1,5 @@
-export { default as Navbar } from "./Navbar.jsx";
-export { default as Footer } from "./Footer";
-export { default as Loader } from "./Loader.jsx";
+import Navbar from "./Navbar.jsx";
+import Footer from "./Footer.jsx";
+import Loader from "./Loader.jsx";
+
+export { Navbar, Footer, Loader };
