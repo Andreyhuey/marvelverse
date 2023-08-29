@@ -1,6 +1,6 @@
 // Homepage
 import Homepage from "./Homepage";
-import Search from "./Search";
+import Search from "./Search/Search";
 
 // Characters
 import Characters from "./Characters/Characters";
