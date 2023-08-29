@@ -1,72 +1,72 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useGetEventsQuery } from "../../services/eventsApi";
+import { useGetSeriesQuery } from "../../services/seriesApi";
 import Loader from "../../components/Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
 
-const Events = () => {
-  const [events, setEvents] = useState([]);
+const Series = () => {
+  const [series, setSeries] = useState([]);
   const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
   const limit = "16";
   const [total, setTotal] = useState(0);
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderByEvents") || "name"
+    sessionStorage.getItem("orderBySeries") || "title"
   );
   const [label, setLabel] = useState(
-    sessionStorage.getItem("labelEvents") || "Ascending Order (A-Z)"
+    sessionStorage.getItem("labelSeries") || "Ascending Order (A-Z)"
   );
 
-  const { data: eventsList, isFetching } = useGetEventsQuery({
+  const { data: seriesList, isFetching } = useGetSeriesQuery({
     orderBy,
     offset,
     limit,
   });
 
   //   Pagination useState(s)
-  const [currentEventPage, setCurrentEventPage] = useState(
-    parseInt(sessionStorage.getItem("currentEventPage")) || 1
+  const [currentSeriesPage, setCurrentSeriesPage] = useState(
+    parseInt(sessionStorage.getItem("currentSeriesPage")) || 1
   );
 
   // Options for the Order
   const options = [
-    { label: "Newest", value: "-startDate" },
-    { label: "Oldest", value: "startDate" },
-    { label: "Ascending Order (A-Z)", value: "name" },
-    { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Modified", value: "modified" },
+    { label: "Start Year", value: "startYear" },
+    { label: "Ascending Order (A-Z)", value: "title" },
+    { label: "Descending Order (Z-A)", value: "-title" },
+    { label: "Oldest Modified", value: "modified" },
+    { label: "Newest", value: "-modified" },
   ];
 
   // handleChange for the Order
   const handleChange = (event, newValue) => {
     setOrderBy(newValue?.value);
     setLabel(newValue?.label);
-    setCurrentEventPage(1);
+    setCurrentSeriesPage(1);
   };
 
   // UseEffect used to fetch and set Total, count and offset
   useEffect(() => {
-    const fetchResults = eventsList?.data?.results;
-    setEvents(fetchResults || []);
-    setTotal(eventsList?.data?.total);
-    setCount(eventsList?.data?.count);
-    setOffset((currentEventPage - 1) * limit);
+    const fetchResults = seriesList?.data?.results;
+    setSeries(fetchResults || []);
+    setTotal(seriesList?.data?.total);
+    setCount(seriesList?.data?.count);
+    setOffset((currentSeriesPage - 1) * limit);
     console.log(fetchResults);
-    sessionStorage.setItem("currentEventPage", currentEventPage);
+    sessionStorage.setItem("currentSeriesPage", currentSeriesPage);
     // Store relevant data in sessionStorage
-    sessionStorage.setItem("orderByEvents", orderBy); // Store orderBy
-    sessionStorage.setItem("labelEvents", label);
+    sessionStorage.setItem("orderBySeries", orderBy); // Store orderBy
+    sessionStorage.setItem("labelSeries", label);
 
     document.title =
-      "Events | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
-  }, [eventsList, orderBy, limit, currentEventPage]);
+      "Series | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
+  }, [seriesList, orderBy, limit, currentSeriesPage]);
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
-    const storedOrderBy = sessionStorage.getItem("orderByEvents");
-    const storedLabel = sessionStorage.getItem("labelEvents");
+    const storedOrderBy = sessionStorage.getItem("orderBySeries");
+    const storedLabel = sessionStorage.getItem("labelSeries");
 
     if (storedOrderBy) {
       setOrderBy(storedOrderBy);
@@ -88,18 +88,106 @@ const Events = () => {
   }
 
   const handlePageClick = (number) => {
-    setCurrentEventPage(number);
-    sessionStorage.setItem(currentEventPage, number);
+    setCurrentSeriesPage(number);
+    sessionStorage.setItem(currentSeriesPage, number);
   };
+
+  function renderSmartPagination() {
+    const totalPageCount = totalPages(); // Replace with your total number of pages
+    const currentPage = currentSeriesPage; // Replace with your current page
+    const screenWidth = window.innerWidth; // Get the screen width
+
+    let visiblePageCount = 3; // Default visible page count
+
+    if (screenWidth > 440) {
+      visiblePageCount = 10; // Show more links on larger screens
+    }
+
+    const pageElements = [];
+
+    const startPage = Math.max(
+      currentPage - Math.floor(visiblePageCount / 2),
+      1
+    );
+    const endPage = Math.min(startPage + visiblePageCount - 1, totalPageCount);
+
+    if (startPage > 1) {
+      pageElements.push(
+        <li key={`page-1`}>
+          <button
+            className={`flex items-center justify-center px-2 md:px-3 h-8 leading-tight ${
+              currentPage === 1
+                ? "text-black bg-white"
+                : "text-gray-500 bg-white border-gray-300 border-[1px] hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            }`}
+            onClick={() => handlePageClick(1)}
+          >
+            1
+          </button>
+        </li>
+      );
+
+      if (startPage > 2) {
+        pageElements.push(
+          <span key="ellipsis-start" className="text-gray-500">
+            ...
+          </span>
+        );
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageElements.push(
+        <li key={`page-${i}`}>
+          <button
+            className={`flex items-center justify-center px-2 md:px-3 h-8 leading-tight ${
+              currentPage === i
+                ? "text-black bg-white"
+                : "text-gray-500 bg-white border-gray-300 border-[1px] hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            }`}
+            onClick={() => handlePageClick(i)}
+          >
+            {i}
+          </button>
+        </li>
+      );
+    }
+
+    if (endPage < totalPageCount) {
+      if (endPage < totalPageCount - 1) {
+        pageElements.push(
+          <span key="ellipsis-end" className="text-gray-500">
+            ...
+          </span>
+        );
+      }
+      pageElements.push(
+        <li key={`page-${totalPageCount}`}>
+          <button
+            className={`flex items-center justify-center px-2 md:px-3 h-8 leading-tight ${
+              currentPage === totalPageCount
+                ? "text-black bg-white"
+                : "text-gray-500 bg-white border-gray-300 border-[1px] hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            }`}
+            onClick={() => handlePageClick(totalPageCount)}
+          >
+            {totalPageCount}
+          </button>
+        </li>
+      );
+    }
+
+    return pageElements;
+  }
 
   return (
     <div>
       <div className="bg-gray-950 text-white py-20 px-4 md:px-8 lg:px-20">
-        <div className="text-center text-[26px] py-6 font-[700]">Events</div>
+        <div className="text-center text-[26px] py-6 font-[700]">Series</div>
 
         <div className="flex items-center justify-center">
           <p className="border rounded p-2 bg-black">
-            Page {currentEventPage} of {totalPages()}
+            Page {currentSeriesPage} of {totalPages()}
           </p>
         </div>
 
@@ -131,7 +219,7 @@ const Events = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
-          {events?.map((c) => (
+          {series?.map((c) => (
             <div
               key={c.id}
               // onMouseEnter={() => handleMouseEnter(c.id)}
@@ -142,7 +230,7 @@ const Events = () => {
             >
               <ScrollPositionManager scrollKey={`${c.id + c.title}`} />
 
-              <Link key={c.id} to={`/events/${c.id}/${c.title}`}>
+              <Link key={c.id} to={`/series/${c.id}/${c.title}`}>
                 <div className={`  `}>
                   <>
                     <img
@@ -154,7 +242,7 @@ const Events = () => {
                 </div>
                 <div className="px-2 pb-2">
                   <div className="font-mono font-bold text-[#a7a4a4] py-2">
-                    {c.start ? moment(c.start).format("YYYY") : "Nill"}
+                    {c.title}
                   </div>
                 </div>
               </Link>
@@ -162,39 +250,26 @@ const Events = () => {
           ))}
         </div>
 
-        <div className="flex justify-center overflow-auto mt-4 py-12">
-          <nav aria-label="Page navigation example ">
+        {/* Pagination example */}
+
+        <div className="flex justify-center  mt-4 py-12 max-w-full">
+          <nav aria-label="Page navigation example">
             <ul className="inline-flex -space-x-px text-md">
               <li>
                 <button
-                  className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() => handlePageClick(currentEventPage - 1)}
-                  disabled={currentEventPage === 1}
+                  className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => handlePageClick(currentSeriesPage - 1)}
+                  disabled={currentSeriesPage === 1}
                 >
                   Prev
                 </button>
               </li>
-              {Array.from({ length: totalPages() }, (_, i) => i + 1).map(
-                (number) => (
-                  <li key={number}>
-                    <button
-                      className={`flex items-center justify-center px-3 h-8 leading-tight ${
-                        currentEventPage === number
-                          ? "text-black bg-white"
-                          : "text-gray-500 bg-white border-gray-300 border-[1px] hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                      }`}
-                      onClick={() => handlePageClick(number)}
-                    >
-                      {number}
-                    </button>
-                  </li>
-                )
-              )}
+              {renderSmartPagination()}
               <li>
                 <button
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() => handlePageClick(currentEventPage + 1)}
-                  disabled={currentEventPage === totalPages()}
+                  className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => handlePageClick(currentSeriesPage + 1)}
+                  disabled={currentSeriesPage === totalPages()}
                 >
                   Next
                 </button>
@@ -207,4 +282,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default Series;
