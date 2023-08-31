@@ -17,7 +17,6 @@ import {
   EventComics,
   Search,
   Series,
-
   //
 } from "./pages";
 import { Footer, Navbar } from "./components";
