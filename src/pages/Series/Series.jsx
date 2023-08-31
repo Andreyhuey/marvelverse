@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useGetSeriesQuery } from "../../services/seriesApi";
 import Loader from "../../components/Loader";
-import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
 
 const Series = () => {
   const [series, setSeries] = useState([]);
-  const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
   const limit = "16";
   const [total, setTotal] = useState(0);
@@ -51,7 +49,6 @@ const Series = () => {
     const fetchResults = seriesList?.data?.results;
     setSeries(fetchResults || []);
     setTotal(seriesList?.data?.total);
-    setCount(seriesList?.data?.count);
     setOffset((currentSeriesPage - 1) * limit);
     console.log(fetchResults);
     sessionStorage.setItem("currentSeriesPage", currentSeriesPage);
