@@ -8,7 +8,7 @@ import { Loader } from "../../components";
 
 const EventDetails = () => {
   const { eventId, title } = useParams();
-  const { event, setEvent } = useState();
+  const [event, setEvent] = useState();
   const { data, isFetching } = useGetEventDetailsQuery(eventId);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const EventDetails = () => {
     setEvent(eventDetails);
     document.title = `${title} | Events | Marvel-Verse`;
     document.body.scrollTop = 0;
-  }, [document, data, title]);
+  }, [data, title, setEvent]);
 
   if (isFetching) return <Loader />;
 
