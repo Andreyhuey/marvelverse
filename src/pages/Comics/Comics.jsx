@@ -60,7 +60,7 @@ const Comics = () => {
     { label: "Descending Order (Z-A)", value: "-title" },
     { label: "Oldest Issue", value: "issueNumber" },
     { label: "Latest Issue", value: "-issueNumber" },
-    { label: "Oldest Modified", value: "modified" },
+    { label: "Old", value: "modified" },
     { label: "Recently Modified", value: "-modified" },
     { label: "Final Order Cutoff (FOC)", value: "focDate" },
     { label: "Latest Final Order Cutoff (FOC)", value: "-focDate" },

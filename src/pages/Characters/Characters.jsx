@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGetCharactersQuery } from "../../services/charactersApi";
 import Loader from "../../components/Loader";
-import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
-  const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
   const limit = "16";
   const [total, setTotal] = useState(0);
@@ -34,7 +32,7 @@ const Characters = () => {
   const options = [
     { label: "Ascending Order (A-Z)", value: "name" },
     { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Modified", value: "modified" },
+    { label: "Old", value: "modified" },
     { label: "Recently Modified", value: "-modified" },
   ];
 
@@ -50,7 +48,6 @@ const Characters = () => {
     const fetchResults = charactersList?.data?.results;
     setCharacters(fetchResults || []);
     setTotal(charactersList?.data?.total);
-    setCount(charactersList?.data?.count);
     setOffset((currentCharacterPage - 1) * limit);
     console.log(fetchResults);
     sessionStorage.setItem("currentCharacterPage", currentCharacterPage);

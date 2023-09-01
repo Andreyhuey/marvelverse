@@ -33,7 +33,7 @@ const Series = () => {
     { label: "Start Year", value: "startYear" },
     { label: "Ascending Order (A-Z)", value: "title" },
     { label: "Descending Order (Z-A)", value: "-title" },
-    { label: "Oldest Modified", value: "modified" },
+    { label: "Old", value: "modified" },
     { label: "Newest", value: "-modified" },
   ];
 
