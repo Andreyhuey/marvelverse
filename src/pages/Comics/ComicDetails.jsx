@@ -64,7 +64,7 @@ const ComicDetails = () => {
                       </div>
 
                       {d.series.available !== 0 ? (
-                        <div className="hover:scale-110  transition duration-300 ease-in-out  text-center text-white flex flex-col gap-1 items-start justify-center font-bold rounded-xl">
+                        <div className="text-center text-white flex flex-col gap-1 items-start justify-center font-bold rounded-xl">
                           <p className="text-md">Series</p>
                           <p className="font-mono text-[#c0bdbd] text-center">
                             {d.series.name}

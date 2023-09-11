@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import Loader from "../../components/Loader";
 import ScrollPositionManager from "../../components/ScrollManager";
+import { BiSolidInfoCircle } from "react-icons/bi";
 
 const CharacterDetails = () => {
   const [character, setCharacter] = useState();
@@ -30,101 +31,96 @@ const CharacterDetails = () => {
             {character &&
               character?.map((d) => {
                 return (
-                  <div
-                    key={d.id}
-                    className={`flex md:items-center backdrop-blur-lg md:justify-center flex-col md:flex-row gap-x-5 gap-y-8`}
-                  >
+                  <>
                     <ScrollPositionManager scrollKey={`${d.id + d.name}`} />
-                    <div className="flex-1 flex items-center justify-center gap-4 flex-col">
-                      <img
-                        src={d.thumbnail.path && d.thumbnail.path + ".jpg"}
-                        className="card-img-top scale-75"
-                        alt={"...image of " + d.name}
-                      />
-                    </div>
-
-                    <div className="flex-1">
-                      <h5 className="font-bold text-[26px] text-center md:text-start md:text-[33px] lg:text-[40px] capitalize ">
-                        {d.name}
-                      </h5>
-                      <div className="flex flex-col justify-center items-start gap-4 max-w-lg">
-                        <p className="font-serif">
-                          {d.description && (
-                            <>
-                              <p className="font-bold pb-2">Overview:</p>
-                              <p className="text-[#212529]"></p>
-                              {HTMLReactParser(d.description)}
-                            </>
-                          )}
-                        </p>
-                        <p className="font-semibold text-slate-300 font-mono">
-                          Date: {moment(d.modified).format("MMM DD, YYYY")}
-                        </p>
+                    <div
+                      key={d.id}
+                      className={`flex  flex-col md:flex-row items-center gap-x-5 gap-y-8 w-full`}
+                    >
+                      <div className="flex-1 w-full items-center justify-center flex">
+                        <img
+                          src={d.thumbnail.path && d.thumbnail.path + ".jpg"}
+                          className=""
+                          alt={"...image of " + d.name}
+                        />
                       </div>
 
-                      <div className="items-center justify-center flex">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-6 items-center justify-center">
-                          {d.events.available !== 0 ? (
-                            <Link to={`/characters/${d.id}/${d.name}/events`}>
-                              <div className="bg-slate-900 hover:bg-red-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                                <p className="font-mono text-[#c0bdbd]">
-                                  {d.events.available}
+                      <div className="flex-1 w-full">
+                        <h5 className="font-bold text-[26px] text-center md:text-start md:text-[33px] lg:text-[40px] capitalize ">
+                          {d.name}
+                        </h5>
+                        <div className="flex flex-col justify-center items-start gap-2 max-w-lg">
+                          <p className="font-bold text-lg">Overview:</p>
+                          <p className="font-serif">
+                            {d.description ? (
+                              <>
+                                <p className="text-slate-300">
+                                  {HTMLReactParser(d.description)}
                                 </p>
-                                <p className="font-mono">Events</p>
-                              </div>
-                            </Link>
-                          ) : (
-                            ""
-                          )}
+                              </>
+                            ) : (
+                              <>
+                                <div className="text-slate-300 flex gap-2 items-center italic">
+                                  <BiSolidInfoCircle className="text-red-500" />{" "}
+                                  No description provided by
+                                  <span className="text-red-500">MARVEL</span>
+                                </div>
+                              </>
+                            )}
+                          </p>
+                          <p className="font-semibold">
+                            Modified:{" "}
+                            <span className="text-slate-300">
+                              {moment(d.modified).format("MMM DD, YYYY")}
+                            </span>
+                          </p>
+                        </div>
 
-                          {d.comics.available !== 0 ? (
-                            <Link to={`/characters/${d.id}/${d.name}/comics`}>
-                              <div className="bg-slate-900 hover:bg-red-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                                <p className="font-mono text-[#c0bdbd]">
-                                  {d.comics.available}
-                                </p>
-                                <p className="font-mono">Comics</p>
-                              </div>
-                            </Link>
-                          ) : (
-                            ""
-                          )}
+                        <div className="items-center justify-center flex w-full">
+                          <div className="grid grid-cols-3 gap-y-10 py-6 items-center justify-between w-full">
+                            {d.events.available !== 0 ? (
+                              <Link to={`/characters/${d.id}/${d.name}/events`}>
+                                <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                                  <p className="font-mono text-[#c0bdbd]">
+                                    {d.events.available}
+                                  </p>
+                                  <p className="font-mono">Events</p>
+                                </div>
+                              </Link>
+                            ) : (
+                              ""
+                            )}
 
-                          {d.series.available !== 0 ? (
-                            <Link to={`/characters/${d.id}/${d.name}/series`}>
-                              <div className="bg-slate-900 hover:bg-red-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                                <p className="font-mono text-[#c0bdbd]">
-                                  {d.series.available}
-                                </p>
-                                <p className="font-mono">Series</p>
-                              </div>
-                            </Link>
-                          ) : (
-                            ""
-                          )}
+                            {d.comics.available !== 0 ? (
+                              <Link to={`/characters/${d.id}/${d.name}/comics`}>
+                                <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                                  <p className="font-mono text-[#c0bdbd]">
+                                    {d.comics.available}
+                                  </p>
+                                  <p className="font-mono">Comics</p>
+                                </div>
+                              </Link>
+                            ) : (
+                              ""
+                            )}
 
-                          {/* <div>
-                        {d.creators.available !== 0 ? (
-                          <Link to={`/characters/${d.id}/${d.name}/creators`}>
-                            <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                              <p className="font-mono text-[#c0bdbd]">
-                                {d.creators.available}
-                              </p>
-                              <p className="font-mono">Creators</p>
-                            </div>
-                          </Link>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-
-                      
-
-                       */}
+                            {d.series.available !== 0 ? (
+                              <Link to={`/characters/${d.id}/${d.name}/series`}>
+                                <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                                  <p className="font-mono text-[#c0bdbd]">
+                                    {d.series.available}
+                                  </p>
+                                  <p className="font-mono">Series</p>
+                                </div>
+                              </Link>
+                            ) : (
+                              ""
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </>
                 );
               })}
           </div>

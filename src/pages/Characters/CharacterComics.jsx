@@ -5,6 +5,7 @@ import Loader from "../../components/Loader";
 import ScrollPositionManager from "../../components/ScrollManager";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
+import { BiSolidInfoCircle } from "react-icons/bi";
 
 const CharacterComics = () => {
   const { characterId, name } = useParams();
@@ -262,9 +263,15 @@ const CharacterComics = () => {
                       />
                     </>
 
-                    <div className="uppercase  font-bold p-2 font-mono text-white absolute bottom-0 right-0 bg-red-500 rounded-br-xl rounded-tl-md">
-                      ${c.prices[0].price}
-                    </div>
+                    {c.description ? (
+                      <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-green-500 rounded-br-xl rounded-tl-md">
+                        <BiSolidInfoCircle />
+                      </div>
+                    ) : (
+                      <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-red-500 rounded-br-xl rounded-tl-md">
+                        <BiSolidInfoCircle />
+                      </div>
+                    )}
                   </div>
                   <div className="px-2 pb-2 flex items-center justify-center">
                     <div
