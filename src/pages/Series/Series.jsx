@@ -4,6 +4,7 @@ import { useGetSeriesQuery } from "../../services/seriesApi";
 import Loader from "../../components/Loader";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
+import { BiSolidInfoCircle } from "react-icons/bi";
 
 const Series = () => {
   const [series, setSeries] = useState([]);
@@ -228,7 +229,7 @@ const Series = () => {
               <ScrollPositionManager scrollKey={`${c.id + c.title}`} />
 
               <Link key={c.id} to={`/series/${c.id}/${c.title}`}>
-                <div className={`  `}>
+                <div className={` relative `}>
                   <>
                     <img
                       src={c.thumbnail.path + ".jpg"}
@@ -236,6 +237,16 @@ const Series = () => {
                       alt={"img of " + c.title}
                     />
                   </>
+
+                  {c.description ? (
+                    <div className="text-xl font-bold p-2 font-mono absolute bottom-2 right-0 text-green-500 rounded-br-xl rounded-tl-md">
+                      <BiSolidInfoCircle />
+                    </div>
+                  ) : (
+                    <div className="text-xl font-bold p-2 font-mono absolute bottom-2 right-0 text-red-500 rounded-br-xl rounded-tl-md">
+                      <BiSolidInfoCircle />
+                    </div>
+                  )}
                 </div>
                 <div className="px-2 pb-2">
                   <div className="font-mono font-bold text-[#a7a4a4] py-2">
