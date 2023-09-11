@@ -19,6 +19,7 @@ import Comics from "./Comics/Comics";
 import ComicDetails from "./Comics/ComicDetails";
 //
 import Series from "./Series/Series";
+import SeriesDetails from "./Series/SeriesDetails";
 
 export {
   Homepage,
@@ -38,4 +39,5 @@ export {
   ComicDetails,
   //
   Series,
+  SeriesDetails,
 };

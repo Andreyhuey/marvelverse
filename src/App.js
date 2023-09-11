@@ -17,6 +17,7 @@ import {
   EventComics,
   Search,
   Series,
+  SeriesDetails,
   //
 } from "./pages";
 import { Footer, Navbar } from "./components";
@@ -90,6 +91,9 @@ const App = () => {
           {/*  */}
           <Route exact path="/series">
             <Series />
+          </Route>
+          <Route exact path="/series/:seriesId/:title">
+            <SeriesDetails />
           </Route>
         </Switch>
       </div>
