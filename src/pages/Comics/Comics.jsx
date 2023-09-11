@@ -247,11 +247,11 @@ const Comics = () => {
                     </>
 
                     {c.description ? (
-                      <div className="text-xl font-bold p-2 font-mono absolute bottom-0 left-0 text-green-500 rounded-br-xl rounded-tl-md">
+                      <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-green-500 rounded-br-xl rounded-tl-md">
                         <BiSolidInfoCircle />
                       </div>
                     ) : (
-                      <div className="text-xl font-bold p-2 font-mono absolute bottom-0 left-0 text-red-500 rounded-br-xl rounded-tl-md">
+                      <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-red-500 rounded-br-xl rounded-tl-md">
                         <BiSolidInfoCircle />
                       </div>
                     )}
