@@ -64,15 +64,19 @@ const SeriesDetails = () => {
                       </div>
 
                       <div className="grid grid-cols-2 gap-x-6  gap-y-3 justify-between w-full">
-                        <p className="font-semibold">
-                          Type:
-                          <span className="text-slate-300"> {d.type}</span>
-                        </p>
+                        {d.type && (
+                          <p className="font-semibold">
+                            Type:
+                            <span className="text-slate-300"> {d.type}</span>
+                          </p>
+                        )}
 
-                        <p className="font-semibold">
-                          Rating:
-                          <span className="text-slate-300"> {d.rating}</span>
-                        </p>
+                        {d.rating && (
+                          <p className="font-semibold">
+                            Rating:
+                            <span className="text-slate-300"> {d.rating}</span>
+                          </p>
+                        )}
 
                         <p className="font-semibold">
                           Start Year:{" "}
