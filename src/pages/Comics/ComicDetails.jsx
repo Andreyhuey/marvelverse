@@ -61,31 +61,36 @@ const ComicDetails = () => {
                         )}
                       </div>
 
-                      <p className="font-mono">
-                        Price :
-                        <span className="text-slate-300">
-                          ${d.prices[0].price}
-                        </span>
-                      </p>
-                      <p className="font-mono">
-                        Format:
-                        <span className="text-slate-300"> {d.format}</span>
-                      </p>
-                      <p className="font-mono">
-                        Page Count:
-                        <span className="text-slate-300"> {d.pageCount}</span>
-                      </p>
-                      <p className="font-mono">
-                        Issue Number:
-                        <span className="text-slate-300"> {d.issueNumber}</span>
-                      </p>
+                      <div className="grid grid-cols-2 gap-3 justify-between">
+                        <p className="font-mono">
+                          Price :
+                          <span className="text-slate-300">
+                            ${d.prices[0].price}
+                          </span>
+                        </p>
+                        <p className="font-mono">
+                          Format:
+                          <span className="text-slate-300"> {d.format}</span>
+                        </p>
+                        <p className="font-mono">
+                          Page Count:
+                          <span className="text-slate-300"> {d.pageCount}</span>
+                        </p>
+                        <p className="font-mono">
+                          Issue Number:
+                          <span className="text-slate-300">
+                            {" "}
+                            {d.issueNumber}
+                          </span>
+                        </p>
 
-                      <p className="font-semibold  font-mono">
-                        Date:{" "}
-                        <span className="text-slate-300">
-                          {moment(d.modified).format("MMM DD, YYYY")}
-                        </span>
-                      </p>
+                        <p className="font-semibold  font-mono">
+                          Date:{" "}
+                          <span className="text-slate-300">
+                            {moment(d.modified).format("MMM DD, YYYY")}
+                          </span>
+                        </p>
+                      </div>
                     </div>
 
                     <div className="items-start justify-start flex">
@@ -170,16 +175,21 @@ const ComicDetails = () => {
                     </div>
 
                     <div className="font-semibold  font-mono">
-                      <p className="text-lg">Creators:</p>
-                      <span className="pb-1">
+                      <p className="text-2xl">Creators</p>
+                      <span className="pb-1 grid grid-cols-2">
                         {d.creators.items.map((c) => {
                           return (
-                            <div
-                              key={c.role}
-                              className="flex items-center justify-start gap-2"
-                            >
-                              <p className="capitalize">{c.role}:</p>
-                              <p className="text-slate-300">{c.name}</p>
+                            <div key={c.role} className="">
+                              <div className="">
+                                <div className="flex items-center justify-start gap-2">
+                                  <p className="capitalize">
+                                    {c.role}:{" "}
+                                    <span className="text-slate-300">
+                                      {c.name}
+                                    </span>
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           );
                         })}
