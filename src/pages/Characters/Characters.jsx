@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGetCharactersQuery } from "../../services/charactersApi";
 import Loader from "../../components/Loader";
+import { BiSolidInfoCircle } from "react-icons/bi";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
 
@@ -227,7 +228,7 @@ const Characters = () => {
                   to={`/characters/${c.id}/${c.name}`}
                   className="py-4"
                 >
-                  <div className={`  `}>
+                  <div className={` relative `}>
                     <>
                       <img
                         src={c.thumbnail.path + ".jpg"}
@@ -236,10 +237,20 @@ const Characters = () => {
                       />
                     </>
 
-                    <div className="px-2 pb-2">
-                      <div className={`uppercase  font-bold py-2  "`}>
-                        {c.name}
+                    {c.description ? (
+                      <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-green-500 rounded-br-xl rounded-tl-md">
+                        <BiSolidInfoCircle />
                       </div>
+                    ) : (
+                      <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-red-500 rounded-br-xl rounded-tl-md">
+                        <BiSolidInfoCircle />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="px-2 pb-2">
+                    <div className={`uppercase  font-bold py-2  "`}>
+                      {c.name}
                     </div>
                   </div>
                 </Link>
