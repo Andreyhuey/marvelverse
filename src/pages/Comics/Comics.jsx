@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useGetComicsQuery } from "../../services/comicsApi";
 import Loader from "../../components/Loader";
 import ScrollPositionManager from "../../components/ScrollManager";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import { BiSolidInfoCircle } from "react-icons/bi";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Autocomplete, TextField } from "@mui/material";
 import placeholderComics from "../../assets/placeholder-comics.jpg";
@@ -223,9 +223,12 @@ const Comics = () => {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
           {comics?.map((c) => (
-            <div key={c.id} className="">
-              <ScrollPositionManager scrollKey={`${c.id + c.diamondCode}`} />
+            <div
+              key={c.id}
+              className={` ${isFetching ? "animate-pulse" : ""} `}
+            >
               <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
+                <ScrollPositionManager scrollKey={`${c.id + c.diamondCode}`} />
                 <Link
                   key={c.id}
                   to={`/comics/${c.id}/${c.title}`}
@@ -237,13 +240,21 @@ const Comics = () => {
                         src={c.thumbnail.path + ".jpg"}
                         className={`${"rounded-xl w-full"}`}
                         alt={"img of " + c.title}
-                        loading={<Loader />}
+                        onLoad={(isFetching) => (
+                          <Loader className="animate-pulse" />
+                        )}
                       />
                     </>
 
-                    <div className="uppercase  font-bold p-2 font-mono text-white absolute bottom-2 right-0 bg-red-500 rounded-br-xl rounded-tl-md">
-                      ${c.prices[0].price}
-                    </div>
+                    {c.description ? (
+                      <div className="text-xl font-bold p-2 font-mono absolute bottom-0 left-0 text-green-500 rounded-br-xl rounded-tl-md">
+                        <BiSolidInfoCircle />
+                      </div>
+                    ) : (
+                      <div className="text-xl font-bold p-2 font-mono absolute bottom-0 left-0 text-red-500 rounded-br-xl rounded-tl-md">
+                        <BiSolidInfoCircle />
+                      </div>
+                    )}
                   </div>
                   <div className="px-2 pb-2 flex items-center justify-center">
                     <div
