@@ -5,6 +5,7 @@ import { useGetComicDetailsQuery } from "../../services/comicsApi";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Loader from "../../components/Loader";
+import { BiSolidInfoCircle } from "react-icons/bi";
 
 const ComicDetails = () => {
   const { comicId, title } = useParams();
@@ -47,44 +48,53 @@ const ComicDetails = () => {
                       </h5>
 
                       <div className="font-serif">
-                        <p className="text-lg font-bold">Overview: </p>
+                        <p className="text-lg font-bold">Overview </p>
 
                         {d.description ? (
                           <p className="text-slate-300">
                             {HTMLReactParser(d.description)}
                           </p>
                         ) : (
-                          <div className="text-slate-300">
-                            Sorry no description provided by
-                            <span className="text-red-500 ml-1">MARVEL</span>
+                          <div className="text-slate-300 flex gap-2 items-center italic">
+                            <BiSolidInfoCircle className="text-red-500" /> No
+                            description provided by
+                            <span className="text-red-500">MARVEL</span>
                           </div>
                         )}
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3 justify-between">
-                        <p className="font-mono">
-                          Price :
-                          <span className="text-slate-300">
-                            ${d.prices[0].price}
-                          </span>
-                        </p>
-                        <p className="font-mono">
-                          Format:
-                          <span className="text-slate-300"> {d.format}</span>
-                        </p>
-                        <p className="font-mono">
+                      <div className="grid grid-cols-2 gap-x-6  gap-y-3 justify-between w-full">
+                        {d.issueNumber > 0 ? (
+                          <p className="font-semibold">
+                            Issue Number:
+                            <span className="text-slate-300">
+                              {" "}
+                              {d.issueNumber}
+                            </span>
+                          </p>
+                        ) : (
+                          ""
+                        )}
+
+                        <p className="font-semibold">
                           Page Count:
                           <span className="text-slate-300"> {d.pageCount}</span>
                         </p>
-                        <p className="font-mono">
-                          Issue Number:
+
+                        <p className="font-semibold">
+                          Format:
+                          <span className="text-slate-300"> {d.format}</span>
+                        </p>
+
+                        <p className="font-semibold">
+                          Price:
                           <span className="text-slate-300">
                             {" "}
-                            {d.issueNumber}
+                            ${d.prices[0].price}
                           </span>
                         </p>
 
-                        <p className="font-semibold  font-mono">
+                        <p className="font-semibold">
                           Date:{" "}
                           <span className="text-slate-300">
                             {moment(d.modified).format("MMM DD, YYYY")}
@@ -93,90 +103,51 @@ const ComicDetails = () => {
                       </div>
                     </div>
 
-                    <div className="items-start justify-start flex">
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-6 items-center justify-center">
-                        <div>
-                          {d.characters.available !== 0 ? (
-                            <Link to={`/comics/${d.id}/${d.title}/characters`}>
-                              <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                                <p className="font-mono text-[#c0bdbd]">
-                                  {d.characters.available}
-                                </p>
-                                <p className="font-mono">Characters</p>
-                              </div>
-                            </Link>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                        <div>
-                          {d.events.available !== 0 ? (
-                            <Link to={`/comics/${d.id}/${d.title}/events`}>
-                              <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                                <p className="font-mono text-[#c0bdbd]">
-                                  {d.events.available}
-                                </p>
-                                <p className="font-mono">Events</p>
-                              </div>
-                            </Link>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-
-                        {/* <div>
-                        {d.creators.available !== 0 ? (
-                          <Link to={`/comics/${d.id}/${d.title}/creators`}>
-                            <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                              <p className="font-mono text-[#c0bdbd]">
-                                {d.creators.available}
-                              </p>
-                              <p className="font-mono">Creators</p>
-                            </div>
-                          </Link>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-
-                      <div>
+                    <div className="items-center justify-center flex">
+                      <div className="grid grid-cols-2 md:grid-cols-4  gap-10 py-6 items-stretch justify-between w-full">
                         {d.series.available !== 0 ? (
-                          <Link to={`/comics/${d.id}/${d.title}/series`}>
-                            <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                              <p className="font-mono text-[#c0bdbd]">
-                                {d.series.available}
-                              </p>
-                              <p className="font-mono">Series</p>
-                            </div>
-                          </Link>
+                          <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out  text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                            <p className="italic text-left">Series</p>
+                            <p className="font-mono text-[#c0bdbd] text-center">
+                              {d.series.name}
+                            </p>
+                          </div>
                         ) : (
                           ""
                         )}
-                      </div>
 
-                      <div>
-                        {d.stories.available !== 0 ? (
-                          <Link
-                            to={`/comics/${d.id}/${d.title}/stories
-`}
-                          >
-                            <div className="bg-slate-900 hover:text-red-500 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                        {d.characters.available !== 0 ? (
+                          <Link to={`/comics/${d.id}/${d.title}/characters`}>
+                            <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
-                                {d.stories.available}
+                                {d.characters.available}
                               </p>
-                              <p className="font-mono">Stories</p>
+                              <p className="font-semibold">Characters</p>
                             </div>
                           </Link>
                         ) : (
                           ""
                         )}
-                      </div> */}
+
+                        {d.events.available !== 0 ? (
+                          <Link to={`/comics/${d.id}/${d.title}/events`}>
+                            <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
+                              <p className="font-mono text-[#c0bdbd]">
+                                {d.events.available}
+                              </p>
+                              <p className="font-semibold">Events</p>
+                            </div>
+                          </Link>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
 
-                    <div className="font-semibold  font-mono">
+                    {/* creators */}
+                    <div className="font-semibold">
                       <p className="text-2xl">Creators</p>
-                      <span className="pb-1 grid grid-cols-2">
+                      <span className="pb-1 grid grid-cols-2 w-full justify-between gap-1">
                         {d.creators.items.map((c) => {
                           return (
                             <div key={c.role} className="">
