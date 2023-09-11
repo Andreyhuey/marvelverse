@@ -33,10 +33,10 @@ const SeriesDetails = () => {
                   key={d.id}
                   className="flex items-center lg:items-start justify-center flex-col lg:flex-row gap-x-5 gap-y-8"
                 >
-                  <div className="flex-1">
+                  <div className="flex-1 flex items-center justify-center">
                     <img
                       src={d.thumbnail.path && d.thumbnail.path + ".jpg"}
-                      className="card-img-top"
+                      className="h-auto w-auto"
                       alt={"...image of " + d.title}
                     />
                   </div>

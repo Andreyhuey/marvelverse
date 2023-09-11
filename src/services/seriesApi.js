@@ -38,12 +38,6 @@ export const seriesApi = createApi({
           `/series/${eventId}/creators?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
-    getSeriesSeries: builder.query({
-      query: ({ eventId, orderBy, limit, offset }) =>
-        createRequest(
-          `/series/${eventId}/series?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
-        ),
-    }),
   }),
 });
 
