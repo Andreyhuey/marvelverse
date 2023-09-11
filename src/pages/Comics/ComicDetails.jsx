@@ -63,6 +63,17 @@ const ComicDetails = () => {
                         )}
                       </div>
 
+                      {d.series.available !== 0 ? (
+                        <div className="hover:scale-110  transition duration-300 ease-in-out  text-center text-white flex flex-col gap-1 items-start justify-center font-bold rounded-xl">
+                          <p className="text-md">Series</p>
+                          <p className="font-mono text-[#c0bdbd] text-center">
+                            {d.series.name}
+                          </p>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+
                       <div className="grid grid-cols-2 gap-x-6  gap-y-3 justify-between w-full">
                         {d.issueNumber > 0 ? (
                           <p className="font-semibold">
@@ -104,18 +115,7 @@ const ComicDetails = () => {
                     </div>
 
                     <div className="items-center justify-center flex">
-                      <div className="grid grid-cols-2 md:grid-cols-4  gap-10 py-6 items-stretch justify-between w-full">
-                        {d.series.available !== 0 ? (
-                          <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out  text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                            <p className="italic text-left">Series</p>
-                            <p className="font-mono text-[#c0bdbd] text-center">
-                              {d.series.name}
-                            </p>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-
+                      <div className="grid grid-cols-2 md:grid-cols-4  gap-10 py-6 items-center justify-between w-full">
                         {d.characters.available !== 0 ? (
                           <Link to={`/comics/${d.id}/${d.title}/characters`}>
                             <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
