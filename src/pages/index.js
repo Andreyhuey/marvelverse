@@ -21,6 +21,9 @@ import ComicDetails from "./Comics/ComicDetails";
 import Series from "./Series/Series";
 import SeriesDetails from "./Series/SeriesDetails";
 
+// Collection
+import Collection from "./Collection";
+
 export {
   Homepage,
   Search,
@@ -40,4 +43,6 @@ export {
   //
   Series,
   SeriesDetails,
+  //
+  Collection,
 };
