@@ -19,6 +19,7 @@ import {
   Series,
   SeriesDetails,
   //
+  Collection,
 } from "./pages";
 import { Footer, Navbar } from "./components";
 
@@ -94,6 +95,10 @@ const App = () => {
           </Route>
           <Route exact path="/series/:seriesId/:title">
             <SeriesDetails />
+          </Route>
+          {/*  */}
+          <Route exact path="/collection/:searchTerm">
+            <Collection />
           </Route>
         </Switch>
       </div>
