@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useGetSeriesComicsQuery } from "../../services/charactersApi";
+import { useGetSeriesComicsQuery } from "../../services/seriesApi";
 import Loader from "../../components/Loader";
 import ScrollPositionManager from "../../components/ScrollManager";
 import moment from "moment";
@@ -16,7 +16,7 @@ const SeriesComics = () => {
     sessionStorage.getItem(`labelBySeriesComics${seriesId}`) ||
       "Ascending Order (A-Z)"
   );
-  limit = "12";
+  const limit = "12";
   const [offset, setOffset] = useState(0);
 
   const { data: comicsList, isFetching } = useGetSeriesComicsQuery({
@@ -47,7 +47,6 @@ const SeriesComics = () => {
     setTotal(comicsList?.data?.total);
     setComics(fetchResults || []);
     setTotal(comicsList?.data?.total);
-    setCount(comicsList?.data?.count);
     setOffset((currentSeriesComicsPage - 1) * limit);
     console.log(fetchResults);
 

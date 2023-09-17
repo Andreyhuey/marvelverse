@@ -17,9 +17,12 @@ import EventComics from "./Events/EventComics";
 // Comics
 import Comics from "./Comics/Comics";
 import ComicDetails from "./Comics/ComicDetails";
+import ComicCharacters from "./Comics/ComicCharacters";
+import ComicEvents from "./Comics/ComicEvents";
 //
 import Series from "./Series/Series";
 import SeriesDetails from "./Series/SeriesDetails";
+import SeriesComics from "./Series/SeriesComics";
 
 // Collection
 import Collection from "./Collection";
@@ -40,9 +43,12 @@ export {
   //
   Comics,
   ComicDetails,
+  ComicCharacters,
+  ComicEvents,
   //
   Series,
   SeriesDetails,
+  SeriesComics,
   //
   Collection,
 };

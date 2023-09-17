@@ -21,6 +21,7 @@ export default configureStore({
       eventsApi.middleware,
       charactersApi.middleware,
       comicsApi.middleware,
-      collectionApi.middleware
+      collectionApi.middleware,
+      seriesApi.middleware
     ),
 });
