@@ -32,7 +32,7 @@ const App = () => {
   return (
     <div className="relative">
       <Navbar />
-      <div className="md:pt-20 pt-12">
+      <div className="md:pt-20 pt-12 min-h-screen">
         <Switch>
           <Route exact path="/">
             <Homepage />
