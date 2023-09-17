@@ -15,27 +15,27 @@ export const seriesApi = createApi({
         ),
     }),
     getSeriesDetails: builder.query({
-      query: (eventId) =>
+      query: (seriesId) =>
         createRequest(
-          `/series/${eventId}?&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/series/${seriesId}?&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     getSeriesCharacters: builder.query({
-      query: ({ eventId, orderBy, limit, offset }) =>
+      query: ({ seriesId, orderBy, limit, offset }) =>
         createRequest(
-          `/series/${eventId}/characters?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/series/${seriesId}/characters?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     getSeriesComics: builder.query({
-      query: ({ eventId, orderBy, limit, offset }) =>
+      query: ({ seriesId, orderBy, limit, offset }) =>
         createRequest(
-          `/series/${eventId}/comics?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/series/${seriesId}/comics?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     getSeriesCreators: builder.query({
-      query: ({ eventId, orderBy, limit, offset }) =>
+      query: ({ seriesId, orderBy, limit, offset }) =>
         createRequest(
-          `/series/${eventId}/creators?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/series/${seriesId}/creators?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
   }),
