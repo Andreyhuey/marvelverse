@@ -20,6 +20,7 @@ import {
   //
   Series,
   SeriesDetails,
+  SeriesCharacters,
   SeriesComics,
   //
   Search,
@@ -102,9 +103,15 @@ const App = () => {
           <Route exact path="/series">
             <Series />
           </Route>
+          {/* Series Details */}
           <Route exact path="/series/:seriesId/:title">
             <SeriesDetails />
           </Route>
+          {/* Series Characters */}
+          <Route exact path="/series/:seriesId/:title/characters">
+            <SeriesCharacters />
+          </Route>
+          {/* Series Comics */}
           <Route exact path="/series/:seriesId/:title/comics">
             <SeriesComics />
           </Route>
