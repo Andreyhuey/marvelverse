@@ -100,7 +100,7 @@ const SeriesDetails = () => {
                     <div className="items-center justify-center flex">
                       <div className="grid grid-cols-2 md:grid-cols-4  gap-10 py-6 items-center justify-between w-full">
                         {d.characters.available !== 0 ? (
-                          <Link to={`/comics/${d.id}/${d.title}/characters`}>
+                          <Link to={`/series/${d.id}/${d.title}/characters`}>
                             <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.characters.available}
@@ -113,7 +113,7 @@ const SeriesDetails = () => {
                         )}
 
                         {d.comics.available !== 0 ? (
-                          <Link to={`/comics/${d.id}/${d.title}/events`}>
+                          <Link to={`/series/${d.id}/${d.title}/comics`}>
                             <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.comics.available}
@@ -126,7 +126,7 @@ const SeriesDetails = () => {
                         )}
 
                         {d.events.available !== 0 ? (
-                          <Link to={`/comics/${d.id}/${d.title}/events`}>
+                          <Link to={`/series/${d.id}/${d.title}/events`}>
                             <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.events.available}

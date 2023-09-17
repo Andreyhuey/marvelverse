@@ -8,7 +8,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import { BiSolidInfoCircle } from "react-icons/bi";
 
 const SeriesComics = () => {
-  const { seriesId, name } = useParams();
+  const { seriesId, title } = useParams();
   const [orderBy, setOrderBy] = useState(
     sessionStorage.getItem(`orderBySeriesComics${seriesId}`) || "title"
   );
@@ -58,14 +58,14 @@ const SeriesComics = () => {
     sessionStorage.setItem(`orderBySeriesComics${seriesId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelBySeriesComics${seriesId}`, label);
 
-    document.title = `${name} Comics | Series | Marvel-Verse `;
+    document.title = `${title} Comics | Series | Marvel-Verse `;
   }, [
     comicsList,
     orderBy,
     label,
     limit,
     currentSeriesComicsPage,
-    name,
+    title,
     seriesId,
   ]);
 
@@ -205,7 +205,7 @@ const SeriesComics = () => {
     <div>
       <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
         <div className="text-center text-[26px] py-6 font-[700]">
-          {name} Comics
+          {title} Comics
         </div>
 
         <div className="flex items-center justify-center">
