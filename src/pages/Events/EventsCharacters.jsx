@@ -4,6 +4,7 @@ import { useGetEventCharactersQuery } from "../../services/eventsApi";
 import Loader from "../../components/Loader";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
+import { BiSolidInfoCircle } from "react-icons/bi";
 
 const EventCharacters = () => {
   const { eventId, title } = useParams();
@@ -251,7 +252,7 @@ const EventCharacters = () => {
                     className="py-4"
                   >
                     <div
-                      className={`  `}
+                      className={`relative  `}
                       // onMouseEnter={() => handleMouseEnter(c.id)}
                       // onMouseLeave={handleMouseLeave}
                     >
@@ -261,12 +262,22 @@ const EventCharacters = () => {
                           className={`${"rounded-xl"}`}
                           alt={"img of " + c.name}
                         />
-                      </>
 
-                      <div className="px-2 pb-2">
-                        <div className={`uppercase  font-bold py-2  "`}>
-                          {c.name}
-                        </div>
+                        {c.description ? (
+                          <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-green-500 rounded-br-xl rounded-tl-md">
+                            <BiSolidInfoCircle />
+                          </div>
+                        ) : (
+                          <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-red-500 rounded-br-xl rounded-tl-md">
+                            <BiSolidInfoCircle />
+                          </div>
+                        )}
+                      </>
+                    </div>
+
+                    <div className="px-2 pb-2">
+                      <div className={`uppercase  font-bold py-2  "`}>
+                        {c.name}
                       </div>
                     </div>
                   </Link>
