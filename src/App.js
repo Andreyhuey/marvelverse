@@ -25,6 +25,7 @@ import {
   //
   Search,
   Collection,
+  CharacterSeries,
 } from "./pages";
 import { Footer, Navbar } from "./components";
 
@@ -60,9 +61,13 @@ const App = () => {
           <Route exact path="/characters/:characterId/:name/comics">
             <CharacterComics />
           </Route>
-          {/* Character Comics */}
+          {/* Character Events */}
           <Route exact path="/characters/:characterId/:name/events">
             <CharacterEvents />
+          </Route>
+          {/* Character Series */}
+          <Route exact path="/characters/:characterId/:name/series">
+            <CharacterSeries />
           </Route>
 
           {/* Events */}

@@ -7,6 +7,7 @@ import Characters from "./Characters/Characters";
 import CharacterDetails from "./Characters/CharacterDetails";
 import CharacterComics from "./Characters/CharacterComics";
 import CharacterEvents from "./Characters/CharacterEvents";
+import CharacterSeries from "./Characters/CharacterSeries";
 
 // Events
 import Events from "./Events/Events";
@@ -36,6 +37,7 @@ export {
   CharacterDetails,
   CharacterComics,
   CharacterEvents,
+  CharacterSeries,
   //
   Events,
   EventDetails,
