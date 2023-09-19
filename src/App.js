@@ -66,7 +66,7 @@ const App = () => {
             <CharacterEvents />
           </Route>
           {/* Character Series */}
-          <Route exact path="/characters/:characterId/:name/series">
+          <Route exact path="/characters/:characterId/:title/series">
             <CharacterSeries />
           </Route>
 

@@ -7,7 +7,7 @@ import ScrollPositionManager from "../../components/ScrollManager";
 import { BiSolidInfoCircle } from "react-icons/bi";
 
 const CharacterSeries = () => {
-  const { characterId, title } = useParams();
+  const { characterId, name } = useParams();
   const [series, setSeries] = useState([]);
   const [offset, setOffset] = useState(0);
   const limit = "16";
@@ -21,6 +21,7 @@ const CharacterSeries = () => {
 
   // data fetched from character Api
   const { data: seriesList, isFetching } = useGetCharacterSeriesQuery({
+    characterId,
     orderBy,
     offset,
     limit,
@@ -62,8 +63,8 @@ const CharacterSeries = () => {
     sessionStorage.setItem("orderBySeries", orderBy); // Store orderBy
     sessionStorage.setItem("labelSeries", label);
 
-    document.title = `${title} | Series | Marvel-Verse - The Official Marvel site for Marvel's Vast Library`;
-  }, [seriesList, orderBy, limit, currentCharacterSeriesPage, title]);
+    document.title = `${name} | Series | Marvel-Verse - The Official Marvel site for Marvel's Vast Library`;
+  }, [seriesList, orderBy, limit, currentCharacterSeriesPage, name]);
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
@@ -186,7 +187,7 @@ const CharacterSeries = () => {
     <div>
       <div className="bg-gray-950 text-white py-20 px-4 md:px-8 lg:px-20">
         <div className="text-center text-[26px] py-6 font-[700]">
-          {title} Series
+          {name} Series
         </div>
 
         <div className="flex items-center justify-center">
