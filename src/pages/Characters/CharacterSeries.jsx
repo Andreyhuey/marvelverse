@@ -9,6 +9,7 @@ import { BiSolidInfoCircle } from "react-icons/bi";
 const CharacterSeries = () => {
   const { characterId, title } = useParams();
   const [series, setSeries] = useState([]);
+  const [offset, setOffset] = useState(0);
   const limit = "16";
   const [total, setTotal] = useState(0);
   const [orderBy, setOrderBy] = useState(
