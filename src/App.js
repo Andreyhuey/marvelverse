@@ -26,6 +26,7 @@ import {
   Search,
   Collection,
   CharacterSeries,
+  ComicSeriesSearch,
 } from "./pages";
 import { Footer, Navbar } from "./components";
 
@@ -42,6 +43,10 @@ const App = () => {
           {/* search */}
           <Route exact path={"/search"}>
             <Search />
+          </Route>
+          {/* comic series search */}
+          <Route exact path={"/series/:searchTerm"}>
+            <ComicSeriesSearch />
           </Route>
 
           {/*collection  */}

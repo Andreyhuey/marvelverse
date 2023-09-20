@@ -66,9 +66,11 @@ const ComicDetails = () => {
                       {d.series.available !== 0 ? (
                         <div className="text-center text-white flex flex-col gap-1 items-start justify-center font-bold rounded-xl">
                           <p className="text-md">Series</p>
-                          <p className="font-mono text-[#c0bdbd] text-center">
-                            {d.series.name}
-                          </p>
+                          <Link to={`/series/${d.series.name.slice(0, 10)}`}>
+                            <p className="font-mono text-slate-300 text-center">
+                              {d.series.name}
+                            </p>
+                          </Link>
                         </div>
                       ) : (
                         ""

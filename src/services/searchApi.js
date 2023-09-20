@@ -32,6 +32,12 @@ export const searchApi = createApi({
           `/series?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
+    getComicSeries: builder.query({
+      query: (searchTerm) =>
+        createRequest(
+          `/series?titleStartsWith=${searchTerm}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+        ),
+    }),
   }),
 });
 
@@ -40,4 +46,5 @@ export const {
   useGetSearchComicsQuery,
   useGetSearchEventsQuery,
   useGetSearchSeriesQuery,
+  useGetComicSeriesQuery,
 } = searchApi;

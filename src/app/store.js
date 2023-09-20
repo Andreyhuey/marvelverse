@@ -5,6 +5,7 @@ import { charactersApi } from "../services/charactersApi";
 import { comicsApi } from "../services/comicsApi";
 import { seriesApi } from "../services/seriesApi";
 import { collectionApi } from "../services/collectionApi";
+import { searchApi } from "../services/searchApi";
 
 export default configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
     [comicsApi.reducerPath]: comicsApi.reducer,
     [seriesApi.reducerPath]: seriesApi.reducer,
     [collectionApi.reducerPath]: collectionApi.reducer,
+    [searchApi.reducerPath]: searchApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -22,6 +24,7 @@ export default configureStore({
       charactersApi.middleware,
       comicsApi.middleware,
       collectionApi.middleware,
-      seriesApi.middleware
+      seriesApi.middleware,
+      searchApi.middleware
     ),
 });
