@@ -13,10 +13,11 @@ const CharacterSeries = () => {
   const limit = "16";
   const [total, setTotal] = useState(0);
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderBySeries") || "title"
+    sessionStorage.getItem(`orderByCharacterSeries${characterId}`) || "title"
   );
   const [label, setLabel] = useState(
-    sessionStorage.getItem("labelSeries") || "Ascending Order (A-Z)"
+    sessionStorage.getItem(`labelCharacterSeries${characterId}`) ||
+      "Ascending Order (A-Z)"
   );
 
   // data fetched from character Api
@@ -29,7 +30,9 @@ const CharacterSeries = () => {
 
   //   Pagination useState(s)
   const [currentCharacterSeriesPage, setCurrentCharacterSeriesPage] = useState(
-    parseInt(sessionStorage.getItem("currentCharacterSeriesPage")) || 1
+    parseInt(
+      sessionStorage.getItem(`currentCharacterSeriesPage${characterId}`)
+    ) || 1
   );
 
   // Options for the Order
@@ -55,21 +58,34 @@ const CharacterSeries = () => {
     setTotal(seriesList?.data?.total);
     setOffset((currentCharacterSeriesPage - 1) * limit);
     console.log(fetchResults);
+
+    // Store relevant data in session storage
     sessionStorage.setItem(
-      "currentCharacterSeriesPage",
+      `currentCharacterSeriesPage${characterId}`,
       currentCharacterSeriesPage
     );
     // Store relevant data in sessionStorage
-    sessionStorage.setItem("orderBySeries", orderBy); // Store orderBy
-    sessionStorage.setItem("labelSeries", label);
+    sessionStorage.setItem(`orderByCharacterSeries${characterId}`, orderBy); // Store orderBy
+    sessionStorage.setItem(`labelByCharacterSeries${characterId}`, label);
 
     document.title = `${name} | Series | Marvel-Verse - The Official Marvel site for Marvel's Vast Library`;
-  }, [seriesList, orderBy, limit, currentCharacterSeriesPage, name]);
+  }, [
+    seriesList,
+    orderBy,
+    limit,
+    currentCharacterSeriesPage,
+    name,
+    characterId,
+  ]);
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
-    const storedOrderBy = sessionStorage.getItem("orderBySeries");
-    const storedLabel = sessionStorage.getItem("labelSeries");
+    const storedOrderBy = sessionStorage.getItem(
+      `orderByCharacterSeries${characterId}`
+    );
+    const storedLabel = sessionStorage.getItem(
+      `labelByCharacterSeries${characterId}`
+    );
 
     if (storedOrderBy) {
       setOrderBy(storedOrderBy);
@@ -92,7 +108,7 @@ const CharacterSeries = () => {
 
   const handlePageClick = (number) => {
     setCurrentCharacterSeriesPage(number);
-    sessionStorage.setItem(currentCharacterSeriesPage, number);
+    sessionStorage.setItem(`currentCharacterSeriesPage${characterId}`, number);
   };
 
   function renderSmartPagination() {
