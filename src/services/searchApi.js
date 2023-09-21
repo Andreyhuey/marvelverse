@@ -33,9 +33,9 @@ export const searchApi = createApi({
         ),
     }),
     getComicSeries: builder.query({
-      query: (searchTerm) =>
+      query: ({ orderBy, limit, offset, searchTerm }) =>
         createRequest(
-          `/series?titleStartsWith=${searchTerm}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/series?orderBy=${orderBy}&limit=${limit}&offset=${offset}&titleStartsWith=${searchTerm}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
   }),
