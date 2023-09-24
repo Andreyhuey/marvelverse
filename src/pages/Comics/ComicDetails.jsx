@@ -119,7 +119,12 @@ const ComicDetails = () => {
                     <div className="items-center justify-center flex">
                       <div className="grid grid-cols-2 md:grid-cols-4  gap-10 py-6 items-center justify-between w-full">
                         {d.characters.available !== 0 ? (
-                          <Link to={`/comics/${d.id}/${d.title}/characters`}>
+                          <Link
+                            to={`/comics/${d.id}/${d.title.replace(
+                              /#/g,
+                              "Issue "
+                            )}/characters`}
+                          >
                             <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.characters.available}
@@ -132,7 +137,12 @@ const ComicDetails = () => {
                         )}
 
                         {d.events.available !== 0 ? (
-                          <Link to={`/comics/${d.id}/${d.title}/events`}>
+                          <Link
+                            to={`/comics/${d.id}/${d.title.replace(
+                              /#/g,
+                              "Issue "
+                            )}/events`}
+                          >
                             <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.events.available}
