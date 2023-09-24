@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { BiSearchAlt } from "react-icons/bi";
@@ -8,6 +8,18 @@ import { AiOutlineClose } from "react-icons/ai";
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
+
+  // Add this effect to handle body overflow
+  useEffect(() => {
+    if (nav) {
+      document.body.style.overflow = "hidden"; // Prevent scrolling
+    } else {
+      document.body.style.overflow = "auto"; // Allow scrolling
+    }
+    return () => {
+      document.body.style.overflow = "auto"; // Make sure to reset when unmounting
+    };
+  }, [nav]);
 
   return (
     <div className="bg-black fixed h-auto w-full left-0 top-0 z-30">
@@ -71,7 +83,7 @@ const Navbar = () => {
         </>
 
         {nav ? (
-          <div className="absolute h-screen w-full  backdrop-blur-lg  transform">
+          <div className="absolute h-screen w-full  backdrop-blur-3xl  transform">
             <div className="w-[80%] border-r-white/20 bg-white/5 py-4 border-r-[1px] h-screen ">
               <div className="flex flex-col gap-6 text-white font-bold">
                 <div className="pl-3">
@@ -108,7 +120,11 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="cursor-pointer pl-3 pb-3">
-                    <Link to={`/collection`} onClick={handleClick}>
+                    <Link
+                      to={`/collection`}
+                      onClick={handleClick}
+                      className="text-red-500"
+                    >
                       Collection
                     </Link>
                   </li>
@@ -130,28 +146,28 @@ const Navbar = () => {
                       </Link>
                       <Link
                         to={`/avengers`}
-                        className="cursor-pointer text-green-900"
+                        className="cursor-pointer text-white"
                         onClick={handleClick}
                       >
                         Hulk
                       </Link>
                       <Link
                         to={`/avengers`}
-                        className="cursor-pointer text-red-700"
+                        className="cursor-pointer text-white"
                         onClick={handleClick}
                       >
                         Spider
                       </Link>
                       <Link
                         to={`/avengers`}
-                        className="cursor-pointer text-red-700"
+                        className="cursor-pointer text-white"
                         onClick={handleClick}
                       >
                         Moon Knight
                       </Link>
                       <Link
                         to={`/thor`}
-                        className="cursor-pointer text-yellow-700"
+                        className="cursor-pointer text-white"
                         onClick={handleClick}
                       >
                         Nova
@@ -159,28 +175,28 @@ const Navbar = () => {
 
                       <Link
                         to={`/thor`}
-                        className="cursor-pointer text-yellow-700"
+                        className="cursor-pointer text-white"
                         onClick={handleClick}
                       >
                         Thanos
                       </Link>
                       <Link
                         to={`/thor`}
-                        className="cursor-pointer text-yellow-700"
+                        className="cursor-pointer text-white"
                         onClick={handleClick}
                       >
                         Thor
                       </Link>
                       <Link
                         to={`/thor`}
-                        className="cursor-pointer text-yellow-700"
+                        className="cursor-pointer text-white"
                         onClick={handleClick}
                       >
                         Wolverine
                       </Link>
                       <Link
                         to={`/thor`}
-                        className="cursor-pointer text-yellow-700"
+                        className="cursor-pointer text-white"
                         onClick={handleClick}
                       >
                         Venom
