@@ -150,10 +150,10 @@ const ComicDetails = () => {
                     <div className="font-semibold">
                       <p className="text-2xl">Creators</p>
                       <span className="pb-1 grid grid-cols-2 w-full justify-between gap-1">
-                        {d.creators.items.map((c) => {
+                        {d.creators.items.map((c, index) => {
                           return (
-                            <div key={c.role} className="">
-                              <div className="">
+                            <div key={index}>
+                              <div>
                                 <div className="flex items-center justify-start gap-2">
                                   <p className="capitalize">
                                     {c.role}:{" "}
