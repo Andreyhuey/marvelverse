@@ -99,43 +99,55 @@ const SeriesDetails = () => {
 
                     <div className="items-center justify-center flex">
                       <div className="grid grid-cols-2 md:grid-cols-4  gap-10 py-6 items-center justify-between w-full">
-                        {d.characters.available !== 0 ? (
+                        {d.characters.available !== 0 && (
                           <Link to={`/series/${d.id}/${d.title}/characters`}>
                             <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.characters.available}
                               </p>
-                              <p className="font-semibold">Characters</p>
+                              <p className="font-semibold">
+                                {d.characters.available == 1 ? (
+                                  <>Character</>
+                                ) : (
+                                  d.characters.available > 1 && <>Characters</>
+                                )}
+                              </p>
                             </div>
                           </Link>
-                        ) : (
-                          ""
                         )}
 
-                        {d.comics.available !== 0 ? (
+                        {d.comics.available !== 0 && (
                           <Link to={`/series/${d.id}/${d.title}/comics`}>
                             <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.comics.available}
                               </p>
-                              <p className="font-semibold">Comics</p>
+                              <p className="font-semibold">
+                                {d.comics.available == 1 ? (
+                                  <>Comic</>
+                                ) : (
+                                  d.comics.available > 1 && <>Comics</>
+                                )}
+                              </p>
                             </div>
                           </Link>
-                        ) : (
-                          ""
                         )}
 
-                        {d.events.available !== 0 ? (
+                        {d.events.available !== 0 && (
                           <Link to={`/series/${d.id}/${d.title}/events`}>
                             <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.events.available}
                               </p>
-                              <p className="font-semibold">Events</p>
+                              <p className="font-semibold">
+                                {d.events.available == 1 ? (
+                                  <>Event</>
+                                ) : (
+                                  d.events.available > 1 && <>Events</>
+                                )}
+                              </p>
                             </div>
                           </Link>
-                        ) : (
-                          ""
                         )}
                       </div>
                     </div>

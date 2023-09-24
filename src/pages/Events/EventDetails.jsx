@@ -55,81 +55,43 @@ const EventDetails = () => {
                     <div className="items-center justify-center flex">
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-6 items-center justify-center">
                         <div>
-                          {d.characters.available !== 0 ? (
+                          {d.characters.available !== 0 && (
                             <Link to={`/events/${d.id}/${d.title}/characters`}>
                               <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                                 <p className="font-mono text-[#c0bdbd]">
                                   {d.characters.available}
                                 </p>
-                                <p className="font-mono">Characters</p>
+                                <p className="font-mono">
+                                  {d.characters.available == 1 ? (
+                                    <>Character</>
+                                  ) : (
+                                    d.characters.available > 1 && (
+                                      <>Characters</>
+                                    )
+                                  )}
+                                </p>
                               </div>
                             </Link>
-                          ) : (
-                            ""
                           )}
                         </div>
                         <div>
-                          {d.comics.available !== 0 ? (
+                          {d.comics.available !== 0 && (
                             <Link to={`/events/${d.id}/${d.title}/comics`}>
                               <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                                 <p className="font-mono text-[#c0bdbd]">
                                   {d.comics.available}
                                 </p>
-                                <p className="font-mono">Comics</p>
+                                <p className="font-mono">
+                                  {d.comics.available == 1 ? (
+                                    <>Comic</>
+                                  ) : (
+                                    d.comics.available > 1 && <>Comics</>
+                                  )}
+                                </p>
                               </div>
                             </Link>
-                          ) : (
-                            ""
                           )}
                         </div>
-
-                        {/* <div>
-                        {d.creators.available !== 0 ? (
-                          <Link to={`/events/${d.id}/${d.title}/creators`}>
-                            <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                              <p className="font-mono text-[#c0bdbd]">
-                                {d.creators.available}
-                              </p>
-                              <p className="font-mono">Creators</p>
-                            </div>
-                          </Link>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-
-                      <div>
-                        {d.series.available !== 0 ? (
-                          <Link to={`/events/${d.id}/${d.title}/series`}>
-                            <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                              <p className="font-mono text-[#c0bdbd]">
-                                {d.series.available}
-                              </p>
-                              <p className="font-mono">Series</p>
-                            </div>
-                          </Link>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-
-                      <div>
-                        {d.stories.available !== 0 ? (
-                          <Link
-                            to={`/events/${d.id}/${d.title}/stories
-`}
-                          >
-                            <div className="bg-slate-900 hover:bg-slate-800 w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
-                              <p className="font-mono text-[#c0bdbd]">
-                                {d.stories.available}
-                              </p>
-                              <p className="font-mono">Stories</p>
-                            </div>
-                          </Link>
-                        ) : (
-                          ""
-                        )}
-                      </div> */}
                       </div>
                     </div>
                   </div>

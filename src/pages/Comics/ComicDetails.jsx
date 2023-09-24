@@ -118,7 +118,7 @@ const ComicDetails = () => {
 
                     <div className="items-center justify-center flex">
                       <div className="grid grid-cols-2 md:grid-cols-4  gap-10 py-6 items-center justify-between w-full">
-                        {d.characters.available !== 0 ? (
+                        {d.characters.available !== 0 && (
                           <Link
                             to={`/comics/${d.id}/${d.title.replace(
                               /#/g,
@@ -129,14 +129,18 @@ const ComicDetails = () => {
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.characters.available}
                               </p>
-                              <p className="font-semibold">Characters</p>
+                              <p className="font-semibold">
+                                {d.characters.available == 1 ? (
+                                  <>Character</>
+                                ) : (
+                                  d.characters.available > 1 && <>Characters</>
+                                )}
+                              </p>
                             </div>
                           </Link>
-                        ) : (
-                          ""
                         )}
 
-                        {d.events.available !== 0 ? (
+                        {d.events.available !== 0 && (
                           <Link
                             to={`/comics/${d.id}/${d.title.replace(
                               /#/g,
@@ -147,11 +151,15 @@ const ComicDetails = () => {
                               <p className="font-mono text-[#c0bdbd]">
                                 {d.events.available}
                               </p>
-                              <p className="font-semibold">Events</p>
+                              <p className="font-semibold">
+                                {d.events.available == 1 ? (
+                                  <>Event</>
+                                ) : (
+                                  d.events.available > 1 && <>Events</>
+                                )}
+                              </p>
                             </div>
                           </Link>
-                        ) : (
-                          ""
                         )}
                       </div>
                     </div>

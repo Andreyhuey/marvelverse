@@ -75,33 +75,41 @@ const CharacterDetails = () => {
                           </div>
 
                           <div className="grid grid-cols-3 py-6 justify-center gap-x-8 items-center">
-                            {d.comics.available !== 0 ? (
+                            {d.comics.available !== 0 && (
                               <Link to={`/characters/${d.id}/${d.name}/comics`}>
                                 <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                                   <p className="font-mono text-[#c0bdbd]">
                                     {d.comics.available}
                                   </p>
-                                  <p className="font-mono">Comics</p>
+                                  <p className="font-mono">
+                                    {d.comics.available == 1 ? (
+                                      <>Comic</>
+                                    ) : (
+                                      d.comics.available > 1 && <>Comics</>
+                                    )}
+                                  </p>
                                 </div>
                               </Link>
-                            ) : (
-                              ""
                             )}
 
-                            {d.events.available !== 0 ? (
+                            {d.events.available !== 0 && (
                               <Link to={`/characters/${d.id}/${d.name}/events`}>
                                 <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                                   <p className="font-mono text-[#c0bdbd]">
                                     {d.events.available}
                                   </p>
-                                  <p className="font-mono">Events</p>
+                                  <p className="font-mono">
+                                    {d.events.available == 1 ? (
+                                      <>Event</>
+                                    ) : (
+                                      d.events.available > 1 && <>Events</>
+                                    )}
+                                  </p>
                                 </div>
                               </Link>
-                            ) : (
-                              ""
                             )}
 
-                            {d.series.available !== 0 ? (
+                            {d.series.available !== 0 && (
                               <Link to={`/characters/${d.id}/${d.name}/series`}>
                                 <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out w-[100px] h-[100px] text-center text-white flex flex-col items-center justify-center font-bold rounded-xl">
                                   <p className="font-mono text-[#c0bdbd]">
@@ -110,8 +118,6 @@ const CharacterDetails = () => {
                                   <p className="font-mono">Series</p>
                                 </div>
                               </Link>
-                            ) : (
-                              ""
                             )}
                           </div>
                         </div>
