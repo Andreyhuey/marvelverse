@@ -22,7 +22,7 @@ const EventDetails = () => {
 
   return (
     <>
-      <div className="bg-gray-950 px-4 md:px-8 lg:px-20 py-10 text-white">
+      <div className="bg-gray-950 px-4 md:px-8 lg:px-20 py-10 text-white min-h-screen">
         <div>
           {event &&
             event?.map((d) => {
