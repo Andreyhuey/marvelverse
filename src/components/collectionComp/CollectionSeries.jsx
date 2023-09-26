@@ -28,7 +28,7 @@ function CollectionSeries(props) {
 
   return (
     <>
-      {series.length > 1 && (
+      {series.length >= 1 && (
         <>
           <h1 className="capitalize text-start font-bold pt-8 text-lg">
             Series

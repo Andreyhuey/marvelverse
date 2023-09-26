@@ -9,17 +9,16 @@ export const collection = [
   { name: "doctor strange" },
   { name: "hawkeye" },
   { name: "hulk" },
-  { name: "iron man" },
+  { name: "Iron Man" },
   { name: "moon knight" },
-  { name: "matt murdock" },
   { name: "nova" },
+  { name: "scarlet witch" },
   { name: "skrull" },
   { name: "spider" },
   { name: "thanos" },
   { name: "thor" },
-  { name: "ultron" },
-  { name: "venom" },
   { name: "wolverine" },
+  { name: "venom" },
 ];
 
 export const characterOptions = [

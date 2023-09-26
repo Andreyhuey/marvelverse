@@ -28,7 +28,7 @@ const CollectionComics = (props) => {
 
   return (
     <>
-      {comics.length > 1 && (
+      {comics.length >= 1 && (
         <>
           <h1 className="capitalize text-start font-bold pt-8 text-lg">
             Comics

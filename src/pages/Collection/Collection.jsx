@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   CollectionSeries,
@@ -9,6 +9,10 @@ import {
 
 const Collection = () => {
   const { searchTerm } = useParams();
+
+  useEffect(() => {
+    document.title = `${searchTerm} | Collection | Marvel-Verse`;
+  }, [searchTerm]);
 
   return (
     <>
