@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Loader from "../Loader";
 import { useGetCollectionComicsQuery } from "../../services/collectionApi";
 import ScrollPositionManager from "../ScrollManager";
 import { Link } from "react-router-dom";
 import { BiSolidInfoCircle } from "react-icons/bi";
+import Loader from "../Loader";
+import { comicsOptions } from "../../data";
+import { Autocomplete, TextField } from "@mui/material";
 
 const CollectionComics = (props) => {
   const searchTerm = props?.searchTerm;
@@ -15,6 +17,7 @@ const CollectionComics = (props) => {
     searchTerm,
     limit,
     offset,
+    // orderBy,
   });
 
   useEffect(() => {
@@ -33,6 +36,7 @@ const CollectionComics = (props) => {
           <h1 className="capitalize text-start font-bold pt-8 text-lg">
             Comics
           </h1>
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
             {comics?.map((c) => (
               <div
@@ -45,7 +49,9 @@ const CollectionComics = (props) => {
                   />
                   <Link
                     key={c.id}
-                    to={`/comics/${c.id}/${c.title}`}
+                    to={`/comics/${c.id}/${c.title
+                      .replace(/#/g, "issue")
+                      .replace(/\//g, "or")}`}
                     className="py-4"
                   >
                     <div className={` relative`}>

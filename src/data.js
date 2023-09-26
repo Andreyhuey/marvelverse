@@ -5,12 +5,16 @@ export const collection = [
   { name: "captain america" },
   { name: "captain marvel" },
   { name: "daredevil" },
-  { name: "deadpool" },
+  { name: "Deadpool" },
   { name: "doctor strange" },
   { name: "hawkeye" },
   { name: "hulk" },
+  { name: "Red hulk" },
   { name: "Iron Man" },
+  { name: "Loki" },
+  { name: "Kang" },
   { name: "moon knight" },
+  { name: "magneto" },
   { name: "nova" },
   { name: "scarlet witch" },
   { name: "skrull" },
@@ -21,14 +25,14 @@ export const collection = [
   { name: "venom" },
 ];
 
-export const characterOptions = [
+export const charactersOptions = [
   { label: "Ascending Order (A-Z)", value: "name" },
   { label: "Descending Order (Z-A)", value: "-name" },
   { label: "Old", value: "modified" },
   { label: "Recently Modified", value: "-modified" },
 ];
 
-export const comicOptions = [
+export const comicsOptions = [
   { label: "Ascending Order (A-Z)", value: "title" },
   { label: "Descending Order (Z-A)", value: "-title" },
   { label: "Oldest Issue", value: "issueNumber" },
@@ -41,7 +45,7 @@ export const comicOptions = [
   { label: "Latest On Sale", value: "-onsaleDate" },
 ];
 
-export const eventOptions = [
+export const eventsOptions = [
   { label: "Ascending Order (A-Z)", value: "name" },
   { label: "Descending Order (Z-A)", value: "-name" },
   { label: "Newest", value: "-startDate" },

@@ -4,6 +4,7 @@ import Homepage from "./Homepage";
 // Search
 import Search from "./Search/Search";
 import ComicSeriesSearch from "./Search/ComicSeriesSearch";
+import ComicSearch from "./Search/ComicSearch";
 
 // Characters
 import Characters from "./Characters/Characters";
@@ -37,6 +38,7 @@ export {
   //
   Search,
   ComicSeriesSearch,
+  ComicSearch,
   //
   Characters,
   CharacterDetails,

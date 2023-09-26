@@ -5,6 +5,7 @@ import CollectionCharacters from "./collectionComp/CollectionCharacters.jsx";
 import CollectionComics from "./collectionComp/CollectionComics.jsx";
 import CollectionEvents from "./collectionComp/CollectionEvents.jsx";
 import CollectionSeries from "./collectionComp/CollectionSeries.jsx";
+import Sort from "./Sort.jsx";
 
 export {
   Navbar,
@@ -14,4 +15,5 @@ export {
   CollectionCharacters,
   CollectionEvents,
   CollectionComics,
+  Sort,
 };

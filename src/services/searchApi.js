@@ -15,9 +15,9 @@ export const searchApi = createApi({
         ),
     }),
     getSearchComics: builder.query({
-      query: ({ orderBy, limit, offset }) =>
+      query: ({ orderBy, limit, offset, searchTerm }) =>
         createRequest(
-          `/comics?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/comics?titleStartsWith=${searchTerm}&orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     getSearchEvents: builder.query({

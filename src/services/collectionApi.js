@@ -11,13 +11,13 @@ export const collectionApi = createApi({
     getCollectionCharacters: builder.query({
       query: ({ limit, offset, searchTerm }) =>
         createRequest(
-          `/characters?nameStartsWith=${searchTerm}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/characters?nameStartsWith=${searchTerm}&orderBy=-modified&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     getCollectionComics: builder.query({
-      query: ({ limit, offset, searchTerm }) =>
+      query: ({ limit, offset, searchTerm, orderBy }) =>
         createRequest(
-          `/comics?titleStartsWith=${searchTerm}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/comics?titleStartsWith=${searchTerm}&orderBy=-modified&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     getCollectionEvents: builder.query({
