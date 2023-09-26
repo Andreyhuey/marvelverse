@@ -7,6 +7,7 @@ import {
   CharacterDetails,
   CharacterComics,
   CharacterEvents,
+  CharacterSeries,
   //
   Comics,
   ComicDetails,
@@ -25,7 +26,6 @@ import {
   //
   Search,
   Collection,
-  CharacterSeries,
   ComicSeriesSearch,
 } from "./pages";
 import { Footer, Navbar } from "./components";
@@ -41,90 +41,100 @@ const App = () => {
           </Route>
 
           {/* search */}
-          <Route exact path={"/search"}>
-            <Search />
-          </Route>
-          {/* comic series search */}
-          <Route exact path={"/series/:searchTerm"}>
-            <ComicSeriesSearch />
-          </Route>
+          <>
+            <Route exact path={"/search"}>
+              <Search />
+            </Route>
+            {/* comic series search */}
+            <Route exact path={"/series/:searchTerm"}>
+              <ComicSeriesSearch />
+            </Route>
 
-          {/*collection  */}
-          <Route exact path="/collection/:searchTerm">
-            <Collection />
-          </Route>
+            {/*collection  */}
+            <Route exact path="/collection/:searchTerm">
+              <Collection />
+            </Route>
+          </>
 
-          {/* Characters */}
-          <Route exact path="/characters">
-            <Characters />
-          </Route>
-          {/* CharacterDetails */}
-          <Route exact path="/characters/:characterId/:name">
-            <CharacterDetails />
-          </Route>
-          {/* Character Comics */}
-          <Route exact path="/characters/:characterId/:name/comics">
-            <CharacterComics />
-          </Route>
-          {/* Character Events */}
-          <Route exact path="/characters/:characterId/:name/events">
-            <CharacterEvents />
-          </Route>
-          {/* Character Series */}
-          <Route exact path="/characters/:characterId/:name/series">
-            <CharacterSeries />
-          </Route>
+          <>
+            {/* Characters */}
+            <Route exact path="/characters">
+              <Characters />
+            </Route>
+            {/* CharacterDetails */}
+            <Route exact path="/characters/:characterId/:name">
+              <CharacterDetails />
+            </Route>
+            {/* Character Comics */}
+            <Route exact path="/characters/:characterId/:name/comics">
+              <CharacterComics />
+            </Route>
+            {/* Character Events */}
+            <Route exact path="/characters/:characterId/:name/events">
+              <CharacterEvents />
+            </Route>
+            {/* Character Series */}
+            <Route exact path="/characters/:characterId/:name/series">
+              <CharacterSeries />
+            </Route>
+          </>
 
-          {/* Events */}
-          <Route exact path="/events">
-            <Events />
-          </Route>
-          {/* Event Details */}
-          <Route exact path="/events/:eventId/:title">
-            <EventDetails />
-          </Route>
-          {/* Event Characters */}
-          <Route exact path="/events/:eventId/:title/characters">
-            <EventsCharacters />
-          </Route>
-          {/* Event Comics */}
-          <Route exact path="/events/:eventId/:title/comics">
-            <EventComics />
-          </Route>
+          <>
+            {/* Events */}
+            <Route exact path="/events">
+              <Events />
+            </Route>
+            {/* Event Details */}
+            <Route exact path="/events/:eventId/:title">
+              <EventDetails />
+            </Route>
+            {/* Event Characters */}
+            <Route exact path="/events/:eventId/:title/characters">
+              <EventsCharacters />
+            </Route>
+            {/* Event Comics */}
+            <Route exact path="/events/:eventId/:title/comics">
+              <EventComics />
+            </Route>
+          </>
 
-          {/* Comics */}
-          <Route exact path="/comics">
-            <Comics />
-          </Route>
-          {/* Comic Details */}
-          <Route exact path="/comics/:comicId/:title">
-            <ComicDetails />
-          </Route>
-          {/* Comic Characters */}
-          <Route exact path="/comics/:comicId/:title/characters">
-            <ComicCharacters />
-          </Route>
-          {/* Comic Events */}
-          <Route exact path="/comics/:comicId/:title/events">
-            <ComicEvents />
-          </Route>
+          <>
+            {/* Comics */}
+            <Route exact path="/comics">
+              <Comics />
+            </Route>
+            {/* Comic Details */}
+            <Route exact path="/comics/:comicId/:title">
+              <ComicDetails />
+            </Route>
+            {/* Comic Characters */}
+            <Route exact path="/comics/:comicId/:title/characters">
+              <ComicCharacters />
+            </Route>
+            {/* Comic Events */}
+            <Route exact path="/comics/:comicId/:title/events">
+              <ComicEvents />
+            </Route>
+          </>
 
-          {/* Series */}
-          <Route exact path="/series">
-            <Series />
-          </Route>
-          {/* Series Details */}
-          <Route exact path="/series/:seriesId/:title">
-            <SeriesDetails />
-          </Route>
-          {/* Series Characters */}
-          <Route exact path="/series/:seriesId/:title/characters">
-            <SeriesCharacters />
-          </Route>
-          {/* Series Comics */}
-          <Route exact path="/series/:seriesId/:title/comics">
-            <SeriesComics />
-          </Route>
+          <>
+            {/* Series */}
+            <Route exact path="/series">
+              <Series />
+            </Route>
+            {/* Series Details */}
+            <Route exact path="/series/:seriesId/:title">
+              <SeriesDetails />
+            </Route>
+            {/* Series Characters */}
+            <Route exact path="/series/:seriesId/:title/characters">
+              <SeriesCharacters />
+            </Route>
+            {/* Series Comics */}
+            <Route exact path="/series/:seriesId/:title/comics">
+              <SeriesComics />
+            </Route>
+          </>
         </Switch>
       </div>
       <Footer />

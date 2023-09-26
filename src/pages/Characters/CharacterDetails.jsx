@@ -18,7 +18,7 @@ const CharacterDetails = () => {
     setCharacter(characterDetails);
     document.title = `${name} | Characters | Marvel-Verse`;
     document.body.scrollTop = 0;
-  }, [document, name, data]);
+  }, [name, data]);
 
   if (isFetching) return <Loader />;
 
@@ -82,7 +82,7 @@ const CharacterDetails = () => {
                                     {d.comics.available}
                                   </p>
                                   <p className="font-mono">
-                                    {d.comics.available == 1 ? (
+                                    {d.comics.available === 1 ? (
                                       <>Comic</>
                                     ) : (
                                       d.comics.available > 1 && <>Comics</>
@@ -99,7 +99,7 @@ const CharacterDetails = () => {
                                     {d.events.available}
                                   </p>
                                   <p className="font-mono">
-                                    {d.events.available == 1 ? (
+                                    {d.events.available === 1 ? (
                                       <>Event</>
                                     ) : (
                                       d.events.available > 1 && <>Events</>

@@ -59,7 +59,7 @@ const Series = () => {
 
     document.title =
       "Series | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
-  }, [seriesList, orderBy, limit, currentSeriesPage]);
+  }, [seriesList, orderBy, label, limit, currentSeriesPage]);
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {

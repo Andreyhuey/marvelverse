@@ -73,6 +73,7 @@ const ComicCharacters = () => {
     charactersList,
     currentComicCharactersPage,
     orderBy,
+    label,
     comicId,
     title,
     limit,
@@ -93,7 +94,7 @@ const ComicCharacters = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [comicId]);
 
   if (isFetching) return <Loader />;
 

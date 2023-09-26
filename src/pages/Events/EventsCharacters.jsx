@@ -27,7 +27,6 @@ const EventCharacters = () => {
   // Characters Array
   const [characters, setCharacters] = useState([]);
   const [total, setTotal] = useState(0);
-  const [count, setCount] = useState("");
 
   const [label, setLabel] = useState(
     sessionStorage.getItem(`labelByEventCharacters${eventId}`) ||
@@ -59,7 +58,6 @@ const EventCharacters = () => {
     const fetchResults = charactersList?.data?.results;
     setCharacters(fetchResults || []);
     setTotal(charactersList?.data?.total);
-    setCount(charactersList?.data?.count);
     setOffset((currentEventCharactersPage - 1) * limit);
     console.log(fetchResults);
     sessionStorage.setItem(
@@ -75,6 +73,7 @@ const EventCharacters = () => {
     charactersList,
     currentEventCharactersPage,
     orderBy,
+    label,
     eventId,
     title,
     limit,
@@ -95,7 +94,7 @@ const EventCharacters = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [eventId]);
 
   if (isFetching) return <Loader />;
 

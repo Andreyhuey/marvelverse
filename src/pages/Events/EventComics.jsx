@@ -16,7 +16,6 @@ const EventComics = () => {
       "Ascending Order (A-Z)"
   );
   const limit = "12";
-  const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
 
   const { data: comicsList, isFetching } = useGetEventComicsQuery({
@@ -46,7 +45,6 @@ const EventComics = () => {
     setTotal(comicsList?.data?.total);
     setComics(fetchResults || []);
     setTotal(comicsList?.data?.total);
-    setCount(comicsList?.data?.count);
     setOffset((currentEventComicsPage - 1) * limit);
     console.log(fetchResults);
 
@@ -95,7 +93,7 @@ const EventComics = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [eventId]);
 
   if (isFetching) return <Loader />;
 

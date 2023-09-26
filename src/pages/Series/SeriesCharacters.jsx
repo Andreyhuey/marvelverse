@@ -75,6 +75,7 @@ const SeriesCharacters = () => {
     charactersList,
     currentSeriesCharactersPage,
     orderBy,
+    label,
     seriesId,
     title,
     limit,
@@ -95,7 +96,7 @@ const SeriesCharacters = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [seriesId]);
 
   if (isFetching) return <Loader />;
 

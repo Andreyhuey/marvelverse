@@ -8,7 +8,6 @@ import ScrollPositionManager from "../../components/ScrollManager";
 
 const Events = () => {
   const [events, setEvents] = useState([]);
-  const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
   const limit = "16";
   const [total, setTotal] = useState(0);
@@ -51,7 +50,6 @@ const Events = () => {
     const fetchResults = eventsList?.data?.results;
     setEvents(fetchResults || []);
     setTotal(eventsList?.data?.total);
-    setCount(eventsList?.data?.count);
     setOffset((currentEventPage - 1) * limit);
     console.log(fetchResults);
     sessionStorage.setItem("currentEventPage", currentEventPage);
@@ -61,7 +59,7 @@ const Events = () => {
 
     document.title =
       "Events | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
-  }, [eventsList, orderBy, limit, currentEventPage]);
+  }, [eventsList, orderBy, label, limit, currentEventPage]);
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {

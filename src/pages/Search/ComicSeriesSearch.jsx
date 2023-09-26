@@ -66,7 +66,7 @@ const ComicSeriesSearch = () => {
     sessionStorage.setItem(`labelByComicSeries${searchTerm}`, label);
 
     document.title = `Series | Marvel-Verse - The Official Marvel site for Marvel's Vast Library`;
-  }, [seriesList, orderBy, limit, currentComicSeriesPage, searchTerm]);
+  }, [seriesList, orderBy, label, limit, currentComicSeriesPage, searchTerm]);
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
@@ -83,7 +83,7 @@ const ComicSeriesSearch = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [searchTerm]);
 
   // ...Loading Content ...
 

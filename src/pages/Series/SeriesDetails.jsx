@@ -106,7 +106,7 @@ const SeriesDetails = () => {
                                 {d.characters.available}
                               </p>
                               <p className="font-semibold">
-                                {d.characters.available == 1 ? (
+                                {d.characters.available === 1 ? (
                                   <>Character</>
                                 ) : (
                                   d.characters.available > 1 && <>Characters</>
@@ -123,7 +123,7 @@ const SeriesDetails = () => {
                                 {d.comics.available}
                               </p>
                               <p className="font-semibold">
-                                {d.comics.available == 1 ? (
+                                {d.comics.available === 1 ? (
                                   <>Comic</>
                                 ) : (
                                   d.comics.available > 1 && <>Comics</>
@@ -140,7 +140,7 @@ const SeriesDetails = () => {
                                 {d.events.available}
                               </p>
                               <p className="font-semibold">
-                                {d.events.available == 1 ? (
+                                {d.events.available === 1 ? (
                                   <>Event</>
                                 ) : (
                                   d.events.available > 1 && <>Events</>

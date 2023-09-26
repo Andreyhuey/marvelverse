@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGetCharactersQuery } from "../../services/charactersApi";
 import Loader from "../../components/Loader";
 import { BiSolidInfoCircle } from "react-icons/bi";
@@ -58,7 +58,7 @@ const Characters = () => {
 
     document.title =
       "Characters | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
-  }, [charactersList, orderBy, limit, currentCharacterPage]);
+  }, [charactersList, orderBy, label, limit, currentCharacterPage]);
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {

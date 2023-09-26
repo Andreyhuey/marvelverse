@@ -62,7 +62,7 @@ const EventDetails = () => {
                                   {d.characters.available}
                                 </p>
                                 <p className="font-mono">
-                                  {d.characters.available == 1 ? (
+                                  {d.characters.available === 1 ? (
                                     <>Character</>
                                   ) : (
                                     d.characters.available > 1 && (
@@ -82,7 +82,7 @@ const EventDetails = () => {
                                   {d.comics.available}
                                 </p>
                                 <p className="font-mono">
-                                  {d.comics.available == 1 ? (
+                                  {d.comics.available === 1 ? (
                                     <>Comic</>
                                   ) : (
                                     d.comics.available > 1 && <>Comics</>

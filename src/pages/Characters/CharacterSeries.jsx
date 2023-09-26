@@ -72,6 +72,7 @@ const CharacterSeries = () => {
   }, [
     seriesList,
     orderBy,
+    label,
     limit,
     currentCharacterSeriesPage,
     name,
@@ -93,7 +94,7 @@ const CharacterSeries = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [characterId]);
 
   // ...Loading Content ...
 

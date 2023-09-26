@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useGetCharacterEventsQuery } from "../../services/charactersApi";
-import HTMLReactParser from "html-react-parser";
 import Loader from "../../components/Loader";
 import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
@@ -10,7 +9,6 @@ import ScrollPositionManager from "../../components/ScrollManager";
 const CharacterEvents = () => {
   const { characterId, name } = useParams();
   const [events, setEvents] = useState([]);
-  const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
   const limit = "16";
   const [total, setTotal] = useState(0);
@@ -56,7 +54,6 @@ const CharacterEvents = () => {
     const fetchResults = eventsList?.data?.results;
     setEvents(fetchResults || []);
     setTotal(eventsList?.data?.total);
-    setCount(eventsList?.data?.count);
     setOffset((currentCharacterEventsPage - 1) * limit);
     console.log(fetchResults);
     sessionStorage.setItem(
@@ -73,6 +70,7 @@ const CharacterEvents = () => {
     currentCharacterEventsPage,
     characterId,
     orderBy,
+    label,
     limit,
     name,
   ]);
@@ -80,8 +78,7 @@ const CharacterEvents = () => {
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
     const storedOrderBy = sessionStorage.getItem(
-      `orderByCharacterEvents=${characterId}`,
-      orderBy
+      `orderByCharacterEvents=${characterId}`
     );
     const storedLabel = sessionStorage.getItem(
       `labelByCharacterEvents=${characterId}`
@@ -93,7 +90,7 @@ const CharacterEvents = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [characterId]);
 
   if (isFetching) return <Loader />;
 

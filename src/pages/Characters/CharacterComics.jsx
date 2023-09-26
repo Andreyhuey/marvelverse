@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import { useGetCharacterComicsQuery } from "../../services/charactersApi";
 import Loader from "../../components/Loader";
 import ScrollPositionManager from "../../components/ScrollManager";
-import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 import { BiSolidInfoCircle } from "react-icons/bi";
 
@@ -17,7 +16,6 @@ const CharacterComics = () => {
       "Ascending Order (A-Z)"
   );
   const limit = "12";
-  const [count, setCount] = useState("");
   const [offset, setOffset] = useState(0);
 
   const { data: comicsList, isFetching } = useGetCharacterComicsQuery({
@@ -50,7 +48,6 @@ const CharacterComics = () => {
     setTotal(comicsList?.data?.total);
     setComics(fetchResults || []);
     setTotal(comicsList?.data?.total);
-    setCount(comicsList?.data?.count);
     setOffset((currentCharacterComicsPage - 1) * limit);
     console.log(fetchResults);
 
@@ -101,7 +98,7 @@ const CharacterComics = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [characterId]);
 
   // Total Pages of Data Available
   function totalPages() {

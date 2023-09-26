@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGetComicsQuery } from "../../services/comicsApi";
 import Loader from "../../components/Loader";
 import ScrollPositionManager from "../../components/ScrollManager";
 import { BiSolidInfoCircle } from "react-icons/bi";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Autocomplete, TextField } from "@mui/material";
-import placeholderComics from "../../assets/placeholder-comics.jpg";
 
 const Comics = () => {
   const [orderBy, setOrderBy] = useState(

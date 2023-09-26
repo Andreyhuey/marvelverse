@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import { useGetSeriesComicsQuery } from "../../services/seriesApi";
 import Loader from "../../components/Loader";
 import ScrollPositionManager from "../../components/ScrollManager";
-import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 import { BiSolidInfoCircle } from "react-icons/bi";
 
@@ -97,7 +96,7 @@ const SeriesComics = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [seriesId]);
 
   // Total Pages of Data Available
   function totalPages() {

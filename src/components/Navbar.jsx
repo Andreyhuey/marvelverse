@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlineMenu } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
+import { collection } from "../data";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -26,7 +27,10 @@ const Navbar = () => {
       {/* for tabs and pcs */}
       <div className="md:flex md:flex-col hidden ">
         <div className="border border-gray-600 flex items-center justify-between px-20 text-white relative">
-          <Link className="uppercase border hover:text-red-500 border-r-gray-600 border-l-gray-600 font-semibold border-t-0 border-b-0 p-3 flex items-center justify-center cursor-pointer">
+          <Link
+            className="uppercase border hover:text-red-500 border-r-gray-600 border-l-gray-600 font-semibold border-t-0 border-b-0 p-3 flex items-center justify-center cursor-pointer"
+            to={`/join`}
+          >
             sign in | join
           </Link>
           <Link
@@ -82,9 +86,9 @@ const Navbar = () => {
           </Link>
         </>
 
-        {nav ? (
-          <div className="absolute h-screen w-full  backdrop-blur-3xl  transform">
-            <div className="w-[80%] border-r-white/20 bg-white/5 py-4 border-r-[1px] h-screen ">
+        {nav && (
+          <div className="absolute w-full  backdrop-blur-3xl  transform overflow-y-scroll">
+            <div className="min-h-screen border-r-white/20 bg-black py-6 border-r-[1px] ">
               <div className="flex flex-col gap-6 text-white font-bold">
                 <div className="pl-3">
                   <AiOutlineClose
@@ -130,120 +134,25 @@ const Navbar = () => {
                   </li>
                   <li className="w-full pl-3">
                     <div className="grid grid-cols-2 justify-between gap-5 text-sm">
-                      <Link
-                        to={`/captain-america`}
-                        className="cursor-pointer text-blue-700"
-                        onClick={handleClick}
-                      >
-                        Captains
-                      </Link>
-                      <Link
-                        to={`/captain-america`}
-                        className="cursor-pointer text-white"
-                        onClick={handleClick}
-                      >
-                        Deadpool
-                      </Link>
-                      <Link
-                        to={`/avengers`}
-                        className="cursor-pointer text-white"
-                        onClick={handleClick}
-                      >
-                        Hulk
-                      </Link>
-                      <Link
-                        to={`/avengers`}
-                        className="cursor-pointer text-white"
-                        onClick={handleClick}
-                      >
-                        Spider
-                      </Link>
-                      <Link
-                        to={`/avengers`}
-                        className="cursor-pointer text-white"
-                        onClick={handleClick}
-                      >
-                        Moon Knight
-                      </Link>
-                      <Link
-                        to={`/thor`}
-                        className="cursor-pointer text-white"
-                        onClick={handleClick}
-                      >
-                        Nova
-                      </Link>
-
-                      <Link
-                        to={`/thor`}
-                        className="cursor-pointer text-white"
-                        onClick={handleClick}
-                      >
-                        Thanos
-                      </Link>
-                      <Link
-                        to={`/thor`}
-                        className="cursor-pointer text-white"
-                        onClick={handleClick}
-                      >
-                        Thor
-                      </Link>
-                      <Link
-                        to={`/thor`}
-                        className="cursor-pointer text-white"
-                        onClick={handleClick}
-                      >
-                        Wolverine
-                      </Link>
-                      <Link
-                        to={`/thor`}
-                        className="cursor-pointer text-white"
-                        onClick={handleClick}
-                      >
-                        Venom
-                      </Link>
+                      {collection?.map((item, index) => (
+                        <div key={index}>
+                          <Link
+                            to={item?.name && `/collection/${item.name}`}
+                            className="cursor-pointer text-white capitalize hover:text-red-500"
+                            onClick={handleClick}
+                          >
+                            {item?.name}
+                          </Link>
+                        </div>
+                      ))}
                     </div>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-        ) : (
-          <></>
         )}
       </div>
-
-      {/* {nav && (
-        <ul
-          className={
-            !nav
-              ? "hidden"
-              : "absolute h-screen w-full px-4 cursor-pointer bg-black"
-          }
-        >
-          <div className="flex flex-col gap-6 text-white pt-8 font-bold">
-            <li className="cursor-pointer hover:text-red-500">
-              <Link to={`/characters`} onClick={handleClick}>
-                Characters
-              </Link>
-            </li>
-            <li className="cursor-pointer hover:text-red-500">
-              <Link to={`/comics`} onClick={handleClick}>
-                Comics
-              </Link>
-            </li>
-            <li className="cursor-pointer hover:text-red-500">
-              <Link to={`/events`} onClick={handleClick}>
-                Events
-              </Link>
-            </li>
-            <li className="cursor-pointer hover:text-red-500">
-              <Link to={`/series`} onClick={handleClick}>
-                Series
-              </Link>
-            </li>
-          </div>
-        </ul>
-      )} */}
     </div>
   );
 };

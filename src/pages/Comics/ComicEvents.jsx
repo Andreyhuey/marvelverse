@@ -63,13 +63,20 @@ const ComicEvents = () => {
     sessionStorage.setItem(`labelByComicEvents=${comicId}`, label);
 
     document.title = `${title}  |Events | Marvel-Verse - The Official Marvel site for Marvel's Vast Library`;
-  }, [eventsList, currentComicEventsPage, comicId, orderBy, limit, title]);
+  }, [
+    eventsList,
+    currentComicEventsPage,
+    comicId,
+    orderBy,
+    label,
+    limit,
+    title,
+  ]);
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
     const storedOrderBy = sessionStorage.getItem(
-      `orderByComicEvents=${comicId}`,
-      orderBy
+      `orderByComicEvents=${comicId}`
     );
     const storedLabel = sessionStorage.getItem(`labelByComicEvents=${comicId}`);
 
@@ -79,7 +86,7 @@ const ComicEvents = () => {
     if (storedLabel) {
       setLabel(storedLabel);
     }
-  }, []);
+  }, [comicId]);
 
   if (isFetching) return <Loader />;
 
