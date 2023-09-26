@@ -4,36 +4,30 @@ import { NavLink } from "react-router-dom";
 import { collection } from "../data";
 
 let activeNav = {
-  color: "#14744C",
-  backgroundColor: "#B1FD5559",
-  borderLeft: "3px solid #14744C",
+  color: "#EF4444",
+  backgroundColor: "#EF4444",
+  borderLeft: "3px solid #EF4444",
   height: "100%",
   width: "100%",
 };
 
-const CollectionBar = ({ closeCollectionBar }) => {
+function CollectionBar(props) {
   return (
-    <div
-      className="absolute top-[4.5rem] left-[-180px]"
-      onMouseLeave={closeCollectionBar}
-    >
-      <div className="relative w-[100%] h-full bg-[#fff] rounded-[10px] shadow-md p-8">
-        <span className="absolute top-[-20px] right-[34.5%]">
-          {" "}
-          <BsFillTriangleFill color="#fff" size={"22"} />{" "}
-        </span>
-
+    <div className="absolute top-[20px] left-[-180px]">
+      <div className="relative w-[100%] h-full bg-black rounded-[10px] shadow-md p-8">
         <div className="flex items-start justify-start gap-4 w-full">
-          <div className="flex flex-col items-start gap-4 w-[264px]">
+          <div className="grid grid-cols-2 gap-y-4 justify-center min-w-[400px]">
             {collection?.map((item, index) => (
               <>
                 <NavLink
+                  key={index}
                   to={`/collection/${item?.name}`}
                   reloadDocument
                   style={({ isActive }) => isActive && activeNav}
-                  className="text-[#333333]"
+                  className="text-white"
+                  onClick={props.collectionCloseHandler}
                 >
-                  <span className="text-[14px] font-bold leading-[40px] hover:text-[#14744c] hover:border-l-4 hover:border-[#14744c] hover:bg-[#B1FD5559] w-full hover:py-4 hover:pr-40 pl-2">
+                  <span className="text-[14px] font-bold leading-[40px] hover:text-[#EF4444] hover:border-l-2 hover:border-[#EF4444]  w-full hover:py-4 px-4 hover:pr-10 pl-2">
                     {" "}
                     {item?.name}
                   </span>
@@ -45,6 +39,6 @@ const CollectionBar = ({ closeCollectionBar }) => {
       </div>
     </div>
   );
-};
+}
 
 export default CollectionBar;

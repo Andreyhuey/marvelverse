@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlineMenu } from "react-icons/hi";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineDown } from "react-icons/ai";
 import { collection } from "../data";
+import CollectionBar from "./CollectionBar";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
+  const [showCollectionBar, setShowCollectionBar] = useState(false);
+  const handleCollectionBar = () => setShowCollectionBar(!showCollectionBar);
 
   // Add this effect to handle body overflow
   useEffect(() => {
@@ -60,8 +63,36 @@ const Navbar = () => {
           <li className="cursor-pointer hover:text-red-500">
             <Link to={`/series`}>Series</Link>
           </li>
-          <li className="cursor-pointer hover:text-red-500">
-            <Link to={`/series`}>Collection</Link>
+          <li
+            className="cursor-pointer hover:text-red-500"
+            onMouseLeave={() => setShowCollectionBar(false)}
+          >
+            <div className="flex justify-start items-center w-full transition">
+              <div className="flex items-center justify-between w-full">
+                <div className="relative">
+                  <div
+                    className={`flex items-center gap-1 font=bold  text-[13px] h-full cursor-pointer  ${
+                      showCollectionBar ? "text-red-500" : "text-[#fff]"
+                    } `}
+                    onMouseEnter={() => setShowCollectionBar(true)}
+                    onClick={handleCollectionBar}
+                  >
+                    {" "}
+                    Collection
+                  </div>
+                  <>
+                    {showCollectionBar && (
+                      <CollectionBar
+                        onMouseEnter={() => setShowCollectionBar(true)}
+                        onMouseLeave={() => setShowCollectionBar(false)}
+                        onClick={handleCollectionBar}
+                        collectionCloseHandler={handleCollectionBar}
+                      />
+                    )}
+                  </>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -87,7 +118,7 @@ const Navbar = () => {
         </>
 
         {nav && (
-          <div className="absolute w-full  backdrop-blur-3xl  transform overflow-y-scroll">
+          <div className="absolute w-full  backdrop-blur-3xl  transform h-auto  overflow-y-scroll">
             <div className="min-h-screen border-r-white/20 bg-black py-6 border-r-[1px] ">
               <div className="flex flex-col gap-6 text-white font-bold">
                 <div className="pl-3">
@@ -132,6 +163,7 @@ const Navbar = () => {
                       Collection
                     </Link>
                   </li>
+
                   <li className="w-full pl-3">
                     <div className="grid grid-cols-2 justify-between gap-5 text-sm">
                       {collection?.map((item, index) => (
