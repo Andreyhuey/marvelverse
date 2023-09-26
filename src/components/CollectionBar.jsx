@@ -1,5 +1,4 @@
 import React from "react";
-import { BsFillTriangleFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import { collection } from "../data";
 
@@ -13,10 +12,10 @@ let activeNav = {
 
 function CollectionBar(props) {
   return (
-    <div className="absolute top-[20px] left-[-180px]">
-      <div className="relative w-[100%] h-full bg-black rounded-[10px] shadow-md p-8">
-        <div className="flex items-start justify-start gap-4 w-full">
-          <div className="grid grid-cols-2 gap-y-4 justify-center min-w-[400px]">
+    <div className="absolute top-[20px] lg:left-[-180px] md:right-[-185px]">
+      <div className="relative">
+        <div className="flex items-start justify-start">
+          <div className="grid grid-cols-3 gap-y-4 justify-center md:min-w-[600px] lg:min-w-[800px] bg-black p-4  rounded-[10px] shadow-md">
             {collection?.map((item, index) => (
               <>
                 <NavLink

@@ -30,7 +30,7 @@ import SeriesCharacters from "./Series/SeriesCharacters";
 import SeriesComics from "./Series/SeriesComics";
 
 // Collection
-import Collection from "./Collection";
+import Collection from "./Collection/Collection";
 
 export {
   Homepage,
