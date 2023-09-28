@@ -118,7 +118,7 @@ const Navbar = () => {
         </>
 
         {nav && (
-          <div className="absolute w-full  backdrop-blur-3xl overflow-y-auto hover:overflow-y-scroll h-auto">
+          <div className="absolute w-full  backdrop-blur-3xl  h-full">
             <div className=" border-r-white/20 bg-black py-6 border-r-[1px] ">
               <div className="flex flex-col gap-6 text-white font-bold h-full">
                 <div className="pl-3">
