@@ -9,9 +9,9 @@ export const searchApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getSearchCharacters: builder.query({
-      query: ({ orderBy, limit, offset }) =>
+      query: ({ orderBy, limit, offset, searchTerm }) =>
         createRequest(
-          `/characters?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/characters?nameStartsWith=${searchTerm}&orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     getSearchComics: builder.query({
@@ -21,15 +21,15 @@ export const searchApi = createApi({
         ),
     }),
     getSearchEvents: builder.query({
-      query: ({ orderBy, limit, offset }) =>
+      query: ({ orderBy, limit, offset, searchTerm }) =>
         createRequest(
-          `/events?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/events?nameStartsWith=${searchTerm}&orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     getSearchSeries: builder.query({
-      query: ({ orderBy, limit, offset }) =>
+      query: ({ orderBy, limit, offset, searchTerm }) =>
         createRequest(
-          `/series?orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
+          `/series?titleStartsWith=${searchTerm}&orderBy=${orderBy}&limit=${limit}&offset=${offset}&ts=1&apikey=${process.env.REACT_APP_API_KEY}&hash=${process.env.REACT_APP_HASH}`
         ),
     }),
     getComicSeries: builder.query({
