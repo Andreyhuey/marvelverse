@@ -1,4 +1,7 @@
 import React from "react";
+import ScrollPositionManager from "../ScrollManager";
+import { Link } from "react-router-dom";
+import moment from "moment";
 
 const EventsComp = (props) => {
   const events = props?.events;
@@ -8,14 +11,12 @@ const EventsComp = (props) => {
         {events?.map((c) => (
           <div
             key={c.id}
-            // onMouseEnter={() => handleMouseEnter(c.id)}
-            // onMouseLeave={handleMouseLeave}
             className={` 
                 
                 transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2`}
           >
             <ScrollPositionManager
-              scrollKey={`${c.id + c.title + searchTerm}`}
+              scrollKey={`${c.id + c.title + props?.searchTerm}`}
             />
 
             <Link key={c.id} to={`/events/${c.id}/${c.title}`}>

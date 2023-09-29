@@ -1,4 +1,7 @@
 import React from "react";
+import ScrollPositionManager from "../ScrollManager";
+import { Link } from "react-router-dom";
+import { BiSolidInfoCircle } from "react-icons/bi";
 
 const CharactersComp = (props) => {
   const characters = props?.characters;
@@ -8,7 +11,7 @@ const CharactersComp = (props) => {
         {characters?.map((c, index) => (
           <div key={index}>
             <ScrollPositionManager
-              scrollKey={`${c.id + c.description + searchTerm}`}
+              scrollKey={`${c.id + c.description + props?.searchTerm}`}
             />
             <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
               <Link
@@ -25,15 +28,13 @@ const CharactersComp = (props) => {
                     />
                   </>
 
-                  {c.description ? (
-                    <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-green-500 rounded-br-xl rounded-tl-md">
-                      <BiSolidInfoCircle />
-                    </div>
-                  ) : (
-                    <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-red-500 rounded-br-xl rounded-tl-md">
-                      <BiSolidInfoCircle />
-                    </div>
-                  )}
+                  <div
+                    className={`text-xl font-bold p-2 font-mono absolute bottom-2 right-0 ${
+                      c.description ? "text-green-500" : "text-red-500"
+                    }  rounded-br-xl rounded-tl-md`}
+                  >
+                    <BiSolidInfoCircle />
+                  </div>
                 </div>
 
                 <div className="px-2 pb-2">
