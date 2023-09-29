@@ -1,7 +1,11 @@
 import React from "react";
 
 const Search = () => {
-  return <div></div>;
+  return (
+    <div className="bg-gray-950 text-white min-h-screen flex items-center justify-center">
+      <h1 className="font-bold text-[42px] ">In Progress</h1>
+    </div>
+  );
 };
 
 export default Search;
