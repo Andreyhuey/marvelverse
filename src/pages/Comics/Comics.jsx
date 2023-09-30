@@ -52,7 +52,7 @@ const Comics = () => {
     sessionStorage.setItem(`orderByComics`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelByComics`, label);
 
-    document.title = `Comics | Marvel-Verse `;
+    document.title = `Comics | Marvelverse `;
   }, [comicsList, orderBy, label, limit, currentComicsPage]);
 
   const options = [

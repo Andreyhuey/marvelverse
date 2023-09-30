@@ -62,7 +62,7 @@ const ComicSearch = () => {
     sessionStorage.setItem(`orderByComicSearch${searchTerm}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelByComicSearch${searchTerm}`, label);
 
-    document.title = `Comics | Marvel-Verse `;
+    document.title = `Comics | Marvelverse `;
   }, [comicsList, orderBy, label, limit, currentComicsSearchPage, searchTerm]);
 
   const handleSearch = (event) => {

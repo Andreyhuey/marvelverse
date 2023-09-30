@@ -56,7 +56,7 @@ const EventComics = () => {
     sessionStorage.setItem(`orderByEventComics${eventId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelByEventComics${eventId}`, label);
 
-    document.title = `${title} Comics | Events | Marvel-Verse `;
+    document.title = `${title} Comics | Events | Marvelverse `;
   }, [
     comicsList,
     orderBy,

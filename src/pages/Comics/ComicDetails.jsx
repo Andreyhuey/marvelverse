@@ -16,7 +16,7 @@ const ComicDetails = () => {
     const comicDetails = data?.data?.results;
     console.log(comicDetails);
     setComic(comicDetails);
-    document.title = `${title} | Comics | Marvel-Verse`;
+    document.title = `${title} | Comics | Marvelverse`;
     document.body.scrollTop = 0;
   }, [data, title]);
 

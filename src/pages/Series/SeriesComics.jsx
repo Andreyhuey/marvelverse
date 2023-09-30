@@ -58,7 +58,7 @@ const SeriesComics = () => {
     sessionStorage.setItem(`orderBySeriesComics${seriesId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelBySeriesComics${seriesId}`, label);
 
-    document.title = `${title} Comics | Series | Marvel-Verse `;
+    document.title = `${title} Comics | Series | Marvelverse `;
   }, [
     comicsList,
     orderBy,

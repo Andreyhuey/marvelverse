@@ -69,7 +69,7 @@ const CharacterSeries = () => {
     sessionStorage.setItem(`orderByCharacterSeries${characterId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelByCharacterSeries${characterId}`, label);
 
-    document.title = `${name} | Series | Marvel-Verse - The Official Marvel site for Marvel's Vast Library`;
+    document.title = `${name} | Series | Marvelverse - The Official Marvel site for Marvel's Vast Library`;
   }, [
     seriesList,
     orderBy,

@@ -16,7 +16,7 @@ const CharacterDetails = () => {
     const characterDetails = data?.data?.results;
     console.log(characterDetails);
     setCharacter(characterDetails);
-    document.title = `${name} | Characters | Marvel-Verse`;
+    document.title = `${name} | Characters | Marvelverse`;
     document.body.scrollTop = 0;
   }, [name, data]);
 

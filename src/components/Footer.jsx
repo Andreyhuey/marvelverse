@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
         <div className="border-t-[1px] border-t-[#2A407C text-[#8794BA] text-[24px] px-4 md:px-8 lg:px-20">
           <div className="text-center text-[10px]">
-            © 2022 Marvel-Verse. All rights reserved.
+            © 2022 Marvelverse. All rights reserved.
           </div>
         </div>
       </div>

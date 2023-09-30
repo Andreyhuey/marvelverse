@@ -61,7 +61,7 @@ const ComicEvents = () => {
     sessionStorage.setItem(`orderByComicEvents=${comicId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelByComicEvents=${comicId}`, label);
 
-    document.title = `${title}  |Events | Marvel-Verse - The Official Marvel site for Marvel's Vast Library`;
+    document.title = `${title}  |Events | Marvelverse - The Official Marvel site for Marvel's Vast Library`;
   }, [
     eventsList,
     currentComicEventsPage,

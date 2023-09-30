@@ -14,7 +14,7 @@ const EventDetails = () => {
   useEffect(() => {
     const eventDetails = data?.data?.results;
     setEvent(eventDetails);
-    document.title = `${title} | Events | Marvel-Verse`;
+    document.title = `${title} | Events | Marvelverse`;
     document.body.scrollTop = 0;
   }, [data, title, setEvent]);
 

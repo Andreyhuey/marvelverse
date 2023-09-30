@@ -59,7 +59,7 @@ const Series = () => {
     sessionStorage.setItem("labelSeries", label);
 
     document.title =
-      "Series | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
+      "Series | Marvelverse - The Official Marvel site for Marvel's Vast Library";
   }, [seriesList, orderBy, label, limit, currentSeriesPage]);
 
   // On component mount, retrieve stored data from sessionStorage

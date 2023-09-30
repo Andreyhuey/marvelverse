@@ -60,7 +60,7 @@ const CharacterComics = () => {
     sessionStorage.setItem(`orderByCharacterComics${characterId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelByCharacterComics${characterId}`, label);
 
-    document.title = `${name} Comics | Characters | Marvel-Verse `;
+    document.title = `${name} Comics | Characters | Marvelverse `;
   }, [
     comicsList,
     orderBy,

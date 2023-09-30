@@ -69,7 +69,7 @@ const EventCharacters = () => {
     sessionStorage.setItem(`orderByEventCharacters${eventId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelByEventCharacters${eventId}`, label);
 
-    document.title = `${title} Characters | Events | Marvel-Verse`;
+    document.title = `${title} Characters | Events | Marvelverse`;
   }, [
     charactersList,
     currentEventCharactersPage,

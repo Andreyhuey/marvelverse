@@ -5,7 +5,7 @@ export const collection = [
   { name: "captain america" },
   { name: "captain marvel" },
   { name: "daredevil" },
-  { name: "Deadpool" },
+  { name: "deadpool" },
   { name: "doctor strange" },
   { name: "hawkeye" },
   { name: "hulk" },

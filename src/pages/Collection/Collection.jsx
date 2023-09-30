@@ -11,7 +11,7 @@ const Collection = () => {
   const { searchTerm } = useParams();
 
   useEffect(() => {
-    document.title = `${searchTerm} | Collection | Marvel-Verse`;
+    document.title = `${searchTerm} | Collection | Marvelverse`;
   }, [searchTerm]);
 
   return (

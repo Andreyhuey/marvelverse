@@ -65,7 +65,7 @@ const CharacterEvents = () => {
     sessionStorage.setItem(`orderByCharacterEvents=${characterId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelByCharacterEvents=${characterId}`, label);
 
-    document.title = `${name}  |Events | Marvel-Verse - The Official Marvel site for Marvel's Vast Library`;
+    document.title = `${name}  |Events | Marvelverse - The Official Marvel site for Marvel's Vast Library`;
   }, [
     eventsList,
     currentCharacterEventsPage,

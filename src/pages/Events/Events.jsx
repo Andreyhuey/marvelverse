@@ -59,7 +59,7 @@ const Events = () => {
     sessionStorage.setItem("labelEvents", label);
 
     document.title =
-      "Events | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
+      "Events | Marvelverse - The Official Marvel site for Marvel's Vast Library";
   }, [eventsList, orderBy, label, limit, currentEventPage]);
 
   // On component mount, retrieve stored data from sessionStorage

@@ -58,7 +58,7 @@ const Characters = () => {
     sessionStorage.setItem("labelCharacters", label);
 
     document.title =
-      "Characters | Marvel-Verse - The Official Marvel site for Marvel's Vast Library";
+      "Characters | Marvelverse - The Official Marvel site for Marvel's Vast Library";
   }, [charactersList, orderBy, label, limit, currentCharacterPage]);
 
   // On component mount, retrieve stored data from sessionStorage

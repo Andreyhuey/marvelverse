@@ -71,7 +71,7 @@ const SeriesCharacters = () => {
     sessionStorage.setItem(`orderBySeriesCharacters${seriesId}`, orderBy); // Store orderBy
     sessionStorage.setItem(`labelBySeriesCharacters${seriesId}`, label);
 
-    document.title = `${title} Characters | Events | Marvel-Verse`;
+    document.title = `${title} Characters | Events | Marvelverse`;
   }, [
     charactersList,
     currentSeriesCharactersPage,
