@@ -6,16 +6,18 @@ import ScrollPositionManager from "../../components/ScrollManager";
 import { BiSolidInfoCircle } from "react-icons/bi";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Autocomplete, TextField } from "@mui/material";
+import { ComicsComp } from "../../components";
 
 const ComicSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem(`orderByComics${searchTerm}`) || "-modified"
+    sessionStorage.getItem(`orderByComicSearch${searchTerm}`) || "-modified"
   );
 
   const [label, setLabel] = useState(
-    sessionStorage.getItem(`labelComics${searchTerm}`) || "Recently Modified"
+    sessionStorage.getItem(`labelByComicSearch${searchTerm}`) ||
+      "Recently Modified"
   );
 
   const limit = "12";
@@ -57,8 +59,8 @@ const ComicSearch = () => {
       `currentComicsSearchPage${searchTerm}`,
       currentComicsSearchPage
     );
-    sessionStorage.setItem(`orderByComics${searchTerm}`, orderBy); // Store orderBy
-    sessionStorage.setItem(`labelComics${searchTerm}`, label);
+    sessionStorage.setItem(`orderByComicSearch${searchTerm}`, orderBy); // Store orderBy
+    sessionStorage.setItem(`labelByComicSearch${searchTerm}`, label);
 
     document.title = `Comics | Marvel-Verse `;
   }, [comicsList, orderBy, label, limit, currentComicsSearchPage, searchTerm]);
@@ -85,8 +87,12 @@ const ComicSearch = () => {
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {
-    const storedOrderBy = sessionStorage.getItem(`orderByComics${searchTerm}`);
-    const storedLabel = sessionStorage.getItem(`labelComics${searchTerm}`);
+    const storedOrderBy = sessionStorage.getItem(
+      `orderByComicSearch${searchTerm}`
+    );
+    const storedLabel = sessionStorage.getItem(
+      `labelByComicSearch${searchTerm}`
+    );
 
     if (storedOrderBy) {
       setOrderBy(storedOrderBy);
@@ -259,50 +265,8 @@ const ComicSearch = () => {
             </fieldset>
           </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
-          {comics?.map((c) => (
-            <div
-              key={c.id}
-              className={` ${isFetching ? "animate-pulse" : ""} `}
-            >
-              <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
-                <ScrollPositionManager scrollKey={`${c.id + c.diamondCode}`} />
-                <Link
-                  key={c.id}
-                  to={`/comics/${c.id}/${c.title}`}
-                  className="py-4"
-                >
-                  <div className={` relative`}>
-                    <>
-                      <img
-                        src={c.thumbnail.path + ".jpg"}
-                        className={`${"rounded-xl w-full"}`}
-                        alt={"img of " + c.title}
-                      />
-                    </>
 
-                    {c.description ? (
-                      <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-green-500 rounded-br-xl rounded-tl-md">
-                        <BiSolidInfoCircle />
-                      </div>
-                    ) : (
-                      <div className="text-xl font-bold p-2 font-mono absolute bottom-2 left-0 text-red-500 rounded-br-xl rounded-tl-md">
-                        <BiSolidInfoCircle />
-                      </div>
-                    )}
-                  </div>
-                  <div className="px-2 pb-2 flex items-center justify-center">
-                    <div
-                      className={`uppercase  font-bold py-2 font-mono text-[#a7a4a4] text-center"`}
-                    >
-                      {c.title}
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ComicsComp comics={comics} />
 
         {/* Pagination example */}
 

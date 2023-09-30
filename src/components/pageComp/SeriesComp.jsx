@@ -5,11 +5,11 @@ import { BiSolidInfoCircle } from "react-icons/bi";
 
 const SeriesComp = ({ search, series, searchTerm }) => {
   return (
-    <div>
+    <>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
-        {series?.map((c) => (
+        {series?.map((c, index) => (
           <div
-            key={c.id}
+            key={index}
             // onMouseEnter={() => handleMouseEnter(c.id)}
             // onMouseLeave={handleMouseLeave}
             className={` 
@@ -47,7 +47,7 @@ const SeriesComp = ({ search, series, searchTerm }) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

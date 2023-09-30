@@ -7,9 +7,9 @@ const EventsComp = ({ events, search, searchTerm }) => {
   return (
     <>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
-        {events?.map((c) => (
+        {events?.map((c, index) => (
           <div
-            key={c.id}
+            key={index}
             className={` 
                 
                 transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2`}
