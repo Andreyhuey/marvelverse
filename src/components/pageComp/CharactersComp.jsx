@@ -3,15 +3,16 @@ import ScrollPositionManager from "../ScrollManager";
 import { Link } from "react-router-dom";
 import { BiSolidInfoCircle } from "react-icons/bi";
 
-const CharactersComp = (props) => {
-  const characters = props?.characters;
+const CharactersComp = ({ search, searchTerm, characters }) => {
   return (
-    <div>
+    <>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 pt-4">
         {characters?.map((c, index) => (
           <div key={index}>
             <ScrollPositionManager
-              scrollKey={`${c.id + c.description + props?.searchTerm}`}
+              scrollKey={`${
+                c.id + c.description + `${search ? searchTerm : null} `
+              }`}
             />
             <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
               <Link
@@ -45,7 +46,7 @@ const CharactersComp = (props) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

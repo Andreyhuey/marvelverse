@@ -2,17 +2,18 @@ import React from "react";
 import ScrollPositionManager from "../ScrollManager";
 import { Link } from "react-router-dom";
 import { BiSolidInfoCircle } from "react-icons/bi";
+import { seriesOptions } from "../../data";
 
-const ComicsComp = (props) => {
-  const comics = props?.comics;
-
+const ComicsComp = ({ comics, search, searchTerm }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
       {comics?.map((c) => (
         <div key={c.id}>
           <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
             <ScrollPositionManager
-              scrollKey={`${c.id + c.diamondCode + props?.searchTerm}`}
+              scrollKey={`${
+                c.id + c.diamondCode + `${search ? searchTerm : null}`
+              }`}
             />
             <Link key={c.id} to={`/comics/${c.id}/${c.title}`} className="py-4">
               <div className={` relative`}>

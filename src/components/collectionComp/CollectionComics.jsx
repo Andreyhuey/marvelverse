@@ -37,7 +37,7 @@ const CollectionComics = (props) => {
             Comics
           </h1>
 
-          <ComicsComp searchTerm={searchTerm} comics={comics} />
+          <ComicsComp search searchTerm={searchTerm} comics={comics} />
         </>
       )}
     </>

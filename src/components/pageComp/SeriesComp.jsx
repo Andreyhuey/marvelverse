@@ -3,9 +3,7 @@ import ScrollPositionManager from "../ScrollManager";
 import { Link } from "react-router-dom";
 import { BiSolidInfoCircle } from "react-icons/bi";
 
-const SeriesComp = (props) => {
-  const series = props?.series;
-
+const SeriesComp = ({ search, series, searchTerm }) => {
   return (
     <div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
@@ -19,7 +17,7 @@ const SeriesComp = (props) => {
                 transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2`}
           >
             <ScrollPositionManager
-              scrollKey={`${c.id + c.title + props?.searchTerm}`}
+              scrollKey={`${c.id + c.title + `${search ? searchTerm : null}`}`}
             />
 
             <Link key={c.id} to={`/series/${c.id}/${c.title}`}>

@@ -30,7 +30,11 @@ const CollectionCharacters = (props) => {
           <h1 className="capitalize text-start font-bold pt-8 text-lg">
             Characters
           </h1>
-          <CharactersComp characters={characters} searchTerm={searchTerm} />
+          <CharactersComp
+            search
+            characters={characters}
+            searchTerm={searchTerm}
+          />
         </>
       )}
     </>

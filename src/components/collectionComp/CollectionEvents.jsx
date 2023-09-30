@@ -31,7 +31,7 @@ const CollectionEvents = (props) => {
           <h1 className="capitalize text-start font-bold pt-8 text-lg">
             Events
           </h1>
-          <EventsComp searchTerm={searchTerm} events={events} />
+          <EventsComp search searchTerm={searchTerm} events={events} />
         </>
       )}
     </>

@@ -3,10 +3,9 @@ import ScrollPositionManager from "../ScrollManager";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-const EventsComp = (props) => {
-  const events = props?.events;
+const EventsComp = ({ events, search, searchTerm }) => {
   return (
-    <div>
+    <>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
         {events?.map((c) => (
           <div
@@ -16,7 +15,7 @@ const EventsComp = (props) => {
                 transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2`}
           >
             <ScrollPositionManager
-              scrollKey={`${c.id + c.title + props?.searchTerm}`}
+              scrollKey={`${c.id + c.title + `${search ? searchTerm : null}`}`}
             />
 
             <Link key={c.id} to={`/events/${c.id}/${c.title}`}>
@@ -38,7 +37,7 @@ const EventsComp = (props) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
