@@ -22,6 +22,20 @@ const ComicDetails = () => {
 
   if (isFetching) return <Loader />;
 
+  function getPartBeforeFirstParenthesis(inputString) {
+    const index = inputString.indexOf("(");
+    if (index !== -1) {
+      return inputString.substring(0, index).trim();
+    }
+    // If "(" is not found, return the original string or handle it as needed
+    return inputString;
+  }
+
+  // Example usage:
+  function modifiedTitle(str) {
+    getPartBeforeFirstParenthesis(str);
+  }
+
   return (
     <>
       <div className="bg-gray-950 px-4 md:px-8 lg:px-20 py-10 min-h-screen text-white">
@@ -81,7 +95,11 @@ const ComicDetails = () => {
                       {series.available !== 0 && (
                         <div className="text-center text-white flex flex-col gap-1 items-start justify-center font-bold rounded-xl">
                           <p className="text-md">Series</p>
-                          <Link to={`/series/${series.name.slice(0, 10)}`}>
+                          <Link
+                            to={`/series/${getPartBeforeFirstParenthesis(
+                              series?.name
+                            )}`}
+                          >
                             <p className="font-mono text-slate-300 text-center">
                               {series.name}
                             </p>
@@ -90,7 +108,7 @@ const ComicDetails = () => {
                       )}
 
                       <div className="grid grid-cols-2 gap-x-6  gap-y-3 justify-between w-full">
-                        {issueNumber > 0 ? (
+                        {issueNumber > 0 && (
                           <p className="font-semibold">
                             Issue Number:
                             <span className="text-slate-300">
@@ -98,8 +116,6 @@ const ComicDetails = () => {
                               {issueNumber}
                             </span>
                           </p>
-                        ) : (
-                          ""
                         )}
 
                         <p className="font-semibold">

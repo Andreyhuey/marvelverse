@@ -7,10 +7,9 @@ import { BiSolidInfoCircle } from "react-icons/bi";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Autocomplete, TextField } from "@mui/material";
 import { ComicsComp } from "../../components";
+import { charactersOptions } from "../../data";
 
-const ComicSearch = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-
+const ComicSearch = ({ searchTerm }) => {
   const [orderBy, setOrderBy] = useState(
     sessionStorage.getItem(`orderByComicSearch${searchTerm}`) || "-modified"
   );
@@ -217,29 +216,6 @@ const ComicSearch = () => {
         </div>
 
         <div className="flex md:flex-row flex-col items-center justify-between py-4 gap-5">
-          <div className="flex items-start justify-start">
-            <form
-              className="w-[225px] h-auto rounded-lg"
-              onSubmit={handleSearch}
-            >
-              <input
-                className="text-black"
-                minLength="5"
-                type="search"
-                value={searchTerm}
-                placeholder="Spider.."
-                onChange={(event) => setSearchTerm(event.target.value)}
-                required
-              />
-              <button
-                className="btn btn-primary my-2 my-sm-0"
-                type="submit"
-                value="submit"
-              >
-                Search
-              </button>
-            </form>
-          </div>
           <div className="flex items-start justify-end text-black mb-7">
             <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
               <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">

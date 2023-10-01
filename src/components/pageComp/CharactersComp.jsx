@@ -17,7 +17,7 @@ const CharactersComp = ({ search, searchTerm, characters }) => {
             <div className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2">
               <Link
                 key={c.id}
-                to={`/characters/${c.id}/${c.name}`}
+                to={`/characters/${c.id}/${c.name.replace(/\//g, "-")}`}
                 className="py-4"
               >
                 <div className={` relative `}>
