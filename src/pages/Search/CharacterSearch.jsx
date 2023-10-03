@@ -4,6 +4,7 @@ import { CharactersComp, Loader } from "../../components";
 import { charactersOptions } from "../../data";
 
 const CharacterSearch = ({ searchTerm, expandable }) => {
+  const options = charactersOptions;
   const [orderBy, setOrderBy] = useState(options[0]?.value);
   const [characters, setCharacters] = useState([]);
 
@@ -16,14 +17,6 @@ const CharacterSearch = ({ searchTerm, expandable }) => {
     offset,
     orderBy,
   });
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    // Fetch data when the submit button is clicked
-    // You can add any additional validation or error handling here
-    setSearchTerm(searchQuery);
-    setOffset(0); // Reset offset to fetch the first page of results
-  };
 
   useEffect(() => {
     const fetchResults = charactersList?.data?.results;

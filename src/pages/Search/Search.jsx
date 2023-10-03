@@ -8,14 +8,12 @@ const Search = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    // Fetch data when the submit button is clicked
-    // You can add any additional validation or error handling here
+
     setSearchTerm(searchQuery);
-    setOffset(0); // Reset offset to fetch the first page of results
   };
 
   return (
-    <>
+    <div className="bg-gray-950 text-white flex flex-col min-h-screen items-center justify-center py-10 px-4 md:px-8 lg:px-20">
       <div>
         <>
           <form
@@ -38,13 +36,11 @@ const Search = () => {
         </>
       </div>
 
-      <div className="bg-gray-950 text-white min-h-screen flex flex-col items-center justify-center gap-4 py-10 px-2 md:px-8 lg:px-20">
-        {/* Characters */}
-        <CharacterSearch searchTerm={searchTerm} />
-      </div>
+      {/* Characters */}
+      <CharacterSearch searchTerm={searchTerm} />
 
-      <ComicSearch />
-    </>
+      <ComicSearch searchTerm={searchTerm} />
+    </div>
   );
 };
 
