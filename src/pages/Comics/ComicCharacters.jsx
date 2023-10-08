@@ -6,8 +6,10 @@ import { BiSolidInfoCircle } from "react-icons/bi";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
 import CharactersComp from "../../components/pageComp/CharactersComp";
+import { charactersOptions } from "../../data";
 
 const ComicCharacters = () => {
+  const options = charactersOptions;
   const { comicId, title } = useParams();
   const [offset, setOffset] = useState(0);
   const limit = "16";
@@ -45,14 +47,6 @@ const ComicCharacters = () => {
     setLabel(newValue?.label);
     setCurrentComicCharactersPage(1);
   };
-
-  // Options for the Order
-  const options = [
-    { label: "Ascending Order (A-Z)", value: "name" },
-    { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Oldest", value: "modified" },
-    { label: "Recently Modified", value: "-modified" },
-  ];
 
   // UseEffect used to fetch and set total, count and offset
   useEffect(() => {

@@ -4,8 +4,10 @@ import { useGetComicEventsQuery } from "../../services/comicsApi";
 import Loader from "../../components/Loader";
 import { Autocomplete, TextField } from "@mui/material";
 import EventsComp from "../../components/pageComp/EventsComp";
+import { eventsOptions } from "../../data";
 
 const ComicEvents = () => {
+  const options = eventsOptions;
   const { comicId, title } = useParams();
   const [events, setEvents] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -36,15 +38,6 @@ const ComicEvents = () => {
     setLabel(newValue?.label);
     setCurrentComicEventsPage(1);
   };
-
-  // Options for the Order
-  const options = [
-    { label: "Newest", value: "-startDate" },
-    { label: "Oldest", value: "startDate" },
-    { label: "Ascending Order (A-Z)", value: "name" },
-    { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Modified", value: "modified" },
-  ];
 
   // UseEffect used to fetch and set Total, count and offset
   useEffect(() => {

@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useGetComicsQuery } from "../../services/comicsApi";
 import Loader from "../../components/Loader";
-import ScrollPositionManager from "../../components/ScrollManager";
-import { BiSolidInfoCircle } from "react-icons/bi";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Autocomplete, TextField } from "@mui/material";
 import ComicsComp from "../../components/pageComp/ComicsComp";
+import { comicsOptions } from "../../data";
 
 const Comics = () => {
+  const options = comicsOptions;
   const [orderBy, setOrderBy] = useState(
     sessionStorage.getItem(`orderByComics`) || "-modified"
   );
@@ -54,19 +53,6 @@ const Comics = () => {
 
     document.title = `Comics | Marvelverse `;
   }, [comicsList, orderBy, label, limit, currentComicsPage]);
-
-  const options = [
-    { label: "Ascending Order (A-Z)", value: "title" },
-    { label: "Descending Order (Z-A)", value: "-title" },
-    { label: "Oldest Issue", value: "issueNumber" },
-    { label: "Latest Issue", value: "-issueNumber" },
-    { label: "Old", value: "modified" },
-    { label: "Recently Modified", value: "-modified" },
-    { label: "Final Order Cutoff (FOC)", value: "focDate" },
-    { label: "Latest Final Order Cutoff (FOC)", value: "-focDate" },
-    { label: "Oldest On Sale", value: "onsaleDate" },
-    { label: "Latest On Sale", value: "-onsaleDate" },
-  ];
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {

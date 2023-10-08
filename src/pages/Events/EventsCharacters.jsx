@@ -3,11 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import { useGetEventCharactersQuery } from "../../services/eventsApi";
 import Loader from "../../components/Loader";
 import { Autocomplete, TextField } from "@mui/material";
-import ScrollPositionManager from "../../components/ScrollManager";
-import { BiSolidInfoCircle } from "react-icons/bi";
+
 import { CharactersComp } from "../../components";
+import { charactersOptions } from "../../data";
 
 const EventCharacters = () => {
+  const options = charactersOptionss;
   const { eventId, title } = useParams();
   const [offset, setOffset] = useState(0);
   const limit = "16";
@@ -45,14 +46,6 @@ const EventCharacters = () => {
     setLabel(newValue?.label);
     setCurrentEventCharactersPage(1);
   };
-
-  // Options for the Order
-  const options = [
-    { label: "Ascending Order (A-Z)", value: "name" },
-    { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Oldest", value: "modified" },
-    { label: "Recently Modified", value: "-modified" },
-  ];
 
   // UseEffect used to fetch and set total, count and offset
   useEffect(() => {

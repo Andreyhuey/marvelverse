@@ -6,8 +6,10 @@ import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
 import { EventsComp } from "../../components";
+import { eventsOptions } from "../../data";
 
 const Events = () => {
+  const options = eventsOptions;
   const [events, setEvents] = useState([]);
   const [offset, setOffset] = useState(0);
   const limit = "16";
@@ -29,15 +31,6 @@ const Events = () => {
   const [currentEventPage, setCurrentEventPage] = useState(
     parseInt(sessionStorage.getItem("currentEventPage")) || 1
   );
-
-  // Options for the Order
-  const options = [
-    { label: "Newest", value: "-startDate" },
-    { label: "Oldest", value: "startDate" },
-    { label: "Ascending Order (A-Z)", value: "name" },
-    { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Modified", value: "modified" },
-  ];
 
   // handleChange for the Order
   const handleChange = (event, newValue) => {
