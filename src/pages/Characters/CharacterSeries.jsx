@@ -6,8 +6,10 @@ import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
 import { BiSolidInfoCircle } from "react-icons/bi";
 import { SeriesComp } from "../../components";
+import { seriesOptions } from "../../data";
 
 const CharacterSeries = () => {
+  const options = seriesOptions;
   const { characterId, name } = useParams();
   const [series, setSeries] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -35,15 +37,6 @@ const CharacterSeries = () => {
       sessionStorage.getItem(`currentCharacterSeriesPage${characterId}`)
     ) || 1
   );
-
-  // Options for the Order
-  const options = [
-    { label: "Start Year", value: "startYear" },
-    { label: "Ascending Order (A-Z)", value: "title" },
-    { label: "Descending Order (Z-A)", value: "-title" },
-    { label: "Old", value: "modified" },
-    { label: "Newest", value: "-modified" },
-  ];
 
   // handleChange for the Order
   const handleChange = (event, newValue) => {

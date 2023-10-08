@@ -6,8 +6,10 @@ import ScrollPositionManager from "../../components/ScrollManager";
 import { Autocomplete, TextField } from "@mui/material";
 import { BiSolidInfoCircle } from "react-icons/bi";
 import { ComicsComp } from "../../components";
+import { comicsOptions } from "../../data";
 
 const CharacterComics = () => {
+  const options = comicsOptions;
   const { characterId, name } = useParams();
   const [orderBy, setOrderBy] = useState(
     sessionStorage.getItem(`orderByCharacterComics${characterId}`) || "title"
@@ -70,19 +72,6 @@ const CharacterComics = () => {
     name,
     characterId,
   ]);
-
-  const options = [
-    { label: "Ascending Order (A-Z)", value: "title" },
-    { label: "Descending Order (Z-A)", value: "-title" },
-    { label: "Oldest Issue", value: "issueNumber" },
-    { label: "Latest Issue", value: "-issueNumber" },
-    { label: "Old", value: "modified" },
-    { label: "Recently Modified", value: "-modified" },
-    { label: "Final Order Cutoff (FOC)", value: "focDate" },
-    { label: "Latest Final Order Cutoff (FOC)", value: "-focDate" },
-    { label: "Oldest On Sale", value: "onsaleDate" },
-    { label: "Latest On Sale", value: "-onsaleDate" },
-  ];
 
   // On component mount, retrieve stored data from sessionStorage
   useEffect(() => {

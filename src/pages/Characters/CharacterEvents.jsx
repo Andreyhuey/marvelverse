@@ -6,8 +6,10 @@ import moment from "moment";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
 import { EventsComp } from "../../components";
+import { eventsOptions } from "../../data";
 
 const CharacterEvents = () => {
+  const options = eventsOptions;
   const { characterId, name } = useParams();
   const [events, setEvents] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -40,15 +42,6 @@ const CharacterEvents = () => {
     setLabel(newValue?.label);
     setCurrentCharacterEventsPage(1);
   };
-
-  // Options for the Order
-  const options = [
-    { label: "Newest", value: "-startDate" },
-    { label: "Oldest", value: "startDate" },
-    { label: "Ascending Order (A-Z)", value: "name" },
-    { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Modified", value: "modified" },
-  ];
 
   // UseEffect used to fetch and set Total, count and offset
   useEffect(() => {

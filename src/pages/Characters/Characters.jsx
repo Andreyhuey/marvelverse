@@ -6,8 +6,10 @@ import { BiSolidInfoCircle } from "react-icons/bi";
 import { Autocomplete, TextField } from "@mui/material";
 import ScrollPositionManager from "../../components/ScrollManager";
 import { CharactersComp } from "../../components";
+import { charactersOptions } from "../../data";
 
 const Characters = () => {
+  const options = charactersOptions;
   const [characters, setCharacters] = useState([]);
   const [offset, setOffset] = useState(0);
   const limit = "16";
@@ -29,14 +31,6 @@ const Characters = () => {
   const [currentCharacterPage, setCurrentCharacterPage] = useState(
     parseInt(sessionStorage.getItem("currentCharacterPage")) || 1
   );
-
-  // Options for the Order
-  const options = [
-    { label: "Ascending Order (A-Z)", value: "name" },
-    { label: "Descending Order (Z-A)", value: "-name" },
-    { label: "Old", value: "modified" },
-    { label: "Recently Modified", value: "-modified" },
-  ];
 
   // handleChange for the Order
   const handleChange = (event, newValue) => {
