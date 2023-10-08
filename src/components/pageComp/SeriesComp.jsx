@@ -20,7 +20,10 @@ const SeriesComp = ({ series, searchTerm }) => {
               scrollKey={`${c.id + c.title + searchTerm}`}
             />
 
-            <Link key={c.id} to={`/series/${c.id}/${c.title}`}>
+            <Link
+              key={c.id}
+              to={`/series/${c.id}/${c.title.replace(/\//g, "-")}`}
+            >
               <div className={` relative `}>
                 <>
                   <img

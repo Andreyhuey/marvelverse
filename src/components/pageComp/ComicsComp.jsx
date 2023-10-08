@@ -17,7 +17,7 @@ const ComicsComp = ({ comics, search, searchTerm }) => {
               />
               <Link
                 key={c.id}
-                to={`/comics/${c.id}/${c.title}`}
+                to={`/comics/${c.id}/${c.title.replace(/\//g, "-")}`}
                 className="py-4"
               >
                 <div className={` relative`}>

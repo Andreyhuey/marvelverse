@@ -18,7 +18,10 @@ const EventsComp = ({ events, searchTerm }) => {
               scrollKey={`${c.id + c.title + searchTerm}`}
             />
 
-            <Link key={c.id} to={`/events/${c.id}/${c.title}`}>
+            <Link
+              key={c.id}
+              to={`/events/${c.id}/${c.title.replace(/\//g, "-")}`}
+            >
               <div className={`  `}>
                 <>
                   <img

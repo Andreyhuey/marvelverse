@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CharacterSearch from "./CharacterSearch";
 import ComicSearch from "./ComicSearch";
 import EventSearch from "./EventSearch";
@@ -10,7 +10,7 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState(
     sessionStorage.getItem(`searchPageSearchTerm`) || ""
   );
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(searchTerm || "");
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -18,14 +18,16 @@ const Search = () => {
     sessionStorage.setItem(`searchPageSearchTerm`, searchQuery);
   };
 
-  const [tabIndex, setTabIndex] = useState(
-    sessionStorage.getItem(`searchPageTabIndex`) || 1
-  );
+  const [tabIndex, setTabIndex] = useState(1);
 
   const nextTab = (index) => {
     setTabIndex(index);
-    sessionStorage.setItem(`searchPageTabIndex`, index);
   };
+
+  //
+  useEffect(() => {
+    sessionStorage.setItem(`searchPageSearchTerm`, searchQuery);
+  }, [searchTerm, searchQuery]);
 
   return (
     <div className="bg-gray-950 text-white flex flex-col min-h-screen  py-10 px-4 md:px-8 lg:px-20">
@@ -43,7 +45,7 @@ const Search = () => {
         </form>
       </>
 
-      <div className="flex items-center justify-between border-t-2 border-red-500 rounded-t-xl pb-6 ">
+      <div className="flex items-center justify-between border-t-2 border-red-500 rounded-t-xl pb-6 pt-2 ">
         {searchStructure?.map((item, index) => (
           <div
             key={index}
@@ -73,7 +75,7 @@ const Search = () => {
 
             <EventSearch searchTerm={searchTerm} simplified />
             {/*  */}
-
+            <span className="border-t-2 border-red-500 py-10" />
             <SeriesSearch searchTerm={searchTerm} simplified />
           </div>
         )}

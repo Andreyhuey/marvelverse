@@ -28,6 +28,12 @@ const ComicSearch = ({ searchTerm, simplified }) => {
 
   return (
     <div>
+      {comics?.length > 0 && (
+        <div className="w-full">
+          <span className="border-t-2 border-red-500 py-10" />
+        </div>
+      )}
+
       <ComicsComp comics={comics} searchTerm={searchTerm} />
     </div>
   );

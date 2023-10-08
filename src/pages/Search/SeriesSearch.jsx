@@ -20,7 +20,7 @@ const SeriesSearch = ({ searchTerm, simplified }) => {
   useEffect(() => {
     const fetchResults = seriesList?.data?.results;
 
-    setCharacters(fetchResults || []);
+    setSeries(fetchResults || []);
     console.log(fetchResults);
   }, [seriesList]);
 

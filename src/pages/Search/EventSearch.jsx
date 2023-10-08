@@ -28,6 +28,12 @@ const EventSearch = ({ searchTerm, simplified }) => {
 
   return (
     <div>
+      {simplified && (
+        <>
+          {events > 0 && <span className="border-t-2 border-red-500 py-10" />}
+        </>
+      )}
+
       <EventsComp events={events} searchTerm={searchTerm} />
     </div>
   );
