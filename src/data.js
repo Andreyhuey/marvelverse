@@ -60,3 +60,11 @@ export const seriesOptions = [
   { label: "Old", value: "modified" },
   { label: "Newest", value: "-modified" },
 ];
+
+export const searchStructure = [
+  { label: "All" },
+  { label: "Characters" },
+  { label: "Comics" },
+  { label: "Events" },
+  { label: "Series" },
+];

@@ -3,10 +3,10 @@ import { useGetSearchComicsQuery } from "../../services/searchApi";
 import { ComicsComp, Loader } from "../../components";
 import { comicsOptions } from "../../data";
 
-const ComicSearch = ({ searchTerm }) => {
+const ComicSearch = ({ searchTerm, simplified }) => {
   const options = comicsOptions;
-  const [orderBy, setOrderBy] = useState(options[0]?.value);
-  const limit = "20";
+  const [orderBy, setOrderBy] = useState(options[5]?.value);
+  const limit = simplified ? 20 : 100;
   const [offset, setOffset] = useState("");
   const [comics, setComics] = useState([]);
 

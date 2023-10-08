@@ -4,6 +4,7 @@ import ComicSearch from "./ComicSearch";
 import EventSearch from "./EventSearch";
 import SeriesSearch from "./SeriesSearch";
 import ScrollPositionManager from "../../components/ScrollManager";
+import { searchStructure } from "../../data";
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState(
@@ -16,14 +17,6 @@ const Search = () => {
     setSearchTerm(searchQuery);
     sessionStorage.setItem(`searchPageSearchTerm`, searchQuery);
   };
-
-  const searchStructure = [
-    { label: "All" },
-    { label: "Characters" },
-    { label: "Comics" },
-    { label: "Events" },
-    { label: "Series" },
-  ];
 
   const [tabIndex, setTabIndex] = useState(
     sessionStorage.getItem(`searchPageTabIndex`) || 1
@@ -71,19 +64,17 @@ const Search = () => {
 
       <div>
         {tabIndex === 1 && (
-          <div className="py-10">
-            {/* Characters */}
-            <p>Characters</p>
-            <CharacterSearch searchTerm={searchTerm} />
+          <div className="py-10 flex flex-col gap-10">
+            <CharacterSearch searchTerm={searchTerm} simplified />
             {/* ComicSearch */}
-            <p>Comics</p>
-            <ComicSearch searchTerm={searchTerm} />
+
+            <ComicSearch searchTerm={searchTerm} simplified />
             {/*  */}
-            <p>Events</p>
-            <EventSearch searchTerm={searchTerm} />
+
+            <EventSearch searchTerm={searchTerm} simplified />
             {/*  */}
-            <p>Series</p>
-            <SeriesSearch searchTerm={searchTerm} />
+
+            <SeriesSearch searchTerm={searchTerm} simplified />
           </div>
         )}
         {/*  */}

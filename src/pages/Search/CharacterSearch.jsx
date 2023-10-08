@@ -3,13 +3,12 @@ import { useGetSearchCharactersQuery } from "../../services/searchApi";
 import { CharactersComp, Loader } from "../../components";
 import { charactersOptions } from "../../data";
 
-const CharacterSearch = ({ searchTerm, expandable }) => {
+const CharacterSearch = ({ searchTerm, simplified }) => {
   const options = charactersOptions;
   const [orderBy, setOrderBy] = useState(options[0]?.value);
   const [characters, setCharacters] = useState([]);
-
   const [offset, setOffset] = useState(0);
-  const limit = "100";
+  const limit = simplified ? 20 : 100;
 
   const { data: charactersList, isFetching } = useGetSearchCharactersQuery({
     searchTerm,
