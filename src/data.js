@@ -68,3 +68,10 @@ export const searchStructure = [
   { label: "Events" },
   { label: "Series" },
 ];
+
+export const DetailsTab = [
+  { tab: "Bio" },
+  { tab: "Details" },
+  { tab: "Related" },
+  { tab: "Creators" },
+];
