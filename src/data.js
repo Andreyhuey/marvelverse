@@ -70,7 +70,7 @@ export const searchStructure = [
 ];
 
 export const DetailsTab = [
-  { tab: "Bio" },
+  { tab: "Description" },
   { tab: "Details" },
   { tab: "Related" },
   { tab: "Creators" },
