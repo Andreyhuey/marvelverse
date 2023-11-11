@@ -13,10 +13,10 @@ const Series = () => {
   const limit = "16";
   const [total, setTotal] = useState(0);
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem("orderBySeries") || "title"
+    sessionStorage.getItem("orderBySeries") || "-modified"
   );
   const [label, setLabel] = useState(
-    sessionStorage.getItem("labelSeries") || "Ascending Order (A-Z)"
+    sessionStorage.getItem("labelSeries") || "Newest"
   );
 
   const { data: seriesList, isFetching } = useGetSeriesQuery({
@@ -180,7 +180,8 @@ const Series = () => {
   }
 
   return (
-    <div>
+    <>
+      <ScrollPositionManager scrollKey={`${currentSeriesPage}`} />
       <div className="bg-gray-950 text-white py-20 px-4 md:px-8 lg:px-20">
         <div className="text-center text-[26px] py-6 font-[700]">Series</div>
 
@@ -247,7 +248,7 @@ const Series = () => {
           </nav>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

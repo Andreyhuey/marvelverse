@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useGetComicDetailsQuery } from "../../services/comicsApi";
 import { Link } from "react-router-dom";
 import { BiSolidInfoCircle } from "react-icons/bi";
+import { FiExternalLink } from "react-icons/fi";
 import moment from "moment";
 import Loader from "../../components/Loader";
 import { DetailsTab } from "../../data";
@@ -41,6 +42,10 @@ const ComicDetails = () => {
     getPartBeforeFirstParenthesis(str);
   }
 
+  function removeParentheses(str) {
+    return str.replace(/\([^)]*\)/g, "").trim();
+  }
+
   return (
     <>
       <div className="bg-gray-950 px-4 md:px-8 lg:px-20 py-10 min-h-screen text-white">
@@ -65,26 +70,26 @@ const ComicDetails = () => {
               return (
                 <div
                   key={index}
-                  className="flex items-center lg:items-start justify-center flex-col lg:flex-row gap-x-5 gap-y-8"
+                  className="flex items-center lg:items-start justify-center flex-col lg:flex-row gap-x-5 gap-y-8 w-full h-full overflow-hidden min-w-fit"
                 >
-                  <div className="flex-1">
+                  <div className="flex-1 flex items-center justify-center">
                     <img
                       src={thumbnail.path && thumbnail.path + ".jpg"}
-                      className="card-img-top"
+                      className="md:max-h-[80vh]"
                       alt={"...image of " + title}
                     />
                   </div>
 
-                  <div className="flex-1">
-                    <div className="flex flex-col justify-center items-start gap-10">
+                  <div className="flex-1 h-full w-full">
+                    <div className="flex flex-col justify-center h-full w-full items-center gap-8">
                       <h5 className="font-extrabold text-[30px] capitalize text-center">
                         {title}
                       </h5>
 
-                      <div className="flex items-center justify-between w-full lg:w-full h-full font-bold">
+                      <div className="flex items-center justify-between gap-x-2 md:gap-x-4 md:w-full lg:justify-start  h-full font-bold">
                         {DetailsTab?.map((item, index) => (
                           <div
-                            className={`py-3 px-8  text-white rounded-xl cursor-pointer z-10 ${
+                            className={`p-3  text-white rounded-xl text-center cursor-pointer w-full z-10 ${
                               tabIndex === index ? "bg-black" : "bg-slate-800"
                             } `}
                             key={index}
@@ -95,15 +100,15 @@ const ComicDetails = () => {
                         ))}
                       </div>
 
-                      <div className="bg-black p-8 rounded-[20px] w-full min-h-fit">
+                      <div className="bg-black p-8 rounded-[20px] w-full min-h-[45vh]">
                         {tabIndex === 0 && (
                           <div className="text-white">
                             {description ? (
                               <p>{HTMLReactParser(description)}</p>
                             ) : (
                               <div className=" flex gap-2 items-center italic">
-                                <BiSolidInfoCircle className="text-red-500" />{" "}
-                                No description provided by
+                                <BiSolidInfoCircle className="text-red-500 text-xl" />{" "}
+                                Sorry, No description provided by
                                 <span className="text-red-500">MARVEL</span>
                               </div>
                             )}
@@ -128,11 +133,6 @@ const ComicDetails = () => {
                                 <span className="text-white"> {pageCount}</span>
                               </p>
 
-                              <p className="font-semibold">
-                                Format:
-                                <span className="text-white"> {format}</span>
-                              </p>
-
                               {prices[0].price > 0 && (
                                 <p className="font-semibold">
                                   Price:
@@ -149,35 +149,72 @@ const ComicDetails = () => {
                                   {moment(modified).format("MMM DD, YYYY")}
                                 </span>
                               </p>
+
+                              <p className="font-semibold">
+                                Format:
+                                <span className="text-white"> {format}</span>
+                              </p>
                             </div>
                           </>
                         )}
 
                         {tabIndex === 2 && (
-                          <div className="flex flex-col gap-3 w-full">
-                            <div className="flex justify-between w-full py-6 items-center ">
+                          <div className="flex flex-col gap-5 h-full w-full">
+                            {series.available !== 0 && (
+                              <Link
+                                to={`/series/${getPartBeforeFirstParenthesis(
+                                  series?.name
+                                )}`}
+                                className="text-center text-slate-300  flex justify-start gap-3 item font-bold rounded-xl cursor-pointer bg-slate-900 px-6 py-2 w-fit hover:scale-110 transition duration-300 ease-in-out"
+                              >
+                                <p className="text-md">Series:</p>
+                                <p className="font-mono  text-white text-center">
+                                  {series.name}
+                                </p>
+                              </Link>
+                            )}
+                            <div className="flex justify-between w-full gap-3 items-center ">
                               {characters.available !== 0 && (
-                                <Link
-                                  to={`/comics/${id}/${title.replace(
-                                    /#/g,
-                                    "Issue "
-                                  )}/characters`}
-                                >
-                                  <button className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out text-center text-white flex gap-2 items-center justify-center px-6 py-2 font-bold rounded-xl cursor-pointer">
-                                    <p className="font-mono text-white">
-                                      {characters.available}
-                                    </p>
-                                    <p className="font-semibold text-[#c0bdbd]">
-                                      {characters.available === 1 ? (
-                                        <>Character</>
-                                      ) : (
-                                        characters.available > 1 && (
-                                          <>Characters</>
-                                        )
-                                      )}
-                                    </p>
-                                  </button>
-                                </Link>
+                                <>
+                                  <div className="bg-slate-900 text-center text-white flex flex-col gap-5 items-start justify-center p-5 font-bold rounded-xl ">
+                                    <div className="flex justify-between w-full gap-3 items-center">
+                                      <p>
+                                        {characters.available === 1 ? (
+                                          <>Character</>
+                                        ) : (
+                                          characters.available > 1 && (
+                                            <>Characters</>
+                                          )
+                                        )}
+                                      </p>
+                                      <Link
+                                        className="hover:scale-125 transition duration-300 ease-in-out cursor-pointer"
+                                        to={`/comics/${id}/${title.replace(
+                                          /#/g,
+                                          "Issue "
+                                        )}/characters`}
+                                      >
+                                        <FiExternalLink />
+                                      </Link>
+                                    </div>
+                                    <div className="flex items-center gap-5 w-full">
+                                      {characters.items.map((item, index) => (
+                                        <div className="flex item-center gap-5">
+                                          <Link
+                                            key={index}
+                                            to={`/collection/${removeParentheses(
+                                              item.name
+                                            )}`}
+                                          >
+                                            <div className="bg-slate-500 rounded-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out py-1 px-3 font-normal">
+                                              {item?.name}
+                                            </div>
+                                          </Link>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </>
                               )}
 
                               {events.available !== 0 && (
@@ -202,40 +239,30 @@ const ComicDetails = () => {
                                 </Link>
                               )}
                             </div>
-
-                            {series.available !== 0 && (
-                              <div className="text-center text-slate-300  flex flex-col gap-1 items-start justify-center font-bold rounded-xl">
-                                <p className="text-md">Series</p>
-                                <Link
-                                  to={`/series/${getPartBeforeFirstParenthesis(
-                                    series?.name
-                                  )}`}
-                                >
-                                  <p className="font-mono  text-white text-center">
-                                    {series.name}
-                                  </p>
-                                </Link>
-                              </div>
-                            )}
                           </div>
                         )}
 
                         {tabIndex === 3 && (
                           <>
-                            <div className="flex flex-col w-full justify-between gap-3">
+                            <div
+                              className={` ${
+                                creators.items.length > 8
+                                  ? "grid grid-cols-2 "
+                                  : "flex flex-col justify-between"
+                              }  gap-3 w-full`}
+                            >
                               {creators.items.map((c, index) => {
                                 return (
-                                  <div key={index}>
-                                    <div>
-                                      <div className="flex items-center justify-start gap-2">
-                                        <p className="capitalize text-slate-300">
-                                          {c.role}:{" "}
-                                          <span className="text-white">
-                                            {c.name}
-                                          </span>
-                                        </p>
-                                      </div>
-                                    </div>
+                                  <div
+                                    className="flex items-center justify-between gap-2"
+                                    key={index}
+                                  >
+                                    <p className="capitalize text-slate-300 font-bold">
+                                      {c.role}:{" "}
+                                      <span className="text-white">
+                                        {c.name}
+                                      </span>
+                                    </p>
                                   </div>
                                 );
                               })}

@@ -72,6 +72,6 @@ export const searchStructure = [
 export const DetailsTab = [
   { tab: "Description" },
   { tab: "Details" },
-  { tab: "Related" },
+  { tab: "Links" },
   { tab: "Creators" },
 ];

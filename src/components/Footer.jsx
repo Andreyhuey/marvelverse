@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <div className=" bg-gray-950 ">
-        <div className="bg-gray-950 text-[#8794BA]  px-4 md:px-8 lg:px-20">
+      <div className=" bg-black lg:min-h-[20vh] flex flex-col gap-6">
+        <div className=" text-[#8794BA]  px-4 md:px-8 lg:px-20">
           <div className="py-5 flex md:flex-row flex-col items-center justify-center md:items-center md:justify-between gap-6">
             <Link to={"/"} className="cursor-pointer">
               <img
@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="border-t-[1px] border-t-[#2A407C text-[#8794BA] text-[24px] px-4 md:px-8 lg:px-20">
+        <div className=" text-[#8794BA] text-[24px] px-4 md:px-8 lg:px-20">
           <div className="text-center text-[10px]">
             © 2022 Marvelverse. All rights reserved.
           </div>

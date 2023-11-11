@@ -20,26 +20,27 @@ const CharactersComp = ({ search, searchTerm, characters }) => {
                 to={`/characters/${c.id}/${c.name.replace(/\//g, "-")}`}
                 className="py-4"
               >
-                <div className={` relative `}>
-                  <>
-                    <img
-                      src={c.thumbnail.path + ".jpg"}
-                      className={`${"rounded-xl"}`}
-                      alt={"img of " + c.name}
-                    />
-                  </>
-
-                  <div
-                    className={`text-xl font-bold p-2 font-mono absolute bottom-2 right-0 ${
-                      c.description ? "text-green-500" : "text-red-500"
-                    }  rounded-br-xl rounded-tl-md`}
-                  >
-                    <BiSolidInfoCircle />
-                  </div>
-                </div>
+                <>
+                  <img
+                    src={c.thumbnail.path + ".jpg"}
+                    className={`${"rounded-xl"}`}
+                    alt={"img of " + c.name}
+                  />
+                </>
 
                 <div className="px-2 pb-2">
-                  <div className={`uppercase  font-bold py-2  "`}>{c.name}</div>
+                  <div
+                    className={`uppercase  font-bold py-2  flex justify-between items-center"`}
+                  >
+                    <div>{c.name}</div>
+                    <div
+                      className={` ${
+                        c.description ? "text-green-500" : "text-red-500"
+                      }  rounded-br-xl rounded-tl-md text-xl`}
+                    >
+                      <BiSolidInfoCircle />
+                    </div>
+                  </div>
                 </div>
               </Link>
             </div>

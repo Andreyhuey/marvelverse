@@ -10,11 +10,10 @@ import { ComicsComp } from "../../components";
 const SeriesComics = () => {
   const { seriesId, title } = useParams();
   const [orderBy, setOrderBy] = useState(
-    sessionStorage.getItem(`orderBySeriesComics${seriesId}`) || "title"
+    sessionStorage.getItem(`orderBySeriesComics${seriesId}`) || "issueNumber"
   );
   const [label, setLabel] = useState(
-    sessionStorage.getItem(`labelBySeriesComics${seriesId}`) ||
-      "Ascending Order (A-Z)"
+    sessionStorage.getItem(`labelBySeriesComics${seriesId}`) || "Oldest Issue"
   );
   const limit = "12";
   const [offset, setOffset] = useState(0);
@@ -26,7 +25,7 @@ const SeriesComics = () => {
     offset,
   });
 
-  const [comics, setComics] = useState([]);
+  const [comics, setComics] = useState();
   const [total, setTotal] = useState(0);
 
   //   Pagination useState(s)
@@ -59,6 +58,7 @@ const SeriesComics = () => {
     sessionStorage.setItem(`labelBySeriesComics${seriesId}`, label);
 
     document.title = `${title} Comics | Series | Marvelverse `;
+    document.body.scrollTop = 0;
   }, [
     comicsList,
     orderBy,
@@ -203,16 +203,18 @@ const SeriesComics = () => {
 
   return (
     <div>
-      <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
+      <div className="bg-gray-950 text-white py-20 px-4 md:px-8 lg:px-20">
         <div className="text-center text-[26px] py-6 font-[700]">
           {title} Comics
         </div>
 
-        <div className="flex items-center justify-center">
-          <p className="border rounded p-2 bg-black">
-            Page {currentSeriesComicsPage} of {totalPages()}
-          </p>
-        </div>
+        {total > limit && (
+          <div className="flex items-center justify-center">
+            <p className="border rounded p-2 bg-black">
+              Page {currentSeriesComicsPage} of {totalPages()}
+            </p>
+          </div>
+        )}
 
         <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
           <div className="flex items-start justify-end text-black mb-7">
@@ -243,33 +245,33 @@ const SeriesComics = () => {
 
         <ComicsComp comics={comics} />
 
-        {/* Pagination example */}
-
-        <div className="flex justify-center  mt-4 py-12 max-w-full">
-          <nav aria-label="Page navigation example">
-            <ul className="inline-flex -space-x-px text-md">
-              <li>
-                <button
-                  className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() => handlePageClick(currentSeriesComicsPage - 1)}
-                  disabled={currentSeriesComicsPage === 1}
-                >
-                  Prev
-                </button>
-              </li>
-              {renderSmartPagination()}
-              <li>
-                <button
-                  className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() => handlePageClick(currentSeriesComicsPage + 1)}
-                  disabled={currentSeriesComicsPage === totalPages()}
-                >
-                  Next
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        {total > limit && (
+          <div className="flex justify-center  mt-4 py-12 max-w-full">
+            <nav aria-label="Page navigation example">
+              <ul className="inline-flex -space-x-px text-md">
+                <li>
+                  <button
+                    className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    onClick={() => handlePageClick(currentSeriesComicsPage - 1)}
+                    disabled={currentSeriesComicsPage === 1}
+                  >
+                    Prev
+                  </button>
+                </li>
+                {renderSmartPagination()}
+                <li>
+                  <button
+                    className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    onClick={() => handlePageClick(currentSeriesComicsPage + 1)}
+                    disabled={currentSeriesComicsPage === totalPages()}
+                  >
+                    Next
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
       </div>
     </div>
   );

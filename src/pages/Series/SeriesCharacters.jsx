@@ -72,6 +72,7 @@ const SeriesCharacters = () => {
     sessionStorage.setItem(`labelBySeriesCharacters${seriesId}`, label);
 
     document.title = `${title} Characters | Events | Marvelverse`;
+    document.body.scrollTop = 0;
   }, [
     charactersList,
     currentSeriesCharactersPage,
@@ -209,11 +210,13 @@ const SeriesCharacters = () => {
           {title} Characters
         </div>
 
-        <div className="flex items-center justify-center">
-          <p className="border rounded p-2 bg-black">
-            Page {currentSeriesCharactersPage} of {totalPages()}
-          </p>
-        </div>
+        {total > limit && (
+          <div className="flex items-center justify-center">
+            <p className="border rounded p-2 bg-black">
+              Page {currentSeriesCharactersPage} of {totalPages()}
+            </p>
+          </div>
+        )}
 
         <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
           <div className="flex items-start justify-end text-black mb-7">
@@ -244,39 +247,37 @@ const SeriesCharacters = () => {
 
         <CharactersComp characters={characters} />
 
-        {/* Pagination example */}
-
-        <div className="flex justify-center  mt-4 py-12 max-w-full">
-          <nav aria-label="Page navigation example">
-            <ul className="inline-flex -space-x-px text-md">
-              <li>
-                <button
-                  className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() =>
-                    handlePageClick(currentSeriesCharactersPage - 1)
-                  }
-                  disabled={currentSeriesCharactersPage === 1}
-                >
-                  Prev
-                </button>
-              </li>
-              {renderSmartPagination()}
-              <li>
-                <button
-                  className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() =>
-                    handlePageClick(currentSeriesCharactersPage + 1)
-                  }
-                  disabled={currentSeriesCharactersPage === totalPages()}
-                >
-                  Next
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
-        {/* If there is no data  */}
+        {total > limit && (
+          <div className="flex justify-center  mt-4 py-12 max-w-full">
+            <nav aria-label="Page navigation example">
+              <ul className="inline-flex -space-x-px text-md">
+                <li>
+                  <button
+                    className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    onClick={() =>
+                      handlePageClick(currentSeriesCharactersPage - 1)
+                    }
+                    disabled={currentSeriesCharactersPage === 1}
+                  >
+                    Prev
+                  </button>
+                </li>
+                {renderSmartPagination()}
+                <li>
+                  <button
+                    className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    onClick={() =>
+                      handlePageClick(currentSeriesCharactersPage + 1)
+                    }
+                    disabled={currentSeriesCharactersPage === totalPages()}
+                  >
+                    Next
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -196,16 +196,18 @@ const ComicCharacters = () => {
 
   return (
     <div>
-      <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
+      <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20 min-h-max">
         <div className="text-center text-[26px] py-6 font-[700]">
           {title} Characters
         </div>
 
-        <div className="flex items-center justify-center">
-          <p className="border rounded p-2 bg-black">
-            Page {currentComicCharactersPage} of {totalPages()}
-          </p>
-        </div>
+        {total > limit && (
+          <div className="flex items-center justify-center">
+            <p className="border rounded p-2 bg-black">
+              Page {currentComicCharactersPage} of {totalPages()}
+            </p>
+          </div>
+        )}
 
         <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
           <div className="flex items-start justify-end text-black mb-7">
@@ -238,35 +240,37 @@ const ComicCharacters = () => {
 
         {/* Pagination example */}
 
-        <div className="flex justify-center  mt-4 py-12 max-w-full">
-          <nav aria-label="Page navigation example">
-            <ul className="inline-flex -space-x-px text-md">
-              <li>
-                <button
-                  className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() =>
-                    handlePageClick(currentComicCharactersPage - 1)
-                  }
-                  disabled={currentComicCharactersPage === 1}
-                >
-                  Prev
-                </button>
-              </li>
-              {renderSmartPagination()}
-              <li>
-                <button
-                  className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() =>
-                    handlePageClick(currentComicCharactersPage + 1)
-                  }
-                  disabled={currentComicCharactersPage === totalPages()}
-                >
-                  Next
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        {total > limit && (
+          <div className="flex justify-center  mt-4 py-12 max-w-full">
+            <nav aria-label="Page navigation example">
+              <ul className="inline-flex -space-x-px text-md">
+                <li>
+                  <button
+                    className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    onClick={() =>
+                      handlePageClick(currentComicCharactersPage - 1)
+                    }
+                    disabled={currentComicCharactersPage === 1}
+                  >
+                    Prev
+                  </button>
+                </li>
+                {renderSmartPagination()}
+                <li>
+                  <button
+                    className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    onClick={() =>
+                      handlePageClick(currentComicCharactersPage + 1)
+                    }
+                    disabled={currentComicCharactersPage === totalPages()}
+                  >
+                    Next
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
 
         {/* If there is no data  */}
       </div>
