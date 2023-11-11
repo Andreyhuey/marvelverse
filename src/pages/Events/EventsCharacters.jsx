@@ -8,7 +8,7 @@ import { CharactersComp } from "../../components";
 import { charactersOptions } from "../../data";
 
 const EventCharacters = () => {
-  const options = charactersOptionss;
+  const options = charactersOptions;
   const { eventId, title } = useParams();
   const [offset, setOffset] = useState(0);
   const limit = "16";
