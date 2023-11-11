@@ -173,10 +173,10 @@ const SeriesDetails = () => {
 
                               <div
                                 className={` ${
-                                  d?.characters?.available > 3
+                                  d?.characters?.available >= 3
                                     ? "grid grid-cols-2"
                                     : "flex "
-                                } items-center gap-5 w-full`}
+                                } items-center justify-between gap-5 w-full`}
                               >
                                 {d.characters.items.map((item, index) => (
                                   <Link

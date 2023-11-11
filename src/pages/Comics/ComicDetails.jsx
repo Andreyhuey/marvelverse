@@ -197,20 +197,24 @@ const ComicDetails = () => {
                                         <FiExternalLink />
                                       </Link>
                                     </div>
-                                    <div className="flex items-center gap-5 w-full">
+                                    <div
+                                      className={` ${
+                                        characters?.available >= 3
+                                          ? "grid grid-cols-2"
+                                          : "flex"
+                                      } items-center justify-between gap-5 w-full`}
+                                    >
                                       {characters.items.map((item, index) => (
-                                        <div className="flex item-center gap-5">
-                                          <Link
-                                            key={index}
-                                            to={`/collection/${removeParentheses(
-                                              item.name
-                                            )}`}
-                                          >
-                                            <div className="bg-slate-500 rounded-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out py-1 px-3 font-normal">
-                                              {item?.name}
-                                            </div>
-                                          </Link>
-                                        </div>
+                                        <Link
+                                          key={index}
+                                          to={`/collection/${removeParentheses(
+                                            item.name
+                                          )}`}
+                                        >
+                                          <div className="bg-slate-500 rounded-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out py-1 px-3 font-normal">
+                                            {item?.name}
+                                          </div>
+                                        </Link>
                                       ))}
                                     </div>
                                   </div>
