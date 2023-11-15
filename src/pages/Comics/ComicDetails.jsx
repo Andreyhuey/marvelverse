@@ -106,10 +106,14 @@ const ComicDetails = () => {
                             {description ? (
                               <p>{HTMLReactParser(description)}</p>
                             ) : (
-                              <div className=" flex gap-2 items-center italic">
+                              <div className=" flex gap-1 items-center italic">
                                 <BiSolidInfoCircle className="text-red-500 text-xl" />{" "}
-                                Sorry, No description provided by
-                                <span className="text-red-500">MARVEL</span>
+                                <div>
+                                  Sorry, No description provided by
+                                  <span className="text-red-500 pl-1">
+                                    MARVEL
+                                  </span>
+                                </div>
                               </div>
                             )}
                           </div>
