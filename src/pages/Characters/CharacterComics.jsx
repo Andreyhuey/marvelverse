@@ -193,8 +193,8 @@ const CharacterComics = () => {
   if (isFetching) return <Loader />;
 
   return (
-    <div>
-      <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
+    <>
+      <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20 min-h-screen">
         <div className="text-center text-[26px] py-6 font-[700]">
           {name} Comics
         </div>
@@ -274,7 +274,7 @@ const CharacterComics = () => {
           </>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

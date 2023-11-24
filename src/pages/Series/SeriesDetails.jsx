@@ -36,7 +36,7 @@ const SeriesDetails = () => {
     <>
       <div className="bg-gray-950 px-4 md:px-8 lg:px-20 py-10 min-h-screen w-full text-white">
         <div>
-          {comic ? (
+          {comic &&
             comic.map((d) => {
               return (
                 <div
@@ -283,14 +283,7 @@ const SeriesDetails = () => {
                   </div>
                 </div>
               );
-            })
-          ) : (
-            <>
-              <div className="bg-gray-950 px-4 md:px-8 lg:px-20 py-10 min-h-screen text-white flex items-center justify-center">
-                <p>No details provided</p>
-              </div>
-            </>
-          )}
+            })}
         </div>
       </div>
     </>
