@@ -26,7 +26,7 @@ const Navbar = () => {
   }, [nav]);
 
   return (
-    <div className="bg-black fixed h-auto w-full left-0 top-0 z-30">
+    <div className="bg-black fixed h-auto w-full left-0 top-0 z-30 ">
       {/* for tabs and pcs */}
       <div className="md:flex md:flex-col hidden ">
         <div className="border border-gray-600 flex items-center justify-between px-20 text-white relative">
@@ -117,8 +117,8 @@ const Navbar = () => {
         </Link>
 
         {nav && (
-          <div className="absolute w-full  backdrop-blur-3xl">
-            <div className=" border-r-white/20 bg-black py-6 border-r-[1px] ">
+          <div className="absolute w-full  backdrop-blur-3xl overflow-y-scroll h-[100vh]">
+            <div className=" border-r-white/20 bg-black pt-2 pb-6 border-r-[1px] ">
               <div className="flex flex-col gap-6 text-white font-bold h-full  ">
                 <div className="pl-3">
                   <AiOutlineClose
@@ -127,7 +127,7 @@ const Navbar = () => {
                   />
                 </div>
 
-                <ul className="flex flex-col gap-5 text-white font-bold pt-8 ">
+                <ul className="flex flex-col gap-5 text-white font-bold pt-8">
                   <li className="cursor-pointer hover:text-red-500 border-b-[1px] border-white/20 pb-4 pl-3">
                     <Link to={`/`} onClick={handleClick}>
                       Home
