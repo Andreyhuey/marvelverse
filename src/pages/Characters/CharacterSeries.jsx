@@ -201,72 +201,78 @@ const CharacterSeries = () => {
           {name} Series
         </div>
 
-        <div className="flex items-center justify-center">
-          <p className="border rounded p-2 bg-black">
-            Page {currentCharacterSeriesPage} of {totalPages()}
-          </p>
-        </div>
-
-        <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
-          <div className="flex items-start justify-end text-black mb-7">
-            <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
-              <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
-                <Autocomplete
-                  disablePortal
-                  options={options}
-                  getOptionLabel={(option) => option.label}
-                  className="capitalize rounded-xl focus-within:none bg-transparent"
-                  onChange={handleChange}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      name="Order By"
-                      placeholder={label}
-                      variant="outlined"
-                      id="outlined-basic"
-                      required
-                      className="flex items-center justify-center bg-slate-600 text-white rounded-lg"
+        {total > limit && (
+          <>
+            {" "}
+            <div className="flex items-center justify-center">
+              <p className="border rounded p-2 bg-black">
+                Page {currentCharacterSeriesPage} of {totalPages()}
+              </p>
+            </div>
+            <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
+              <div className="flex items-start justify-end text-black mb-7">
+                <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
+                  <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
+                    <Autocomplete
+                      disablePortal
+                      options={options}
+                      getOptionLabel={(option) => option.label}
+                      className="capitalize rounded-xl focus-within:none bg-transparent"
+                      onChange={handleChange}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          name="Order By"
+                          placeholder={label}
+                          variant="outlined"
+                          id="outlined-basic"
+                          required
+                          className="flex items-center justify-center bg-slate-600 text-white rounded-lg"
+                        />
+                      )}
                     />
-                  )}
-                />
+                  </div>
+                </fieldset>
               </div>
-            </fieldset>
-          </div>
-        </div>
+            </div>
+          </>
+        )}
 
         <SeriesComp series={series} />
 
-        {/* Pagination example */}
-
-        <div className="flex justify-center  mt-4 py-12 max-w-full">
-          <nav aria-label="Page navigation example">
-            <ul className="inline-flex -space-x-px text-md">
-              <li>
-                <button
-                  className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() =>
-                    handlePageClick(currentCharacterSeriesPage - 1)
-                  }
-                  disabled={currentCharacterSeriesPage === 1}
-                >
-                  Prev
-                </button>
-              </li>
-              {renderSmartPagination()}
-              <li>
-                <button
-                  className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() =>
-                    handlePageClick(currentCharacterSeriesPage + 1)
-                  }
-                  disabled={currentCharacterSeriesPage === totalPages()}
-                >
-                  Next
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        {total > limit && (
+          <>
+            <div className="flex justify-center  mt-4 py-12 max-w-full">
+              <nav aria-label="Page navigation example">
+                <ul className="inline-flex -space-x-px text-md">
+                  <li>
+                    <button
+                      className="flex items-center justify-center px-2 md:px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      onClick={() =>
+                        handlePageClick(currentCharacterSeriesPage - 1)
+                      }
+                      disabled={currentCharacterSeriesPage === 1}
+                    >
+                      Prev
+                    </button>
+                  </li>
+                  {renderSmartPagination()}
+                  <li>
+                    <button
+                      className="flex items-center justify-center px-2 md:px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      onClick={() =>
+                        handlePageClick(currentCharacterSeriesPage + 1)
+                      }
+                      disabled={currentCharacterSeriesPage === totalPages()}
+                    >
+                      Next
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ const Navbar = () => {
         <div className="border border-gray-600 flex items-center justify-between px-20 text-white relative">
           <Link
             className="uppercase border hover:text-red-500 border-r-gray-600 border-l-gray-600 font-semibold border-t-0 border-b-0 p-3 flex items-center justify-center cursor-pointer"
-            to={`/join`}
+            to={`/signin`}
           >
             sign in | join
           </Link>

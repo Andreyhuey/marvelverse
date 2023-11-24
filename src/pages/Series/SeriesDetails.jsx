@@ -41,7 +41,7 @@ const SeriesDetails = () => {
               return (
                 <div
                   key={d.id}
-                  className="flex flex-col lg:flex-row items-center h-full w-full justify-center lg:items-center gap-x-5 gap-y-8"
+                  className="flex flex-col lg:flex-row items-center h-full w-full justify-center lg:items-start gap-x-5 gap-y-8"
                 >
                   <div className="flex-1 flex h-full w-full items-center justify-center">
                     <img
@@ -70,7 +70,7 @@ const SeriesDetails = () => {
                       ))}
                     </div>
 
-                    <div className="bg-black p-8 rounded-[20px] w-full min-h-[45vh]">
+                    <div className="bg-black p-8 rounded-[20px] w-full  min-h-[50vh]">
                       {tabIndex === 0 && (
                         <div className="text-white">
                           {d?.description ? (
@@ -144,6 +144,7 @@ const SeriesDetails = () => {
                                     )
                                   )}
                                 </p>
+                                <FiExternalLink />
                               </button>
                             </Link>
                           )}
@@ -202,7 +203,7 @@ const SeriesDetails = () => {
                                 "Issue "
                               )}/events`}
                             >
-                              <div className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out text-center text-white flex gap-2 items-center justify-center px-6 py-2 font-bold rounded-xl cursor-pointer">
+                              <button className="bg-slate-900 hover:scale-110 transition duration-300 ease-in-out text-center text-white flex gap-2 items-center justify-center px-6 py-2 font-bold rounded-xl cursor-pointer">
                                 <p className="font-mono text-[#c0bdbd]">
                                   {d?.events.available}
                                 </p>
@@ -213,7 +214,8 @@ const SeriesDetails = () => {
                                     d?.events.available > 1 && <>Events</>
                                   )}
                                 </p>
-                              </div>
+                                <FiExternalLink />
+                              </button>
                             </Link>
                           )}
                         </div>

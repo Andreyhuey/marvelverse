@@ -28,6 +28,7 @@ import {
   Collection,
   ComicSeriesSearch,
   ComicSearch,
+  SignIn,
 } from "./pages";
 import { Footer, Navbar } from "./components";
 
@@ -130,6 +131,11 @@ const App = () => {
           {/* Series Comics */}
           <Route exact path="/series/:seriesId/:title/comics">
             <SeriesComics />
+          </Route>
+
+          {/* Signin*/}
+          <Route exact path="/signin">
+            <SignIn />
           </Route>
         </Switch>
       </div>

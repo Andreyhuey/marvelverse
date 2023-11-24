@@ -19,6 +19,12 @@ const ComicsComp = ({ comics, search, searchTerm }) => {
             />
             <Link
               key={c.id}
+              // fixing the user authentication
+              // to={
+              //   c.prices[0].price <= 0
+              //     ? `/comics/${c.id}/${c.title.replace(/\//g, "-")}`
+              //     : `/signin`
+              // }
               to={`/comics/${c.id}/${c.title.replace(/\//g, "-")}`}
               className="py-4"
             >

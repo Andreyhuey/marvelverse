@@ -33,6 +33,9 @@ import SeriesComics from "./Series/SeriesComics";
 // Collection
 import Collection from "./Collection/Collection";
 
+// Authentication
+import SignIn from "./SignIn";
+
 export {
   Homepage,
   //
@@ -62,4 +65,5 @@ export {
   SeriesComics,
   //
   Collection,
+  SignIn,
 };
