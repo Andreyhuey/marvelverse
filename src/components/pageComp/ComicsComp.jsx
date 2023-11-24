@@ -1,7 +1,7 @@
 import React from "react";
 import ScrollPositionManager from "../ScrollManager";
 import { Link } from "react-router-dom";
-import { BiSolidInfoCircle } from "react-icons/bi";
+// import { BiSolidInfoCircle } from "react-icons/bi";
 
 const ComicsComp = ({ comics, search, searchTerm }) => {
   return (
@@ -46,7 +46,7 @@ const ComicsComp = ({ comics, search, searchTerm }) => {
                 >
                   {c.title}
                 </div>
-                {c.prices[0].price <= 0 && (
+                {/* {c.prices[0].price <= 0 && (
                   <div
                     className={`text-xl font-bold font-mono ${
                       c.description ? "text-green-500" : "text-red-500"
@@ -54,7 +54,7 @@ const ComicsComp = ({ comics, search, searchTerm }) => {
                   >
                     <BiSolidInfoCircle />
                   </div>
-                )}
+                )} */}
               </div>
             </Link>
           </div>

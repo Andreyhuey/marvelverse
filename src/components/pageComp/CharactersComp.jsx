@@ -1,7 +1,7 @@
 import React from "react";
 import ScrollPositionManager from "../ScrollManager";
 import { Link } from "react-router-dom";
-import { BiSolidInfoCircle } from "react-icons/bi";
+// import { BiSolidInfoCircle } from "react-icons/bi";
 
 const CharactersComp = ({ search, searchTerm, characters }) => {
   return (
@@ -33,13 +33,13 @@ const CharactersComp = ({ search, searchTerm, characters }) => {
                     className={`uppercase  font-bold py-2  flex justify-between items-center"`}
                   >
                     <div>{c.name}</div>
-                    <div
+                    {/* <div
                       className={` ${
                         c.description ? "text-green-500" : "text-red-500"
                       }  rounded-br-xl rounded-tl-md text-xl`}
                     >
                       <BiSolidInfoCircle />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </Link>

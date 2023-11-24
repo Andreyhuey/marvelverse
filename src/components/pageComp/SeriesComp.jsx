@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-import { BiSolidInfoCircle } from "react-icons/bi";
+// import { BiSolidInfoCircle } from "react-icons/bi";
 
 const SeriesComp = ({ series, searchTerm }) => {
   return (
@@ -29,13 +29,13 @@ const SeriesComp = ({ series, searchTerm }) => {
                   />
                 </>
 
-                <div
+                {/* <div
                   className={`text-xl font-bold p-2 font-mono absolute bottom-2 right-0 ${
                     c.description ? "text-green-500" : "text-red-500"
                   }  rounded-br-xl rounded-tl-md`}
                 >
                   <BiSolidInfoCircle />
-                </div>
+                </div> */}
               </div>
               <div className="px-2 pb-2">
                 <div className="font-mono font-bold text-[#a7a4a4] py-2">
