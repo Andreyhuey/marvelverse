@@ -96,8 +96,9 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
+
       {/* for phones */}
-      <div className="md:hidden flex justify-between text-white">
+      <div className="md:hidden flex justify-between text-white relative">
         <div
           className="flex items-center justify-center p-4"
           onClick={handleClick}
@@ -105,20 +106,18 @@ const Navbar = () => {
           <HiOutlineMenu className="text-[26px]" />
         </div>
 
-        <>
-          <Link to={`/`} className="cursor-pointer">
-            <img src={logo} alt="site logo" className="h-[50px] w-[128px]" />
-          </Link>
-          <Link
-            className="text-[26px] hover:text-red-500 font-semibold p-3"
-            to={`/search`}
-          >
-            <BiSearchAlt />
-          </Link>
-        </>
+        <Link to={`/`} className="cursor-pointer">
+          <img src={logo} alt="site logo" className="h-[50px] w-[128px]" />
+        </Link>
+        <Link
+          className="text-[26px] hover:text-red-500 font-semibold p-3"
+          to={`/search`}
+        >
+          <BiSearchAlt />
+        </Link>
 
         {nav && (
-          <div className="absolute w-full  backdrop-blur-3xl  h-full">
+          <div className="absolute w-full  backdrop-blur-3xl">
             <div className=" border-r-white/20 bg-black py-6 border-r-[1px] ">
               <div className="flex flex-col gap-6 text-white font-bold h-full  ">
                 <div className="pl-3">

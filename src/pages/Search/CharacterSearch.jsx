@@ -28,7 +28,6 @@ const CharacterSearch = ({ searchTerm, simplified }) => {
 
   return (
     <>
-      <div></div>
       <CharactersComp characters={characters} searchTerm={searchTerm} />
     </>
   );
