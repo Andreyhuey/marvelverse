@@ -28,7 +28,7 @@ const EventSearch = ({ searchTerm, simplified }) => {
 
   return (
     <div>
-      {simplified && (
+      {events.length > 0 && (
         <>
           {events > 0 && <span className="border-t-2 border-red-500 py-10" />}
         </>

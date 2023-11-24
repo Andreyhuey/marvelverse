@@ -205,45 +205,47 @@ const SeriesCharacters = () => {
 
   return (
     <div>
-      <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20">
+      <div className="bg-gray-950 text-white py-10 px-4 md:px-8 lg:px-20 min-h-screen flex flex-col items-center justify-center">
         <div className="text-center text-[26px] py-6 font-[700]">
           {title} Characters
         </div>
 
         {total > limit && (
-          <div className="flex items-center justify-center">
-            <p className="border rounded p-2 bg-black">
-              Page {currentSeriesCharactersPage} of {totalPages()}
-            </p>
-          </div>
-        )}
+          <>
+            <div className="flex items-center justify-center">
+              <p className="border rounded p-2 bg-black">
+                Page {currentSeriesCharactersPage} of {totalPages()}
+              </p>
+            </div>
 
-        <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
-          <div className="flex items-start justify-end text-black mb-7">
-            <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
-              <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
-                <Autocomplete
-                  disablePortal
-                  options={options}
-                  getOptionLabel={(option) => option.label}
-                  className="capitalize rounded-xl focus-within:none bg-transparent"
-                  onChange={handleChange}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      name="Order By"
-                      placeholder={label}
-                      variant="outlined"
-                      id="outlined-basic"
-                      required
-                      className="flex items-center justify-center bg-slate-600 text-white rounded-lg"
+            <div className="flex md:flex-row flex-col items-center justify-end py-4 gap-5">
+              <div className="flex items-start justify-end text-black mb-7">
+                <fieldset className="fieldset flex items-center flex-col justify-center gap-2">
+                  <div className=" w-[225px] h-auto mt-1 rounded-lg bg-transparent">
+                    <Autocomplete
+                      disablePortal
+                      options={options}
+                      getOptionLabel={(option) => option.label}
+                      className="capitalize rounded-xl focus-within:none bg-transparent"
+                      onChange={handleChange}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          name="Order By"
+                          placeholder={label}
+                          variant="outlined"
+                          id="outlined-basic"
+                          required
+                          className="flex items-center justify-center bg-slate-600 text-white rounded-lg"
+                        />
+                      )}
                     />
-                  )}
-                />
+                  </div>
+                </fieldset>
               </div>
-            </fieldset>
-          </div>
-        </div>
+            </div>
+          </>
+        )}
 
         <CharactersComp characters={characters} />
 

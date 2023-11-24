@@ -75,7 +75,7 @@ const Search = () => {
 
             <EventSearch searchTerm={searchTerm} simplified />
             {/*  */}
-            <span className="border-t-2 border-red-500 py-10" />
+
             <SeriesSearch searchTerm={searchTerm} simplified />
           </div>
         )}
