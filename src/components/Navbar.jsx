@@ -118,9 +118,9 @@ const Navbar = () => {
 
         {nav && (
           <div className="absolute w-full  backdrop-blur-3xl overflow-y-scroll h-[100vh]">
-            <div className=" border-r-white/20 bg-black pt-2 pb-6 border-r-[1px] ">
+            <div className=" border-r-white/20 bg-black pb-28 border-r-[1px] ">
               <div className="flex flex-col gap-6 text-white font-bold h-full  ">
-                <div className="pl-3">
+                <div className="pl-3 pt-4">
                   <AiOutlineClose
                     className="text-[26px] cursor-pointer inline text-white"
                     onClick={handleClick}
