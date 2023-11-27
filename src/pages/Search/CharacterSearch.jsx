@@ -27,9 +27,19 @@ const CharacterSearch = ({ searchTerm, simplified }) => {
   if (isFetching) return <Loader />;
 
   return (
-    <>
-      <CharactersComp characters={characters} searchTerm={searchTerm} />
-    </>
+    <div className="pt-5">
+      <>
+        {simplified && (
+          <>
+            {" "}
+            <h1 className="capitalize text-start font-bold pt-8 text-lg">
+              Characters
+            </h1>
+          </>
+        )}
+        <CharactersComp characters={characters} searchTerm={searchTerm} />
+      </>
+    </div>
   );
 };
 

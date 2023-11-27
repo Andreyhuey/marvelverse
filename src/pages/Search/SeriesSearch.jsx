@@ -28,6 +28,13 @@ const SeriesSearch = ({ searchTerm, simplified }) => {
 
   return (
     <div>
+      {simplified && (
+        <>
+          <h1 className="capitalize text-start font-bold pt-8 text-lg text-[40px]">
+            Series
+          </h1>
+        </>
+      )}
       <SeriesComp series={series} searchTerm={searchTerm} />
     </div>
   );

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ComicsComp = ({ comics, search, searchTerm }) => {
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 ">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-14 gap-x-8 pt-4">
         {comics?.map((c, index) => (
           <div
             className="transition-transform transform hover:scale-110 font-mono relative group cursor-pointer py-2"

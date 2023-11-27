@@ -6,7 +6,7 @@ import { comicsOptions } from "../../data";
 const ComicSearch = ({ searchTerm, simplified }) => {
   const options = comicsOptions;
   const [orderBy, setOrderBy] = useState(options[5]?.value);
-  const limit = simplified ? 20 : 100;
+  const limit = simplified ? 28 : 100;
   const [offset, setOffset] = useState("");
   const [comics, setComics] = useState([]);
 
@@ -32,6 +32,14 @@ const ComicSearch = ({ searchTerm, simplified }) => {
         <div className="w-full">
           <span className="border-t-2 border-red-500 py-10" />
         </div>
+      )}
+
+      {simplified && (
+        <>
+          <h1 className="capitalize text-start font-bold pt-8 text-lg py-3">
+            Comics
+          </h1>
+        </>
       )}
 
       <ComicsComp comics={comics} searchTerm={searchTerm} />

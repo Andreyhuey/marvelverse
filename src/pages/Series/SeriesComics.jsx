@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useGetSeriesComicsQuery } from "../../services/seriesApi";
 import Loader from "../../components/Loader";
-import ScrollPositionManager from "../../components/ScrollManager";
 import { Autocomplete, TextField } from "@mui/material";
-import { BiSolidInfoCircle } from "react-icons/bi";
 import { ComicsComp } from "../../components";
 
 const SeriesComics = () => {
