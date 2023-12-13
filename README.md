@@ -1,74 +1,65 @@
-# Getting Started with Create React App
+Software Requirement Specifications for MarvelVerse
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Infinite Scrolling
 
-## Available Scripts
+Requirement: Implement infinite scrolling for search results, displaying 20 results initially and loading an additional 20 on clicking "Load More."
 
-In the project directory, you can run:
+Technical Specifications:
 
-<!-- Scroll Position handled thanks to the link below -->
+Use a virtualized list component (e.g., react-virtualized) to efficiently render a large number of items.
+Fetch additional data as the user scrolls and reaches the bottom of the list.
+Implement a loading indicator to show users that data is being fetched.
+Ensure smooth scrolling and transition between loaded batches of data. 2. User Portal
 
-gist [scroll position gist](https://gist.github.com/jeffijoe/510f6823ef809e3711ed307823b48c0a)
+Requirement: Develop a backend system to manage user accounts and data.
 
-### `npm start`
+Technical Specifications:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Choose a suitable backend technology (e.g., Node.js, Python).
+Design a database schema to store user information, wishlists, reading lists, and payment details.
+Implement user authentication and authorization mechanisms.
+Develop APIs for user creation, login, wishlist management, reading list management, and payment processing. 3. Wishlists and Reading Lists
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Requirement: Allow users to create and manage wishlists and reading lists for characters, comics, events, and series.
 
-### `npm test`
+Technical Specifications:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Store wishlist and reading list data in the user's profile.
+Provide features for adding, removing, and managing items in each list.
+Display personalized wishlists and reading lists on the user portal.
+Implement sorting and filtering options for list items. 4. Paid Comics
 
-### `npm run build`
+Requirement: Allow users to pay for access to premium comics.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Technical Specifications:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Integrate with a payment gateway (e.g., Stripe, PayPal).
+Implement a secure payment process to protect user information.
+Mark comics as "premium" in the search results and on individual comic pages.
+Allow users to unlock premium comics through payment and track their purchases. 5. Character Description Correction
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Requirement: Fetch accurate character descriptions if Marvel's API doesn't provide information.
 
-### `npm run eject`
+Technical Specifications:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Investigate alternative data sources for character information, such as News APIs or Details APIs.
+Implement logic to check if Marvel's description is empty and fetch information from alternative sources.
+Ensure consistency and accuracy of character descriptions.
+Display a message indicating the source of information if it's not from Marvel's API. 6. Surprise Feature and User Experience
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Requirement: Incorporate innovative features and prioritize a user-friendly interface.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Technical Specifications:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Implement a "Surprise Me" feature that recommends characters, comics, events, or series based on user preferences.
+Integrate a user rating and review system for comics and series.
+Develop a personalized news feed with relevant Marvel news and updates.
+Optimize the user interface for responsiveness and accessibility across different devices.
+Utilize data analytics to understand user behavior and improve the user experience.
+Additional Considerations:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Security: Implement robust security measures to protect user data and prevent unauthorized access.
+Performance: Ensure efficient data fetching and rendering to maintain smooth performance.
+Scalability: Design the system to handle a growing user base and data volume.
+Documentation: Provide clear and concise documentation for developers and users.
+Testing: Conduct thorough testing to ensure the functionality and stability of the system.
