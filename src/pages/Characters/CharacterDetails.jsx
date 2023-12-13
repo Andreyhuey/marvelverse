@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import Loader from "../../components/Loader";
 import { BiSolidInfoCircle } from "react-icons/bi";
+import ScrollPositionManager from "../../components/ScrollManager";
 
 const CharacterDetails = () => {
   const [character, setCharacter] = useState();
   const { characterId, name } = useParams();
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(1);
   const nextTab = (index) => {
     setTabIndex(index);
   };
@@ -35,6 +36,9 @@ const CharacterDetails = () => {
               character?.map((d) => {
                 return (
                   <>
+                    <ScrollPositionManager
+                      scrollKey={` ${name + characterId} `}
+                    />
                     <div
                       key={d.id}
                       className={`flex  flex-col md:flex-row items-center gap-x-5 gap-y-8`}

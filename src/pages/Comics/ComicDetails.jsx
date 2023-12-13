@@ -8,6 +8,7 @@ import { FiExternalLink } from "react-icons/fi";
 import moment from "moment";
 import Loader from "../../components/Loader";
 import { DetailsTab } from "../../data";
+import ScrollPositionManager from "../../components/ScrollManager";
 
 const ComicDetails = () => {
   const { comicId, title } = useParams();
@@ -72,6 +73,7 @@ const ComicDetails = () => {
                   key={index}
                   className="flex items-center lg:items-start justify-center flex-col lg:flex-row gap-x-5 gap-y-8 w-full h-full overflow-hidden min-w-fit"
                 >
+                  <ScrollPositionManager scrollKey={` ${title + id} `} />
                   <div className="flex-1 flex items-center justify-center">
                     <img
                       src={thumbnail.path && thumbnail.path + ".jpg"}
