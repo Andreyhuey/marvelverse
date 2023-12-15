@@ -11,7 +11,7 @@ Fetch additional data as the user scrolls and reaches the bottom of the list.
 Implement a loading indicator to show users that data is being fetched.
 Ensure smooth scrolling and transition between loaded batches of data. 2. User Portal
 
-Requirement: Develop a backend system to manage user accounts and data.
+- Requirement: Develop a backend system to manage user accounts and data.
 
 Technical Specifications:
 
