@@ -14,7 +14,6 @@ dist
 dist-ssr
 *.local
 
-.env.local
 
 # Editor directories and files
 .vscode/*
@@ -65,6 +64,7 @@ yarn-error.log*
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
