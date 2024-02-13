@@ -14,7 +14,7 @@ app.use(express.json());
 dotenv.config();
 
 // makes all user routes active
-app.use("/user", userRoutes);
+app.use("/users", userRoutes);
 
 // used to connect to database
 async function connectToDatabase() {
