@@ -37,7 +37,7 @@ const Search = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="SEARCH"
+            placeholder="Enter a character, name, event or series..."
             className="bg-gray-950 h-auto w-full px-3 rounded-l-md focus:outline-none placeholder:font-bold"
             // minLength="3"
             required

@@ -34,7 +34,10 @@ const Footer = () => {
         </div>
         <div className=" text-[#8794BA] text-[24px] px-4 md:px-8 lg:px-20">
           <div className="text-center text-[10px]">
-            © 2022 Marvelverse. All rights reserved.
+            © 2024 Marvelverse. All rights reserved by{" "}
+            <a target="_blank" href="">
+              developer.
+            </a>
           </div>
         </div>
       </div>

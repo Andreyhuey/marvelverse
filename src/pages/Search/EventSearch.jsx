@@ -28,7 +28,7 @@ const EventSearch = ({ searchTerm, simplified }) => {
 
   return (
     <div>
-      {simplified && (
+      {events.length !== 0 && (
         <>
           <h1 className="capitalize text-start font-bold pt-8 text-lg pb-4">
             Events

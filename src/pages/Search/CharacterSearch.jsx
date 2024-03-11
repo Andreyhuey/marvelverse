@@ -29,7 +29,7 @@ const CharacterSearch = ({ searchTerm, simplified }) => {
   return (
     <div className="pt-5">
       <>
-        {simplified && (
+        {characters.length !== 0 && (
           <>
             {" "}
             <h1 className="capitalize text-start font-bold pt-8 text-lg">
