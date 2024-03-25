@@ -24,6 +24,8 @@ This project is under development. Refer to the Issues: [issues] and Pull Reques
 3. Execute `npm install` to install all necessary dependencies.
 4. Navigate to [marvel developer portal](https://developer.marvel.com/) and get your SDK, create a .env and add them to the project's root directory
 
+Congratulations, you're all set to explore the marvelverse
+
 ### Contributing
 
 We welcome contributions from the Marvel community! If you'd like to get involved, feel free to fork the repository and submit a pull request.
