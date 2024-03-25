@@ -10,7 +10,7 @@ Search Marvel's expansive database for characters, comics, events, and series.
 Explore details like character bios, comic synopses, event summaries, and series information.
 
 ### Technical Specifications:
-This project utilizes the [Marvel Developer API](https://developer.marvel.com/) to fetch data. Redux-toolkit to manage the data fetching and state management of the application.
+This project utilizes the [Marvel Developer API](https://developer.marvel.com/) to fetch data, Redux-toolkit to manage the data fetching and state management of the application.
 
 ### Development
 
