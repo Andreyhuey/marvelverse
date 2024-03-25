@@ -1,65 +1,34 @@
-Software Requirement Specifications for MarvelVerse
+# MarvelVerse
 
-1. Infinite Scrolling
+### Description: 
 
-Requirement: Implement infinite scrolling for search results, displaying 20 results initially and loading an additional 20 on clicking "Load More."
+Welcome to MarvelVerse! This project allows users to explore the vast library of Marvel comics, characters, events, and series. Dive deep into the Marvel Universe, from classic stories to the latest releases.
 
-Technical Specifications:
+### Features:
 
-Use a virtualized list component (e.g., react-virtualized) to efficiently render a large number of items.
-Fetch additional data as the user scrolls and reaches the bottom of the list.
-Implement a loading indicator to show users that data is being fetched.
-Ensure smooth scrolling and transition between loaded batches of data. 2. User Portal
+Search Marvel's expansive database for characters, comics, events, and series.
+Explore details like character bios, comic synopses, event summaries, and series information.
 
-- Requirement: Develop a backend system to manage user accounts and data.
+### Technical Specifications:
+This project utilizes the [Marvel Developer API](https://developer.marvel.com/) to fetch data. Redux-toolkit to manage the data fetching and state management of the application.
 
-Technical Specifications:
+### Development
 
-Choose a suitable backend technology (e.g., Node.js, Python).
-Design a database schema to store user information, wishlists, reading lists, and payment details.
-Implement user authentication and authorization mechanisms.
-Develop APIs for user creation, login, wishlist management, reading list management, and payment processing. 3. Wishlists and Reading Lists
+This project is under development. Refer to the Issues: [issues] and Pull Requests: [pulls] sections for ongoing discussions and contributions.
 
-Requirement: Allow users to create and manage wishlists and reading lists for characters, comics, events, and series.
 
-Technical Specifications:
+### Getting Started
 
-Store wishlist and reading list data in the user's profile.
-Provide features for adding, removing, and managing items in each list.
-Display personalized wishlists and reading lists on the user portal.
-Implement sorting and filtering options for list items. 4. Paid Comics
+1. Clone this repository to your local machine.
+2. Navigate to the project's root directory.
+3. Execute `npm install` to install all necessary dependencies.
+4. Navigate to [marvel developer portal](https://developer.marvel.com/) and get your SDK, create a .env and add them to the project's root directory
 
-Requirement: Allow users to pay for access to premium comics.
+### Contributing
 
-Technical Specifications:
+We welcome contributions from the Marvel community! If you'd like to get involved, feel free to fork the repository and submit a pull request.
 
-Integrate with a payment gateway (e.g., Stripe, PayPal).
-Implement a secure payment process to protect user information.
-Mark comics as "premium" in the search results and on individual comic pages.
-Allow users to unlock premium comics through payment and track their purchases. 5. Character Description Correction
 
-Requirement: Fetch accurate character descriptions if Marvel's API doesn't provide information.
+### Contact
 
-Technical Specifications:
-
-Investigate alternative data sources for character information, such as News APIs or Details APIs.
-Implement logic to check if Marvel's description is empty and fetch information from alternative sources.
-Ensure consistency and accuracy of character descriptions.
-Display a message indicating the source of information if it's not from Marvel's API. 6. Surprise Feature and User Experience
-
-Requirement: Incorporate innovative features and prioritize a user-friendly interface.
-
-Technical Specifications:
-
-Implement a "Surprise Me" feature that recommends characters, comics, events, or series based on user preferences.
-Integrate a user rating and review system for comics and series.
-Develop a personalized news feed with relevant Marvel news and updates.
-Optimize the user interface for responsiveness and accessibility across different devices.
-Utilize data analytics to understand user behavior and improve the user experience.
-Additional Considerations:
-
-Security: Implement robust security measures to protect user data and prevent unauthorized access.
-Performance: Ensure efficient data fetching and rendering to maintain smooth performance.
-Scalability: Design the system to handle a growing user base and data volume.
-Documentation: Provide clear and concise documentation for developers and users.
-Testing: Conduct thorough testing to ensure the functionality and stability of the system.
+For any questions or feedback, feel free to reach out to the project maintainer: andreyhuey, Please send me an [email](mailto:andreyhuey777@gmail.com)
